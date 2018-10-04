@@ -8,6 +8,6 @@ export default class StartApp extends JetView {
         }
     }
     init() {
-       alert(devConfig.getApiUrl());
+       
     }
 }
