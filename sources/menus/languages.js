@@ -1,31 +1,28 @@
-const ui = {
+export const languagesPopup = {
 	view: "popup",
 	id: "languagesPopup",
 	width: 300,
-	padding:0,
-	css:"list_popup",
-	body:{
+	padding: 0,
+	css: "list_popup",
+	body: {
 		type: "clean",
-		borderless:true,
-		rows:[
+		borderless: true,
+		rows: [
 			{
 				view: "list",
 				autoheight: true,
 				data: [
-					{id: 1, name: "es-ES", text: "Español", personId:1},
-					{id: 2, name: "em-UK", text: "English", personId:2}
+					{ id: 2, name: "es", text: "Español" },
+					{ id: 3, name: "fr", text: "Francais" },
+					{ id: 1, name: "en", text: "English" }
 				],
-				type:{
+				type: {
 					height: 45,
-					template: "	<img class='photo' src='assets/img/photos/#personId#.png' /><span class='text'>#text#</span><span class='name'>#name#</span>"
-
+					template: "	<img class='photo' src='assets/img/flags/#id#.png' /><span class='text'>#text#</span>"
 				}
-			},
-			{
-				css: "show_all", template: "Show all messages <span class='webix_icon fa-angle-double-right'></span>", height: 40
 			}
 		]
 	}
 };
 
-export default ui;
+

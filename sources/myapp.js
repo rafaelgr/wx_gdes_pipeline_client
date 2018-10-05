@@ -9,7 +9,7 @@ export default class MyApp extends JetApp{
 			router 	: BUILD_AS_MODULE ? EmptyRouter : HashRouter,
 			debug 	: !PRODUCTION,
 			start 	: "/startapp",
-			name : "GDES PIPILE"
+			name : "GDES PIPELINE"
 		};
 
 		super({ ...defaults, ...config });
