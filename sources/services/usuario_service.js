@@ -15,8 +15,36 @@ export const usuarioService = {
         cookieApi.setCookie('gdes_pipeline_usuario', JSON.stringify(usuario), 1);
     },
     // getUsuario
-    getUsuarios: () => {
+    getUsuarios: (usu, done) => {
         var url = devConfig.getApiUrl() + "/api/usuarios";
-        
+        webix.ajax()
+        .timeout(10000)
+        .headers({
+            "Content-Type": "application/json",
+            "x-apiKey": usu.apiKey
+        })
+        .get(url)
+        .then(function (result) {
+            done(null, result.json());
+        })
+        .catch(function (inXhr) {
+            done(inXhr);
+        });
+    },
+    // getLoginEmail
+    getLoginEmail: (email, done) => {
+        var url = devConfig.getApiUrl() + "/login/email";
+        webix.ajax()
+        .timeout(10000)
+        .headers({
+            "Content-Type": "application/json"
+        })
+        .post(url, {usuario: {email: email}})
+        .then(function (result) {
+            done(null, result.json());
+        })
+        .catch(function (inXhr) {
+            done(inXhr);
+        });
     }
 }

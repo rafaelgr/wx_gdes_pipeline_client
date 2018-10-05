@@ -13,16 +13,16 @@ export const cookieApi = {
         return (cookieEnabled);
     },
     setCookie: (c_name, value, exdays) => {
-        if (!this.areCookiesEnabled()) {
+        if (!cookieApi.areCookiesEnabled()) {
             alert("NO COOKIES");
         }
         var exdate = new Date();
         exdate.setDate(exdate.getDate() + exdays);
-        var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+        var c_value = encodeURI(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
         document.cookie = c_name + "=" + c_value;
     },
     deleteCookie: (c_name) => {
-        if (!this.areCookiesEnabled()) {
+        if (!cookieApi.areCookiesEnabled()) {
             alert("NO COOKIES");
         }
         document.cookie = c_name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -34,7 +34,7 @@ export const cookieApi = {
             y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
             x = x.replace(/^\s+|\s+$/g, "");
             if (x == c_name) {
-                return unescape(y);
+                return decodeURI(y);
             }
         }
     },
