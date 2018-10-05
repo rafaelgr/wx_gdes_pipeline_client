@@ -18,7 +18,7 @@ export const languagesPopup = {
 				],
 				type: {
 					height: 45,
-					template: "	<img class='photo' src='assets/img/flags/#id#.png' /><span class='text'>#text#</span>"
+					template: "<img class='photo' src='assets/img/flags/#id#.png' onClick='this.insideFunction()' /><span class='text'>#text#</span>"
 				}
 			}
 		]

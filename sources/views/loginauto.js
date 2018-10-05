@@ -9,7 +9,7 @@ export default class LoginAuto extends JetView {
         }
     }
     init(view, url) {
-
+        
     }
     urlChange(view, url) {
         if (!url[0].params.email) {
@@ -19,7 +19,7 @@ export default class LoginAuto extends JetView {
             if (err) return messageApi.errorMessageAjax(err);
             // Store user as a cookie 
             usuarioService.setUsuarioCookie(usuario);
-        })
-
+            this.app.show('top/inicio');
+        });
     }
 }

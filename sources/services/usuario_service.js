@@ -14,6 +14,9 @@ export const usuarioService = {
     setUsuarioCookie: (usuario) => {
         cookieApi.setCookie('gdes_pipeline_usuario', JSON.stringify(usuario), 1);
     },
+    deleteUsuarioCookie: (usuario) => {
+        cookieApi.deleteCookie('gdes_pipeline_usuario');
+    },
     // getUsuario
     getUsuarios: (usu, done) => {
         var url = devConfig.getApiUrl() + "/api/usuarios";

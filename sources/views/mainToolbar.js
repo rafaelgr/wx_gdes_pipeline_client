@@ -1,10 +1,6 @@
 import { JetView, plugins } from "webix-jet";
 import { usuarioService } from "../services/usuario_service";
-import { languagesPopup } from "../menus/languages";
-import profile from "menus/profile";
-import search from "menus/search";
-import mail from "menus/mail";
-import message from "menus/message";
+
 
 export default class MainToolbar extends JetView {
 	config() {
@@ -27,24 +23,18 @@ export default class MainToolbar extends JetView {
 					height: 46, id: "person_template", css: "header_person", borderless: true, data: usu,
 					template: function (obj) {
 						var html = "<div style='height:100%;width:100%;'>";
-						html += "<img class='photo' src='assets/img/man-user.png' /><span class='name'>" + obj.nombre+ "</span>";
+						html += "<img class='photo' src='assets/img/man-user.png' /><span class='name'>" + obj.nombre + "</span>";
 						return html;
 					}
 				},
 				{
 					view: "label", label: this.app.config.name
 				},
-				{ view: "icon", icon: "flag", value: 5, width: 45, popup: languagesPopup },
 				{
-					view: "button", type: "icon", icon: "bell", width: 37, align: "right",
+					view: "button", type: "icon", icon: "sign-out", width: 37, align: "right",
 					click: () => {
-						langs.setLang('es-ES');
-					}
-				},
-				{
-					view: "button", type: "icon", icon: "home", width: 37, align: "right",
-					click: () => {
-						themes.setTheme('compact');
+						usuarioService.deleteUsuarioCookie();
+						window.open('https://login.microsoftonline.com/common/oauth2/logout', '_self');
 					}
 				}
 			]
@@ -53,9 +43,7 @@ export default class MainToolbar extends JetView {
 		return mainToolBar;
 	}
 	init() {
-		this.ui(profile);
-		this.ui(search);
-		this.ui(mail);
-		this.ui(message);
 	}
+
 }
+
