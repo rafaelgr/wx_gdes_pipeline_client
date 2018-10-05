@@ -9,11 +9,6 @@ export default class StartApp extends JetView {
         }
     }
     init() {
-        // Auth url
-        var authUrl = devConfig.getApiUrl() + "/auth/openid"
-        // Verify if exists a use cookie
-        var usu = usuarioService.getUsuarioCookie();
-        if (!usu) return window.open(authUrl, '_self');
-        this.app.show('top/inicio');
+        if (usuarioService.checkLoggedUser()) this.app.show('top/inicio');
     }
 }

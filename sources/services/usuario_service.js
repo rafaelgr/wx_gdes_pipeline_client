@@ -17,6 +17,17 @@ export const usuarioService = {
     deleteUsuarioCookie: (usuario) => {
         cookieApi.deleteCookie('gdes_pipeline_usuario');
     },
+    checkLoggedUser: () => {
+        // Auth url
+        var authUrl = devConfig.getApiUrl() + "/auth/openid"
+        // Verify if exists a user cookie
+        var usu = usuarioService.getUsuarioCookie();
+        if (!usu){
+            window.open(authUrl, '_self');
+            return false;
+        } 
+        return usu;
+    },
     // getUsuario
     getUsuarios: (usu, done) => {
         var url = devConfig.getApiUrl() + "/api/usuarios";
