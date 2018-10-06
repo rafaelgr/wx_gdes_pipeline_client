@@ -11,5 +11,11 @@ export default {
     "Contador inicial año": "Initial year counter",
     "Documentos aplicables (ESPAÑA)": "Applicable documents (SPAIN)",
     "Documentos aplicables (UK)": "Applicable documents (UK)",
-    "Documentos aplicables (FRANCIA)": "Applicable documents (FRANCE)"
+    "Documentos aplicables (FRANCIA)": "Applicable documents (FRANCE)",
+    "Aceptar": "Accept",
+    "Cancelar": "Cancel",
+    "Grupos de usuarios": "User groups",
+    "Nombre de grupo": "Group name",
+    "ID": "ID",
+    "Acciones": "Actions"
 }

@@ -13,6 +13,12 @@ export const messageApi = {
             title: "ERROR",
             text: msg
         });
+    },
+    normalMessage: (msg) => {
+        webix.alert({
+            title: "INFORMATION",
+            text: msg
+        });
     }
 
 }
