@@ -39,8 +39,8 @@ export default class Parametros extends JetView {
                         {
                             margin: 5, cols: [
                                 { gravity: 5 },
-                                { view: "button", label: translate("Cancelar"), click: this.cancel },
-                                { view: "button", label: translate("Aceptar"), click: this.accept, type: "form" }
+                                { view: "button", label: translate("Cancelar"), click: this.cancel, hotkey: "esc" },
+                                { view: "button", label: translate("Aceptar"), click: this.accept, type: "form", hotkey: "enter" }
                             ]
                         }
                     ]

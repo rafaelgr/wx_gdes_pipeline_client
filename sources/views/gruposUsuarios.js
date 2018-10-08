@@ -22,7 +22,7 @@ export default class GruposUsuarios extends JetView {
         var pagerGruposUsuarios = {
             cols: [
                 {
-                    view: "button", type: "icon", icon: "plus", width: 37, align: "left",
+                    view: "button", type: "icon", icon: "plus", width: 37, align: "left", hotkey: "shift+n",
                     click: () => {
                         this.show('/top/gruposUsuariosForm?grupoUsuarioId=0');
                     }
