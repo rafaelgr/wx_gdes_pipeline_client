@@ -1,10 +1,11 @@
 import { JetView } from "webix-jet";
 import { usuarioService } from "../services/usuario_service";
 import { messageApi } from "../utilities/messages";
+import { generalApi } from "../utilities/general";
 import { gruposUsuariosService } from "../services/gruposUsuarios_service";
 
-var editButton = "<span class='webix_icon fa-edit'></span>";
-var deleteButton = "<span class='webix_icon fa-trash'></span>";
+var editButton = "<span class='onEdit webix_icon fa-edit'></span>";
+var deleteButton = "<span class='onDelete webix_icon fa-trash'></span>";
 
 export default class GruposUsuarios extends JetView {
     config() {
@@ -16,43 +17,55 @@ export default class GruposUsuarios extends JetView {
             ]
         }
         var pagerGruposUsuarios = {
-			cols: [
-				{
-					view: "button", type: "icon", icon: "plus", width: 37, align: "left",
-					click: () => {
-						webix.message("Not implemented yet");
-					}
-				},
-				{
-					view: "button", type: "icon", icon: "table", width: 37, align: "right", 
-					click: () => {
-						console.log("Export to excel...");
-						webix.toExcel($$("gruposUsuariosGrid"),{
-							filename: "grupos_usuarios",
-							name: "Grupos",
-							rawValues:true,
-							ignore: {"actions": true}
-						  });
-					}
-				},
-				{},
-				{
-					view: "pager", id: "mypager", css: { "text-align": "right" },
-					template: "{common.first()} {common.prev()} {common.pages()} {common.next()} {common.last()}",
-					size: 25,
-					group: 5
-				}
-			]
-		};
+            cols: [
+                {
+                    view: "button", type: "icon", icon: "plus", width: 37, align: "left",
+                    click: () => {
+                        this.show('/top/gruposUsuariosForm?grupoUsuarioId=0');
+                    }
+                },
+                {
+                    view: "button", type: "icon", icon: "table", width: 37, align: "right",
+                    click: () => {
+                        console.log("Export to excel...");
+                        webix.toExcel($$("gruposUsuariosGrid"), {
+                            filename: "grupos_usuarios",
+                            name: "Grupos",
+                            rawValues: true,
+                            ignore: { "actions": true }
+                        });
+                    }
+                },
+                {},
+                {
+                    view: "pager", id: "mypager", css: { "text-align": "right" },
+                    template: "{common.first()} {common.prev()} {common.pages()} {common.next()} {common.last()}",
+                    size: 25,
+                    group: 5
+                }
+            ]
+        };
         var datatableGruposUsuarios = {
             view: "datatable",
             id: "gruposUsuariosGrid",
             pager: "mypager",
+            select: "row",
             columns: [
-                { id: "grupoUsuarioId", adjust: true, header: translate("ID"), sort: "string" },
+                { id: "grupoUsuarioId", adjust: true, header: [translate("ID"), { content: "numberFilter" }], sort: "number" },
                 { id: "nombre", fillspace: true, header: [translate("Nombre de grupo"), { content: "textFilter" }], sort: "string" },
                 { id: "actions", header: [{ text: translate("Acciones"), css: { "text-align": "center" } }], template: editButton + deleteButton, css: { "text-align": "center" } }
-            ]
+            ],
+            onClick: {
+                "onDelete": function (event, id, node) {
+                    var dtable = this;
+                    var curRow = this.data.pull[id.row];
+                    var name = curRow.nombre;
+                    this.$scope.delete(id.row, name);
+                },
+                "onEdit": function (event, id, node) {
+                    this.$scope.edit(id.row);
+                }
+            }
         }
         var _view = {
             rows: [
@@ -63,14 +76,39 @@ export default class GruposUsuarios extends JetView {
         }
         return _view;
     }
-    init() {
+    init(view, url) {
         usuarioService.checkLoggedUser();
-        this.load();
+        var id = null;
+        if (url[0].params.grupoUsuarioId) {
+            id = url[0].params.grupoUsuarioId;
+        }
+        this.load(id);
     }
-    load() {
-        gruposUsuariosService.getGruposUsuarios(usuarioService.getUsuarioCookie(), (err, data)=>{
+    load(id) {
+        gruposUsuariosService.getGruposUsuarios(usuarioService.getUsuarioCookie(), (err, data) => {
             if (err) return messageApi.errorMessageAjax(err);
-            $$("gruposUsuariosGrid").parse(data);
+            $$("gruposUsuariosGrid").clearAll();
+            $$("gruposUsuariosGrid").parse(generalApi.prepareDataForDataTable("grupoUsuarioId", data));
+            if (id) {
+                $$("gruposUsuariosGrid").select(id);
+                $$("gruposUsuariosGrid").showItem(id);
+            }
         })
+    }
+    edit(id) {
+        this.show('/top/gruposUsuariosForm?grupoUsuarioId=' + id);
+    }
+    delete(id, name) {
+        const translate = this.app.getService("locale")._;
+        var self = this;
+        webix.confirm(translate("¿Seguro que quiere eliminar ") + name + "?", function (action) {
+            if (action === true) {
+                gruposUsuariosService.deleteGrupoUsuario(usuarioService.getUsuarioCookie(), id, (err, result) => {
+                    if (err) return messageApi.errorMessageAjax(err);
+                    self.load();
+                });
+            }
+
+        });
     }
 }

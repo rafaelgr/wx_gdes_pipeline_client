@@ -1,53 +1,40 @@
 import { JetView } from "webix-jet";
 import { usuarioService } from "../services/usuario_service";
+import { gruposUsuariosService } from "../services/gruposUsuarios_service";
 import { parametrosService } from "../services/parametros_service";
 import { messageApi } from "../utilities/messages";
+
+var gruposUsuarioId = 0;
 
 export default class Parametros extends JetView {
     config() {
         const translate = this.app.getService("locale")._;
         const _view = {
             view: "layout",
-            id: "parametrosForm",
+            id: "gruposUsuariosForm",
             rows: [
                 {
                     view: "toolbar", padding: 3, elements: [
                         { view: "icon", icon: "cogs", width: 37, align: "left" },
-                        { view: "label", label: translate("Parámetros") }
+                        { view: "label", label: translate("Grupos de usuarios") }
                     ]
                 },
                 {
                     view: "form",
 
-                    id: "frmParametros",
+                    id: "frmGruposUsuarios",
                     elements: [
                         {
                             cols: [
                                 {
-                                    view: "text", name: "anoEnCurso",
-                                    label: translate("Año en curso"), labelPosition: "top"
+                                    view: "text", name: "grupoUsuarioId", width: 100, disabled: true,
+                                    label: translate("ID"), labelPosition: "top"
                                 },
                                 {
-                                    view: "text", name: "valorActualAno",
-                                    label: translate("Contador actual"), labelPosition: "top"
-                                },
-                                {
-                                    view: "text", name: "valorInicialAno",
-                                    label: translate("Contador inicial año"), labelPosition: "top"
+                                    view: "text", name: "nombre",
+                                    label: translate("Nombre de grupo"), labelPosition: "top"
                                 }
                             ]
-                        },
-                        {
-                            view: "textarea", name: "docAppSpain",
-                            label: translate("Documentos aplicables (ESPAÑA)"), labelPosition: "top"
-                        },
-                        {
-                            view: "textarea", name: "docAppUk",
-                            label: translate("Documentos aplicables (UK)"), labelPosition: "top"
-                        },
-                        {
-                            view: "textarea", name: "docAppFrance",
-                            label: translate("Documentos aplicables (FRANCIA)"), labelPosition: "top"
                         },
                         {
                             margin: 5, cols: [
@@ -62,26 +49,38 @@ export default class Parametros extends JetView {
         }
         return _view;
     }
-    init() {
+    init(view, url) {
         usuarioService.checkLoggedUser();
-        this.load();
+        if (url[0].params.grupoUsuarioId) {
+            gruposUsuarioId = url[0].params.grupoUsuarioId;
+        }
+        this.load(gruposUsuarioId);
     }
-    load() {
-        parametrosService.getParametros(usuarioService.getUsuarioCookie(), (err, parametros) => {
+    load(grupoUsuarioId) {
+        if (grupoUsuarioId == 0) return;
+        gruposUsuariosService.getGrupoUsuario(usuarioService.getUsuarioCookie(), gruposUsuarioId, (err, parametros) => {
             if (err) return messageApi.errorMessageAjax(err);
-            $$("frmParametros").setValues(parametros);
+            $$("frmGruposUsuarios").setValues(parametros);
         });
     }
     cancel() {
-        this.$scope.show('/top/inicio');
+        this.$scope.show('/top/gruposUsuarios');
     }
     accept() {
         // Here goes validation
-        var data = $$("frmParametros").getValues();
-        parametrosService.putParametros(usuarioService.getUsuarioCookie(), data,
-            (err, result) => {
-                if (err) return messageApi.errorMessageAjax(err);
-                this.$scope.show('/top/inicio');
-            });
+        var data = $$("frmGruposUsuarios").getValues();
+        if (gruposUsuarioId == 0) {
+            gruposUsuariosService.postGrupoUsuario(usuarioService.getUsuarioCookie(), data,
+                (err, result) => {
+                    if (err) return messageApi.errorMessageAjax(err);
+                    this.$scope.show('/top/gruposUsuarios?grupoUsuarioId=' + result.grupoUsuarioId);
+                });
+        } else {
+            gruposUsuariosService.putGrupoUsuario(usuarioService.getUsuarioCookie(), data,
+                (err, result) => {
+                    if (err) return messageApi.errorMessageAjax(err);
+                    this.$scope.show('/top/gruposUsuarios?grupoUsuarioId=' + result.grupoUsuarioId);
+                });
+        }
     }
 }

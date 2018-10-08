@@ -17,5 +17,6 @@ export default {
     "Grupos de usuarios": "User groups",
     "Nombre de grupo": "Group name",
     "ID": "ID",
-    "Acciones": "Actions"
+    "Acciones": "Actions",
+    "¿Seguro que quiere eliminar ": "Are you sure to delete "
 }
