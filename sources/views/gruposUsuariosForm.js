@@ -31,7 +31,7 @@ export default class Parametros extends JetView {
                                     label: translate("ID"), labelPosition: "top"
                                 },
                                 {
-                                    view: "text", name: "nombre",
+                                    view: "text", name: "nombre", required: true,
                                     label: translate("Nombre de grupo"), labelPosition: "top"
                                 }
                             ]
@@ -67,7 +67,11 @@ export default class Parametros extends JetView {
         this.$scope.show('/top/gruposUsuarios');
     }
     accept() {
-        // Here goes validation
+        const translate = this.$scope.app.getService("locale")._;
+        if (!$$("frmGruposUsuarios").validate()) {
+            messageApi.errorMessage(translate("Debe rellenar los campos correctamente"));
+            return;
+        }
         var data = $$("frmGruposUsuarios").getValues();
         if (gruposUsuarioId == 0) {
             gruposUsuariosService.postGrupoUsuario(usuarioService.getUsuarioCookie(), data,

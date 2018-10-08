@@ -18,5 +18,7 @@ export default {
     "Nombre de grupo": "Group name",
     "ID": "ID",
     "Acciones": "Actions",
-    "¿Seguro que quiere eliminar ": "Are you sure to delete "
+    "¿Seguro que quiere eliminar ": "Are you sure to delete ",
+    "Debe rellenar los campos correctamente": "You must fill in the fields correctly",
+    "Valores incorrectos": "Wrong values"
 }

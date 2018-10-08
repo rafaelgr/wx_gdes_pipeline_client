@@ -6,6 +6,9 @@ import { gruposUsuariosService } from "../services/gruposUsuarios_service";
 
 var editButton = "<span class='onEdit webix_icon fa-edit'></span>";
 var deleteButton = "<span class='onDelete webix_icon fa-trash'></span>";
+var currentIdDatatableView;
+var currentRowDatatableView
+var semaphore = false;
 
 export default class GruposUsuarios extends JetView {
     config() {
@@ -52,7 +55,7 @@ export default class GruposUsuarios extends JetView {
             select: "row",
             columns: [
                 { id: "grupoUsuarioId", adjust: true, header: [translate("ID"), { content: "numberFilter" }], sort: "number" },
-                { id: "nombre", fillspace: true, header: [translate("Nombre de grupo"), { content: "textFilter" }], sort: "string" },
+                { id: "nombre", fillspace: true, header: [translate("Nombre de grupo"), { content: "textFilter" }], sort: "string", editor: "text" },
                 { id: "actions", header: [{ text: translate("Acciones"), css: { "text-align": "center" } }], template: editButton + deleteButton, css: { "text-align": "center" } }
             ],
             onClick: {
@@ -65,6 +68,33 @@ export default class GruposUsuarios extends JetView {
                 "onEdit": function (event, id, node) {
                     this.$scope.edit(id.row);
                 }
+            },
+            editable: true,
+            editaction: "dblclick",
+            rules: {
+                "nombre": webix.rules.isNotEmpty
+            },
+            on: {
+                "onAfterEditStart": function (id) {
+                    currentIdDatatableView = id.row;
+                    currentRowDatatableView = this.data.pull[currentIdDatatableView];
+                },
+                "onAfterEditStop": function (state, editor, ignoreUpdate) {
+                    if (state.value != state.old) {
+                        semaphore = true;
+                        if (!this.validate(currentIdDatatableView)) {
+                            messageApi.errorMessage(translate("Valores incorrectos"));
+                        } else {
+                            currentRowDatatableView = this.data.pull[currentIdDatatableView];
+                            // id is not part of the row object
+                            delete currentRowDatatableView.id;
+                            gruposUsuariosService.putGrupoUsuario(usuarioService.getUsuarioCookie(), currentRowDatatableView, (err, result) => {
+                                if (err) return messageApi.errorMessageAjax(err);
+                                
+                            })
+                        }
+                    }
+                },
             }
         }
         var _view = {
