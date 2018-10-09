@@ -22,9 +22,19 @@ export default class GruposUsuarios extends JetView {
         var pagerGruposUsuarios = {
             cols: [
                 {
-                    view: "button", type: "icon", icon: "plus", width: 37, align: "left", hotkey: "shift+n",
+                    view: "button", type: "icon", icon: "plus", width: 37, align: "left", hotkey: "shift+1",
                     click: () => {
                         this.show('/top/gruposUsuariosForm?grupoUsuarioId=0');
+                    }
+                },
+                {
+                    view: "button", type: "icon", icon: "plus-square", width: 37, align: "left", hotkey: "shift+2",
+                    click: () => {
+                        var newRow = { id: -1, grupoUsuarioId: 0 };
+                        $$('gruposUsuariosGrid').editStop();
+                        var id = $$("gruposUsuariosGrid").add(newRow, 0);
+                        $$("gruposUsuariosGrid").showItem(id);
+                        $$('gruposUsuariosGrid').editRow(id);
                     }
                 },
                 {
@@ -88,10 +98,20 @@ export default class GruposUsuarios extends JetView {
                             currentRowDatatableView = this.data.pull[currentIdDatatableView];
                             // id is not part of the row object
                             delete currentRowDatatableView.id;
-                            gruposUsuariosService.putGrupoUsuario(usuarioService.getUsuarioCookie(), currentRowDatatableView, (err, result) => {
-                                if (err) return messageApi.errorMessageAjax(err);
-                                
-                            })
+                            var data = currentRowDatatableView;
+                            if (data.grupoUsuarioId == 0) {
+                                gruposUsuariosService.postGrupoUsuario(usuarioService.getUsuarioCookie(), data, (err, result) => {
+                                    if (err) return messageApi.errorMessageAjax(err);
+                                    console.log("Result: ", result);
+                                    this.$scope.load(result.grupoUsuarioId);
+                                    $$('gruposUsuariosGrid').editStop();
+                                });
+                            } else {
+                                gruposUsuariosService.putGrupoUsuario(usuarioService.getUsuarioCookie(), data, (err, result) => {
+                                    if (err) return messageApi.errorMessageAjax(err);
+
+                                });
+                            }
                         }
                     }
                 },
@@ -112,6 +132,11 @@ export default class GruposUsuarios extends JetView {
         if (url[0].params.grupoUsuarioId) {
             id = url[0].params.grupoUsuarioId;
         }
+        webix.UIManager.addHotKey("Esc", function () {
+			console.log("Esc key to remove");
+			$$('gruposUsuariosGrid').remove(-1);
+			return false;
+		}, $$('gruposUsuariosGrid'));
         this.load(id);
     }
     load(id) {
