@@ -32,15 +32,15 @@ export default class GruposUsuarios extends JetView {
                     click: () => {
                         var newRow = { id: -1, grupoUsuarioId: 0 };
                         $$('gruposUsuariosGrid').editStop();
-                        var id = $$("gruposUsuariosGrid").add(newRow, 0);
+                        var id = $$("gruposUsuariosGrid").add(newRow, $$('gruposUsuariosGrid').getLastId() + 1);
                         $$("gruposUsuariosGrid").showItem(id);
+                        $$("gruposUsuariosGrid").select(id);
                         $$('gruposUsuariosGrid').editRow(id);
                     }
                 },
                 {
                     view: "button", type: "icon", icon: "table", width: 37, align: "right",
                     click: () => {
-                        console.log("Export to excel...");
                         webix.toExcel($$("gruposUsuariosGrid"), {
                             filename: "grupos_usuarios",
                             name: "Grupos",
@@ -102,7 +102,6 @@ export default class GruposUsuarios extends JetView {
                             if (data.grupoUsuarioId == 0) {
                                 gruposUsuariosService.postGrupoUsuario(usuarioService.getUsuarioCookie(), data, (err, result) => {
                                     if (err) return messageApi.errorMessageAjax(err);
-                                    console.log("Result: ", result);
                                     this.$scope.load(result.grupoUsuarioId);
                                     $$('gruposUsuariosGrid').editStop();
                                 });
@@ -133,10 +132,9 @@ export default class GruposUsuarios extends JetView {
             id = url[0].params.grupoUsuarioId;
         }
         webix.UIManager.addHotKey("Esc", function () {
-			console.log("Esc key to remove");
-			$$('gruposUsuariosGrid').remove(-1);
-			return false;
-		}, $$('gruposUsuariosGrid'));
+            $$('gruposUsuariosGrid').remove(-1);
+            return false;
+        }, $$('gruposUsuariosGrid'));
         this.load(id);
     }
     load(id) {
