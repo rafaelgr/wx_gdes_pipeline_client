@@ -74,11 +74,14 @@ export default class Parametros extends JetView {
             this.loadPaises();
             return;
         }
-        empresasService.getEmpresa(usuarioService.getUsuarioCookie(), empresaId, (err, empresa) => {
-            if (err) return messageApi.errorMessageAjax(err);
-            $$("frmEmpresas").setValues(empresa);
-            this.loadPaises(empresa.paisId);
-        });
+        empresasService.getEmpresa(usuarioService.getUsuarioCookie(), empresaId)
+            .then((empresa) => {
+                $$("frmEmpresas").setValues(empresa);
+                this.loadPaises(empresa.paisId);
+            })
+            .catch((err) => {
+                messageApi.errorMessageAjax(err);
+            });
     }
     cancel() {
         this.$scope.show('/top/empresas');
@@ -93,17 +96,22 @@ export default class Parametros extends JetView {
         console.log("DATAF: ", data);
         if (empresaId == 0) {
             data.empresaId = 0;
-            empresasService.postEmpresa(usuarioService.getUsuarioCookie(), data,
-                (err, result) => {
-                    console.log("RS: ", result);
-                    if (err) return messageApi.errorMessageAjax(err);
+            empresasService.postEmpresa(usuarioService.getUsuarioCookie(),data)
+                .the((result) => {
                     this.$scope.show('/top/empresas?empresaId=' + result.empresaId);
+                })
+                .catch((err) => {
+                    messageApi.errorMessageAjax(err);
                 });
         } else {
-            empresasService.putEmpresa(usuarioService.getUsuarioCookie(), data,
-                (err, result) => {
-                    if (err) return messageApi.errorMessageAjax(err);
+            empresasService.putEmpresa(usuarioService.getUsuarioCookie(), data)
+                .then(() => {
+                    console.log("From PUTOK");
                     this.$scope.show('/top/empresas?empresaId=' + data.empresaId);
+                })
+                .catch((err) => {
+                    console.log("From PUTERR");
+                    messageApi.errorMessageAjax(err);
                 });
         }
     }

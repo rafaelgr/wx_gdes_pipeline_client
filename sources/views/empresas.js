@@ -2,7 +2,7 @@ import { JetView } from "webix-jet";
 import { usuarioService } from "../services/usuario_service";
 import { messageApi } from "../utilities/messages";
 import { generalApi } from "../utilities/general";
-import { empresasService } from "../services/empresas_service";
+import { empresaId, empresasService } from "../services/empresas_service";
 
 var editButton = "<span class='onEdit webix_icon fa-edit'></span>";
 var deleteButton = "<span class='onDelete webix_icon fa-trash'></span>";
@@ -107,16 +107,21 @@ export default class Empresas extends JetView {
                             delete currentRowDatatableView.id;
                             var data = currentRowDatatableView;
                             if (data.empresaId == 0) {
-                                empresasService.postEmpresa(usuarioService.getUsuarioCookie(), data, (err, result) => {
-                                    if (err) return messageApi.errorMessageAjax(err);
-                                    this.$scope.load(result.empresaId);
-                                    $$('empresasGrid').editStop();
-                                });
+                                empresasService.postEmpresa(usuarioService.getUsuarioCookie(), data)
+                                    .then((result) => {
+                                        this.$scope.load(result.empresaId);
+                                        $$('empresasGrid').editStop();
+                                    })
+                                    .catch((err) => {
+                                        messageApi.errorMessageAjax(err);
+                                    });
                             } else {
-                                empresasService.putEmpresa(usuarioService.getUsuarioCookie(), data, (err, result) => {
-                                    if (err) return messageApi.errorMessageAjax(err);
-
-                                });
+                                empresasService.putEmpresa(usuarioService.getUsuarioCookie(), data)
+                                    .then((result) => {
+                                    })
+                                    .catch((err) => {
+                                        messageApi.errorMessageAjax(err);
+                                    });
                             }
                         }
                     }
@@ -145,7 +150,7 @@ export default class Empresas extends JetView {
         this.load(id);
     }
     load(id) {
-        empresasService.getRxEmpresas(usuarioService.getUsuarioCookie())
+        empresasService.getEmpresas(usuarioService.getUsuarioCookie())
             .then((data) => {
                 $$("empresasGrid").clearAll();
                 $$("empresasGrid").parse(generalApi.prepareDataForDataTable("empresaId", data));
@@ -166,10 +171,13 @@ export default class Empresas extends JetView {
         var self = this;
         webix.confirm(translate("¿Seguro que quiere eliminar ") + name + "?", function (action) {
             if (action === true) {
-                empresasService.deleteEmpresa(usuarioService.getUsuarioCookie(), id, (err, result) => {
-                    if (err) return messageApi.errorMessageAjax(err);
-                    self.load();
-                });
+                empresasService.deleteEmpresa(usuarioService.getUsuarioCookie(), id)
+                    .then((result) => {
+                        self.load();
+                    })
+                    .catch((err) => {
+                        messageApi.errorMessageAjax(err);
+                    })
             }
 
         });
