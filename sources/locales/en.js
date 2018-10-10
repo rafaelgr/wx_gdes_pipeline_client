@@ -23,5 +23,8 @@ export default {
     "Valores incorrectos": "Wrong values",
     "Paises": "Countries",
     "Nombre de pais": "Country name",
-    "Código": "Code"
+    "Código": "Code",
+    "Empresas": "Companies",
+    "Nombre empresa": "Company name",
+    "Pais relacionado": "Related country"
 }
