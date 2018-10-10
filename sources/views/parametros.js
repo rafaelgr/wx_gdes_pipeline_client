@@ -18,7 +18,6 @@ export default class Parametros extends JetView {
                 },
                 {
                     view: "form",
-
                     id: "frmParametros",
                     elements: [
                         {

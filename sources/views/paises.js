@@ -2,52 +2,51 @@ import { JetView } from "webix-jet";
 import { usuarioService } from "../services/usuario_service";
 import { messageApi } from "../utilities/messages";
 import { generalApi } from "../utilities/general";
-import { gruposUsuariosService } from "../services/gruposUsuarios_service";
+import { paisesService } from "../services/paises_service";
 
 var editButton = "<span class='onEdit webix_icon fa-edit'></span>";
 var deleteButton = "<span class='onDelete webix_icon fa-trash'></span>";
 var currentIdDatatableView;
 var currentRowDatatableView
-var semaphore = false;
+var isNewRow = false;
 
-export default class GruposUsuarios extends JetView {
+export default class Paises extends JetView {
     config() {
         const translate = this.app.getService("locale")._;
-        var toolbarGruposUsuarios = {
+        var toolbarPaises = {
             view: "toolbar", padding: 3, elements: [
                 { view: "icon", icon: "users", width: 37, align: "left" },
-                { view: "label", label: translate("Grupos de usuarios") }
+                { view: "label", label: translate("Paises") }
             ]
         }
-        var pagerGruposUsuarios = {
+        var pagerPaises = {
             cols: [
                 {
                     view: "button", type: "icon", icon: "plus", width: 37, align: "left", hotkey: "Ctrl+F",
                     click: () => {
-                        this.show('/top/gruposUsuariosForm?grupoUsuarioId=0');
+                        this.show('/top/paisesForm?paisId=0');
                     }
                 },
                 {
                     view: "button", type: "icon", icon: "plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
-                        var newRow = { id: -1, grupoUsuarioId: 0 };
-                        $$('gruposUsuariosGrid').editStop();
-                        var id = $$("gruposUsuariosGrid").add(newRow, $$('gruposUsuariosGrid').getLastId() + 1);
-                        $$("gruposUsuariosGrid").edit({
+                        var newRow = { id: -1, paisId: 0 };
+                        $$('paisesGrid').editStop();
+                        var id = $$("paisesGrid").add(newRow, $$('paisesGrid').getLastId() + 1);
+                        $$("paisesGrid").showItem(id);
+                        $$("paisesGrid").edit({
                             row: -1,
                             column: "nombre"
                         });
-                        $$("gruposUsuariosGrid").showItem(id);
-                        $$("gruposUsuariosGrid").select(id);
-
+                        isNewRow = true;
                     }
                 },
                 {
                     view: "button", type: "icon", icon: "table", width: 37, align: "right",
                     click: () => {
-                        webix.toExcel($$("gruposUsuariosGrid"), {
-                            filename: "grupos_usuarios",
-                            name: "Grupos",
+                        webix.toExcel($$("paisesGrid"), {
+                            filename: "paises",
+                            name: "Paises",
                             rawValues: true,
                             ignore: { "actions": true }
                         });
@@ -62,14 +61,15 @@ export default class GruposUsuarios extends JetView {
                 }
             ]
         };
-        var datatableGruposUsuarios = {
+        var datatablePaises = {
             view: "datatable",
-            id: "gruposUsuariosGrid",
+            id: "paisesGrid",
             pager: "mypager",
             select: "row",
             columns: [
-                { id: "grupoUsuarioId", adjust: true, header: [translate("ID"), { content: "numberFilter" }], sort: "number" },
-                { id: "nombre", fillspace: true, header: [translate("Nombre de grupo"), { content: "textFilter" }], sort: "string", editor: "text" },
+                { id: "paisId", adjust: true, header: [translate("ID"), { content: "numberFilter" }], sort: "number" },
+                { id: "nombre", fillspace: true, header: [translate("Nombre de pais"), { content: "textFilter" }], sort: "string", editor: "text" },
+                { id: "codPais", header: [translate("Código"), { content: "textFilter" }], sort: "string", editor: "text" },
                 { id: "actions", header: [{ text: translate("Acciones"), css: { "text-align": "center" } }], template: editButton + deleteButton, css: { "text-align": "center" } }
             ],
             onClick: {
@@ -86,7 +86,8 @@ export default class GruposUsuarios extends JetView {
             editable: true,
             editaction: "dblclick",
             rules: {
-                "nombre": webix.rules.isNotEmpty
+                "nombre": webix.rules.isNotEmpty,
+                "codPais": webix.rules.isNotEmpty
             },
             on: {
                 "onAfterEditStart": function (id) {
@@ -94,8 +95,11 @@ export default class GruposUsuarios extends JetView {
                     currentRowDatatableView = this.data.pull[currentIdDatatableView];
                 },
                 "onAfterEditStop": function (state, editor, ignoreUpdate) {
+                    var cIndex = this.getColumnIndex(editor.column);
+                    var length = this.config.columns.length;
+                    if (isNewRow && cIndex != length - 2) return false;
                     if (state.value != state.old) {
-                        semaphore = true;
+                        isNewRow = false;
                         if (!this.validate(currentIdDatatableView)) {
                             messageApi.errorMessage(translate("Valores incorrectos"));
                         } else {
@@ -103,14 +107,14 @@ export default class GruposUsuarios extends JetView {
                             // id is not part of the row object
                             delete currentRowDatatableView.id;
                             var data = currentRowDatatableView;
-                            if (data.grupoUsuarioId == 0) {
-                                gruposUsuariosService.postGrupoUsuario(usuarioService.getUsuarioCookie(), data, (err, result) => {
+                            if (data.paisId == 0) {
+                                paisesService.postPais(usuarioService.getUsuarioCookie(), data, (err, result) => {
                                     if (err) return messageApi.errorMessageAjax(err);
-                                    this.$scope.load(result.grupoUsuarioId);
-                                    $$('gruposUsuariosGrid').editStop();
+                                    this.$scope.load(result.paisId);
+                                    $$('paisesGrid').editStop();
                                 });
                             } else {
-                                gruposUsuariosService.putGrupoUsuario(usuarioService.getUsuarioCookie(), data, (err, result) => {
+                                paisesService.putPais(usuarioService.getUsuarioCookie(), data, (err, result) => {
                                     if (err) return messageApi.errorMessageAjax(err);
 
                                 });
@@ -122,9 +126,9 @@ export default class GruposUsuarios extends JetView {
         }
         var _view = {
             rows: [
-                toolbarGruposUsuarios,
-                pagerGruposUsuarios,
-                datatableGruposUsuarios
+                toolbarPaises,
+                pagerPaises,
+                datatablePaises
             ]
         }
         return _view;
@@ -132,35 +136,35 @@ export default class GruposUsuarios extends JetView {
     init(view, url) {
         usuarioService.checkLoggedUser();
         var id = null;
-        if (url[0].params.grupoUsuarioId) {
-            id = url[0].params.grupoUsuarioId;
+        if (url[0].params.paisId) {
+            id = url[0].params.paisId;
         }
         webix.UIManager.addHotKey("Esc", function () {
-            $$('gruposUsuariosGrid').remove(-1);
+            $$('paisesGrid').remove(-1);
             return false;
-        }, $$('gruposUsuariosGrid'));
+        }, $$('paisesGrid'));
         this.load(id);
     }
     load(id) {
-        gruposUsuariosService.getGruposUsuarios(usuarioService.getUsuarioCookie(), (err, data) => {
+        paisesService.getPaises(usuarioService.getUsuarioCookie(), (err, data) => {
             if (err) return messageApi.errorMessageAjax(err);
-            $$("gruposUsuariosGrid").clearAll();
-            $$("gruposUsuariosGrid").parse(generalApi.prepareDataForDataTable("grupoUsuarioId", data));
+            $$("paisesGrid").clearAll();
+            $$("paisesGrid").parse(generalApi.prepareDataForDataTable("paisId", data));
             if (id) {
-                $$("gruposUsuariosGrid").select(id);
-                $$("gruposUsuariosGrid").showItem(id);
+                $$("paisesGrid").select(id);
+                $$("paisesGrid").showItem(id);
             }
         })
     }
     edit(id) {
-        this.show('/top/gruposUsuariosForm?grupoUsuarioId=' + id);
+        this.show('/top/paisesForm?paisId=' + id);
     }
     delete(id, name) {
         const translate = this.app.getService("locale")._;
         var self = this;
         webix.confirm(translate("¿Seguro que quiere eliminar ") + name + "?", function (action) {
             if (action === true) {
-                gruposUsuariosService.deleteGrupoUsuario(usuarioService.getUsuarioCookie(), id, (err, result) => {
+                paisesService.deletePais(usuarioService.getUsuarioCookie(), id, (err, result) => {
                     if (err) return messageApi.errorMessageAjax(err);
                     self.load();
                 });

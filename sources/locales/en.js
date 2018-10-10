@@ -20,5 +20,8 @@ export default {
     "Acciones": "Actions",
     "¿Seguro que quiere eliminar ": "Are you sure to delete ",
     "Debe rellenar los campos correctamente": "You must fill in the fields correctly",
-    "Valores incorrectos": "Wrong values"
+    "Valores incorrectos": "Wrong values",
+    "Paises": "Countries",
+    "Nombre de pais": "Country name",
+    "Código": "Code"
 }
