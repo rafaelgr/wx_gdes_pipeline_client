@@ -108,16 +108,22 @@ export default class Paises extends JetView {
                             delete currentRowDatatableView.id;
                             var data = currentRowDatatableView;
                             if (data.paisId == 0) {
-                                paisesService.postPais(usuarioService.getUsuarioCookie(), data, (err, result) => {
-                                    if (err) return messageApi.errorMessageAjax(err);
+                                paisesService.vice.postPais(usuarioService.getUsuarioCookie(), data)
+                                .then(result =>{
                                     this.$scope.load(result.paisId);
                                     $$('paisesGrid').editStop();
+                                })
+                                .catch(err => {
+                                    messageApi.errorMessageAjax(err);
                                 });
                             } else {
-                                paisesService.putPais(usuarioService.getUsuarioCookie(), data, (err, result) => {
-                                    if (err) return messageApi.errorMessageAjax(err);
+                                paisesService.vice.putPais(usuarioService.getUsuarioCookie(), data)
+                                .then(result=>{
 
-                                });
+                                })
+                                .catch(err=>{
+                                    messageApi.errorMessageAjax(err);
+                                })
                             }
                         }
                     }
@@ -146,14 +152,17 @@ export default class Paises extends JetView {
         this.load(id);
     }
     load(id) {
-        paisesService.getPaises(usuarioService.getUsuarioCookie(), (err, data) => {
-            if (err) return messageApi.errorMessageAjax(err);
+        paisesService.getPaises(usuarioService.getUsuarioCookie())
+        .then(data=>{
             $$("paisesGrid").clearAll();
             $$("paisesGrid").parse(generalApi.prepareDataForDataTable("paisId", data));
             if (id) {
                 $$("paisesGrid").select(id);
                 $$("paisesGrid").showItem(id);
             }
+        })
+        .catch(err=>{
+            messageApi.errorMessageAjax(err);
         })
     }
     edit(id) {
@@ -164,7 +173,7 @@ export default class Paises extends JetView {
         var self = this;
         webix.confirm(translate("¿Seguro que quiere eliminar ") + name + "?", function (action) {
             if (action === true) {
-                paisesService.deletePais(usuarioService.getUsuarioCookie(), id, (err, result) => {
+                empresasService.vice.deletePais(usuarioService.getUsuarioCookie(), id, (err, result) => {
                     if (err) return messageApi.errorMessageAjax(err);
                     self.load();
                 });

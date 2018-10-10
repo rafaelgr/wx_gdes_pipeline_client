@@ -1,4 +1,3 @@
-import { cookieApi } from "../utilities/cookies";
 import { devConfig } from "../config/config";
 export const empresasService = {
     getEmpresas: (usu) => {

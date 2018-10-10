@@ -1,84 +1,98 @@
 import { cookieApi } from "../utilities/cookies";
 import { devConfig } from "../config/config";
 export const paisesService = {
-    getPaises: (usu, done) => {
-        var url = devConfig.getApiUrl() + "/api/paises";
-        webix.ajax()
-        .timeout(10000)
-        .headers({
-            "Content-Type": "application/json",
-            "x-apiKey": usu.apiKey
+    getPaises: (usu) => {
+        return new webix.promise((success, fail)=>{
+            var url = devConfig.getApiUrl() + "/api/paises";
+            webix.ajax()
+            .timeout(10000)
+            .headers({
+                "Content-Type": "application/json",
+                "x-apiKey": usu.apiKey
+            })
+            .get(url)
+            .then(function (result) {
+                success(result.json());
+            })
+            .catch(function (inXhr) {
+                fail(inXhr);
+            });
         })
-        .get(url)
-        .then(function (result) {
-            done(null, result.json());
-        })
-        .catch(function (inXhr) {
-            done(inXhr);
-        });
+
     },
-    getPais: (usu, paisId, done) => {
-        var url = devConfig.getApiUrl() + "/api/paises/" + paisId;
-        webix.ajax()
-        .timeout(10000)
-        .headers({
-            "Content-Type": "application/json",
-            "x-apiKey": usu.apiKey
-        })
-        .get(url)
-        .then(function (result) {
-            done(null, result.json());
-        })
-        .catch(function (inXhr) {
-            done(inXhr);
+    getPais: (usu, paisId) => {
+        return new webix.promise((success, fail)=>{
+            var url = devConfig.getApiUrl() + "/api/paises/" + paisId;
+            webix.ajax()
+            .timeout(10000)
+            .headers({
+                "Content-Type": "application/json",
+                "x-apiKey": usu.apiKey
+            })
+            .get(url)
+            .then(function (result) {
+                success(result.json());
+            })
+            .catch(function (inXhr) {
+                fail(inXhr);
+            })
         });
+;
     },
-    postPais: (usu, grupoUsuario, done) => {
-        var url = devConfig.getApiUrl() + "/api/paises" ;
-        webix.ajax()
-        .timeout(10000)
-        .headers({
-            "Content-Type": "application/json",
-            "x-apiKey": usu.apiKey
-        })
-        .post(url, grupoUsuario)
-        .then(function (result) {
-            done(null, result.json());
-        })
-        .catch(function (inXhr) {
-            done(inXhr);
+    postPais: (usu, grupoUsuario) => {
+        return new webix.promise((success, fail)=>{
+            var url = devConfig.getApiUrl() + "/api/paises" ;
+            webix.ajax()
+            .timeout(10000)
+            .headers({
+                "Content-Type": "application/json",
+                "x-apiKey": usu.apiKey
+            })
+            .post(url, grupoUsuario)
+            .then(function (result) {
+                success(result.json());
+            })
+            .catch(function (inXhr) {
+                fail(inXhr);
+            });
         });
+
     },
-    putPais: (usu, grupoUsuario, done) => {
-        var url = devConfig.getApiUrl() + "/api/paises" ;
-        webix.ajax()
-        .timeout(10000)
-        .headers({
-            "Content-Type": "application/json",
-            "x-apiKey": usu.apiKey
-        })
-        .put(url, grupoUsuario)
-        .then(function (result) {
-            done(null, result.json());
-        })
-        .catch(function (inXhr) {
-            done(inXhr);
+    putPais: (usu, grupoUsuario) => {
+        return new webix.promise((success, fail)=>{
+            var url = devConfig.getApiUrl() + "/api/paises" ;
+            webix.ajax()
+            .timeout(10000)
+            .headers({
+                "Content-Type": "application/json",
+                "x-apiKey": usu.apiKey
+            })
+            .put(url, grupoUsuario)
+            .then(function (result) {
+                success(result.json());
+            })
+            .catch(function (inXhr) {
+                fail(inXhr);
+            });
         });
+
     },
-    deletePais: (usu, paisId, done) => {
-        var url = devConfig.getApiUrl() + "/api/paises/" + paisId;
-        webix.ajax()
-        .timeout(10000)
-        .headers({
-            "Content-Type": "application/json",
-            "x-apiKey": usu.apiKey
-        })
-        .del(url)
-        .then(function (result) {
-            done(null, result.json());
-        })
-        .catch(function (inXhr) {
-            done(inXhr);
+    deletePais: (usu, paisId) => {
+        return new webix.promise((success, fail)=>{
+            var url = devConfig.getApiUrl() + "/api/paises/" + paisId;
+            webix.ajax()
+            .timeout(10000)
+            .headers({
+                "Content-Type": "application/json",
+                "x-apiKey": usu.apiKey
+            })
+            .del(url)
+            .then(function (result) {
+                success(result.json());
+            })
+            .catch(function (inXhr) {
+                fail(inXhr);
+            });
         });
     }
 }
