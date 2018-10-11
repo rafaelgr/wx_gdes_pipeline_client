@@ -31,7 +31,7 @@ export default class Parametros extends JetView {
                                     label: translate("ID"), labelPosition: "top"
                                 },
                                 {
-                                    view: "text", name: "nombre", required: true,
+                                    view: "text", name: "nombre", required: true, id:"firstField",
                                     label: translate("Nombre de grupo"), labelPosition: "top"
                                 }
                             ]
@@ -55,13 +55,17 @@ export default class Parametros extends JetView {
             gruposUsuarioId = url[0].params.grupoUsuarioId;
         }
         this.load(gruposUsuarioId);
+        webix.delay(function(){ $$("firstField").focus(); });
     }
     load(grupoUsuarioId) {
         if (grupoUsuarioId == 0) return;
-        gruposUsuariosService.getGrupoUsuario(usuarioService.getUsuarioCookie(), gruposUsuarioId, (err, parametros) => {
-            if (err) return messageApi.errorMessageAjax(err);
-            $$("frmGruposUsuarios").setValues(parametros);
-        });
+        gruposUsuariosService.getGrupoUsuario(usuarioService.getUsuarioCookie(), gruposUsuarioId)
+            .then(grupo => {
+                $$("frmGruposUsuarios").setValues(grupo);
+            })
+            .catch(err => {
+                messageApi.errorMessageAjax(err);
+            });
     }
     cancel() {
         this.$scope.show('/top/gruposUsuarios');
@@ -74,16 +78,20 @@ export default class Parametros extends JetView {
         }
         var data = $$("frmGruposUsuarios").getValues();
         if (gruposUsuarioId == 0) {
-            gruposUsuariosService.postGrupoUsuario(usuarioService.getUsuarioCookie(), data,
-                (err, result) => {
-                    if (err) return messageApi.errorMessageAjax(err);
+            gruposUsuariosService.postGrupoUsuario(usuarioService.getUsuarioCookie(), data)
+                .then(result => {
                     this.$scope.show('/top/gruposUsuarios?grupoUsuarioId=' + result.grupoUsuarioId);
+                })
+                .catch(err => {
+                    messageApi.errorMessageAjax(err);
                 });
         } else {
-            gruposUsuariosService.putGrupoUsuario(usuarioService.getUsuarioCookie(), data,
-                (err, result) => {
-                    if (err) return messageApi.errorMessageAjax(err);
+            gruposUsuariosService.putGrupoUsuario(usuarioService.getUsuarioCookie(), data)
+                .then(result => {
                     this.$scope.show('/top/gruposUsuarios?grupoUsuarioId=' + result.grupoUsuarioId);
+                })
+                .catch(err => {
+                    messageApi.errorMessageAjax(err);
                 });
         }
     }

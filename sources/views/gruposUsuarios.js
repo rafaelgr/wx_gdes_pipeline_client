@@ -104,16 +104,22 @@ export default class GruposUsuarios extends JetView {
                             delete currentRowDatatableView.id;
                             var data = currentRowDatatableView;
                             if (data.grupoUsuarioId == 0) {
-                                gruposUsuariosService.postGrupoUsuario(usuarioService.getUsuarioCookie(), data, (err, result) => {
-                                    if (err) return messageApi.errorMessageAjax(err);
-                                    this.$scope.load(result.grupoUsuarioId);
-                                    $$('gruposUsuariosGrid').editStop();
-                                });
+                                gruposUsuariosService.postGrupoUsuario(usuarioService.getUsuarioCookie(), data)
+                                    .then(result => {
+                                        this.$scope.load(result.grupoUsuarioId);
+                                        $$('gruposUsuariosGrid').editStop();
+                                    })
+                                    .catch(err => {
+                                        messageApi.errorMessageAjax(err);
+                                    });
                             } else {
-                                gruposUsuariosService.putGrupoUsuario(usuarioService.getUsuarioCookie(), data, (err, result) => {
-                                    if (err) return messageApi.errorMessageAjax(err);
+                                gruposUsuariosService.putGrupoUsuario(usuarioService.getUsuarioCookie(), data)
+                                    .then(result => {
 
-                                });
+                                    })
+                                    .catch(err => {
+                                        messageApi.errorMessageAjax(err);
+                                    })
                             }
                         }
                     }
@@ -142,15 +148,18 @@ export default class GruposUsuarios extends JetView {
         this.load(id);
     }
     load(id) {
-        gruposUsuariosService.getGruposUsuarios(usuarioService.getUsuarioCookie(), (err, data) => {
-            if (err) return messageApi.errorMessageAjax(err);
-            $$("gruposUsuariosGrid").clearAll();
-            $$("gruposUsuariosGrid").parse(generalApi.prepareDataForDataTable("grupoUsuarioId", data));
-            if (id) {
-                $$("gruposUsuariosGrid").select(id);
-                $$("gruposUsuariosGrid").showItem(id);
-            }
-        })
+        gruposUsuariosService.getGruposUsuarios(usuarioService.getUsuarioCookie())
+            .then(data => {
+                $$("gruposUsuariosGrid").clearAll();
+                $$("gruposUsuariosGrid").parse(generalApi.prepareDataForDataTable("grupoUsuarioId", data));
+                if (id) {
+                    $$("gruposUsuariosGrid").select(id);
+                    $$("gruposUsuariosGrid").showItem(id);
+                }
+            })
+            .catch(err => {
+                return messageApi.errorMessageAjax(err);
+            });
     }
     edit(id) {
         this.show('/top/gruposUsuariosForm?grupoUsuarioId=' + id);
@@ -160,9 +169,12 @@ export default class GruposUsuarios extends JetView {
         var self = this;
         webix.confirm(translate("¿Seguro que quiere eliminar ") + name + "?", function (action) {
             if (action === true) {
-                gruposUsuariosService.deleteGrupoUsuario(usuarioService.getUsuarioCookie(), id, (err, result) => {
-                    if (err) return messageApi.errorMessageAjax(err);
+                gruposUsuariosService.deleteGrupoUsuario(usuarioService.getUsuarioCookie(), id)
+                .then(result=>{
                     self.load();
+                })
+                .catch(err=>{
+                    messageApi.errorMessageAjax(err);
                 });
             }
 

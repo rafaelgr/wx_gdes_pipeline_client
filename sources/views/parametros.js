@@ -66,9 +66,12 @@ export default class Parametros extends JetView {
         this.load();
     }
     load() {
-        parametrosService.getParametros(usuarioService.getUsuarioCookie(), (err, parametros) => {
-            if (err) return messageApi.errorMessageAjax(err);
+        parametrosService.getParametros(usuarioService.getUsuarioCookie())
+        .then(parametros =>{
             $$("frmParametros").setValues(parametros);
+        })
+        .catch(err => {
+            messageApi.errorMessageAjax(err);
         });
     }
     cancel() {
@@ -77,10 +80,12 @@ export default class Parametros extends JetView {
     accept() {
         // Here goes validation
         var data = $$("frmParametros").getValues();
-        parametrosService.putParametros(usuarioService.getUsuarioCookie(), data,
-            (err, result) => {
-                if (err) return messageApi.errorMessageAjax(err);
-                this.$scope.show('/top/inicio');
-            });
+        parametrosService.putParametros(usuarioService.getUsuarioCookie(), data)
+        .then(result =>{
+            this.$scope.show('/top/inicio');
+        })
+        .catch(err => {
+            messageApi.errorMessageAjax(err);
+        })
     }
 }

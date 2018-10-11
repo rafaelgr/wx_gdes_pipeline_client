@@ -32,7 +32,7 @@ export default class Parametros extends JetView {
                                     label: translate("ID"), labelPosition: "top"
                                 },
                                 {
-                                    view: "text", name: "nombre", required: true,
+                                    view: "text", name: "nombre", required: true, id: "firstField",
                                     label: translate("Nombre empresa"), labelPosition: "top"
                                 }
                             ]
@@ -68,6 +68,7 @@ export default class Parametros extends JetView {
             empresaId = url[0].params.empresaId;
         }
         this.load(empresaId);
+        webix.delay(function(){ $$("firstField").focus(); });
     }
     load(empresaId) {
         if (empresaId == 0) {

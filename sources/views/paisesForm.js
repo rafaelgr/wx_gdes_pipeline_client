@@ -31,7 +31,7 @@ export default class Parametros extends JetView {
                                     label: translate("ID"), labelPosition: "top"
                                 },
                                 {
-                                    view: "text", name: "nombre", required: true,
+                                    view: "text", name: "nombre", required: true, id: "firstField",
                                     label: translate("Nombre de pais"), labelPosition: "top"
                                 },
                                 {
@@ -59,6 +59,7 @@ export default class Parametros extends JetView {
             paisId = url[0].params.paisId;
         }
         this.load(paisId);
+        webix.delay(function(){ $$("firstField").focus(); });
     }
     load(paisId) {
         if (paisId == 0) return;
