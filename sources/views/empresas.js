@@ -80,7 +80,7 @@ export default class Empresas extends JetView {
                 { id: "empresaId", adjust: true, header: [translate("ID"), { content: "numberFilter" }], sort: "number" },
                 { id: "nombre", fillspace: true, header: [translate("Nombre empresa"), { content: "textFilter" }], sort: "string", editor: "text" },
                 { id: "cod", header: [translate("Código"), { content: "textFilter" }], sort: "string", editor: "text" },
-                { id: "paisId", header: [translate("Pais relacionado"), { content: "textFilter" }], sort: "string", editor: "combo", collection: colPaises, width: 200 },
+                { id: "paisId", header: [translate("Pais relacionado"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colPaises, width: 200 },
                 { id: "actions", header: [{ text: translate("Acciones"), css: { "text-align": "center" } }], template: editButton + deleteButton, css: { "text-align": "center" } }
             ],
             onClick: {

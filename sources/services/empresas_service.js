@@ -18,6 +18,23 @@ export const empresasService = {
                 });
         });
     },
+    getSyncEmpresas: (usu) => {
+        var url = devConfig.getApiUrl() + "/api/empresas";
+        var res = webix.ajax()
+            .headers({
+                "Content-Type": "application/json",
+                "x-apiKey": usu.apiKey
+            })
+            .sync()
+            .get(url);
+        var result = { data: null, err: null };
+        if (res.status != 200) {
+            result.err = res;
+        } else {
+            result.data = JSON.parse(res.response);
+        }
+        return result;
+    },
     getEmpresa: (usu, empresaId) => {
         return new webix.promise((success, fail) => {
             var url = devConfig.getApiUrl() + "/api/empresas/" + empresaId;
@@ -57,7 +74,7 @@ export const empresasService = {
         });
     },
     putEmpresa: (usu, grupoUsuario) => {
-        return new webix.promise((success, fail)=>{
+        return new webix.promise((success, fail) => {
             var url = devConfig.getApiUrl() + "/api/empresas";
             webix.ajax()
                 .timeout(10000)
@@ -75,7 +92,7 @@ export const empresasService = {
         });
     },
     deleteEmpresa: (usu, empresaId) => {
-        return new webix.promise((success, fail)=>{
+        return new webix.promise((success, fail) => {
             var url = devConfig.getApiUrl() + "/api/empresas/" + empresaId;
             webix.ajax()
                 .timeout(10000)
