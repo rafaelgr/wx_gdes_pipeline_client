@@ -62,10 +62,13 @@ export default class Parametros extends JetView {
     }
     load(paisId) {
         if (paisId == 0) return;
-        paisesService.getPais(usuarioService.getUsuarioCookie(), paisId, (err, parametros) => {
-            if (err) return messageApi.errorMessageAjax(err);
-            $$("frmPaises").setValues(parametros);
-        });
+        paisesService.getPais(usuarioService.getUsuarioCookie(), paisId)
+            .then(paises => {
+                $$("frmPaises").setValues(paises);
+            })
+            .catch(err => {
+                messageApi.errorMessageAjax(err);
+            });
     }
     cancel() {
         this.$scope.show('/top/paises');
@@ -80,18 +83,21 @@ export default class Parametros extends JetView {
         console.log("DATAF: ", data);
         if (paisId == 0) {
             data.paisId = 0;
-            paisesService.postPais(usuarioService.getUsuarioCookie(), data,
-                (err, result) => {
-                    console.log("RS: ", result);
-                    if (err) return messageApi.errorMessageAjax(err);
-                    this.$scope.show('/top/paises?paisId=' + result.paisId);
-                });
+            paisesService.postPais(usuarioService.getUsuarioCookie(), data)
+            .then(result => {
+                this.$scope.show('/top/paises?paisId=' + result.paisId);
+            })
+            .catch(err => {
+                messageApi.errorMessageAjax(err);
+            });
         } else {
-            paisesService.putPais(usuarioService.getUsuarioCookie(), data,
-                (err, result) => {
-                    if (err) return messageApi.errorMessageAjax(err);
-                    this.$scope.show('/top/paises?paisId=' + data.paisId);
-                });
+            paisesService.putPais(usuarioService.getUsuarioCookie(), data)
+            .then(result => {
+                this.$scope.show('/top/paises?paisId=' + data.paisId);
+            })
+            .catch(err => {
+                messageApi.errorMessageAjax(err);
+            });
         }
     }
 }
