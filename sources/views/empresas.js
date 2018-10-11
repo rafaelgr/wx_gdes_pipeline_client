@@ -10,9 +10,14 @@ var deleteButton = "<span class='onDelete webix_icon fa-trash'></span>";
 var currentIdDatatableView;
 var currentRowDatatableView
 var isNewRow = false;
-var paisResult =  paisesService.getSyncPaises(usuarioService.getUsuarioCookie()).response;
-console.log("PRS: ", generalApi.prepareDataForCombo('paisId', 'nombre', JSON.parse(paisResult)));
-var colPaises = generalApi.prepareDataForCombo('paisId', 'nombre', JSON.parse(paisResult));
+var colPaises = [];
+var paisResult = paisesService.getSyncPaises(usuarioService.getUsuarioCookie());
+if (paisResult.err) {
+    messageApi.errorMessageAjax(paisResult.err);
+} else {
+    colPaises = generalApi.prepareDataForCombo('paisId', 'nombre', paisResult.data);
+}
+
 
 
 export default class Empresas extends JetView {
@@ -75,7 +80,7 @@ export default class Empresas extends JetView {
                 { id: "empresaId", adjust: true, header: [translate("ID"), { content: "numberFilter" }], sort: "number" },
                 { id: "nombre", fillspace: true, header: [translate("Nombre empresa"), { content: "textFilter" }], sort: "string", editor: "text" },
                 { id: "cod", header: [translate("Código"), { content: "textFilter" }], sort: "string", editor: "text" },
-                { id: "paisId", header: [translate("País relacionado"), { content: "textFilter" }], sort: "string", editor: "combo", collection: colPaises },
+                { id: "paisId", header: [translate("Pais relacionado"), { content: "textFilter" }], sort: "string", editor: "combo", collection: colPaises, width: 200 },
                 { id: "actions", header: [{ text: translate("Acciones"), css: { "text-align": "center" } }], template: editButton + deleteButton, css: { "text-align": "center" } }
             ],
             onClick: {
@@ -93,7 +98,8 @@ export default class Empresas extends JetView {
             editaction: "dblclick",
             rules: {
                 "nombre": webix.rules.isNotEmpty,
-                "codEmpresa": webix.rules.isNotEmpty
+                "cod": webix.rules.isNotEmpty,
+                "paisId": webix.rules.isNotEmpty
             },
             on: {
                 "onAfterEditStart": function (id) {
@@ -159,7 +165,6 @@ export default class Empresas extends JetView {
     load(id) {
         empresasService.getEmpresas(usuarioService.getUsuarioCookie())
             .then((data) => {
-                console.log("GRDX: ", $$("empresasGrid").config.columns);
                 $$("empresasGrid").clearAll();
                 $$("empresasGrid").parse(generalApi.prepareDataForDataTable("empresaId", data));
                 if (id) {

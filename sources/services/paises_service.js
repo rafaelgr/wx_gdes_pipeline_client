@@ -28,7 +28,16 @@ export const paisesService = {
         })
         .sync()
         .get(url);
-        return res;
+        var result = {
+            data: null,
+            err: null
+        }
+        if (res.status != 200) {
+            result.err = res;
+        } else {
+            result.data = JSON.parse(res.response);
+        }
+        return result;
     },
     getPais: (usu, paisId) => {
         return new webix.promise((success, fail)=>{

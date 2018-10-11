@@ -40,7 +40,7 @@ export default class Parametros extends JetView {
                         {
                             cols: [
                                 {
-                                    view: "text", name: "cod", width: 100,
+                                    view: "text", name: "cod", width: 100, required: true,
                                     label: translate("Código"), labelPosition: "top"
                                 },
                                 {
