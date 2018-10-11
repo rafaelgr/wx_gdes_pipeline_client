@@ -78,9 +78,9 @@ export default class Areas extends JetView {
             select: "row",
             columns: [
                 { id: "areaId", adjust: true, header: [translate("ID"), { content: "numberFilter" }], sort: "number" },
-                { id: "nombre", fillspace: true, header: [translate("Nombre area"), { content: "textFilter" }], sort: "string", editor: "text" },
+                { id: "nombre", fillspace: true, header: [translate("Nombre area"), { content: "textFilter" }], sort: "string", editor: "text", minWidth: 200 },
                 { id: "cod", header: [translate("Código"), { content: "textFilter" }], sort: "string", editor: "text" },
-                { id: "orden", header: [translate("Orden"), { content: "textFilter" }], sort: "string", editor: "text" },
+                { id: "orden", header: [translate("Orden"), { content: "numberFilter" }], sort: "string", editor: "text" },
                 { id: "nombreEN", header: [translate("Nombre Inglés"), { content: "textFilter" }], sort: "string", editor: "text", width:250 },
                 { id: "nombreFR", header: [translate("Nombre Francés"), { content: "textFilter" }], sort: "string", editor: "text", width:250 },
                 { id: "unidadNegocioId", header: [translate("Unidad de negocio"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUnidadesNegocio, width: 200 },
