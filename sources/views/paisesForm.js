@@ -80,7 +80,6 @@ export default class Parametros extends JetView {
             return;
         }
         var data = $$("frmPaises").getValues();
-        console.log("DATAF: ", data);
         if (paisId == 0) {
             data.paisId = 0;
             paisesService.postPais(usuarioService.getUsuarioCookie(), data)

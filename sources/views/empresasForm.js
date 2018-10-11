@@ -93,7 +93,6 @@ export default class Parametros extends JetView {
             return;
         }
         var data = $$("frmEmpresas").getValues();
-        console.log("DATAF: ", data);
         if (empresaId == 0) {
             data.empresaId = 0;
             empresasService.postEmpresa(usuarioService.getUsuarioCookie(),data)
@@ -106,11 +105,9 @@ export default class Parametros extends JetView {
         } else {
             empresasService.putEmpresa(usuarioService.getUsuarioCookie(), data)
                 .then(() => {
-                    console.log("From PUTOK");
                     this.$scope.show('/top/empresas?empresaId=' + data.empresaId);
                 })
                 .catch((err) => {
-                    console.log("From PUTERR");
                     messageApi.errorMessageAjax(err);
                 });
         }
