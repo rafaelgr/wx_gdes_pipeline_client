@@ -15,7 +15,7 @@ export default class UnidadesNegocio extends JetView {
         const translate = this.app.getService("locale")._;
         var toolbarUnidadesNegocio = {
             view: "toolbar", padding: 3, elements: [
-                { view: "icon", icon: "users", width: 37, align: "left" },
+                { view: "icon", icon: "cog", width: 37, align: "left" },
                 { view: "label", label: translate("Unidades de negocio") }
             ]
         }
