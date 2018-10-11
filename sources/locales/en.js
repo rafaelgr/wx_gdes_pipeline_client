@@ -27,8 +27,13 @@ export default {
     "Empresas": "Companies",
     "Nombre empresa": "Company name",
     "Pais relacionado": "Related country",
-    "Unidades de negocio": "Business unit",
+    "Unidades de negocio": "Business units",
+    "Unidad de negocio": "Business unit",
     "Nombre unidad de negocio": "Business unit name",
     "Nombre Francés": "French name",
-    "Nombre Inglés": "English name"
+    "Nombre Inglés": "English name",
+    "Areas": "Areas",
+    "Nombre area": "Area name",
+    "Orden": "Order",
+    "Unidad negocio relacionada": "Related business unit"
 }
