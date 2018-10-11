@@ -2,13 +2,18 @@ import { JetView } from "webix-jet";
 import { usuarioService } from "../services/usuario_service";
 import { messageApi } from "../utilities/messages";
 import { generalApi } from "../utilities/general";
-import { empresaId, empresasService } from "../services/empresas_service";
+import { empresasService } from "../services/empresas_service";
+import { paisesService } from "../services/paises_service";
 
 var editButton = "<span class='onEdit webix_icon fa-edit'></span>";
 var deleteButton = "<span class='onDelete webix_icon fa-trash'></span>";
 var currentIdDatatableView;
 var currentRowDatatableView
 var isNewRow = false;
+var paisResult =  paisesService.getSyncPaises(usuarioService.getUsuarioCookie()).response;
+console.log("PRS: ", generalApi.prepareDataForCombo('paisId', 'nombre', JSON.parse(paisResult)));
+var colPaises = generalApi.prepareDataForCombo('paisId', 'nombre', JSON.parse(paisResult));
+
 
 export default class Empresas extends JetView {
     config() {
@@ -69,6 +74,8 @@ export default class Empresas extends JetView {
             columns: [
                 { id: "empresaId", adjust: true, header: [translate("ID"), { content: "numberFilter" }], sort: "number" },
                 { id: "nombre", fillspace: true, header: [translate("Nombre empresa"), { content: "textFilter" }], sort: "string", editor: "text" },
+                { id: "cod", header: [translate("Código"), { content: "textFilter" }], sort: "string", editor: "text" },
+                { id: "paisId", header: [translate("País relacionado"), { content: "textFilter" }], sort: "string", editor: "combo", collection: colPaises },
                 { id: "actions", header: [{ text: translate("Acciones"), css: { "text-align": "center" } }], template: editButton + deleteButton, css: { "text-align": "center" } }
             ],
             onClick: {
@@ -152,6 +159,7 @@ export default class Empresas extends JetView {
     load(id) {
         empresasService.getEmpresas(usuarioService.getUsuarioCookie())
             .then((data) => {
+                console.log("GRDX: ", $$("empresasGrid").config.columns);
                 $$("empresasGrid").clearAll();
                 $$("empresasGrid").parse(generalApi.prepareDataForDataTable("empresaId", data));
                 if (id) {

@@ -16,9 +16,19 @@ export const paisesService = {
             })
             .catch(function (inXhr) {
                 fail(inXhr);
-            });
+            })
         })
-
+    },
+    getSyncPaises: (usu) => {
+        var url = devConfig.getApiUrl() + "/api/paises";
+        var res = webix.ajax()
+        .headers({
+            "Content-Type": "application/json",
+            "x-apiKey": usu.apiKey
+        })
+        .sync()
+        .get(url);
+        return res;
     },
     getPais: (usu, paisId) => {
         return new webix.promise((success, fail)=>{
@@ -54,7 +64,7 @@ export const paisesService = {
             })
             .catch(function (inXhr) {
                 fail(inXhr);
-            });
+            })
         });
 
     },
@@ -73,7 +83,7 @@ export const paisesService = {
             })
             .catch(function (inXhr) {
                 fail(inXhr);
-            });
+            })
         });
 
     },

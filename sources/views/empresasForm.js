@@ -68,7 +68,7 @@ export default class Parametros extends JetView {
             empresaId = url[0].params.empresaId;
         }
         this.load(empresaId);
-        webix.delay(function(){ $$("firstField").focus(); });
+        webix.delay(function () { $$("firstField").focus(); });
     }
     load(empresaId) {
         if (empresaId == 0) {
@@ -96,7 +96,7 @@ export default class Parametros extends JetView {
         var data = $$("frmEmpresas").getValues();
         if (empresaId == 0) {
             data.empresaId = 0;
-            empresasService.postEmpresa(usuarioService.getUsuarioCookie(),data)
+            empresasService.postEmpresa(usuarioService.getUsuarioCookie(), data)
                 .the((result) => {
                     this.$scope.show('/top/empresas?empresaId=' + result.empresaId);
                 })
@@ -114,15 +114,17 @@ export default class Parametros extends JetView {
         }
     }
     loadPaises(paisId) {
-        paisesService.getPaises(usuarioService.getUsuarioCookie(), (err, rows) => {
-            var empresas = generalApi.prepareDataForCombo('paisId', 'nombre', rows);
-            var list = $$("cmbPais").getPopup().getList();
-            list.clearAll();
-            list.parse(empresas);
-            if (id) {
-                $$("cmbPais").setValue(paisId);
-                $$("cmbPais").refresh();
-            }
-        });
+        paisesService.getPaises(usuarioService.getUsuarioCookie())
+            .then(rows => {
+                var empresas = generalApi.prepareDataForCombo('paisId', 'nombre', rows);
+                var list = $$("cmbPais").getPopup().getList();
+                list.clearAll();
+                list.parse(empresas);
+                if (id) {
+                    $$("cmbPais").setValue(paisId);
+                    $$("cmbPais").refresh();
+                }
+                return;
+            });
     }
 }
