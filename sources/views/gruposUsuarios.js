@@ -36,6 +36,7 @@ export default class GruposUsuarios extends JetView {
                         $$("gruposUsuariosGrid").showItem(id);
                         $$("gruposUsuariosGrid").select(id);
                         $$('gruposUsuariosGrid').editRow(id);
+                        webix.UIManager.setFocus("gruposUsuariosGrid");
                     }
                 },
                 {
