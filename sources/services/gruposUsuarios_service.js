@@ -19,6 +19,23 @@ export const gruposUsuariosService = {
             });
         });
     },
+    getSyncGruposUsuarios: (usu) => {
+        var url = devConfig.getApiUrl() + "/api/grupos-usuarios";
+        var res = webix.ajax()
+            .headers({
+                "Content-Type": "application/json",
+                "x-apiKey": usu.apiKey
+            })
+            .sync()
+            .get(url);
+        var result = { data: null, err: null };
+        if (res.status != 200) {
+            result.err = res;
+        } else {
+            result.data = JSON.parse(res.response);
+        }
+        return result;
+    },
     getGrupoUsuario: (usu, grupoUsuarioId) => {
         return new webix.promise((success, fail)=>{
             var url = devConfig.getApiUrl() + "/api/grupos-usuarios/" + grupoUsuarioId;

@@ -97,7 +97,7 @@ export default class Parametros extends JetView {
         if (empresaId == 0) {
             data.empresaId = 0;
             empresasService.postEmpresa(usuarioService.getUsuarioCookie(), data)
-                .the((result) => {
+                .then((result) => {
                     this.$scope.show('/top/empresas?empresaId=' + result.empresaId);
                 })
                 .catch((err) => {

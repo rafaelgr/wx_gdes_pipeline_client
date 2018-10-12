@@ -35,5 +35,18 @@ export default {
     "Areas": "Areas",
     "Nombre area": "Area name",
     "Orden": "Order",
-    "Unidad negocio relacionada": "Related business unit"
+    "Unidad negocio relacionada": "Related business unit",
+    "Usuarios": "Users",
+    "Nombre usuario": "User name",
+    "Grupo": "Group",
+    "Idioma": "Language",
+    "Administrador": "Administrator",
+    "Responsable": "Responsable",
+    "Area": "Area",
+    "Unidad negocio": "Business unit",
+    "Correo Azure": "Azure Email",
+    "Ubicación": "Location",
+    "Grupo usuarios": "Users group",
+    "Pais": "Country",
+    "Empresa": "Company"
 }
