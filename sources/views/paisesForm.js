@@ -1,38 +1,42 @@
 import { JetView } from "webix-jet";
 import { usuarioService } from "../services/usuario_service";
-import { gruposUsuariosService } from "../services/gruposUsuarios_service";
+import { paisesService } from "../services/paises_service";
 import { parametrosService } from "../services/parametros_service";
 import { messageApi } from "../utilities/messages";
 
-var gruposUsuarioId = 0;
+var paisId = 0;
 
 export default class Parametros extends JetView {
     config() {
         const translate = this.app.getService("locale")._;
         const _view = {
             view: "layout",
-            id: "gruposUsuariosForm",
+            id: "paisesForm",
             rows: [
                 {
                     view: "toolbar", padding: 3, elements: [
-                        { view: "icon", icon: "users", width: 37, align: "left" },
-                        { view: "label", label: translate("Grupos de usuarios") }
+                        { view: "icon", icon: "cog", width: 37, align: "left" },
+                        { view: "label", label: translate("Paises") }
                     ]
                 },
                 {
                     view: "form",
 
-                    id: "frmGruposUsuarios",
+                    id: "frmPaises",
                     elements: [
                         {
                             cols: [
                                 {
-                                    view: "text", name: "grupoUsuarioId", width: 100, disabled: true,
+                                    view: "text", name: "paisId", width: 100, disabled: true,
                                     label: translate("ID"), labelPosition: "top"
                                 },
                                 {
-                                    view: "text", name: "nombre", required: true, id:"firstField",
-                                    label: translate("Nombre de grupo"), labelPosition: "top"
+                                    view: "text", name: "nombre", required: true, id: "firstField",
+                                    label: translate("Nombre de pais"), labelPosition: "top"
+                                },
+                                {
+                                    view: "text", name: "codPais", required: true,
+                                    label: translate("Código"), labelPosition: "top"
                                 }
                             ]
                         },
@@ -51,48 +55,49 @@ export default class Parametros extends JetView {
     }
     init(view, url) {
         usuarioService.checkLoggedUser();
-        if (url[0].params.grupoUsuarioId) {
-            gruposUsuarioId = url[0].params.grupoUsuarioId;
+        if (url[0].params.paisId) {
+            paisId = url[0].params.paisId;
         }
-        this.load(gruposUsuarioId);
+        this.load(paisId);
         webix.delay(function(){ $$("firstField").focus(); });
     }
-    load(grupoUsuarioId) {
-        if (grupoUsuarioId == 0) return;
-        gruposUsuariosService.getGrupoUsuario(usuarioService.getUsuarioCookie(), gruposUsuarioId)
-            .then(grupo => {
-                $$("frmGruposUsuarios").setValues(grupo);
+    load(paisId) {
+        if (paisId == 0) return;
+        paisesService.getPais(usuarioService.getUsuarioCookie(), paisId)
+            .then(paises => {
+                $$("frmPaises").setValues(paises);
             })
             .catch(err => {
                 messageApi.errorMessageAjax(err);
             });
     }
     cancel() {
-        this.$scope.show('/top/gruposUsuarios');
+        this.$scope.show('/top/paises');
     }
     accept() {
         const translate = this.$scope.app.getService("locale")._;
-        if (!$$("frmGruposUsuarios").validate()) {
+        if (!$$("frmPaises").validate()) {
             messageApi.errorMessage(translate("Debe rellenar los campos correctamente"));
             return;
         }
-        var data = $$("frmGruposUsuarios").getValues();
-        if (gruposUsuarioId == 0) {
-            gruposUsuariosService.postGrupoUsuario(usuarioService.getUsuarioCookie(), data)
-                .then(result => {
-                    this.$scope.show('/top/gruposUsuarios?grupoUsuarioId=' + result.grupoUsuarioId);
-                })
-                .catch(err => {
-                    messageApi.errorMessageAjax(err);
-                });
+        var data = $$("frmPaises").getValues();
+        if (paisId == 0) {
+            data.paisId = 0;
+            paisesService.postPais(usuarioService.getUsuarioCookie(), data)
+            .then(result => {
+                this.$scope.show('/top/paises?paisId=' + result.paisId);
+            })
+            .catch(err => {
+                messageApi.errorMessageAjax(err);
+            });
         } else {
-            gruposUsuariosService.putGrupoUsuario(usuarioService.getUsuarioCookie(), data)
-                .then(result => {
-                    this.$scope.show('/top/gruposUsuarios?grupoUsuarioId=' + result.grupoUsuarioId);
-                })
-                .catch(err => {
-                    messageApi.errorMessageAjax(err);
-                });
+            paisesService.putPais(usuarioService.getUsuarioCookie(), data)
+            .then(result => {
+                this.$scope.show('/top/paises?paisId=' + data.paisId);
+            })
+            .catch(err => {
+                messageApi.errorMessageAjax(err);
+            });
         }
     }
 }

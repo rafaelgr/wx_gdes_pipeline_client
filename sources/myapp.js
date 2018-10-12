@@ -20,7 +20,6 @@ if (!BUILD_AS_MODULE){
 
 	webix.ready(() =>  {
 		var app = new MyApp();
-		console.log("before pluguin");
 		app.use(plugins.Locale);
 		app.use(plugins.Theme);
 		webix.i18n.setLocale("es-ES");

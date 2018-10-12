@@ -20,5 +20,20 @@ export default {
     "Acciones": "Actions",
     "¿Seguro que quiere eliminar ": "Are you sure to delete ",
     "Debe rellenar los campos correctamente": "You must fill in the fields correctly",
-    "Valores incorrectos": "Wrong values"
+    "Valores incorrectos": "Wrong values",
+    "Paises": "Countries",
+    "Nombre de pais": "Country name",
+    "Código": "Code",
+    "Empresas": "Companies",
+    "Nombre empresa": "Company name",
+    "Pais relacionado": "Related country",
+    "Unidades de negocio": "Business units",
+    "Unidad de negocio": "Business unit",
+    "Nombre unidad de negocio": "Business unit name",
+    "Nombre Francés": "French name",
+    "Nombre Inglés": "English name",
+    "Areas": "Areas",
+    "Nombre area": "Area name",
+    "Orden": "Order",
+    "Unidad negocio relacionada": "Related business unit"
 }
