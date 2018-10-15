@@ -54,5 +54,7 @@ export default {
     "Tipos de oportunidad": "Type of deal",
     "Nombre tipo de oportunidad": "Type of deal name",
     "Tipos de contrato": "Type of contract",
-    "Nombre tipo de contrato": "Type of contract name"
+    "Nombre tipo de contrato": "Type of contract name",
+    "Estados": "Statuses",
+    "Nombre estado": "Status name"
 }
