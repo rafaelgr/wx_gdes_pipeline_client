@@ -22,7 +22,8 @@ export default class MainMenu extends JetView {
                         { id: "empresas", value: translate("Empresas"), icon: "cog", details: "Empresas" },
                         { id: "unidadesNegocio", value: translate("Unidades de negocio"), icon: "cog", details: "Unidades de negocio" },
                         { id: "areas", value: translate("Areas"), icon: "cog", details: "Areas" },
-                        { id: "fasesOferta", value: translate("Fases de oferta"), icon: "cog", details: "Fases de oferta" }
+                        { id: "fasesOferta", value: translate("Fases de oferta"), icon: "cog", details: "Fases de oferta" },
+                        { id: "tiposOportunidad", value: translate("Tipos de oportunidad"), icon: "cog", details: "Tipos de oportunidad" }
                     ]
                 }
             ]

@@ -49,6 +49,8 @@ export default {
     "Grupo usuarios": "Users group",
     "Pais": "Country",
     "Empresa": "Company",
-    "Fases de oferta": "Offer stages",
-    "Nombre fase de oferta": "Stage name"
+    "Fases de oferta": "Deal stages",
+    "Nombre fase de oferta": "Deal stage name",
+    "Tipos de oportunidad": "Deal types",
+    "Nombre tipo de oportunidad": "Deal type name"
 }
