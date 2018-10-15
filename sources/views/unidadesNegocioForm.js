@@ -6,7 +6,7 @@ import { messageApi } from "../utilities/messages";
 
 var unidadNegocioId = 0;
 
-export default class Parametros extends JetView {
+export default class UnidadesNegocioForm extends JetView {
     config() {
         const translate = this.app.getService("locale")._;
         const _view = {

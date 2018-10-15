@@ -6,7 +6,7 @@ import { messageApi } from "../utilities/messages";
 
 var gruposUsuarioId = 0;
 
-export default class Parametros extends JetView {
+export default class GruposUsuariosForm extends JetView {
     config() {
         const translate = this.app.getService("locale")._;
         const _view = {

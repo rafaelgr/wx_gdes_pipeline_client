@@ -6,7 +6,7 @@ import { messageApi } from "../utilities/messages";
 
 var tipoOportunidadId = 0;
 
-export default class Parametros extends JetView {
+export default class TiposOportunidadForm extends JetView {
     config() {
         const translate = this.app.getService("locale")._;
         const _view = {

@@ -7,7 +7,7 @@ import { generalApi } from "../utilities/general";
 
 var empresaId = 0;
 
-export default class Parametros extends JetView {
+export default class EmpreasForm extends JetView {
     config() {
         const translate = this.app.getService("locale")._;
         const _view = {
