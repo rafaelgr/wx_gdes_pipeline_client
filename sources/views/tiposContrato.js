@@ -2,7 +2,7 @@ import { JetView } from "webix-jet";
 import { usuarioService } from "../services/usuario_service";
 import { messageApi } from "../utilities/messages";
 import { generalApi } from "../utilities/general";
-import { tiposOportunidadService } from "../services/tiposOportunidad_service";
+import { tiposContratoService } from "../services/tiposContrato_service";
 
 var editButton = "<span class='onEdit webix_icon fa-edit'></span>";
 var deleteButton = "<span class='onDelete webix_icon fa-trash'></span>";
@@ -10,31 +10,31 @@ var currentIdDatatableView;
 var currentRowDatatableView
 var isNewRow = false;
 
-export default class TiposOportunidad extends JetView {
+export default class TiposContrato extends JetView {
     config() {
         const translate = this.app.getService("locale")._;
-        var toolbarTiposOportunidad = {
+        var toolbarTiposContrato = {
             view: "toolbar", padding: 3, elements: [
                 { view: "icon", icon: "cog", width: 37, align: "left" },
-                { view: "label", label: translate("Tipos de oportunidad") }
+                { view: "label", label: translate("Tipos de contrato") }
             ]
         }
-        var pagerTiposOportunidad = {
+        var pagerTiposContrato = {
             cols: [
                 {
                     view: "button", type: "icon", icon: "plus", width: 37, align: "left", hotkey: "Ctrl+F",
                     click: () => {
-                        this.show('/top/tiposOportunidadForm?tipoOportunidadId=0');
+                        this.show('/top/tiposContratoForm?tipoContratoId=0');
                     }
                 },
                 {
                     view: "button", type: "icon", icon: "plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
-                        var newRow = { id: -1, tipoOportunidadId: 0 };
-                        $$('tiposOportunidadGrid').editStop();
-                        var id = $$("tiposOportunidadGrid").add(newRow, $$('tiposOportunidadGrid').getLastId() + 1);
-                        $$("tiposOportunidadGrid").showItem(id);
-                        $$("tiposOportunidadGrid").edit({
+                        var newRow = { id: -1, tipoContratoId: 0 };
+                        $$('tiposContratoGrid').editStop();
+                        var id = $$("tiposContratoGrid").add(newRow, $$('tiposContratoGrid').getLastId() + 1);
+                        $$("tiposContratoGrid").showItem(id);
+                        $$("tiposContratoGrid").edit({
                             row: -1,
                             column: "nombre"
                         });
@@ -44,9 +44,9 @@ export default class TiposOportunidad extends JetView {
                 {
                     view: "button", type: "icon", icon: "table", width: 37, align: "right",
                     click: () => {
-                        webix.toExcel($$("tiposOportunidadGrid"), {
-                            filename: "tiposOportunidad",
-                            name: "TiposOportunidad",
+                        webix.toExcel($$("tiposContratoGrid"), {
+                            filename: "tiposContrato",
+                            name: "TiposContrato",
                             rawValues: true,
                             ignore: { "actions": true }
                         });
@@ -61,14 +61,14 @@ export default class TiposOportunidad extends JetView {
                 }
             ]
         };
-        var datatableTiposOportunidad = {
+        var datatableTiposContrato = {
             view: "datatable",
-            id: "tiposOportunidadGrid",
+            id: "tiposContratoGrid",
             pager: "mypager",
             select: "row",
             columns: [
-                { id: "tipoOportunidadId", adjust: true, header: [translate("ID"), { content: "numberFilter" }], sort: "number" },
-                { id: "nombre", fillspace: true, header: [translate("Nombre tipo de oportunidad"), { content: "textFilter" }], sort: "string", editor: "text" },
+                { id: "tipoContratoId", adjust: true, header: [translate("ID"), { content: "numberFilter" }], sort: "number" },
+                { id: "nombre", fillspace: true, header: [translate("Nombre tipo de contrato"), { content: "textFilter" }], sort: "string", editor: "text" },
                 { id: "nombreEN", header: [translate("Nombre Francés"), { content: "textFilter" }], sort: "string", editor: "text", width: 250},
                 { id: "nombreFR", header: [translate("Nombre Inglés"), { content: "textFilter" }], sort: "string", editor: "text", width: 250 },
                 { id: "actions", header: [{ text: translate("Acciones"), css: { "text-align": "center" } }], template: editButton + deleteButton, css: { "text-align": "center" } }
@@ -109,17 +109,17 @@ export default class TiposOportunidad extends JetView {
                             // id is not part of the row object
                             delete currentRowDatatableView.id;
                             var data = currentRowDatatableView;
-                            if (data.tipoOportunidadId == 0) {
-                                tiposOportunidadService.postTipoOportunidad(usuarioService.getUsuarioCookie(), data)
+                            if (data.tipoContratoId == 0) {
+                                tiposContratoService.postTipoContrato(usuarioService.getUsuarioCookie(), data)
                                     .then(result => {
-                                        this.$scope.load(result.tipoOportunidadId);
-                                        $$('tiposOportunidadGrid').editStop();
+                                        this.$scope.load(result.tipoContratoId);
+                                        $$('tiposContratoGrid').editStop();
                                     })
                                     .catch(err => {
                                         messageApi.errorMessageAjax(err);
                                     });
                             } else {
-                                tiposOportunidadService.putTipoOportunidad(usuarioService.getUsuarioCookie(), data)
+                                tiposContratoService.putTipoContrato(usuarioService.getUsuarioCookie(), data)
                                     .then(result => {
 
                                     })
@@ -134,9 +134,9 @@ export default class TiposOportunidad extends JetView {
         }
         var _view = {
             rows: [
-                toolbarTiposOportunidad,
-                pagerTiposOportunidad,
-                datatableTiposOportunidad
+                toolbarTiposContrato,
+                pagerTiposContrato,
+                datatableTiposContrato
             ]
         }
         return _view;
@@ -144,23 +144,23 @@ export default class TiposOportunidad extends JetView {
     init(view, url) {
         usuarioService.checkLoggedUser();
         var id = null;
-        if (url[0].params.tipoOportunidadId) {
-            id = url[0].params.tipoOportunidadId;
+        if (url[0].params.tipoContratoId) {
+            id = url[0].params.tipoContratoId;
         }
         webix.UIManager.addHotKey("Esc", function () {
-            $$('tiposOportunidadGrid').remove(-1);
+            $$('tiposContratoGrid').remove(-1);
             return false;
-        }, $$('tiposOportunidadGrid'));
+        }, $$('tiposContratoGrid'));
         this.load(id);
     }
     load(id) {
-        tiposOportunidadService.getTiposOportunidad(usuarioService.getUsuarioCookie())
+        tiposContratoService.getTiposContrato(usuarioService.getUsuarioCookie())
             .then(data => {
-                $$("tiposOportunidadGrid").clearAll();
-                $$("tiposOportunidadGrid").parse(generalApi.prepareDataForDataTable("tipoOportunidadId", data));
+                $$("tiposContratoGrid").clearAll();
+                $$("tiposContratoGrid").parse(generalApi.prepareDataForDataTable("tipoContratoId", data));
                 if (id) {
-                    $$("tiposOportunidadGrid").select(id);
-                    $$("tiposOportunidadGrid").showItem(id);
+                    $$("tiposContratoGrid").select(id);
+                    $$("tiposContratoGrid").showItem(id);
                 }
             })
             .catch(err => {
@@ -168,14 +168,14 @@ export default class TiposOportunidad extends JetView {
             })
     }
     edit(id) {
-        this.show('/top/tiposOportunidadForm?tipoOportunidadId=' + id);
+        this.show('/top/tiposContratoForm?tipoContratoId=' + id);
     }
     delete(id, name) {
         const translate = this.app.getService("locale")._;
         var self = this;
         webix.confirm(translate("¿Seguro que quiere eliminar ") + name + "?", function (action) {
             if (action === true) {
-                tiposOportunidadService.deleteTipoOportunidad(usuarioService.getUsuarioCookie(), id)
+                tiposContratoService.deleteTipoContrato(usuarioService.getUsuarioCookie(), id)
                     .then(result => {
                         self.load();
                     })

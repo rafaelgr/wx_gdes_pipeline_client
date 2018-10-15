@@ -51,6 +51,8 @@ export default {
     "Empresa": "Company",
     "Fases de oferta": "Deal stages",
     "Nombre fase de oferta": "Deal stage name",
-    "Tipos de oportunidad": "Deal types",
-    "Nombre tipo de oportunidad": "Deal type name"
+    "Tipos de oportunidad": "Type of deal",
+    "Nombre tipo de oportunidad": "Type of deal name",
+    "Tipos de contrato": "Type of contract",
+    "Nombre tipo de contrato": "Type of contract name"
 }
