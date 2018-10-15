@@ -21,7 +21,8 @@ export default class MainMenu extends JetView {
                         { id: "paises", value: translate("Paises"), icon: "cog", details: "Paises" },
                         { id: "empresas", value: translate("Empresas"), icon: "cog", details: "Empresas" },
                         { id: "unidadesNegocio", value: translate("Unidades de negocio"), icon: "cog", details: "Unidades de negocio" },
-                        { id: "areas", value: translate("Areas"), icon: "cog", details: "Areas" }
+                        { id: "areas", value: translate("Areas"), icon: "cog", details: "Areas" },
+                        { id: "fasesOferta", value: translate("Fases de oferta"), icon: "cog", details: "Fases de oferta" }
                     ]
                 }
             ]

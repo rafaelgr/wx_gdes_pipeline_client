@@ -48,5 +48,7 @@ export default {
     "Ubicación": "Location",
     "Grupo usuarios": "Users group",
     "Pais": "Country",
-    "Empresa": "Company"
+    "Empresa": "Company",
+    "Fases de oferta": "Offer stages",
+    "Nombre fase de oferta": "Stage name"
 }
