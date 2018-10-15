@@ -56,5 +56,8 @@ export default {
     "Tipos de contrato": "Type of contract",
     "Nombre tipo de contrato": "Type of contract name",
     "Estados": "Statuses",
-    "Nombre estado": "Status name"
+    "Nombre estado": "Status name",
+    "Razon perdida": "Reason lost",
+    "Razones perdida": "Reasons lost",
+    "Nombre razon perdida": "Reason lost name"
 }

@@ -25,7 +25,8 @@ export default class MainMenu extends JetView {
                         { id: "fasesOferta", value: translate("Fases de oferta"), icon: "cog", details: "Fases de oferta" },
                         { id: "tiposOportunidad", value: translate("Tipos de oportunidad"), icon: "cog", details: "Tipos de oportunidad" },
                         { id: "tiposContrato", value: translate("Tipos de contrato"), icon: "cog", details: "Tipos de contrato" },
-                        { id: "estados", value: translate("Estados"), icon: "cog", details: "Estados" }
+                        { id: "estados", value: translate("Estados"), icon: "cog", details: "Estados" },
+                        { id: "razonesPerdida", value: translate("Razon perdida"), icon: "cog", details: "Razon perdida" }
 
                     ]
                 }
