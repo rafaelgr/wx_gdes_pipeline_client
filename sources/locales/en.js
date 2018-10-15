@@ -59,5 +59,7 @@ export default {
     "Nombre estado": "Status name",
     "Razon perdida": "Reason lost",
     "Razones perdida": "Reasons lost",
-    "Nombre razon perdida": "Reason lost name"
+    "Nombre razon perdida": "Reason lost name",
+    "Divisas": "Currencies",
+    "Nombre divisa": "Currency name"
 }

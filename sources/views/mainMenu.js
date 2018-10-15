@@ -26,7 +26,8 @@ export default class MainMenu extends JetView {
                         { id: "tiposOportunidad", value: translate("Tipos de oportunidad"), icon: "cog", details: "Tipos de oportunidad" },
                         { id: "tiposContrato", value: translate("Tipos de contrato"), icon: "cog", details: "Tipos de contrato" },
                         { id: "estados", value: translate("Estados"), icon: "cog", details: "Estados" },
-                        { id: "razonesPerdida", value: translate("Razon perdida"), icon: "cog", details: "Razon perdida" }
+                        { id: "razonesPerdida", value: translate("Razon perdida"), icon: "cog", details: "Razon perdida" },
+                        { id: "divisas", value: translate("Divisas"), icon: "cog", details: "Divisas" }
 
                     ]
                 }
