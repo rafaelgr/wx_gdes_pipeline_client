@@ -1,38 +1,38 @@
 import { JetView } from "webix-jet";
 import { usuarioService } from "../services/usuario_service";
-import { unidadesNegocioService } from "../services/unidadesNegocio_service";
+import { razonesPerdidaService } from "../services/razonesPerdida_service";
 import { parametrosService } from "../services/parametros_service";
 import { messageApi } from "../utilities/messages";
 
-var unidadNegocioId = 0;
+var razonPerdidaId = 0;
 
-export default class UnidadesNegocioForm extends JetView {
+export default class RazonesPerdidaForm extends JetView {
     config() {
         const translate = this.app.getService("locale")._;
         const _view = {
             view: "layout",
-            id: "unidadesNegocioForm",
+            id: "razonesPerdidaForm",
             rows: [
                 {
                     view: "toolbar", padding: 3, elements: [
-                        { view: "icon", icon: "mdi mdi-cube-scan", width: 37, align: "left" },
-                        { view: "label", label: translate("Unidades de negocio") }
+                        { view: "icon", icon: "mdi mdi-thumb-down", width: 37, align: "left" },
+                        { view: "label", label: translate("Razones perdida") }
                     ]
                 },
                 {
                     view: "form",
 
-                    id: "frmUnidadesNegocio",
+                    id: "frmRazonesPerdida",
                     elements: [
                         {
                             cols: [
                                 {
-                                    view: "text", name: "unidadNegocioId", width: 100, disabled: true,
+                                    view: "text", name: "razonPerdidaId", width: 100, disabled: true,
                                     label: translate("ID"), labelPosition: "top"
                                 },
                                 {
                                     view: "text", name: "nombre", required: true, id: "firstField",
-                                    label: translate("Nombre unidad de negocio"), labelPosition: "top"
+                                    label: translate("Nombre razon perdida"), labelPosition: "top"
                                 }
                             ]
                         },
@@ -61,6 +61,9 @@ export default class UnidadesNegocioForm extends JetView {
                                 { view: "button", label: translate("Cancelar"), click: this.cancel, hotkey: "esc" },
                                 { view: "button", label: translate("Aceptar"), click: this.accept, type: "form", hotkey: "enter" }
                             ]
+                        },
+                        {
+                            minheight: 600
                         }
                     ]
                 }
@@ -70,45 +73,45 @@ export default class UnidadesNegocioForm extends JetView {
     }
     init(view, url) {
         usuarioService.checkLoggedUser();
-        if (url[0].params.unidadNegocioId) {
-            unidadNegocioId = url[0].params.unidadNegocioId;
+        if (url[0].params.razonPerdidaId) {
+            razonPerdidaId = url[0].params.razonPerdidaId;
         }
-        this.load(unidadNegocioId);
+        this.load(razonPerdidaId);
         webix.delay(function () { $$("firstField").focus(); });
     }
-    load(unidadNegocioId) {
-        if (unidadNegocioId == 0) return;
-        unidadesNegocioService.getUnidadNegocio(usuarioService.getUsuarioCookie(), unidadNegocioId)
-            .then(unidadesNegocio => {
-                $$("frmUnidadesNegocio").setValues(unidadesNegocio);
+    load(razonPerdidaId) {
+        if (razonPerdidaId == 0) return;
+        razonesPerdidaService.getRazonPerdida(usuarioService.getUsuarioCookie(), razonPerdidaId)
+            .then(razonesPerdida => {
+                $$("frmRazonesPerdida").setValues(razonesPerdida);
             })
             .catch(err => {
                 messageApi.errorMessageAjax(err);
             });
     }
     cancel() {
-        this.$scope.show('/top/unidadesNegocio');
+        this.$scope.show('/top/razonesPerdida');
     }
     accept() {
         const translate = this.$scope.app.getService("locale")._;
-        if (!$$("frmUnidadesNegocio").validate()) {
+        if (!$$("frmRazonesPerdida").validate()) {
             messageApi.errorMessage(translate("Debe rellenar los campos correctamente"));
             return;
         }
-        var data = $$("frmUnidadesNegocio").getValues();
-        if (unidadNegocioId == 0) {
-            data.unidadNegocioId = 0;
-            unidadesNegocioService.postUnidadNegocio(usuarioService.getUsuarioCookie(), data)
+        var data = $$("frmRazonesPerdida").getValues();
+        if (razonPerdidaId == 0) {
+            data.razonPerdidaId = 0;
+            razonesPerdidaService.postRazonPerdida(usuarioService.getUsuarioCookie(), data)
                 .then(result => {
-                    this.$scope.show('/top/unidadesNegocio?unidadNegocioId=' + result.unidadNegocioId);
+                    this.$scope.show('/top/razonesPerdida?razonPerdidaId=' + result.razonPerdidaId);
                 })
                 .catch(err => {
                     messageApi.errorMessageAjax(err);
                 });
         } else {
-            unidadesNegocioService.putUnidadNegocio(usuarioService.getUsuarioCookie(), data)
+            razonesPerdidaService.putRazonPerdida(usuarioService.getUsuarioCookie(), data)
                 .then(result => {
-                    this.$scope.show('/top/unidadesNegocio?unidadNegocioId=' + data.unidadNegocioId);
+                    this.$scope.show('/top/razonesPerdida?razonPerdidaId=' + data.razonPerdidaId);
                 })
                 .catch(err => {
                     messageApi.errorMessageAjax(err);

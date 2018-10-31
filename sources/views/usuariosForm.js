@@ -3,10 +3,10 @@ import { usuarioService } from "../services/usuario_service";
 import { paisesService } from "../services/paises_service";
 import { messageApi } from "../utilities/messages";
 import { generalApi } from "../utilities/general";
-import { gruposUsuariosService} from "../services/gruposUsuarios_service";
-import { empresasService} from "../services/empresas_service";
-import { areasService} from "../services/areas_service";
-import { unidadesNegocioService} from "../services/unidadesNegocio_service";
+import { gruposUsuariosService } from "../services/gruposUsuarios_service";
+import { empresasService } from "../services/empresas_service";
+import { areasService } from "../services/areas_service";
+import { unidadesNegocioService } from "../services/unidadesNegocio_service";
 
 var usuarioId = 0;
 
@@ -19,8 +19,8 @@ export default class UsuarioForm extends JetView {
             rows: [
                 {
                     view: "toolbar", padding: 3, elements: [
-                        { view: "icon", icon: "cog", width: 37, align: "left" },
-                        { view: "label", label: translate("Empresas") }
+                        { view: "icon", icon: "mdi mdi-account", width: 37, align: "left" },
+                        { view: "label", label: translate("Usuarios") }
                     ]
                 },
                 {
@@ -51,7 +51,7 @@ export default class UsuarioForm extends JetView {
                                     label: translate("Idioma"), labelPosition: "top"
                                 },
                                 {
-                                    view: "checkbox", name: "esAdministrador",required: true,
+                                    view: "checkbox", name: "esAdministrador", required: true,
                                     label: translate("Administrador"), labelPosition: "top"
                                 },
                                 {
@@ -71,7 +71,7 @@ export default class UsuarioForm extends JetView {
                                     label: translate("Empresa"), labelPosition: "top"
                                 }
                             ]
-                        },      
+                        },
                         {
                             cols: [
                                 {
@@ -83,7 +83,7 @@ export default class UsuarioForm extends JetView {
                                     label: translate("Unidad negocio"), labelPosition: "top"
                                 }
                             ]
-                        },    
+                        },
                         {
                             cols: [
                                 {
@@ -95,7 +95,7 @@ export default class UsuarioForm extends JetView {
                                     label: translate("Ubicación"), labelPosition: "top"
                                 }
                             ]
-                        },                                                               
+                        },
                         {
                             margin: 5, cols: [
                                 { gravity: 5 },
@@ -104,7 +104,8 @@ export default class UsuarioForm extends JetView {
                             ]
                         }
                     ]
-                }
+                },
+                { minheight: 600 }
             ]
         }
         return _view;

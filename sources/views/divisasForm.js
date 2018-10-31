@@ -1,42 +1,38 @@
 import { JetView } from "webix-jet";
 import { usuarioService } from "../services/usuario_service";
-import { paisesService } from "../services/paises_service";
+import { divisasService } from "../services/divisas_service";
 import { parametrosService } from "../services/parametros_service";
 import { messageApi } from "../utilities/messages";
 
-var paisId = 0;
+var divisaId = 0;
 
-export default class PaisesForm extends JetView {
+export default class DivisasForm extends JetView {
     config() {
         const translate = this.app.getService("locale")._;
         const _view = {
             view: "layout",
-            id: "paisesForm",
+            id: "divisasForm",
             rows: [
                 {
                     view: "toolbar", padding: 3, elements: [
-                        { view: "icon", icon: "mdi mdi-flag", width: 37, align: "left" },
-                        { view: "label", label: translate("Paises") }
+                        { view: "icon", icon: "mdi mdi-currency-eur", width: 37, align: "left" },
+                        { view: "label", label: translate("Divisas") }
                     ]
                 },
                 {
                     view: "form",
 
-                    id: "frmPaises",
+                    id: "frmDivisas",
                     elements: [
                         {
                             cols: [
                                 {
-                                    view: "text", name: "paisId", width: 100, disabled: true,
+                                    view: "text", name: "divisaId", width: 100, disabled: true,
                                     label: translate("ID"), labelPosition: "top"
                                 },
                                 {
                                     view: "text", name: "nombre", required: true, id: "firstField",
-                                    label: translate("Nombre de pais"), labelPosition: "top"
-                                },
-                                {
-                                    view: "text", name: "codPais", required: true,
-                                    label: translate("Código"), labelPosition: "top"
+                                    label: translate("Nombre divisa"), labelPosition: "top"
                                 }
                             ]
                         },
@@ -46,55 +42,57 @@ export default class PaisesForm extends JetView {
                                 { view: "button", label: translate("Cancelar"), click: this.cancel, hotkey: "esc" },
                                 { view: "button", label: translate("Aceptar"), click: this.accept, type: "form", hotkey: "enter" }
                             ]
+                        },
+                        {
+                            minheight: 600
                         }
                     ]
-                },
-                { minheight: 600 }
+                }
             ]
         }
         return _view;
     }
     init(view, url) {
         usuarioService.checkLoggedUser();
-        if (url[0].params.paisId) {
-            paisId = url[0].params.paisId;
+        if (url[0].params.divisaId) {
+            divisaId = url[0].params.divisaId;
         }
-        this.load(paisId);
+        this.load(divisaId);
         webix.delay(function () { $$("firstField").focus(); });
     }
-    load(paisId) {
-        if (paisId == 0) return;
-        paisesService.getPais(usuarioService.getUsuarioCookie(), paisId)
-            .then(paises => {
-                $$("frmPaises").setValues(paises);
+    load(divisaId) {
+        if (divisaId == 0) return;
+        divisasService.getDivisa(usuarioService.getUsuarioCookie(), divisaId)
+            .then(divisas => {
+                $$("frmDivisas").setValues(divisas);
             })
             .catch(err => {
                 messageApi.errorMessageAjax(err);
             });
     }
     cancel() {
-        this.$scope.show('/top/paises');
+        this.$scope.show('/top/divisas');
     }
     accept() {
         const translate = this.$scope.app.getService("locale")._;
-        if (!$$("frmPaises").validate()) {
+        if (!$$("frmDivisas").validate()) {
             messageApi.errorMessage(translate("Debe rellenar los campos correctamente"));
             return;
         }
-        var data = $$("frmPaises").getValues();
-        if (paisId == 0) {
-            data.paisId = 0;
-            paisesService.postPais(usuarioService.getUsuarioCookie(), data)
+        var data = $$("frmDivisas").getValues();
+        if (divisaId == 0) {
+            data.divisaId = 0;
+            divisasService.postDivisa(usuarioService.getUsuarioCookie(), data)
                 .then(result => {
-                    this.$scope.show('/top/paises?paisId=' + result.paisId);
+                    this.$scope.show('/top/divisas?divisaId=' + result.divisaId);
                 })
                 .catch(err => {
                     messageApi.errorMessageAjax(err);
                 });
         } else {
-            paisesService.putPais(usuarioService.getUsuarioCookie(), data)
+            divisasService.putDivisa(usuarioService.getUsuarioCookie(), data)
                 .then(result => {
-                    this.$scope.show('/top/paises?paisId=' + data.paisId);
+                    this.$scope.show('/top/divisas?divisaId=' + data.divisaId);
                 })
                 .catch(err => {
                     messageApi.errorMessageAjax(err);

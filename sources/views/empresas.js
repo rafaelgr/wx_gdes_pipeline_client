@@ -5,8 +5,8 @@ import { generalApi } from "../utilities/general";
 import { empresasService } from "../services/empresas_service";
 import { paisesService } from "../services/paises_service";
 
-var editButton = "<span class='onEdit webix_icon fa-edit'></span>";
-var deleteButton = "<span class='onDelete webix_icon fa-trash'></span>";
+var editButton = "<span class='onEdit webix_icon wxi-pencil'></span>";
+var deleteButton = "<span class='onDelete webix_icon wxi-trash'></span>";
 var currentIdDatatableView;
 var currentRowDatatableView
 var isNewRow = false;
@@ -25,24 +25,24 @@ export default class Empresas extends JetView {
         const translate = this.app.getService("locale")._;
         var toolbarEmpresas = {
             view: "toolbar", padding: 3, elements: [
-                { view: "icon", icon: "cog", width: 37, align: "left" },
+                { view: "icon", icon: "mdi mdi-cube", width: 37, align: "left" },
                 { view: "label", label: translate("Empresas") }
             ]
         }
         var pagerEmpresas = {
             cols: [
                 {
-                    view: "button", type: "icon", icon: "plus", width: 37, align: "left", hotkey: "Ctrl+F",
+                    view: "button", type: "icon", icon: "wxi-plus", width: 37, align: "left", hotkey: "Ctrl+F",
                     click: () => {
                         this.show('/top/empresasForm?empresaId=0');
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
+                    view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
                         var newRow = { id: -1, empresaId: 0 };
                         $$('empresasGrid').editStop();
-                        var id = $$("empresasGrid").add(newRow, $$('empresasGrid').getLastId() + 1);
+                        var id = $$("empresasGrid").add(newRow);
                         $$("empresasGrid").showItem(id);
                         $$("empresasGrid").edit({
                             row: -1,
@@ -52,7 +52,7 @@ export default class Empresas extends JetView {
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "table", width: 37, align: "right",
+                    view: "button", type: "icon", icon: "wxi-download", width: 37, align: "right",
                     click: () => {
                         webix.toExcel($$("empresasGrid"), {
                             filename: "empresas",

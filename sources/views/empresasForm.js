@@ -7,7 +7,7 @@ import { generalApi } from "../utilities/general";
 
 var empresaId = 0;
 
-export default class Parametros extends JetView {
+export default class EmpreasForm extends JetView {
     config() {
         const translate = this.app.getService("locale")._;
         const _view = {
@@ -16,7 +16,7 @@ export default class Parametros extends JetView {
             rows: [
                 {
                     view: "toolbar", padding: 3, elements: [
-                        { view: "icon", icon: "cog", width: 37, align: "left" },
+                        { view: "icon", icon: "mdi mdi-cube", width: 37, align: "left" },
                         { view: "label", label: translate("Empresas") }
                     ]
                 },

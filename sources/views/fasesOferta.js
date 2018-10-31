@@ -2,7 +2,7 @@ import { JetView } from "webix-jet";
 import { usuarioService } from "../services/usuario_service";
 import { messageApi } from "../utilities/messages";
 import { generalApi } from "../utilities/general";
-import { paisesService } from "../services/paises_service";
+import { fasesOfertaService } from "../services/fasesOferta_service";
 
 var editButton = "<span class='onEdit webix_icon wxi-pencil'></span>";
 var deleteButton = "<span class='onDelete webix_icon wxi-trash'></span>";
@@ -10,31 +10,31 @@ var currentIdDatatableView;
 var currentRowDatatableView
 var isNewRow = false;
 
-export default class Paises extends JetView {
+export default class FasesOferta extends JetView {
     config() {
         const translate = this.app.getService("locale")._;
-        var toolbarPaises = {
+        var toolbarFasesOferta = {
             view: "toolbar", padding: 3, elements: [
-                { view: "icon", icon: "mdi mdi-flag", width: 37, align: "left" },
-                { view: "label", label: translate("Paises") }
+                { view: "icon", icon: "mdi mdi-filter-variant", width: 37, align: "left" },
+                { view: "label", label: translate("Fases de oferta") }
             ]
         }
-        var pagerPaises = {
+        var pagerFasesOferta = {
             cols: [
                 {
                     view: "button", type: "icon", icon: "wxi-plus", width: 37, align: "left", hotkey: "Ctrl+F",
                     click: () => {
-                        this.show('/top/paisesForm?paisId=0');
+                        this.show('/top/fasesOfertaForm?faseOfertaId=0');
                     }
                 },
                 {
                     view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
-                        var newRow = { id: -1, paisId: 0 };
-                        $$('paisesGrid').editStop();
-                        var id = $$("paisesGrid").add(newRow);
-                        $$("paisesGrid").showItem(id);
-                        $$("paisesGrid").edit({
+                        var newRow = { id: -1, faseOfertaId: 0 };
+                        $$('fasesOfertaGrid').editStop();
+                        var id = $$("fasesOfertaGrid").add(newRow);
+                        $$("fasesOfertaGrid").showItem(id);
+                        $$("fasesOfertaGrid").edit({
                             row: -1,
                             column: "nombre"
                         });
@@ -44,9 +44,9 @@ export default class Paises extends JetView {
                 {
                     view: "button", type: "icon", icon: "wxi-download", width: 37, align: "right",
                     click: () => {
-                        webix.toExcel($$("paisesGrid"), {
-                            filename: "paises",
-                            name: "Paises",
+                        webix.toExcel($$("fasesOfertaGrid"), {
+                            filename: "fasesOferta",
+                            name: "FasesOferta",
                             rawValues: true,
                             ignore: { "actions": true }
                         });
@@ -61,15 +61,16 @@ export default class Paises extends JetView {
                 }
             ]
         };
-        var datatablePaises = {
+        var datatableFasesOferta = {
             view: "datatable",
-            id: "paisesGrid",
+            id: "fasesOfertaGrid",
             pager: "mypager",
             select: "row",
             columns: [
-                { id: "paisId", adjust: true, header: [translate("ID"), { content: "numberFilter" }], sort: "number" },
-                { id: "nombre", fillspace: true, header: [translate("Nombre de pais"), { content: "textFilter" }], sort: "string", editor: "text" },
-                { id: "codPais", header: [translate("Código"), { content: "textFilter" }], sort: "string", editor: "text" },
+                { id: "faseOfertaId", adjust: true, header: [translate("ID"), { content: "numberFilter" }], sort: "number" },
+                { id: "nombre", fillspace: true, header: [translate("Nombre fase de oferta"), { content: "textFilter" }], sort: "string", editor: "text" },
+                { id: "nombreEN", header: [translate("Nombre Francés"), { content: "textFilter" }], sort: "string", editor: "text", width: 250},
+                { id: "nombreFR", header: [translate("Nombre Inglés"), { content: "textFilter" }], sort: "string", editor: "text", width: 250 },
                 { id: "actions", header: [{ text: translate("Acciones"), css: { "text-align": "center" } }], template: editButton + deleteButton, css: { "text-align": "center" } }
             ],
             onClick: {
@@ -87,7 +88,8 @@ export default class Paises extends JetView {
             editaction: "dblclick",
             rules: {
                 "nombre": webix.rules.isNotEmpty,
-                "codPais": webix.rules.isNotEmpty
+                "nombreEN": webix.rules.isNotEmpty,
+                "nombreFR": webix.rules.isNotEmpty
             },
             on: {
                 "onAfterEditStart": function (id) {
@@ -107,17 +109,17 @@ export default class Paises extends JetView {
                             // id is not part of the row object
                             delete currentRowDatatableView.id;
                             var data = currentRowDatatableView;
-                            if (data.paisId == 0) {
-                                paisesService.postPais(usuarioService.getUsuarioCookie(), data)
+                            if (data.faseOfertaId == 0) {
+                                fasesOfertaService.postFaseOferta(usuarioService.getUsuarioCookie(), data)
                                     .then(result => {
-                                        this.$scope.load(result.paisId);
-                                        $$('paisesGrid').editStop();
+                                        this.$scope.load(result.faseOfertaId);
+                                        $$('fasesOfertaGrid').editStop();
                                     })
                                     .catch(err => {
                                         messageApi.errorMessageAjax(err);
                                     });
                             } else {
-                                paisesService.putPais(usuarioService.getUsuarioCookie(), data)
+                                fasesOfertaService.putFaseOferta(usuarioService.getUsuarioCookie(), data)
                                     .then(result => {
 
                                     })
@@ -132,9 +134,9 @@ export default class Paises extends JetView {
         }
         var _view = {
             rows: [
-                toolbarPaises,
-                pagerPaises,
-                datatablePaises
+                toolbarFasesOferta,
+                pagerFasesOferta,
+                datatableFasesOferta
             ]
         }
         return _view;
@@ -142,23 +144,23 @@ export default class Paises extends JetView {
     init(view, url) {
         usuarioService.checkLoggedUser();
         var id = null;
-        if (url[0].params.paisId) {
-            id = url[0].params.paisId;
+        if (url[0].params.faseOfertaId) {
+            id = url[0].params.faseOfertaId;
         }
         webix.UIManager.addHotKey("Esc", function () {
-            $$('paisesGrid').remove(-1);
+            $$('fasesOfertaGrid').remove(-1);
             return false;
-        }, $$('paisesGrid'));
+        }, $$('fasesOfertaGrid'));
         this.load(id);
     }
     load(id) {
-        paisesService.getPaises(usuarioService.getUsuarioCookie())
+        fasesOfertaService.getFasesOferta(usuarioService.getUsuarioCookie())
             .then(data => {
-                $$("paisesGrid").clearAll();
-                $$("paisesGrid").parse(generalApi.prepareDataForDataTable("paisId", data));
+                $$("fasesOfertaGrid").clearAll();
+                $$("fasesOfertaGrid").parse(generalApi.prepareDataForDataTable("faseOfertaId", data));
                 if (id) {
-                    $$("paisesGrid").select(id);
-                    $$("paisesGrid").showItem(id);
+                    $$("fasesOfertaGrid").select(id);
+                    $$("fasesOfertaGrid").showItem(id);
                 }
             })
             .catch(err => {
@@ -166,14 +168,14 @@ export default class Paises extends JetView {
             })
     }
     edit(id) {
-        this.show('/top/paisesForm?paisId=' + id);
+        this.show('/top/fasesOfertaForm?faseOfertaId=' + id);
     }
     delete(id, name) {
         const translate = this.app.getService("locale")._;
         var self = this;
         webix.confirm(translate("¿Seguro que quiere eliminar ") + name + "?", function (action) {
             if (action === true) {
-                paisesService.deletePais(usuarioService.getUsuarioCookie(), id)
+                fasesOfertaService.deleteFaseOferta(usuarioService.getUsuarioCookie(), id)
                     .then(result => {
                         self.load();
                     })

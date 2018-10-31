@@ -12,7 +12,7 @@ export default class Parametros extends JetView {
             rows: [
                 {
                     view: "toolbar", padding: 3, elements: [
-                        { view: "icon", icon: "cogs", width: 37, align: "left" },
+                        { view: "icon", icon: "mdi mdi-altimeter", width: 37, align: "left" },
                         { view: "label", label: translate("Parámetros") }
                     ]
                 },

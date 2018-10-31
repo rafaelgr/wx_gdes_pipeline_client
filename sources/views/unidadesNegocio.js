@@ -4,8 +4,8 @@ import { messageApi } from "../utilities/messages";
 import { generalApi } from "../utilities/general";
 import { unidadesNegocioService } from "../services/unidadesNegocio_service";
 
-var editButton = "<span class='onEdit webix_icon fa-edit'></span>";
-var deleteButton = "<span class='onDelete webix_icon fa-trash'></span>";
+var editButton = "<span class='onEdit webix_icon wxi-pencil'></span>";
+var deleteButton = "<span class='onDelete webix_icon wxi-trash'></span>";
 var currentIdDatatableView;
 var currentRowDatatableView
 var isNewRow = false;
@@ -15,24 +15,24 @@ export default class UnidadesNegocio extends JetView {
         const translate = this.app.getService("locale")._;
         var toolbarUnidadesNegocio = {
             view: "toolbar", padding: 3, elements: [
-                { view: "icon", icon: "cog", width: 37, align: "left" },
+                { view: "icon", icon: "mdi mdi-cube-scan", width: 37, align: "left" },
                 { view: "label", label: translate("Unidades de negocio") }
             ]
         }
         var pagerUnidadesNegocio = {
             cols: [
                 {
-                    view: "button", type: "icon", icon: "plus", width: 37, align: "left", hotkey: "Ctrl+F",
+                    view: "button", type: "icon", icon: "wxi-plus", width: 37, align: "left", hotkey: "Ctrl+F",
                     click: () => {
                         this.show('/top/unidadesNegocioForm?unidadNegocioId=0');
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
+                    view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
                         var newRow = { id: -1, unidadNegocioId: 0 };
                         $$('unidadesNegocioGrid').editStop();
-                        var id = $$("unidadesNegocioGrid").add(newRow, $$('unidadesNegocioGrid').getLastId() + 1);
+                        var id = $$("unidadesNegocioGrid").add(newRow);
                         $$("unidadesNegocioGrid").showItem(id);
                         $$("unidadesNegocioGrid").edit({
                             row: -1,
@@ -42,7 +42,7 @@ export default class UnidadesNegocio extends JetView {
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "table", width: 37, align: "right",
+                    view: "button", type: "icon", icon: "wxi-download", width: 37, align: "right",
                     click: () => {
                         webix.toExcel($$("unidadesNegocioGrid"), {
                             filename: "unidadesNegocio",
@@ -69,8 +69,8 @@ export default class UnidadesNegocio extends JetView {
             columns: [
                 { id: "unidadNegocioId", adjust: true, header: [translate("ID"), { content: "numberFilter" }], sort: "number" },
                 { id: "nombre", fillspace: true, header: [translate("Nombre unidad de negocio"), { content: "textFilter" }], sort: "string", editor: "text" },
-                { id: "nombreEN", header: [translate("Nombre Francés"), { content: "textFilter" }], sort: "string", editor: "text", width: 250},
-                { id: "nombreFR", header: [translate("Nombre Inglés"), { content: "textFilter" }], sort: "string", editor: "text", width: 250 },
+                { id: "nombreEN", header: [translate("Nombre Inglés"), { content: "textFilter" }], sort: "string", editor: "text", width: 250},
+                { id: "nombreFR", header: [translate("Nombre Francés"), { content: "textFilter" }], sort: "string", editor: "text", width: 250 },
                 { id: "actions", header: [{ text: translate("Acciones"), css: { "text-align": "center" } }], template: editButton + deleteButton, css: { "text-align": "center" } }
             ],
             onClick: {

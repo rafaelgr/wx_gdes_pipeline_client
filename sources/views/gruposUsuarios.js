@@ -4,8 +4,8 @@ import { messageApi } from "../utilities/messages";
 import { generalApi } from "../utilities/general";
 import { gruposUsuariosService } from "../services/gruposUsuarios_service";
 
-var editButton = "<span class='onEdit webix_icon fa-edit'></span>";
-var deleteButton = "<span class='onDelete webix_icon fa-trash'></span>";
+var editButton = "<span class='onEdit webix_icon wxi-pencil'></span>";
+var deleteButton = "<span class='onDelete webix_icon wxi-trash'></span>";
 var currentIdDatatableView;
 var currentRowDatatableView
 var semaphore = false;
@@ -15,24 +15,30 @@ export default class GruposUsuarios extends JetView {
         const translate = this.app.getService("locale")._;
         var toolbarGruposUsuarios = {
             view: "toolbar", padding: 3, elements: [
-                { view: "icon", icon: "users", width: 37, align: "left" },
+                { view: "icon", icon: "mdi mdi-account-group", width: 37, align: "left" },
                 { view: "label", label: translate("Grupos de usuarios") }
             ]
         }
         var pagerGruposUsuarios = {
             cols: [
                 {
-                    view: "button", type: "icon", icon: "plus", width: 37, align: "left", hotkey: "Ctrl+F",
+                    view: "button", type: "icon", icon: "wxi-plus", width: 37, align: "left", hotkey: "Ctrl+F",
+                    tooltip: translate("Nuevo registro en formulario (Ctrl+F)"),
                     click: () => {
                         this.show('/top/gruposUsuariosForm?grupoUsuarioId=0');
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
+                    view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
+                    tooltip: translate("Nuevo registro en línea (Ctrl+L)"),
                     click: () => {
                         var newRow = { id: -1, grupoUsuarioId: 0 };
                         $$('gruposUsuariosGrid').editStop();
-                        var id = $$("gruposUsuariosGrid").add(newRow, $$('gruposUsuariosGrid').getLastId() + 1);
+                        console.log('Before edit 1');
+                        var lastId = $$('gruposUsuariosGrid').getLastId() + 1;
+                        console.log('Before edit 3');
+                        var id = $$("gruposUsuariosGrid").add(newRow);
+                        console.log('Before edit 2');
                         $$("gruposUsuariosGrid").edit({
                             row: -1,
                             column: "nombre"
@@ -44,7 +50,8 @@ export default class GruposUsuarios extends JetView {
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "table", width: 37, align: "right",
+                    view: "button", type: "icon", icon: "wxi-download", width: 37, align: "right",
+                    tooltip: translate("Descargar como Excel"),
                     click: () => {
                         webix.toExcel($$("gruposUsuariosGrid"), {
                             filename: "grupos_usuarios",

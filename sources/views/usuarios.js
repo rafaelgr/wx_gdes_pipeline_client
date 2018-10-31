@@ -8,8 +8,8 @@ import { paisesService } from "../services/paises_service";
 import { areasService } from "../services/areas_service";
 import { unidadesNegocioService } from "../services/unidadesNegocio_service";
 
-var editButton = "<span class='onEdit webix_icon fa-edit'></span>";
-var deleteButton = "<span class='onDelete webix_icon fa-trash'></span>";
+var editButton = "<span class='onEdit webix_icon wxi-pencil'></span>";
+var deleteButton = "<span class='onDelete webix_icon wxi-trash'></span>";
 var currentIdDatatableView;
 var currentRowDatatableView
 var isNewRow = false;
@@ -70,24 +70,24 @@ export default class Usuarios extends JetView {
         const translate = this.app.getService("locale")._;
         var toolbarUsuarios = {
             view: "toolbar", padding: 3, elements: [
-                { view: "icon", icon: "cog", width: 37, align: "left" },
+                { view: "icon", icon: "mdi mdi-account", width: 37, align: "left" },
                 { view: "label", label: translate("Usuarios") }
             ]
         }
         var pagerUsuarios = {
             cols: [
                 {
-                    view: "button", type: "icon", icon: "plus", width: 37, align: "left", hotkey: "Ctrl+F",
+                    view: "button", type: "icon", icon: "wxi-plus", width: 37, align: "left", hotkey: "Ctrl+F",
                     click: () => {
                         this.show('/top/usuariosForm?usuarioId=0');
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
+                    view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
                         var newRow = { id: -1, usuarioId: 0 };
                         $$('usuariosGrid').editStop();
-                        var id = $$("usuariosGrid").add(newRow, $$('usuariosGrid').getLastId() + 1);
+                        var id = $$("usuariosGrid").add(newRow);
                         $$("usuariosGrid").showItem(id);
                         $$("usuariosGrid").edit({
                             row: -1,
@@ -97,7 +97,7 @@ export default class Usuarios extends JetView {
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "table", width: 37, align: "right",
+                    view: "button", type: "icon", icon: "wxi-download", width: 37, align: "right",
                     click: () => {
                         webix.toExcel($$("usuariosGrid"), {
                             filename: "usuarios",

@@ -7,7 +7,7 @@ import { generalApi } from "../utilities/general";
 
 var areaId = 0;
 
-export default class Parametros extends JetView {
+export default class AreasForm extends JetView {
     config() {
         const translate = this.app.getService("locale")._;
         const _view = {
@@ -16,7 +16,7 @@ export default class Parametros extends JetView {
             rows: [
                 {
                     view: "toolbar", padding: 3, elements: [
-                        { view: "icon", icon: "cog", width: 37, align: "left" },
+                        { view: "icon", icon: "mdi mdi-cube-outline", width: 37, align: "left" },
                         { view: "label", label: translate("Areas") }
                     ]
                 },
@@ -82,7 +82,8 @@ export default class Parametros extends JetView {
                                 { view: "button", label: translate("Cancelar"), click: this.cancel, hotkey: "esc" },
                                 { view: "button", label: translate("Aceptar"), click: this.accept, type: "form", hotkey: "enter" }
                             ]
-                        }
+                        },
+                        { minlength: 600}
                     ]
                 }
             ]

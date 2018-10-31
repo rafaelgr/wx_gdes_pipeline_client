@@ -48,5 +48,22 @@ export default {
     "Ubicación": "Location",
     "Grupo usuarios": "Users group",
     "Pais": "Country",
-    "Empresa": "Company"
+    "Empresa": "Company",
+    "Fases de oferta": "Deal stages",
+    "Nombre fase de oferta": "Deal stage name",
+    "Tipos de oportunidad": "Type of deal",
+    "Nombre tipo de oportunidad": "Type of deal name",
+    "Tipos de contrato": "Type of contract",
+    "Nombre tipo de contrato": "Type of contract name",
+    "Estados": "Statuses",
+    "Nombre estado": "Status name",
+    "Razon perdida": "Reason lost",
+    "Razones perdida": "Reasons lost",
+    "Nombre razon perdida": "Reason lost name",
+    "Divisas": "Currencies",
+    "Nombre divisa": "Currency name",
+    "Salir y logout": "Exit and logout",
+    "Nuevo registro en formulario (Ctrl+F)": "New record in form (Ctrl+F)",
+    "Nuevo registro en línea (Ctrl+L)": "New record inline (Ctrl + L)",
+    "Descargar como Excel": "Dowload as Excel"
 }

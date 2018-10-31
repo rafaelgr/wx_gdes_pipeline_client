@@ -1,45 +1,47 @@
 import { JetView } from "webix-jet";
 import { usuarioService } from "../services/usuario_service";
-import { unidadesNegocioService } from "../services/unidadesNegocio_service";
+import { estadosService } from "../services/estados_service";
 import { parametrosService } from "../services/parametros_service";
 import { messageApi } from "../utilities/messages";
 
-var unidadNegocioId = 0;
+var estadoId = 0;
 
-export default class UnidadesNegocioForm extends JetView {
+export default class EstadosForm extends JetView {
     config() {
         const translate = this.app.getService("locale")._;
         const _view = {
             view: "layout",
-            id: "unidadesNegocioForm",
+            id: "estadosForm",
             rows: [
                 {
                     view: "toolbar", padding: 3, elements: [
-                        { view: "icon", icon: "mdi mdi-cube-scan", width: 37, align: "left" },
-                        { view: "label", label: translate("Unidades de negocio") }
+                        { view: "icon", icon: "mdi mdi-thumbs-up-down", width: 37, align: "left" },
+                        { view: "label", label: translate("Tipos de estado") }
                     ]
                 },
                 {
                     view: "form",
 
-                    id: "frmUnidadesNegocio",
+                    id: "frmEstados",
                     elements: [
                         {
                             cols: [
                                 {
-                                    view: "text", name: "unidadNegocioId", width: 100, disabled: true,
+                                    view: "text", name: "estadoId", width: 100, disabled: true,
                                     label: translate("ID"), labelPosition: "top"
                                 },
                                 {
                                     view: "text", name: "nombre", required: true, id: "firstField",
-                                    label: translate("Nombre unidad de negocio"), labelPosition: "top"
+                                    label: translate("Nombre tipo de estado"), labelPosition: "top"
                                 }
                             ]
                         },
                         {
                             cols: [
-                                { width: 100 },
                                 {
+                                    view: "text", name: "orden", width: 100, 
+                                    label: translate("Orden"), labelPosition: "top"
+                                }, {
                                     view: "text", name: "nombreEN", required: true,
                                     label: translate("Nombre Inglés"), labelPosition: "top"
                                 }
@@ -61,6 +63,9 @@ export default class UnidadesNegocioForm extends JetView {
                                 { view: "button", label: translate("Cancelar"), click: this.cancel, hotkey: "esc" },
                                 { view: "button", label: translate("Aceptar"), click: this.accept, type: "form", hotkey: "enter" }
                             ]
+                        },
+                        {
+                            minheight: 600
                         }
                     ]
                 }
@@ -70,45 +75,45 @@ export default class UnidadesNegocioForm extends JetView {
     }
     init(view, url) {
         usuarioService.checkLoggedUser();
-        if (url[0].params.unidadNegocioId) {
-            unidadNegocioId = url[0].params.unidadNegocioId;
+        if (url[0].params.estadoId) {
+            estadoId = url[0].params.estadoId;
         }
-        this.load(unidadNegocioId);
+        this.load(estadoId);
         webix.delay(function () { $$("firstField").focus(); });
     }
-    load(unidadNegocioId) {
-        if (unidadNegocioId == 0) return;
-        unidadesNegocioService.getUnidadNegocio(usuarioService.getUsuarioCookie(), unidadNegocioId)
-            .then(unidadesNegocio => {
-                $$("frmUnidadesNegocio").setValues(unidadesNegocio);
+    load(estadoId) {
+        if (estadoId == 0) return;
+        estadosService.getEstado(usuarioService.getUsuarioCookie(), estadoId)
+            .then(estados => {
+                $$("frmEstados").setValues(estados);
             })
             .catch(err => {
                 messageApi.errorMessageAjax(err);
             });
     }
     cancel() {
-        this.$scope.show('/top/unidadesNegocio');
+        this.$scope.show('/top/estados');
     }
     accept() {
         const translate = this.$scope.app.getService("locale")._;
-        if (!$$("frmUnidadesNegocio").validate()) {
+        if (!$$("frmEstados").validate()) {
             messageApi.errorMessage(translate("Debe rellenar los campos correctamente"));
             return;
         }
-        var data = $$("frmUnidadesNegocio").getValues();
-        if (unidadNegocioId == 0) {
-            data.unidadNegocioId = 0;
-            unidadesNegocioService.postUnidadNegocio(usuarioService.getUsuarioCookie(), data)
+        var data = $$("frmEstados").getValues();
+        if (estadoId == 0) {
+            data.estadoId = 0;
+            estadosService.postEstado(usuarioService.getUsuarioCookie(), data)
                 .then(result => {
-                    this.$scope.show('/top/unidadesNegocio?unidadNegocioId=' + result.unidadNegocioId);
+                    this.$scope.show('/top/estados?estadoId=' + result.estadoId);
                 })
                 .catch(err => {
                     messageApi.errorMessageAjax(err);
                 });
         } else {
-            unidadesNegocioService.putUnidadNegocio(usuarioService.getUsuarioCookie(), data)
+            estadosService.putEstado(usuarioService.getUsuarioCookie(), data)
                 .then(result => {
-                    this.$scope.show('/top/unidadesNegocio?unidadNegocioId=' + data.unidadNegocioId);
+                    this.$scope.show('/top/estados?estadoId=' + data.estadoId);
                 })
                 .catch(err => {
                     messageApi.errorMessageAjax(err);
