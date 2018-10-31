@@ -23,12 +23,14 @@ export default class GruposUsuarios extends JetView {
             cols: [
                 {
                     view: "button", type: "icon", icon: "wxi-plus", width: 37, align: "left", hotkey: "Ctrl+F",
+                    tooltip: translate("Nuevo registro en formulario (Ctrl+F)"),
                     click: () => {
                         this.show('/top/gruposUsuariosForm?grupoUsuarioId=0');
                     }
                 },
                 {
                     view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
+                    tooltip: translate("Nuevo registro en línea (Ctrl+L)"),
                     click: () => {
                         var newRow = { id: -1, grupoUsuarioId: 0 };
                         $$('gruposUsuariosGrid').editStop();
@@ -49,6 +51,7 @@ export default class GruposUsuarios extends JetView {
                 },
                 {
                     view: "button", type: "icon", icon: "wxi-download", width: 37, align: "right",
+                    tooltip: translate("Descargar como Excel"),
                     click: () => {
                         webix.toExcel($$("gruposUsuariosGrid"), {
                             filename: "grupos_usuarios",

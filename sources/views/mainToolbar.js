@@ -8,6 +8,7 @@ export default class MainToolbar extends JetView {
 		const langs = app.getService("locale");
 		const themes = app.getService("theme");
 		const usu = usuarioService.getUsuarioCookie();
+		const translate = this.app.getService("locale")._;
 		var mainToolBar = {
 			view: "toolbar",
 			height: 50,
@@ -28,11 +29,18 @@ export default class MainToolbar extends JetView {
 						return html;
 					}
 				},
-				{
-					view: "label", label: this.app.config.name
+				{ view: "label", 
+					label: `
+						<div>
+						<img style="vertical-align:middle" src='assets/img/handshake.png' height='35' />
+						<span>${this.app.config.name}</span>
+						</div>
+					`,
+					width: 200
 				},
 				{
 					view: "button", type: "icon", icon: "mdi mdi-exit-run mdi-36px", width: 50, align: "right",
+					tooltip: translate("Salir y logout"),
 					click: () => {
 						usuarioService.deleteUsuarioCookie();
 						window.open('https://login.microsoftonline.com/common/oauth2/logout', '_self');

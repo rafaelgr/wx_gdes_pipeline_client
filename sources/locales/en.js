@@ -61,5 +61,9 @@ export default {
     "Razones perdida": "Reasons lost",
     "Nombre razon perdida": "Reason lost name",
     "Divisas": "Currencies",
-    "Nombre divisa": "Currency name"
+    "Nombre divisa": "Currency name",
+    "Salir y logout": "Exit and logout",
+    "Nuevo registro en formulario (Ctrl+F)": "New record in form (Ctrl+F)",
+    "Nuevo registro en línea (Ctrl+L)": "New record inline (Ctrl + L)",
+    "Descargar como Excel": "Dowload as Excel"
 }
