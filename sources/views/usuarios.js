@@ -87,7 +87,7 @@ export default class Usuarios extends JetView {
                     click: () => {
                         var newRow = { id: -1, empresaId: 0 };
                         $$('usuariosGrid').editStop();
-                        var id = $$("usuariosGrid").add(newRow, $$('usuariosGrid').getLastId() + 1);
+                        var id = $$("usuariosGrid").add(newRow);
                         $$("usuariosGrid").showItem(id);
                         $$("usuariosGrid").edit({
                             row: -1,

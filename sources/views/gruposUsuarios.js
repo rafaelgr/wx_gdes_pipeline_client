@@ -32,7 +32,11 @@ export default class GruposUsuarios extends JetView {
                     click: () => {
                         var newRow = { id: -1, grupoUsuarioId: 0 };
                         $$('gruposUsuariosGrid').editStop();
-                        var id = $$("gruposUsuariosGrid").add(newRow, $$('gruposUsuariosGrid').getLastId() + 1);
+                        console.log('Before edit 1');
+                        var lastId = $$('gruposUsuariosGrid').getLastId() + 1;
+                        console.log('Before edit 3');
+                        var id = $$("gruposUsuariosGrid").add(newRow);
+                        console.log('Before edit 2');
                         $$("gruposUsuariosGrid").edit({
                             row: -1,
                             column: "nombre"

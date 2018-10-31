@@ -32,7 +32,7 @@ export default class RazonesPerdida extends JetView {
                     click: () => {
                         var newRow = { id: -1, razonPerdidaId: 0 };
                         $$('razonesPerdidaGrid').editStop();
-                        var id = $$("razonesPerdidaGrid").add(newRow, $$('razonesPerdidaGrid').getLastId() + 1);
+                        var id = $$("razonesPerdidaGrid").add(newRow);
                         $$("razonesPerdidaGrid").showItem(id);
                         $$("razonesPerdidaGrid").edit({
                             row: -1,

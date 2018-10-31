@@ -32,7 +32,7 @@ export default class UnidadesNegocio extends JetView {
                     click: () => {
                         var newRow = { id: -1, unidadNegocioId: 0 };
                         $$('unidadesNegocioGrid').editStop();
-                        var id = $$("unidadesNegocioGrid").add(newRow, $$('unidadesNegocioGrid').getLastId() + 1);
+                        var id = $$("unidadesNegocioGrid").add(newRow);
                         $$("unidadesNegocioGrid").showItem(id);
                         $$("unidadesNegocioGrid").edit({
                             row: -1,
@@ -69,8 +69,8 @@ export default class UnidadesNegocio extends JetView {
             columns: [
                 { id: "unidadNegocioId", adjust: true, header: [translate("ID"), { content: "numberFilter" }], sort: "number" },
                 { id: "nombre", fillspace: true, header: [translate("Nombre unidad de negocio"), { content: "textFilter" }], sort: "string", editor: "text" },
-                { id: "nombreEN", header: [translate("Nombre Francés"), { content: "textFilter" }], sort: "string", editor: "text", width: 250},
-                { id: "nombreFR", header: [translate("Nombre Inglés"), { content: "textFilter" }], sort: "string", editor: "text", width: 250 },
+                { id: "nombreEN", header: [translate("Nombre Inglés"), { content: "textFilter" }], sort: "string", editor: "text", width: 250},
+                { id: "nombreFR", header: [translate("Nombre Francés"), { content: "textFilter" }], sort: "string", editor: "text", width: 250 },
                 { id: "actions", header: [{ text: translate("Acciones"), css: { "text-align": "center" } }], template: editButton + deleteButton, css: { "text-align": "center" } }
             ],
             onClick: {

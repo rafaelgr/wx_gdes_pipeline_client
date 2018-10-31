@@ -32,7 +32,7 @@ export default class TiposContrato extends JetView {
                     click: () => {
                         var newRow = { id: -1, tipoContratoId: 0 };
                         $$('tiposContratoGrid').editStop();
-                        var id = $$("tiposContratoGrid").add(newRow, $$('tiposContratoGrid').getLastId() + 1);
+                        var id = $$("tiposContratoGrid").add(newRow);
                         $$("tiposContratoGrid").showItem(id);
                         $$("tiposContratoGrid").edit({
                             row: -1,

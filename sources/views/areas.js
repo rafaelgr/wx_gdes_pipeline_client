@@ -42,7 +42,7 @@ export default class Areas extends JetView {
                     click: () => {
                         var newRow = { id: -1, areaId: 0 };
                         $$('areasGrid').editStop();
-                        var id = $$("areasGrid").add(newRow, $$('areasGrid').getLastId() + 1);
+                        var id = $$("areasGrid").add(newRow);
                         $$("areasGrid").showItem(id);
                         $$("areasGrid").edit({
                             row: -1,

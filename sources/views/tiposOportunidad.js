@@ -32,7 +32,7 @@ export default class TiposOportunidad extends JetView {
                     click: () => {
                         var newRow = { id: -1, tipoOportunidadId: 0 };
                         $$('tiposOportunidadGrid').editStop();
-                        var id = $$("tiposOportunidadGrid").add(newRow, $$('tiposOportunidadGrid').getLastId() + 1);
+                        var id = $$("tiposOportunidadGrid").add(newRow);
                         $$("tiposOportunidadGrid").showItem(id);
                         $$("tiposOportunidadGrid").edit({
                             row: -1,

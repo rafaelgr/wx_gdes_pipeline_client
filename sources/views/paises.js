@@ -32,7 +32,7 @@ export default class Paises extends JetView {
                     click: () => {
                         var newRow = { id: -1, paisId: 0 };
                         $$('paisesGrid').editStop();
-                        var id = $$("paisesGrid").add(newRow, $$('paisesGrid').getLastId() + 1);
+                        var id = $$("paisesGrid").add(newRow);
                         $$("paisesGrid").showItem(id);
                         $$("paisesGrid").edit({
                             row: -1,

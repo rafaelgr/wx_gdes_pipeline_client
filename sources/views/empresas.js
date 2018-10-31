@@ -42,7 +42,7 @@ export default class Empresas extends JetView {
                     click: () => {
                         var newRow = { id: -1, empresaId: 0 };
                         $$('empresasGrid').editStop();
-                        var id = $$("empresasGrid").add(newRow, $$('empresasGrid').getLastId() + 1);
+                        var id = $$("empresasGrid").add(newRow);
                         $$("empresasGrid").showItem(id);
                         $$("empresasGrid").edit({
                             row: -1,

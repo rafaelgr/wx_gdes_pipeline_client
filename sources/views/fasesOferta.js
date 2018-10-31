@@ -32,7 +32,7 @@ export default class FasesOferta extends JetView {
                     click: () => {
                         var newRow = { id: -1, faseOfertaId: 0 };
                         $$('fasesOfertaGrid').editStop();
-                        var id = $$("fasesOfertaGrid").add(newRow, $$('fasesOfertaGrid').getLastId() + 1);
+                        var id = $$("fasesOfertaGrid").add(newRow);
                         $$("fasesOfertaGrid").showItem(id);
                         $$("fasesOfertaGrid").edit({
                             row: -1,

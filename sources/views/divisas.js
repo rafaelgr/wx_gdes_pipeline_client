@@ -32,7 +32,7 @@ export default class Divisas extends JetView {
                     click: () => {
                         var newRow = { id: -1, divisaId: 0 };
                         $$('divisasGrid').editStop();
-                        var id = $$("divisasGrid").add(newRow, $$('divisasGrid').getLastId() + 1);
+                        var id = $$("divisasGrid").add(newRow);
                         $$("divisasGrid").showItem(id);
                         $$("divisasGrid").edit({
                             row: -1,

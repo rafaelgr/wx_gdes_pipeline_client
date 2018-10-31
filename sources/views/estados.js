@@ -32,7 +32,7 @@ export default class Estados extends JetView {
                     click: () => {
                         var newRow = { id: -1, estadoId: 0 };
                         $$('estadosGrid').editStop();
-                        var id = $$("estadosGrid").add(newRow, $$('estadosGrid').getLastId() + 1);
+                        var id = $$("estadosGrid").add(newRow);
                         $$("estadosGrid").showItem(id);
                         $$("estadosGrid").edit({
                             row: -1,
