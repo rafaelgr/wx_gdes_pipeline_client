@@ -16,7 +16,7 @@ export default class EmpreasForm extends JetView {
             rows: [
                 {
                     view: "toolbar", padding: 3, elements: [
-                        { view: "icon", icon: "cog", width: 37, align: "left" },
+                        { view: "icon", icon: "mdi mdi-cube", width: 37, align: "left" },
                         { view: "label", label: translate("Empresas") }
                     ]
                 },

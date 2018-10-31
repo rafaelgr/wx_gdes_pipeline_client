@@ -15,7 +15,7 @@ export default class UnidadesNegocioForm extends JetView {
             rows: [
                 {
                     view: "toolbar", padding: 3, elements: [
-                        { view: "icon", icon: "cog", width: 37, align: "left" },
+                        { view: "icon", icon: "mdi mdi-cube-scan", width: 37, align: "left" },
                         { view: "label", label: translate("Unidades de negocio") }
                     ]
                 },

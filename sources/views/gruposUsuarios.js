@@ -15,7 +15,7 @@ export default class GruposUsuarios extends JetView {
         const translate = this.app.getService("locale")._;
         var toolbarGruposUsuarios = {
             view: "toolbar", padding: 3, elements: [
-                { view: "icon", icon: "users", width: 37, align: "left" },
+                { view: "icon", icon: "mdi mdi-account-group", width: 37, align: "left" },
                 { view: "label", label: translate("Grupos de usuarios") }
             ]
         }

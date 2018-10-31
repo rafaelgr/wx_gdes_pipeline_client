@@ -15,7 +15,7 @@ export default class TiposOportunidad extends JetView {
         const translate = this.app.getService("locale")._;
         var toolbarTiposOportunidad = {
             view: "toolbar", padding: 3, elements: [
-                { view: "icon", icon: "cog", width: 37, align: "left" },
+                { view: "icon", icon: "mdi mdi-shape", width: 37, align: "left" },
                 { view: "label", label: translate("Tipos de oportunidad") }
             ]
         }

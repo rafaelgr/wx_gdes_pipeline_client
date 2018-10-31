@@ -15,7 +15,7 @@ export default class RazonesPerdida extends JetView {
         const translate = this.app.getService("locale")._;
         var toolbarRazonesPerdida = {
             view: "toolbar", padding: 3, elements: [
-                { view: "icon", icon: "cog", width: 37, align: "left" },
+                { view: "icon", icon: "mdi mdi-thumb-down", width: 37, align: "left" },
                 { view: "label", label: translate("Razones perdida") }
             ]
         }

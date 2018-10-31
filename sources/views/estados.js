@@ -15,7 +15,7 @@ export default class Estados extends JetView {
         const translate = this.app.getService("locale")._;
         var toolbarEstados = {
             view: "toolbar", padding: 3, elements: [
-                { view: "icon", icon: "cog", width: 37, align: "left" },
+                { view: "icon", icon: "mdi mdi-thumbs-up-down", width: 37, align: "left" },
                 { view: "label", label: translate("Tipos de estado") }
             ]
         }

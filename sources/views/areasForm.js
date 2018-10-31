@@ -16,7 +16,7 @@ export default class AreasForm extends JetView {
             rows: [
                 {
                     view: "toolbar", padding: 3, elements: [
-                        { view: "icon", icon: "cog", width: 37, align: "left" },
+                        { view: "icon", icon: "mdi mdi-cube-outline", width: 37, align: "left" },
                         { view: "label", label: translate("Areas") }
                     ]
                 },
@@ -82,7 +82,8 @@ export default class AreasForm extends JetView {
                                 { view: "button", label: translate("Cancelar"), click: this.cancel, hotkey: "esc" },
                                 { view: "button", label: translate("Aceptar"), click: this.accept, type: "form", hotkey: "enter" }
                             ]
-                        }
+                        },
+                        { minlength: 600}
                     ]
                 }
             ]

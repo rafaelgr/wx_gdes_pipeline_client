@@ -15,7 +15,7 @@ export default class PaisesForm extends JetView {
             rows: [
                 {
                     view: "toolbar", padding: 3, elements: [
-                        { view: "icon", icon: "cog", width: 37, align: "left" },
+                        { view: "icon", icon: "mdi mdi-flag", width: 37, align: "left" },
                         { view: "label", label: translate("Paises") }
                     ]
                 },
@@ -48,7 +48,8 @@ export default class PaisesForm extends JetView {
                             ]
                         }
                     ]
-                }
+                },
+                { minheight: 600 }
             ]
         }
         return _view;
@@ -59,7 +60,7 @@ export default class PaisesForm extends JetView {
             paisId = url[0].params.paisId;
         }
         this.load(paisId);
-        webix.delay(function(){ $$("firstField").focus(); });
+        webix.delay(function () { $$("firstField").focus(); });
     }
     load(paisId) {
         if (paisId == 0) return;
@@ -84,20 +85,20 @@ export default class PaisesForm extends JetView {
         if (paisId == 0) {
             data.paisId = 0;
             paisesService.postPais(usuarioService.getUsuarioCookie(), data)
-            .then(result => {
-                this.$scope.show('/top/paises?paisId=' + result.paisId);
-            })
-            .catch(err => {
-                messageApi.errorMessageAjax(err);
-            });
+                .then(result => {
+                    this.$scope.show('/top/paises?paisId=' + result.paisId);
+                })
+                .catch(err => {
+                    messageApi.errorMessageAjax(err);
+                });
         } else {
             paisesService.putPais(usuarioService.getUsuarioCookie(), data)
-            .then(result => {
-                this.$scope.show('/top/paises?paisId=' + data.paisId);
-            })
-            .catch(err => {
-                messageApi.errorMessageAjax(err);
-            });
+                .then(result => {
+                    this.$scope.show('/top/paises?paisId=' + data.paisId);
+                })
+                .catch(err => {
+                    messageApi.errorMessageAjax(err);
+                });
         }
     }
 }

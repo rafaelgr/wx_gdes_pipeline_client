@@ -70,7 +70,7 @@ export default class Usuarios extends JetView {
         const translate = this.app.getService("locale")._;
         var toolbarUsuarios = {
             view: "toolbar", padding: 3, elements: [
-                { view: "icon", icon: "cog", width: 37, align: "left" },
+                { view: "icon", icon: "mdi mdi-account", width: 37, align: "left" },
                 { view: "label", label: translate("Usuarios") }
             ]
         }

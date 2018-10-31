@@ -15,7 +15,7 @@ export default class GruposUsuariosForm extends JetView {
             rows: [
                 {
                     view: "toolbar", padding: 3, elements: [
-                        { view: "icon", icon: "users", width: 37, align: "left" },
+                        { view: "icon", icon: "mdi mdi-account-group", width: 37, align: "left" },
                         { view: "label", label: translate("Grupos de usuarios") }
                     ]
                 },
@@ -31,7 +31,7 @@ export default class GruposUsuariosForm extends JetView {
                                     label: translate("ID"), labelPosition: "top"
                                 },
                                 {
-                                    view: "text", name: "nombre", required: true, id:"firstField",
+                                    view: "text", name: "nombre", required: true, id: "firstField",
                                     label: translate("Nombre de grupo"), labelPosition: "top"
                                 }
                             ]
@@ -44,7 +44,8 @@ export default class GruposUsuariosForm extends JetView {
                             ]
                         }
                     ]
-                }
+                },
+                { minheight: 600 }
             ]
         }
         return _view;
@@ -55,7 +56,7 @@ export default class GruposUsuariosForm extends JetView {
             gruposUsuarioId = url[0].params.grupoUsuarioId;
         }
         this.load(gruposUsuarioId);
-        webix.delay(function(){ $$("firstField").focus(); });
+        webix.delay(function () { $$("firstField").focus(); });
     }
     load(grupoUsuarioId) {
         if (grupoUsuarioId == 0) return;

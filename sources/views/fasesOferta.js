@@ -15,7 +15,7 @@ export default class FasesOferta extends JetView {
         const translate = this.app.getService("locale")._;
         var toolbarFasesOferta = {
             view: "toolbar", padding: 3, elements: [
-                { view: "icon", icon: "cog", width: 37, align: "left" },
+                { view: "icon", icon: "mdi mdi-filter-variant", width: 37, align: "left" },
                 { view: "label", label: translate("Fases de oferta") }
             ]
         }

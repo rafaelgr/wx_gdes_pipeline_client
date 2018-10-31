@@ -15,7 +15,7 @@ export default class DivisasForm extends JetView {
             rows: [
                 {
                     view: "toolbar", padding: 3, elements: [
-                        { view: "icon", icon: "cog", width: 37, align: "left" },
+                        { view: "icon", icon: "mdi mdi-currency-eur", width: 37, align: "left" },
                         { view: "label", label: translate("Divisas") }
                     ]
                 },
@@ -42,6 +42,9 @@ export default class DivisasForm extends JetView {
                                 { view: "button", label: translate("Cancelar"), click: this.cancel, hotkey: "esc" },
                                 { view: "button", label: translate("Aceptar"), click: this.accept, type: "form", hotkey: "enter" }
                             ]
+                        },
+                        {
+                            minheight: 600
                         }
                     ]
                 }
