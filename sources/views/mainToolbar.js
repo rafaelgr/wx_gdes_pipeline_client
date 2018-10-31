@@ -19,7 +19,7 @@ export default class MainToolbar extends JetView {
 					}
 				},
 				{ view: "label", label: "<a href='#!/top/inicio'><img src='assets/img/gdes_logo.png' height='35' /></a>", width: 150 },
-				{ view: "button", type: "icon", icon: "mdi mdi-account-key mdi-36px", width: 50},
+				{ view: "button", type: "icon", icon: "mdi mdi-account-key mdi-36px", width: 50 },
 				{
 					height: 46, id: "person_template", css: "header_person", borderless: true, data: usu,
 					template: function (obj) {
@@ -32,7 +32,7 @@ export default class MainToolbar extends JetView {
 					view: "label", label: this.app.config.name
 				},
 				{
-					view: "button", type: "icon", icon: "wxi-close", width: 37, align: "right",
+					view: "button", type: "icon", icon: "mdi mdi-exit-run mdi-36px", width: 50, align: "right",
 					click: () => {
 						usuarioService.deleteUsuarioCookie();
 						window.open('https://login.microsoftonline.com/common/oauth2/logout', '_self');
@@ -44,6 +44,7 @@ export default class MainToolbar extends JetView {
 		return mainToolBar;
 	}
 	init() {
+
 	}
 
 }

@@ -14,7 +14,8 @@ export default class MainMenu extends JetView {
                     id: "inicio", icon: "mdi mdi-home", value: translate("Inicio")
                 },
                 {
-                    id: "administracion", icon: "mdi mdi-switch",  value: translate("Administración"), data: [
+                    id: "administracion", icon: "mdi mdi-switch", open: true, value: translate("Administración"),
+                    data: [
                         { id: "parametros", value: translate("Parámetros"), icon: "mdi mdi-altimeter", details: "Parámetros de la aplicación" },
                         { id: "gruposUsuarios", value: translate("Grupos de usuarios"), icon: "mdi mdi-account-group", details: "Grupos de usuarios" },
                         { id: "usuarios", value: translate("Usuarios"), icon: "mdi mdi-account", details: "Usuarios" },

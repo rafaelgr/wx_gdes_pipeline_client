@@ -24,5 +24,6 @@ if (!BUILD_AS_MODULE){
 		app.use(plugins.Theme);
 		webix.i18n.setLocale("es-ES");
 		app.render();
+		app.getService("theme").setTheme('compact');
 	} );
 }
