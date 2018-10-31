@@ -5,8 +5,8 @@ import { generalApi } from "../utilities/general";
 import { areasService } from "../services/areas_service";
 import { unidadesNegocioService } from "../services/unidadesNegocio_service";
 
-var editButton = "<span class='onEdit webix_icon fa-edit'></span>";
-var deleteButton = "<span class='onDelete webix_icon fa-trash'></span>";
+var editButton = "<span class='onEdit webix_icon wxi-pencil'></span>";
+var deleteButton = "<span class='onDelete webix_icon wxi-trash'></span>";
 var currentIdDatatableView;
 var currentRowDatatableView
 var isNewRow = false;
@@ -32,13 +32,13 @@ export default class Areas extends JetView {
         var pagerAreas = {
             cols: [
                 {
-                    view: "button", type: "icon", icon: "plus", width: 37, align: "left", hotkey: "Ctrl+F",
+                    view: "button", type: "icon", icon: "wxi-plus", width: 37, align: "left", hotkey: "Ctrl+F",
                     click: () => {
                         this.show('/top/areasForm?areaId=0');
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
+                    view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
                         var newRow = { id: -1, areaId: 0 };
                         $$('areasGrid').editStop();
@@ -52,7 +52,7 @@ export default class Areas extends JetView {
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "table", width: 37, align: "right",
+                    view: "button", type: "icon", icon: "wxi-download", width: 37, align: "right",
                     click: () => {
                         webix.toExcel($$("areasGrid"), {
                             filename: "areas",

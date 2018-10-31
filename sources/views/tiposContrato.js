@@ -4,8 +4,8 @@ import { messageApi } from "../utilities/messages";
 import { generalApi } from "../utilities/general";
 import { tiposContratoService } from "../services/tiposContrato_service";
 
-var editButton = "<span class='onEdit webix_icon fa-edit'></span>";
-var deleteButton = "<span class='onDelete webix_icon fa-trash'></span>";
+var editButton = "<span class='onEdit webix_icon wxi-pencil'></span>";
+var deleteButton = "<span class='onDelete webix_icon wxi-trash'></span>";
 var currentIdDatatableView;
 var currentRowDatatableView
 var isNewRow = false;
@@ -22,13 +22,13 @@ export default class TiposContrato extends JetView {
         var pagerTiposContrato = {
             cols: [
                 {
-                    view: "button", type: "icon", icon: "plus", width: 37, align: "left", hotkey: "Ctrl+F",
+                    view: "button", type: "icon", icon: "wxi-plus", width: 37, align: "left", hotkey: "Ctrl+F",
                     click: () => {
                         this.show('/top/tiposContratoForm?tipoContratoId=0');
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
+                    view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
                         var newRow = { id: -1, tipoContratoId: 0 };
                         $$('tiposContratoGrid').editStop();
@@ -42,7 +42,7 @@ export default class TiposContrato extends JetView {
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "table", width: 37, align: "right",
+                    view: "button", type: "icon", icon: "wxi-download", width: 37, align: "right",
                     click: () => {
                         webix.toExcel($$("tiposContratoGrid"), {
                             filename: "tiposContrato",
