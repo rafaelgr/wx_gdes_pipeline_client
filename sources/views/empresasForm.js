@@ -55,6 +55,9 @@ export default class EmpreasForm extends JetView {
                                 { view: "button", label: translate("Cancelar"), click: this.cancel, hotkey: "esc" },
                                 { view: "button", label: translate("Aceptar"), click: this.accept, type: "form", hotkey: "enter" }
                             ]
+                        },
+                        {
+                            minheight: 600
                         }
                     ]
                 }
