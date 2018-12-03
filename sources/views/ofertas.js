@@ -7,11 +7,17 @@ import { unidadesNegocioService } from "../services/unidadesNegocio_service";
 import { empresasService } from "../services/empresas_service";
 import { paisesService } from "../services/paises_service";
 import { fasesOfertaService } from "../services/fasesOferta_service";
+import { tiposOportunidadService} from "../services/tiposOportunidad_service";
+import { areasService} from "../services/areas_service";
+import { estadosService} from "../services/estados_service";
+import {divisasService} from "../services/divisas_service";
 
 var editButton = "<span class='onEdit webix_icon wxi-pencil'></span>";
 var deleteButton = "<span class='onDelete webix_icon wxi-trash'></span>";
+
 var currentIdDatatableView;
-var currentRowDatatableView
+var currentRowDatatableView;
+
 var isNewRow = false;
 var colUnidadesNegocio = [];
 var unidadNegocioResult = unidadesNegocioService.getSyncUnidadesNegocio(usuarioService.getUsuarioCookie());
@@ -46,7 +52,42 @@ if (faseOfertaResult.err) {
     colFasesOferta = generalApi.prepareDataForCombo('faseOfertaId', 'nombre', faseOfertaResult.data);
 }
 
+var colTiposOportunidad = [];
+var tipoOportunidadResult = tiposOportunidadService.getSyncTiposOportunidad(usuarioService.getUsuarioCookie());
+if (tipoOportunidadResult.err) {
+    messageApi.errorMessageAjax(tipoOportunidadResult.err);
+} else {
+    colTiposOportunidad = generalApi.prepareDataForCombo('tipoOportunidadId', 'nombre', tipoOportunidadResult.data);
+}
 
+var colAreas = [];
+var areaResult = areasService.getSyncAreas(usuarioService.getUsuarioCookie());
+if (areaResult.err) {
+    messageApi.errorMessageAjax(areaResult.err);
+} else {
+    colAreas = generalApi.prepareDataForCombo('areaId', 'nombre', areaResult.data);
+}
+
+var colEstados = [];
+var estadoResult = estadosService.getSyncEstados(usuarioService.getUsuarioCookie());
+if (estadoResult.err) {
+    messageApi.errorMessageAjax(estadoResult.err);
+} else {
+    colEstados = generalApi.prepareDataForCombo('estadoId', 'nombre', estadoResult.data);
+}
+
+var colDivisas = [];
+var divisaResult = divisasService.getSyncDivisas(usuarioService.getUsuarioCookie());
+if (divisaResult.err) {
+    messageApi.errorMessageAjax(divisaResult.err);
+} else {
+    colDivisas = generalApi.prepareDataForCombo('divisaId', 'nombre', divisaResult.data);
+}
+
+
+var mfun = (obj) => {
+    alert(obj);
+}
 export default class Ofertas extends JetView {
     config() {
         const translate = this.app.getService("locale")._;
@@ -103,16 +144,28 @@ export default class Ofertas extends JetView {
             id: "ofertasGrid",
             pager: "mypager",
             select: "row",
+            navigation: true,
             columns: [
                 { id: "ofertaId", adjust: true, header: [translate("ID"), { content: "numberFilter" }], sort: "number" },
                 { id: "numeroOferta", header: [translate("Nr. Oferta"), { content: "textFilter" }], sort: "string", editor: "text", minWidth: 100 },
                 { id: "empresaId", header: [translate("Empresa"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colEmpresas, width: 200 },
                 { id: "paisId", header: [translate("Pais"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colPaises, width: 200 },
                 { id: "faseOfertaId", header: [translate("Fase oferta"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colFasesOferta, width: 200 },
-                { id: "cod", header: [translate("Código"), { content: "textFilter" }], sort: "string", editor: "text" },
-                { id: "orden", header: [translate("Orden"), { content: "numberFilter" }], sort: "string", editor: "text" },
-                { id: "nombreEN", header: [translate("Nombre Inglés"), { content: "textFilter" }], sort: "string", editor: "text", width: 250 },
-                { id: "nombreFR", header: [translate("Nombre Francés"), { content: "textFilter" }], sort: "string", editor: "text", width: 250 },
+                { id: "tipoOportunidadId", header: [translate("Tipo oportunidad"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colTiposOportunidad, width: 200 },
+                { id: "areaId", header: [translate("Area"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colAreas, width: 200 },
+                { id: "ubicacion", header: [translate("Ubicación"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
+                { id: "paisUbicacion", header: [translate("Pais ubicación"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
+                { id: "cliente", header: [translate("Cliente"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
+                { id: "nombreCorto", header: [translate("Nombre"), { content: "textFilter" }], sort: "string", editor: "text", width: 250 },
+                { id: "descripcion", header: [translate("Descripción"), { content: "textFilter" }], sort: "string", editor: "text", width: 250 },
+                { id: "estadoId", header: [translate("Estado"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colEstados, width: 200 },
+                { id: "importePresupuesto", adjust: true, header: [translate("Importe"), { content: "numberFilter" }], sort: "int", format:webix.i18n.priceFormat, css:{'text-align':'right'} },
+                { id: "divisaId", header: [translate("Divisa"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colDivisas, width: 200 },
+                { id: "margenContribucion", adjust: true, header: [translate("Margen (%)"), { content: "numberFilter" }], sort: "int", format:webix.i18n.numberFormat, css:{'text-align':'right'} },
+                {
+                    id: "fechaEntrega", header: [{ text: translate("Fecha entrega"), css: { "text-align": "center" } }, { content: "textFilter" }], 
+                    editor: "editdate", width: 150, format:webix.i18n.dateFormatStr, sort: "string"
+				},
                 { id: "unidadNegocioId", header: [translate("Unidad de negocio"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUnidadesNegocio, width: 200 },
                 { id: "actions", header: [{ text: translate("Acciones"), css: { "text-align": "center" } }], template: editButton + deleteButton, css: { "text-align": "center" } }
             ],
@@ -203,7 +256,7 @@ export default class Ofertas extends JetView {
         ofertasService.getOfertas(usuarioService.getUsuarioCookie())
             .then((data) => {
                 $$("ofertasGrid").clearAll();
-                $$("ofertasGrid").parse(generalApi.prepareDataForDataTable("ofertaId", data));
+                $$("ofertasGrid").parse(generalApi.prepareDataForDataTableWidthDates("ofertaId", ['fechaEntrega'], data));
                 if (id) {
                     $$("ofertasGrid").select(id);
                     $$("ofertasGrid").showItem(id);

@@ -69,5 +69,8 @@ export default {
     "Gestión": "Pool",
     "Ofertas": "Deals",
     "Nr. Oferta": "Deal. N.",
-    "Fase oferta": "Deal stage"
+    "Fase oferta": "Deal stage",
+    "Tipo oportunidad": "Deal type",
+    "Pais ubicación": "Location country",
+    "Margen (%)": "Margin (%)"
 }
