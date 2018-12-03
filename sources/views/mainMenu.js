@@ -31,6 +31,12 @@ export default class MainMenu extends JetView {
                         { id: "divisas", value: translate("Divisas"), icon: "mdi mdi-currency-eur", details: "Divisas" }
 
                     ]
+                },
+                {
+                    id: "gestion", icon: "mdi mdi-buffer", open: true, value: translate("Gestión"),
+                    data: [
+                        { id: "ofertas", value: translate("Ofertas"), icon: "mdi mdi-arrow-decision-outline", details: "Ofertas" }
+                    ]
                 }
             ]
         };

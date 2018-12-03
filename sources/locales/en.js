@@ -65,5 +65,9 @@ export default {
     "Salir y logout": "Exit and logout",
     "Nuevo registro en formulario (Ctrl+F)": "New record in form (Ctrl+F)",
     "Nuevo registro en línea (Ctrl+L)": "New record inline (Ctrl + L)",
-    "Descargar como Excel": "Dowload as Excel"
+    "Descargar como Excel": "Dowload as Excel",
+    "Gestión": "Pool",
+    "Ofertas": "Deals",
+    "Nr. Oferta": "Deal. N.",
+    "Fase oferta": "Deal stage"
 }
