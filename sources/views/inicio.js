@@ -6,7 +6,7 @@ export default class Inicio extends JetView {
     config() {
 		const translate = this.app.getService("locale")._;
         return {
-            template: translate("paginainicio")
+            view:"iframe", id:"frame-body", src:"http://gdes.com"
         }
     }
 }

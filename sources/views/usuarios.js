@@ -85,7 +85,7 @@ export default class Usuarios extends JetView {
                 {
                     view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
-                        var newRow = { id: -1, empresaId: 0 };
+                        var newRow = { id: -1, usuarioId: 0 };
                         $$('usuariosGrid').editStop();
                         var id = $$("usuariosGrid").add(newRow);
                         $$("usuariosGrid").showItem(id);
@@ -165,7 +165,7 @@ export default class Usuarios extends JetView {
                     var length = this.config.columns.length;
                     console.log("isNewRow: ", isNewRow, " CIndex: ", cIndex, " length-2: ", length-2);
                     if (isNewRow && cIndex != length - 2) return false;
-                    if (state.value != state.old) {
+                    if ((state.value != state.old) || isNewRow) {
                         isNewRow = false;
                         if (!this.validate(currentIdDatatableView)) {
                             messageApi.errorMessage(translate("Valores incorrectos"));
@@ -176,10 +176,10 @@ export default class Usuarios extends JetView {
                             delete currentRowDatatableView.grupo; // ??
                             delete currentRowDatatableView.responsable; // ??
                             var data = currentRowDatatableView;
-                            if (data.empresaId == 0) {
+                            if (data.usuarioId == 0) {
                                 usuarioService.postUsuario(usuarioService.getUsuarioCookie(), data)
                                     .then((result) => {
-                                        this.$scope.load(result.empresaId);
+                                        this.$scope.load(result.usuarioId);
                                         $$('usuariosGrid').editStop();
                                     })
                                     .catch((err) => {
