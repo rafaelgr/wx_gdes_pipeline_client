@@ -1,6 +1,7 @@
-import { JetView } from "webix-jet";
+import { JetView, plugins } from "webix-jet";
 import { usuarioService } from "../services/usuario_service";
 import { messageApi } from "../utilities/messages";
+import { languageService} from "../locales/language_service";
 
 export default class LoginAuto extends JetView {
     config() {
@@ -18,6 +19,9 @@ export default class LoginAuto extends JetView {
         usuarioService.getLoginEmail(url[0].params.email)
             .then(usuario => {
                 usuarioService.setUsuarioCookie(usuario);
+                // change default locale
+                //this.app.use(plugins.Locale,{lang:usuario.codigoIdioma});
+                languageService.setLanguage(this.app, usuario.codigoIdioma)
                 this.app.show('top/inicio');
             })
             .catch(err => {

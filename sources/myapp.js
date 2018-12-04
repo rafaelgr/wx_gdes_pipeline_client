@@ -22,7 +22,6 @@ if (!BUILD_AS_MODULE){
 		var app = new MyApp();
 		app.use(plugins.Locale);
 		app.use(plugins.Theme);
-		webix.i18n.setLocale("es-ES");
 		app.render();
 		app.getService("theme").setTheme('compact');
 	} );

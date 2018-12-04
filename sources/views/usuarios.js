@@ -136,6 +136,7 @@ export default class Usuarios extends JetView {
                 { id: "ubicacion", fillspace: true, header: [translate("Ubicación"), { content: "textFilter" }], sort: "string", editor: "text", minWidth: 200 },
                 { id: "actions", header: [{ text: translate("Acciones"), css: { "text-align": "center" } }], template: editButton + deleteButton, css: { "text-align": "center" } }
             ],
+            rightSplit:1,
             onClick: {
                 "onDelete": function (event, id, node) {
                     var dtable = this;
