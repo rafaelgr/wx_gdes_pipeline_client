@@ -18,7 +18,7 @@ export default class OfertasForm extends JetView {
     config() {
         const translate = this.app.getService("locale")._;
         const cellDescriptivos = {
-            padding: 5,
+            padding: 5, css: "fondocelda",
             rows: [
                 { template: translate("DESCRIPTIVOS"), type: "section" },
                 { view: "textarea", name: "descripcion", required: true, label: translate("Descripción"), labelPosition: "top", id: "firstField" },
@@ -54,7 +54,7 @@ export default class OfertasForm extends JetView {
             ]
         };
         const cellGenerales = {
-            padding: 5,
+            padding: 5,css: "fondocelda",
             rows: [
                 { template: translate("GENERALES"), type: "section" },
                 {
@@ -105,7 +105,7 @@ export default class OfertasForm extends JetView {
             ]
         };
         const cellOtrosDatos = {
-            padding: 5,
+            padding: 5,css: "fondocelda",
             rows: [
                 { template: translate("OTROS DATOS"), type: "section" },
                 {
@@ -114,7 +114,7 @@ export default class OfertasForm extends JetView {
             ]
         };
         const cellEstado = {
-            padding: 5,
+            padding: 5,css: "fondocelda",
             rows: [
                 { template: translate("ESTADO"), type: "section" },
                 {

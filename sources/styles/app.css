@@ -22,3 +22,7 @@
 .header_person .webix_icon{
 	line-height: inherit;
 }
+.fondocelda {
+	background-color: aliceblue;
+	margin: 2px;
+}
