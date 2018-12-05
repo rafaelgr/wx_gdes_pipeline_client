@@ -103,8 +103,9 @@ if (razonPerdidaResult.err) {
 }
 
 webix.editors.editdate = webix.extend({
-    render: function () {
-        var icon = "<span class='webix_icon mdi-calendar' style='position:absolute; cursor:pointer; top:4px; right:4px;'></span>";
+    render: function (value) {
+        console.log("REBDER: ", value);
+        var icon = "<span class='mdi mdi-calendar' style='position:absolute; cursor:pointer; top:4px; right:4px;'></span>";
         var node = webix.html.create("div", {
             "class": "webix_dt_editor"
         }, "<input type='date'>" + icon);
@@ -181,7 +182,6 @@ export default class Ofertas extends JetView {
         var datatableOfertas = {
             view: "datatable",
             id: "ofertasGrid",
-            pager: "mypager",
             select: "row",
             navigation: true,
             columns: [
@@ -304,7 +304,7 @@ export default class Ofertas extends JetView {
         return _view;
     }
     init(view, url) {
-        var usu = usuarioService.checkLoggedUser(this.app.getService("locale"));
+        var usu = usuarioService.checkLoggedUser();
         var id = null;
         if (url[0].params.ofertaId) {
             id = url[0].params.ofertaId;
@@ -327,7 +327,8 @@ export default class Ofertas extends JetView {
                 }
                 console.log("LOADID");
                 var numReg = $$("ofertasGrid").count();
-                $$("nReg").data.label = "NREG: " + numReg;
+                $$("nReg").config.label = "NREG: " + numReg;
+                $$("nReg").refresh();
             })
             .catch((err) => {
                 messageApi.errorMessageAjax(err);

@@ -19,9 +19,7 @@ export default class LoginAuto extends JetView {
         usuarioService.getLoginEmail(url[0].params.email)
             .then(usuario => {
                 usuarioService.setUsuarioCookie(usuario);
-                // change default locale
-                //this.app.use(plugins.Locale,{lang:usuario.codigoIdioma});
-                languageService.setLanguage(this.app, usuario.codigoIdioma)
+                languageService.setLanguage(this.app, usuario.codigoIdioma);
                 this.app.show('top/inicio');
             })
             .catch(err => {

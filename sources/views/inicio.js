@@ -1,6 +1,7 @@
-import { JetView } from "webix-jet";
+import { JetView, plugins } from "webix-jet";
 import { usuarioService } from "../services/usuario_service";
 import { messageApi } from "../utilities/messages";
+import { languageService} from "../locales/language_service";
 
 export default class Inicio extends JetView {
     config() {
@@ -8,5 +9,9 @@ export default class Inicio extends JetView {
         return {
             view:"iframe", id:"frame-body", src:"http://gdes.com"
         }
+    }
+    init() {
+        let usuario = usuarioService.getUsuarioCookie();
+        languageService.setLanguage(this.app, usuario.codigoIdioma);
     }
 }
