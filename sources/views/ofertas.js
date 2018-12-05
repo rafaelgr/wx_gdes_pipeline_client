@@ -169,7 +169,7 @@ export default class Ofertas extends JetView {
                     }
                 },
                 {
-                    view: "label", id: "nReg", label: "NREG: "
+                    view: "label", id: "OfertasNReg", label: "NREG: "
                 },
                 {
                     view: "pager", id: "mypager", css: { "text-align": "right" },
@@ -288,9 +288,9 @@ export default class Ofertas extends JetView {
                 "onAfterFilter": function () {
                     console.log("ONAFTERFILTER");
                     var numReg = $$("ofertasGrid").count();
-                    $$("nReg").config.label = "NREG: " + numReg;
-                    console.log("NREG ", $$("nReg"));
-                    $$("nReg").refresh();
+                    $$("OfertasNReg").config.label = "NREG: " + numReg;
+                    console.log("NREG ", $$("OfertasNReg"));
+                    $$("OfertasNReg").refresh();
                 }
             }
         }
@@ -327,8 +327,8 @@ export default class Ofertas extends JetView {
                 }
                 console.log("LOADID");
                 var numReg = $$("ofertasGrid").count();
-                $$("nReg").config.label = "NREG: " + numReg;
-                $$("nReg").refresh();
+                $$("OfertasNReg").config.label = "NREG: " + numReg;
+                $$("OfertasNReg").refresh();
             })
             .catch((err) => {
                 messageApi.errorMessageAjax(err);

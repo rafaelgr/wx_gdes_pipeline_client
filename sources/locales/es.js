@@ -79,5 +79,16 @@ export default {
     "Estado": "Estado",
     "Importe": "Importe",
     "Divisa": "Divisa",
-    "Fecha entrega": "Fecha entrega"
+    "Fecha entrega": "Fecha entrega",
+    "Autorizaciones": "Autorizaciones",
+    "UTE": "UTE",
+    "UTE (%)": "UTE (%)",
+    "Num. Pedido": "Num. Pedido",
+    "Competidores": "Competidores",
+    "Fecha adjudicación": "Fecha adjudicación",
+    "Fecha inicio contrato": "Fecha inicio contrato",
+    "Fecha fin contrato": "Fecha fin contrato",
+    "Probabilidad (%)": "Probabilidad (%)",
+    "Duración": "Duración",
+    "Razón pérdida": "Razón pérdida"
 }
