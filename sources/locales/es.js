@@ -90,5 +90,18 @@ export default {
     "Fecha fin contrato": "Fecha fin contrato",
     "Probabilidad (%)": "Probabilidad (%)",
     "Duración": "Duración",
-    "Razón pérdida": "Razón pérdida"
+    "Razón pérdida": "Razón pérdida",
+    "DESCRIPTIVOS": "DESCRIPTIVOS",
+    "Periodo": "Periodo",
+    "Nr. Licitación": "Nr. Licitación",
+    "Pais Ubicación": "Pais Ubicación",
+    "GENERALES": "GENERALES",
+    "OTROS DATOS": "OTROS DATOS",
+    "ESTADO": "ESTADO",
+    "Datos oportunidad": "Datos oportunidad",
+    "Datos económicos": "Datos económicos",
+    "Datos financieros": "Datos financieros",
+    "Datos complementarios": "Datos complemtarios",
+    "Anotaciones": "Anotaciones",
+    "Anexos": "Anexos"
 }

@@ -104,7 +104,6 @@ if (razonPerdidaResult.err) {
 
 webix.editors.editdate = webix.extend({
     render: function (value) {
-        console.log("REBDER: ", value);
         var icon = "<span class='mdi mdi-calendar' style='position:absolute; cursor:pointer; top:4px; right:4px;'></span>";
         var node = webix.html.create("div", {
             "class": "webix_dt_editor"

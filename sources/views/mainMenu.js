@@ -23,6 +23,7 @@ export default class MainMenu extends JetView {
                         { id: "empresas", value: translate("Empresas"), icon: "mdi mdi-cube", details: "Empresas" },
                         { id: "unidadesNegocio", value: translate("Unidades de negocio"), icon: "mdi mdi-cube-scan", details: "Unidades de negocio" },
                         { id: "areas", value: translate("Areas"), icon: "mdi mdi-cube-outline", details: "Areas" },
+                        { id: "servicios", value: translate("Servicios"), icon: "mdi mdi-cube-unfolded", details: "Servicios" },
                         { id: "fasesOferta", value: translate("Fases de oferta"), icon: "mdi mdi-filter-variant", details: "Fases de oferta" },
                         { id: "tiposOportunidad", value: translate("Tipos de oportunidad"), icon: "mdi mdi-shape", details: "Tipos de oportunidad" },
                         { id: "tiposContrato", value: translate("Tipos de contrato"), icon: "mdi mdi-shape-outline", details: "Tipos de contrato" },
