@@ -11,7 +11,6 @@ export default class MyApp extends JetApp {
 			start: "/startapp",
 			name: "GDES PIPELINE"
 		};
-
 		super({ ...defaults, ...config });
 	}
 }
@@ -22,6 +21,6 @@ if (!BUILD_AS_MODULE) {
 		app.use(plugins.Locale);
 		app.use(plugins.Theme);
 		app.render();
-		app.getService("theme").setTheme('compact');
+		app.getService("theme").setTheme('mini');
 	});
 }
