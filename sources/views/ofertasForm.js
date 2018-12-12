@@ -9,6 +9,8 @@ import { serviciosService } from "../services/servicios_service";
 import { fasesOfertaService } from "../services/fasesOferta_service";
 import { tiposOportunidadService } from "../services/tiposOportunidad_service";
 import { tiposContratoService } from "../services/tiposContrato_service";
+import { estadosService } from "../services/estados_service";
+import { razonesPerdidaService } from "../services/razonesPerdida_service";
 import { messageApi } from "../utilities/messages";
 import { generalApi } from "../utilities/general";
 
@@ -119,14 +121,14 @@ export default class OfertasForm extends JetView {
                     cols: [
                         { view: "checkbox", name: "uteSN", required: true, options: {}, label: translate("UTE"), labelPosition: "top", width: 150 },
                         { view: "textarea", name: "uteTXT", required: true, label: translate("Comentario UTE"), labelPosition: "top" },
-                        { view: "text", name: "gdesPor", required: true, label: translate("GDES Porcentaje"), labelPosition: "top" , width: 150}
+                        { view: "text", name: "gdesPor", required: true, label: translate("GDES Porcentaje"), labelPosition: "top", width: 150 }
                     ]
                 },
                 {
                     cols: [
                         { view: "checkbox", name: "subcontrataSN", required: true, options: {}, label: translate("Reclutamiento"), labelPosition: "top", width: 150 },
                         { view: "textarea", name: "subcontrataTXT", required: true, label: translate("Perfil y cantidad a reclutar"), labelPosition: "top" },
-                        { view: "datepicker", editable: true, minDate: new Date(new Date("1500-01-01")), name: "fechaCreacion", required: true, label: translate("Fecha creación"), labelPosition: "top" , width: 150},
+                        { view: "datepicker", editable: true, minDate: new Date(new Date("1500-01-01")), name: "fechaCreacion", required: true, label: translate("Fecha creación"), labelPosition: "top", width: 150 },
                     ]
                 }
             ]
@@ -136,8 +138,18 @@ export default class OfertasForm extends JetView {
             rows: [
                 { template: translate("ESTADO"), type: "section" },
                 {
-
-                }
+                    cols: [
+                        { view: "combo", id: "cmbEstado", name: "estadoId", required: true, options: {}, label: translate("Estado"), labelPosition: "top" },
+                        {}
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "text", name: "numeroPedido", required: true, label: translate("Num. Pedido"), labelPosition: "top" },
+                        { view: "combo", id: "cmbRazonPerdida", name: "razonPerdidaId", required: true, options: {}, label: translate("Razón pérdida"), labelPosition: "top" }
+                    ]
+                },
+                { view: "textarea", name: "notasEstado", required: true, label: translate("Descripción"), labelPosition: "top" }
             ]
         };
         const tabDatosOportunidad = {
@@ -251,6 +263,8 @@ export default class OfertasForm extends JetView {
             this.loadTiposOportunidad();
             this.loadTiposContrato();
             this.loadProbabilidades();
+            this.loadEstados();
+            this.loadRazonesPerdida();
             return;
         }
         ofertasService.getOferta(usuarioService.getUsuarioCookie(), ofertaId)
@@ -271,6 +285,8 @@ export default class OfertasForm extends JetView {
                 this.loadTiposOportunidad(oferta.tipoOportunidadId);
                 this.loadTiposContrato(oferta.tipoContratoId);
                 this.loadProbabilidades(oferta.probabilidad);
+                this.loadEstados(oferta.estadoId);
+                this.loadRazonesPerdida(oferta.razonPerdidaId);
 
             })
             .catch((err) => {
@@ -461,5 +477,33 @@ export default class OfertasForm extends JetView {
             $$("cmbProbabilidad").refresh();
         }
         return;
+    }
+    loadEstados(estadoId) {
+        estadosService.getEstados(usuarioService.getUsuarioCookie())
+            .then(rows => {
+                var estados = generalApi.prepareDataForCombo('estadoId', 'nombre', rows);
+                var list = $$("cmbEstado").getPopup().getList();
+                list.clearAll();
+                list.parse(estados);
+                if (id) {
+                    $$("cmbEstado").setValue(estadoId);
+                    $$("cmbEstado").refresh();
+                }
+                return;
+            });
+    }
+    loadRazonesPerdida(razonPerdidaId) {
+        razonesPerdidaService.getRazonesPerdida(usuarioService.getUsuarioCookie())
+            .then(rows => {
+                var razones = generalApi.prepareDataForCombo('razonPerdidaId', 'nombre', rows);
+                var list = $$("cmbRazonPerdida").getPopup().getList();
+                list.clearAll();
+                list.parse(razones);
+                if (id) {
+                    $$("cmbRazonPerdida").setValue(razonPerdidaId);
+                    $$("cmbRazonPerdida").refresh();
+                }
+                return;
+            });
     }
 }

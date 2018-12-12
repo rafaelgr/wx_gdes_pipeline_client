@@ -122,5 +122,6 @@ export default {
     "GDES Porcentaje": "GDES Porcentaje",
     "Reclutamiento": "Reclutamiento",
     "Perfil y cantidad a reclutar": "Perfil y cantidad a reclutar",
-    "Fecha creación": "Fecha creación"
+    "Fecha creación": "Fecha creación",
+    "Razón pérdida": "Razón pérdida"
 }
