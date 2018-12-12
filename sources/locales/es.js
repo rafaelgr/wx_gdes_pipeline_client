@@ -1,6 +1,6 @@
 export default {
-    "Inicio": "Inicio",
-    "Administración": "Administración",
+    "INICIO": "INICIO",
+    "ADMINISTRACIÓN": "ADMINISTRACIÓN",
     "Parámetros": "Parámetros",
     "paginainicio": `
         <h1>Página inicial</h1>
@@ -66,7 +66,7 @@ export default {
     "Nuevo registro en formulario (Ctrl+F)": "Nuevo registro en formulario (Ctrl+F)",
     "Nuevo registro en línea (Ctrl+L)": "Nuevo registro en línea (Ctrl+L)",
     "Descargar como Excel": "Descargar como Excel",
-    "Gestión": "Gestión",
+    "GESTIÓN": "GESTIÓN",
     "Ofertas": "Ofertas",
     "Nr. Oferta": "Nr. Oferta",
     "Fase oferta": "Fase oferta",
@@ -123,5 +123,29 @@ export default {
     "Reclutamiento": "Reclutamiento",
     "Perfil y cantidad a reclutar": "Perfil y cantidad a reclutar",
     "Fecha creación": "Fecha creación",
-    "Razón pérdida": "Razón pérdida"
+    "Razón pérdida": "Razón pérdida",
+    "BASICOS (€)": "BASICOS (€)",
+    "BASICOS (OTRA DIVISA)":"BASICOS (OTRA DIVISA)",
+    "OTROS DATOS":"OTROS DATOS",
+    "Importe GDES": "Importe GDES",
+    "Importe UTE": "Importe UTE",
+    "Importe Total": "Importe Total",
+    "Margen contribución": "Margen contribución",
+    "Importe margen": "Importe margen",
+    "Importe anual": "Importe anual",
+    "Importe año en curso": "Importe año en curso",
+    "Valor inversión": "Valor inversión",
+    "Divisa": "Divisa",
+    "Factor (1€ =)": "Factor (1€ =)",
+    "Fecha divisa":"Fecha divisa",
+    "Importe GDES (DIVISA)": "Importe GDES (DIVISA)",
+    "Importe UTE (DIVISA)": "Importe UTE (DIVISA)",
+    "Importe Total (DIVISA)": "Importe Total (DIVISA)",
+    "Importe margen (DIVISA)": "Importe margen (DIVISA)",
+    "Importe anual (DIVISA)": "Importe anual (DIVISA)",
+    "Importe año en curso (DIVISA)": "Importe año en curso (DIVISA)",
+    "Valor inversión (DIVISA)": "Valor inversión (DIVISA)",
+    "Descripción inversión": "Descripción inversión",
+    "Condiciones de pago": "Condiciones de pago",
+    "Consideraciones economicas": "Consideraciones economicas"
 }

@@ -11,12 +11,12 @@ export default class MainMenu extends JetView {
             activeTitle: true, select: true,
             data: [
                 {
-                    id: "inicio", icon: "mdi mdi-home", value: translate("Inicio")
+                    id: "inicio", icon: "mdi mdi-home", value: translate("INICIO")
                 },
                 {
-                    id: "administracion", icon: "mdi mdi-switch", open: true, value: translate("Administración"),
+                    id: "administracion", icon: "mdi mdi-switch", open: true, value: translate("ADMINISTRACIÓN"),
                     data: [
-                        { id: "parametros", value: translate("Parámetros"), icon: "mdi mdi-altimeter", details: "Parámetros de la aplicación" },
+                        { id: "parametros", value: translate("Parámetros"), icon: "mdi mdi-altimeter", details: "Parámetros de la aplicación", },
                         { id: "gruposUsuarios", value: translate("Grupos de usuarios"), icon: "mdi mdi-account-group", details: "Grupos de usuarios" },
                         { id: "usuarios", value: translate("Usuarios"), icon: "mdi mdi-account", details: "Usuarios" },
                         { id: "paises", value: translate("Paises"), icon: "mdi mdi-flag", details: "Paises" },
@@ -34,7 +34,7 @@ export default class MainMenu extends JetView {
                     ]
                 },
                 {
-                    id: "gestion", icon: "mdi mdi-buffer", open: true, value: translate("Gestión"),
+                    id: "gestion", icon: "mdi mdi-buffer", open: true, value: translate("GESTIÓN"),
                     data: [
                         { id: "ofertas", value: translate("Ofertas"), icon: "mdi mdi-arrow-decision-outline", details: "Ofertas" }
                     ]

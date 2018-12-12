@@ -11,6 +11,7 @@ import { tiposOportunidadService } from "../services/tiposOportunidad_service";
 import { tiposContratoService } from "../services/tiposContrato_service";
 import { estadosService } from "../services/estados_service";
 import { razonesPerdidaService } from "../services/razonesPerdida_service";
+import { divisasService } from "../services/divisas_service"
 import { messageApi } from "../utilities/messages";
 import { generalApi } from "../utilities/general";
 
@@ -76,7 +77,7 @@ export default class OfertasForm extends JetView {
                 { view: "combo", id: "cmbServicio", name: "servicioId", required: true, options: {}, label: translate("Servicio"), labelPosition: "top" },
                 {
                     cols: [
-                        { view: "text", name: "ofertaId", label: translate("ID"), labelPosition: "top" },
+                        { view: "text", name: "ofertaId", label: translate("ID"), labelPosition: "top", readonly: true },
                         { view: "text", name: "numeroOferta", required: true, label: translate("Nr. Oferta"), labelPosition: "top" },
                         { view: "text", name: "codigoOferta", required: true, label: translate("Cod. Oferta"), labelPosition: "top" }
                     ]
@@ -171,10 +172,123 @@ export default class OfertasForm extends JetView {
                 ]
             }
         };
+        const cellBasicosEuros = {
+            padding: 5, css: "fondocelda",
+            rows: [
+                { template: translate("BASICOS (€)"), type: "section" },
+                {
+                    rows: [
+                        {},
+                        {
+                            cols: [
+                                { view: "text", name: "importePresupuesto", required: true, label: translate("Importe GDES"), labelPosition: "top", format: "1.111,00 €" },
+                                { view: "text", name: "importeUTE", required: true, label: translate("Importe UTE"), labelPosition: "top", format: "1.111,00 €" },
+                                { view: "text", name: "importeTotal", required: true, label: translate("Importe Total"), labelPosition: "top", format: "1.111,00 €" }
+                            ]
+                        },
+                        {
+                            cols: [
+                                { view: "text", name: "margenContribucion", required: true, label: translate("Margen contribución"), labelPosition: "top", format: "1.111,00 %" },
+                                { view: "text", name: "importeContribucion", required: true, label: translate("Importe margen"), labelPosition: "top", format: "1.111,00 €" },
+                                {}
+                            ]
+                        },
+                        {
+                            cols: [
+                                { view: "text", name: "importeAnual", required: true, label: translate("Importe anual"), labelPosition: "top", format: "1.111,00 €" },
+                                { view: "text", name: "importePrimerAno", required: true, label: translate("Importe año en curso"), labelPosition: "top", format: "1.111,00 €" },
+                                {}
+                            ]
+                        },
+                        {
+                            cols: [
+                                { view: "text", name: "importeInversion", required: true, label: translate("Valor inversión"), labelPosition: "top", format: "1.111,00 €" },
+                                {},
+                                {}
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+        const cellBasicosOtraDivisa = {
+            padding: 5, css: "fondocelda",
+            rows: [
+                { template: translate("BASICOS (OTRA DIVISA)"), type: "section" },
+                {
+                    rows: [
+                        {
+                            cols: [
+                                { view: "combo", id: "cmbDivisa", name: "divisaId", required: true, options: {}, label: translate("Divisa"), labelPosition: "top" },
+                                {},
+                                { view: "text", name: "multiplicador", required: true, label: translate("Factor (1€ =)"), labelPosition: "top", format: "1.111,00" },
+                                { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaDivisa", required: true, label: translate("Fecha divisa"), labelPosition: "top" },
+                            ]
+                        },
+                        {
+                            cols: [
+                                { view: "text", name: "importePresupuestoDivisa", required: true, label: translate("Importe GDES (DIVISA)"), labelPosition: "top", format: "1.111,00" },
+                                { view: "text", name: "importeUTEDivisa", required: true, label: translate("Importe UTE (DIVISA)"), labelPosition: "top", format: "1.111,00" },
+                                { view: "text", name: "importeTotal", required: true, label: translate("Importe Total"), labelPosition: "top", format: "1.111,00" }
+                            ]
+                        },
+                        {
+                            cols: [
+                                {},
+                                { view: "text", name: "importeContribucionDivisa", required: true, label: translate("Importe margen (DIVISA)"), labelPosition: "top", format: "1.111,00" },
+                                {}
+                            ]
+                        },
+                        {
+                            cols: [
+                                { view: "text", name: "importeAnualDivisa", required: true, label: translate("Importe anual (DIVISA)"), labelPosition: "top", format: "1.111,00" },
+                                { view: "text", name: "importePrimerAnoDivisa", required: true, label: translate("Importe año en curso (DIVISA)"), labelPosition: "top", format: "1.111,00" },
+                                {}
+                            ]
+                        },
+                        {
+                            cols: [
+                                { view: "text", name: "importeInversionDivisa", required: true, label: translate("Valor inversión (DIVISA)"), labelPosition: "top", format: "1.111,00" },
+                                {},
+                                {}
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+        const cellOtrosEconomicos = {
+            padding: 5, css: "fondocelda",
+            rows: [
+                { template: translate("OTROS DATOS"), type: "section" },
+                { cols:[
+                    {
+                        rows: [
+                            { view: "textarea", name: "descripcionInversion", required: true, label: translate("Descripción inversión"), labelPosition: "top" },
+                            { view: "textarea", name: "condicionesPago", required: true, label: translate("Condiciones de pago"), labelPosition: "top" }
+                        ]
+                    },
+                    {
+                        rows: [
+                            { view: "textarea", name: "consideracionesEconomicas", required: true, label: translate("Consideraciones economicas"), labelPosition: "top" }
+                        ]
+                    }
+                ]}
+            ]
+        };
         const tabDatosEconomicos = {
             header: translate("Datos económicos"),
             body: {
+                rows: [
+                    {
+                        cols: [
+                            cellBasicosEuros,
+                            cellBasicosOtraDivisa
+                        ]
 
+                    },
+                    cellOtrosEconomicos
+                ]
             }
         };
         const tabDatosComplementarios = {
@@ -265,6 +379,7 @@ export default class OfertasForm extends JetView {
             this.loadProbabilidades();
             this.loadEstados();
             this.loadRazonesPerdida();
+            this.loadDivisas();
             return;
         }
         ofertasService.getOferta(usuarioService.getUsuarioCookie(), ofertaId)
@@ -287,6 +402,7 @@ export default class OfertasForm extends JetView {
                 this.loadProbabilidades(oferta.probabilidad);
                 this.loadEstados(oferta.estadoId);
                 this.loadRazonesPerdida(oferta.razonPerdidaId);
+                this.loadDivisas(oferta.divisaId);
 
             })
             .catch((err) => {
@@ -502,6 +618,20 @@ export default class OfertasForm extends JetView {
                 if (id) {
                     $$("cmbRazonPerdida").setValue(razonPerdidaId);
                     $$("cmbRazonPerdida").refresh();
+                }
+                return;
+            });
+    }
+    loadDivisas(divisaId) {
+        divisasService.getDivisas(usuarioService.getUsuarioCookie())
+            .then(rows => {
+                var divisas = generalApi.prepareDataForCombo('divisaId', 'nombre', rows);
+                var list = $$("cmbDivisa").getPopup().getList();
+                list.clearAll();
+                list.parse(divisas);
+                if (id) {
+                    $$("cmbDivisa").setValue(divisaId);
+                    $$("cmbDivisa").refresh();
                 }
                 return;
             });
