@@ -54,7 +54,7 @@ export default class OfertasForm extends JetView {
             ]
         };
         const cellGenerales = {
-            padding: 5,css: "fondocelda",
+            padding: 5, css: "fondocelda",
             rows: [
                 { template: translate("GENERALES"), type: "section" },
                 {
@@ -105,16 +105,34 @@ export default class OfertasForm extends JetView {
             ]
         };
         const cellOtrosDatos = {
-            padding: 5,css: "fondocelda",
+            padding: 5, css: "fondocelda",
             rows: [
                 { template: translate("OTROS DATOS"), type: "section" },
                 {
-
+                    cols: [
+                        { view: "checkbox", name: "subrogacionSN", required: true, options: {}, label: translate("Subrogación"), labelPosition: "top", width: 150 },
+                        { view: "textarea", name: "subrogacionTXT", required: true, label: translate("Comentario subrogación"), labelPosition: "top" },
+                        { view: "text", name: "subrogacionNum", required: true, label: translate("Cantidad personal"), labelPosition: "top", width: 150 }
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "checkbox", name: "uteSN", required: true, options: {}, label: translate("UTE"), labelPosition: "top", width: 150 },
+                        { view: "textarea", name: "uteTXT", required: true, label: translate("Comentario UTE"), labelPosition: "top" },
+                        { view: "text", name: "gdesPor", required: true, label: translate("GDES Porcentaje"), labelPosition: "top" , width: 150}
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "checkbox", name: "subcontrataSN", required: true, options: {}, label: translate("Reclutamiento"), labelPosition: "top", width: 150 },
+                        { view: "textarea", name: "subcontrataTXT", required: true, label: translate("Perfil y cantidad a reclutar"), labelPosition: "top" },
+                        { view: "datepicker", editable: true, minDate: new Date(new Date("1500-01-01")), name: "fechaCreacion", required: true, label: translate("Fecha creación"), labelPosition: "top" , width: 150},
+                    ]
                 }
             ]
         };
         const cellEstado = {
-            padding: 5,css: "fondocelda",
+            padding: 5, css: "fondocelda",
             rows: [
                 { template: translate("ESTADO"), type: "section" },
                 {
