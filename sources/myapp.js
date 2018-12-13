@@ -21,6 +21,6 @@ if (!BUILD_AS_MODULE) {
 		app.use(plugins.Locale);
 		app.use(plugins.Theme);
 		app.render();
-		//app.getService("theme").setTheme('mini');
+		app.getService("theme").setTheme('mini');
 	});
 }

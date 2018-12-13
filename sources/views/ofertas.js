@@ -312,10 +312,13 @@ export default class Ofertas extends JetView {
             $$('ofertasGrid').remove(-1);
             return false;
         }, $$('ofertasGrid'));
+        webix.extend($$("ofertasGrid"), webix.ProgressBar);
         this.load(id);
         languageService.setLanguage(this.app, usu.codigoIdioma);
     }
     load(id) {
+        $$("ofertasGrid").showProgress({type:"icon"});
+        
         ofertasService.getOfertas(usuarioService.getUsuarioCookie())
             .then((data) => {
                 $$("ofertasGrid").clearAll();
@@ -328,8 +331,11 @@ export default class Ofertas extends JetView {
                 var numReg = $$("ofertasGrid").count();
                 $$("OfertasNReg").config.label = "NREG: " + numReg;
                 $$("OfertasNReg").refresh();
+                $$("ofertasGrid").hideProgress();
+
             })
             .catch((err) => {
+                $$("ofertasGrid").hideProgress();
                 messageApi.errorMessageAjax(err);
             });
     }
