@@ -182,6 +182,7 @@ export default class Ofertas extends JetView {
             view: "datatable",
             id: "ofertasGrid",
             select: "row",
+            //pager: "mypager",
             navigation: true,
             columns: [
                 { id: "ofertaId", adjust: true, header: [translate("ID"), { content: "numberFilter" }], sort: "number" },
@@ -327,7 +328,6 @@ export default class Ofertas extends JetView {
                     $$("ofertasGrid").select(id);
                     $$("ofertasGrid").showItem(id);
                 }
-                console.log("LOADID");
                 var numReg = $$("ofertasGrid").count();
                 $$("OfertasNReg").config.label = "NREG: " + numReg;
                 $$("OfertasNReg").refresh();

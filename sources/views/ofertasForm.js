@@ -261,19 +261,21 @@ export default class OfertasForm extends JetView {
             padding: 5, css: "fondocelda",
             rows: [
                 { template: translate("OTROS DATOS"), type: "section" },
-                { cols:[
-                    {
-                        rows: [
-                            { view: "textarea", name: "descripcionInversion", required: true, label: translate("Descripción inversión"), labelPosition: "top" },
-                            { view: "textarea", name: "condicionesPago", required: true, label: translate("Condiciones de pago"), labelPosition: "top" }
-                        ]
-                    },
-                    {
-                        rows: [
-                            { view: "textarea", name: "consideracionesEconomicas", required: true, label: translate("Consideraciones economicas"), labelPosition: "top" }
-                        ]
-                    }
-                ]}
+                {
+                    cols: [
+                        {
+                            rows: [
+                                { view: "textarea", name: "descripcionInversion", required: true, label: translate("Descripción inversión"), labelPosition: "top" },
+                                { view: "textarea", name: "condicionesPago", required: true, label: translate("Condiciones de pago"), labelPosition: "top" }
+                            ]
+                        },
+                        {
+                            rows: [
+                                { view: "textarea", name: "consideracionesEconomicas", required: true, label: translate("Consideraciones economicas"), labelPosition: "top" }
+                            ]
+                        }
+                    ]
+                }
             ]
         };
         const tabDatosEconomicos = {
@@ -291,10 +293,72 @@ export default class OfertasForm extends JetView {
                 ]
             }
         };
+        const cellAlcanceDeLosTrabajos = {
+            padding: 5, css: "fondocelda",
+            rows: [
+                { template: translate("ALCANCE DE LOS TRABAJOS"), type: "section" },
+                { view: "textarea", name: "alcance", required: true, label: translate("Alcance del Proyecto"), labelPosition: "top" },
+                { view: "textarea", name: "puntosRelevantes", required: true, label: translate("Equipo y planificación"), labelPosition: "top" },
+                { view: "textarea", name: "documentosEspeciales", required: true, label: translate("Documentos aplicables"), labelPosition: "top" }
+            ]
+        };
+        const cellCuestionesDeContrato = {
+            padding: 5, css: "fondocelda",
+            rows: [
+                { template: translate("CUESTIONES DE CONTRATO"), type: "section" },
+                { view: "textarea", name: "codicionesEstandar", required: true, label: translate("Comentarios contrato"), labelPosition: "top" },
+                { view: "textarea", name: "garantiasEspeciales", required: true, label: translate("Comentarios garantias"), labelPosition: "top" },
+                { view: "textarea", name: "penalizaciones", required: true, label: translate("Penalizaciones"), labelPosition: "top" },
+                { view: "textarea", name: "riesgos", required: true, label: translate("Riesgos"), labelPosition: "top" }
+            ]
+        };
+        const cellConcurrenciaYMercado = {
+            padding: 5, css: "fondocelda",
+            rows: [
+                { template: translate("CONCURRENCIA Y SITUACIÓN DE MERCADO"), type: "section" },
+                {
+                    cols: [
+                        { view: "text", name: "proveedorActual", required: true, label: translate("Proveedor Actual"), labelPosition: "top" },
+                        {}
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "text", name: "competidores", required: true, label: translate("Competidores"), labelPosition: "top" },
+                        { view: "text", name: "principalCompetidor", required: true, label: translate("Principal Competidor"), labelPosition: "top" }
+                    ]
+                },
+                { view: "textarea", name: "criteriosEvaluacion", required: true, label: translate("Criterios de Evaluación"), labelPosition: "top" },
+                { view: "textarea", name: "datosComerciales", required: true, label: translate("Datos Comerciales"), labelPosition: "top" }
+            ]
+        };
+        const cellValoresYEstrategia = {
+            padding: 5, css: "fondocelda",
+            rows: [
+                { template: translate("GDES VALORES Y ESTRATEGIA"), type: "section" },
+                { view: "textarea", name: "diferencialGDES", required: true, label: translate("Propuesta diferencial GDES"), labelPosition: "top" },
+                { view: "textarea", name: "estrategiaGDES", required: true, label: translate("Estrategia GDES"), labelPosition: "top" },
+                { view: "textarea", name: "sinergias", required: true, label: translate("Sinergias con otros contratos"), labelPosition: "top" }
+
+            ]
+        };
         const tabDatosComplementarios = {
             header: translate("Datos complementarios"),
             body: {
-
+                rows: [
+                    {
+                        cols: [
+                            cellAlcanceDeLosTrabajos,
+                            cellCuestionesDeContrato
+                        ]
+                    },
+                    {
+                        cols: [
+                            cellConcurrenciaYMercado,
+                            cellValoresYEstrategia
+                        ]
+                    }
+                ]
             }
         };
         const tabDatosFinancieros = {
