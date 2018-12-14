@@ -17,6 +17,7 @@ import { generalApi } from "../utilities/general";
 
 var ofertaId = 0;
 
+
 export default class OfertasForm extends JetView {
     config() {
         const translate = this.app.getService("locale")._;
@@ -364,19 +365,19 @@ export default class OfertasForm extends JetView {
         const tabDatosFinancieros = {
             header: translate("Datos financieros"),
             body: {
-
+                id: "financieros", view: "ckeditor", name: "financieros", heigth: 900
             }
         };
         const tabAnotaciones = {
             header: translate("Anotaciones"),
             body: {
-
+                
             }
         };
         const tabAnexos = {
             header: translate("Anexos"),
             body: {
-
+                id: "anexos", view: "ckeditor", name: "anexos", heigth: 900
             }
         };
 
@@ -397,6 +398,7 @@ export default class OfertasForm extends JetView {
                     elements: [
                         {
                             view: "tabview",
+                            multiview: { keepViews: true },
                             cells: [
                                 tabDatosOportunidad,
                                 tabDatosEconomicos,
@@ -411,6 +413,7 @@ export default class OfertasForm extends JetView {
                                 { gravity: 5 },
                                 { view: "button", label: translate("Cancelar"), click: this.cancel, hotkey: "esc" },
                                 { view: "button", label: translate("Aceptar"), click: this.accept, type: "form" }
+
                             ]
                         },
                         { minlength: 600 }
@@ -467,7 +470,6 @@ export default class OfertasForm extends JetView {
                 this.loadEstados(oferta.estadoId);
                 this.loadRazonesPerdida(oferta.razonPerdidaId);
                 this.loadDivisas(oferta.divisaId);
-
             })
             .catch((err) => {
                 messageApi.errorMessageAjax(err);
