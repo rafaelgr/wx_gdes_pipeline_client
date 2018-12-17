@@ -368,10 +368,111 @@ export default class OfertasForm extends JetView {
                 id: "financieros", view: "ckeditor", name: "financieros", heigth: 900
             }
         };
+        const cellOportunidades = {
+            padding: 5, css: "fondocelda",
+            rows: [
+                { template: translate("OPORTUNIDADES"), type: "section" },
+                { view: "textarea", name: "serviciosRealizados", required: true, label: translate("Servicios realizados"), labelPosition: "top" },
+                { view: "textarea", name: "actividadesPlanificadas", required: true, label: translate("Actividades planificadas"), labelPosition: "top" },
+            ]
+        };
+        const cellProyectos = {
+            padding: 5, css: "fondocelda",
+            rows: [
+                { template: translate("PROYECTOS"), type: "section" },
+                { view: "textarea", name: "situacionProyecto", required: true, label: translate("Situación de proyecto"), labelPosition: "top" },
+            ]
+        };
+        const cellReclamaciones = {
+            padding: 5, css: "fondocelda",
+            rows: [
+                { template: translate("RECLAMACIONES"), type: "section" },
+                {
+                    cols: [
+                        {
+                            rows: [
+                                { view: "text", name: "importeReclamacion1", required: true, label: translate("Importe reclamación (1)"), labelPosition: "top", format: "1.111,00 €" },
+                            ]
+                        },
+                        {
+                            rows: [
+                                { view: "textarea", name: "razonReclamacion1", required: true, label: translate("Razón reclamación (1)"), labelPosition: "top" }
+                            ]
+                        }
+
+                    ]
+                },
+                {
+                    cols: [
+                        {
+                            rows: [
+                                { view: "text", name: "importeReclamacion2", required: true, label: translate("Importe reclamación (2)"), labelPosition: "top", format: "1.111,00 €" },
+                            ]
+                        },
+                        {
+                            rows: [
+                                { view: "textarea", name: "razonReclamacion2", required: true, label: translate("Razón reclamación (2)"), labelPosition: "top" }
+                            ]
+                        }
+
+                    ]
+                },
+                {
+                    cols: [
+                        {
+                            rows: [
+                                { view: "text", name: "importeReclamacion3", required: true, label: translate("Importe reclamación (3)"), labelPosition: "top", format: "1.111,00 €" },
+                            ]
+                        },
+                        {
+                            rows: [
+                                { view: "textarea", name: "razonReclamacion3", required: true, label: translate("Razón reclamación (3)"), labelPosition: "top" }
+                            ]
+                        }
+
+                    ]
+                },
+                {
+                    cols: [
+                        {
+                            rows: [
+                                { view: "text", name: "importeReclamacion4", required: true, label: translate("Importe reclamación (4)"), labelPosition: "top", format: "1.111,00 €" },
+                            ]
+                        },
+                        {
+                            rows: [
+                                { view: "textarea", name: "razonReclamacion4", required: true, label: translate("Razón reclamación (4)"), labelPosition: "top" }
+                            ]
+                        }
+
+                    ]
+                }
+            ]
+        };
+        const cellNotas = {
+            padding: 5, css: "fondocelda",
+            rows: [
+                { template: translate("NOTAS"), type: "section" },
+                { view: "textarea", name: "observaciones", required: true, label: translate("Observaciones"), labelPosition: "top" }
+            ]
+        };
         const tabAnotaciones = {
             header: translate("Anotaciones"),
             body: {
-                
+                rows: [
+                    {
+                        cols: [
+                            cellOportunidades,
+                            cellProyectos
+                        ]
+                    },
+                    {
+                        cols: [
+                            cellReclamaciones,
+                            cellNotas
+                        ]
+                    }
+                ]
             }
         };
         const tabAnexos = {
@@ -379,6 +480,34 @@ export default class OfertasForm extends JetView {
             body: {
                 id: "anexos", view: "ckeditor", name: "anexos", heigth: 900
             }
+        };
+
+        const ofertaData =                 {
+            view: "form",
+            id: "frmOfertas",
+            elements: [
+                {
+                    view: "tabview",
+                    multiview: { keepViews: true },
+                    cells: [
+                        tabDatosOportunidad,
+                        tabDatosEconomicos,
+                        tabDatosComplementarios,
+                        tabDatosFinancieros,
+                        tabAnotaciones,
+                        tabAnexos
+                    ]
+                },
+                {
+                    margin: 5, cols: [
+                        { gravity: 5 },
+                        { view: "button", label: translate("Cancelar"), click: this.cancel, hotkey: "esc" },
+                        { view: "button", label: translate("Aceptar"), click: this.accept, type: "form" }
+
+                    ]
+                },
+                { minlength: 600 }
+            ]
         };
 
         const _view = {
@@ -391,34 +520,16 @@ export default class OfertasForm extends JetView {
                         { view: "label", label: translate("Ofertas") }
                     ]
                 },
-
                 {
-                    view: "form",
-                    id: "frmOfertas",
-                    elements: [
-                        {
-                            view: "tabview",
-                            multiview: { keepViews: true },
-                            cells: [
-                                tabDatosOportunidad,
-                                tabDatosEconomicos,
-                                tabDatosComplementarios,
-                                tabDatosFinancieros,
-                                tabAnotaciones,
-                                tabAnexos
-                            ]
-                        },
-                        {
-                            margin: 5, cols: [
-                                { gravity: 5 },
-                                { view: "button", label: translate("Cancelar"), click: this.cancel, hotkey: "esc" },
-                                { view: "button", label: translate("Aceptar"), click: this.accept, type: "form" }
-
-                            ]
-                        },
-                        { minlength: 600 }
+                    view: "accordion",
+                    multi: false, 
+                    cols: [
+                        {header: "Datos de la oferta", id: "Acc1", body: ofertaData},
+                        {header: "Versiones",  id: "Acc2",body: "Versiones"},
+                        {header: "Seguidores", id: "Acc3", body: "Seguidores"}
                     ]
                 }
+
             ]
         }
         return _view;
@@ -430,6 +541,9 @@ export default class OfertasForm extends JetView {
         }
         this.load(ofertaId);
         webix.delay(function () { $$("firstField").focus(); });
+        $$("Acc2").collapse();
+        $$("Acc3").collapse();
+
     }
     load(ofertaId) {
         if (ofertaId == 0) {
