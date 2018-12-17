@@ -169,11 +169,11 @@ export default {
     "Sinergias con otros contratos": "Sinergias con otros contratos",
     "OPORTUNIDADES": "OPORTUNIDADES",
     "PROYECTOS": "PROYECTOS",
-    "RECLAMACIONES":"RECLAMACIONES",
+    "RECLAMACIONES": "RECLAMACIONES",
     "NOTAS": "NOTAS",
     "Servicios realizados": "Servicios realizados",
     "Actividades planificadas": "Actividades planificadas",
-    "Situación de proyecto":"Situación de proyecto",
+    "Situación de proyecto": "Situación de proyecto",
     "Importe reclamación (1)": "Importe reclamación (1)",
     "Razón reclamación (1)": "Razón reclamación (1)",
     "Importe reclamación (2)": "Importe reclamación (2)",
@@ -185,5 +185,9 @@ export default {
     "Observaciones": "Observaciones",
     "Datos de la oferta": "Datos de la oferta",
     "Versiones": "Versiones",
-    "Seguidores": "Seguidores"
+    "Seguidores": "Seguidores",
+    "Version": "Version",
+    "Fecha cambio": "Fecha cambio",
+    "Fecha entrega": "Fecha entrega",
+    "Num. Version": "Num. Version"
 }
