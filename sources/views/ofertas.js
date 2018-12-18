@@ -264,7 +264,7 @@ export default class Ofertas extends JetView {
                             // id is not part of the row object
                             delete currentRowDatatableView.id;
                             var data = currentRowDatatableView;
-                            data = ofertasService.checkFormValues(data);
+                            data = ofertasService.cleanData(data);
                             if (data.ofertaId == 0) {
                                 ofertasService.postOferta(usuarioService.getUsuarioCookie(), data)
                                     .then((result) => {

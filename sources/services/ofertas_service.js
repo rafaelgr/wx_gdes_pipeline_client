@@ -130,5 +130,20 @@ export const ofertasService = {
     checkFormValues: (data) => {
         if (data.orden == "") data.orden = null;
         return data;
+    },
+    cleanData: (data) => {
+        delete data.nomArea;
+        delete data.nomUnidadNegocio;
+        delete data.nomEmpresa;
+        delete data.pais;
+        delete data.faseOferta;
+        delete data.tipoOportunidad;
+        delete data.tipoContrato;
+        delete data.estado;
+        delete data.razonPerdida;
+        delete data.divisa;
+        delete data.servicio;
+        delete data.responsable;
+        return data;
     }
 }
