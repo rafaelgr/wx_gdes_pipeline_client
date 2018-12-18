@@ -28,17 +28,9 @@ export default class UnidadesNegocio extends JetView {
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
+                    view: "button", type: "icon", icon: "mdi mdi-refresh", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
-                        var newRow = { id: -1, unidadNegocioId: 0 };
-                        $$('unidadesNegocioGrid').editStop();
-                        var id = $$("unidadesNegocioGrid").add(newRow);
-                        $$("unidadesNegocioGrid").showItem(id);
-                        $$("unidadesNegocioGrid").edit({
-                            row: -1,
-                            column: "nombre"
-                        });
-                        isNewRow = true;
+                        this.cleanAndload()
                     }
                 },
                 {
@@ -52,7 +44,9 @@ export default class UnidadesNegocio extends JetView {
                         });
                     }
                 },
-                {},
+                {
+                    view: "label", id: "UnidadesNegocioNReg", label: "NREG: "
+                },
                 {
                     view: "pager", id: "mypager", css: { "text-align": "right" },
                     template: "{common.first()} {common.prev()} {common.pages()} {common.next()} {common.last()}",
@@ -130,6 +124,11 @@ export default class UnidadesNegocio extends JetView {
                         }
                     }
                 },
+                "onAfterFilter": function () {
+                    var numReg = $$("unidadesNegocioGrid").count();
+                    $$("UnidadesNegocioNReg").config.label = "NREG: " + numReg;
+                    $$("UnidadesNegocioNReg").refresh();
+                }
             }
         }
         var _view = {
@@ -151,9 +150,11 @@ export default class UnidadesNegocio extends JetView {
             $$('unidadesNegocioGrid').remove(-1);
             return false;
         }, $$('unidadesNegocioGrid'));
+        webix.extend($$("unidadesNegocioGrid"), webix.ProgressBar);
         this.load(id);
     }
     load(id) {
+        $$("unidadesNegocioGrid").showProgress();
         unidadesNegocioService.getUnidadesNegocio(usuarioService.getUsuarioCookie())
             .then(data => {
                 $$("unidadesNegocioGrid").clearAll();
@@ -162,8 +163,13 @@ export default class UnidadesNegocio extends JetView {
                     $$("unidadesNegocioGrid").select(id);
                     $$("unidadesNegocioGrid").showItem(id);
                 }
+                var numReg = $$("unidadesNegocioGrid").count();
+                $$("UnidadesNegocioNReg").config.label = "NREG: " + numReg;
+                $$("UnidadesNegocioNReg").refresh();
+                $$("unidadesNegocioGrid").hideProgress();
             })
             .catch(err => {
+                $$("unidadesNegocioGrid").hideProgress();
                 messageApi.errorMessageAjax(err);
             })
     }
@@ -184,5 +190,16 @@ export default class UnidadesNegocio extends JetView {
                     });
             }
         });
+    }
+    cleanAndload() {
+        $$("unidadesNegocioGrid").eachColumn(function (id, col) {
+            if (col.id == 'actions') return;
+            var filter = this.getFilter(id);
+            if (filter) {
+                if (filter.setValue) filter.setValue("")	// suggest-based filters 
+                else filter.value = "";					// html-based: select & text
+            }
+        });
+        this.load();
     }
 }
