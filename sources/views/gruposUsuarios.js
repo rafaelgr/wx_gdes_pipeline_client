@@ -29,24 +29,9 @@ export default class GruposUsuarios extends JetView {
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
-                    tooltip: translate("Nuevo registro en línea (Ctrl+L)"),
+                    view: "button", type: "icon", icon: "mdi mdi-refresh", width: 37, align: "left",
                     click: () => {
-                        var newRow = { id: -1, grupoUsuarioId: 0 };
-                        $$('gruposUsuariosGrid').editStop();
-                        console.log('Before edit 1');
-                        var lastId = $$('gruposUsuariosGrid').getLastId() + 1;
-                        console.log('Before edit 3');
-                        var id = $$("gruposUsuariosGrid").add(newRow);
-                        console.log('Before edit 2');
-                        $$("gruposUsuariosGrid").edit({
-                            row: -1,
-                            column: "nombre"
-                        });
-                        $$("gruposUsuariosGrid").showItem(id);
-                        $$("gruposUsuariosGrid").select(id);
-                        $$('gruposUsuariosGrid').editRow(id);
-                        webix.UIManager.setFocus("gruposUsuariosGrid");
+                        this.cleanAndload();
                     }
                 },
                 {
@@ -178,14 +163,25 @@ export default class GruposUsuarios extends JetView {
         webix.confirm(translate("¿Seguro que quiere eliminar ") + name + "?", function (action) {
             if (action === true) {
                 gruposUsuariosService.deleteGrupoUsuario(usuarioService.getUsuarioCookie(), id)
-                .then(result=>{
-                    self.load();
-                })
-                .catch(err=>{
-                    messageApi.errorMessageAjax(err);
-                });
+                    .then(result => {
+                        self.load();
+                    })
+                    .catch(err => {
+                        messageApi.errorMessageAjax(err);
+                    });
             }
 
         });
+    }
+    cleanAndload() {
+        $$("gruposUsuariosGrid").eachColumn(function (id, col) {
+            if (col.id == 'actions') return;
+            var filter = this.getFilter(id);
+            if (filter) {
+                if (filter.setValue) filter.setValue("")	// suggest-based filters 
+                else filter.value = "";					// html-based: select & text
+            }
+        });
+        this.load();
     }
 }
