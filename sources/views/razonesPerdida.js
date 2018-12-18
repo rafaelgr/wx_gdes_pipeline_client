@@ -28,17 +28,9 @@ export default class RazonesPerdida extends JetView {
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
+                    view: "button", type: "icon", icon: "mdi mdi-refresh", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
-                        var newRow = { id: -1, razonPerdidaId: 0 };
-                        $$('razonesPerdidaGrid').editStop();
-                        var id = $$("razonesPerdidaGrid").add(newRow);
-                        $$("razonesPerdidaGrid").showItem(id);
-                        $$("razonesPerdidaGrid").edit({
-                            row: -1,
-                            column: "nombre"
-                        });
-                        isNewRow = true;
+                        this.cleanAndload();
                     }
                 },
                 {
@@ -52,7 +44,9 @@ export default class RazonesPerdida extends JetView {
                         });
                     }
                 },
-                {},
+                {
+                    view: "label", id: "RazonesPerdidaNReg", label: "NREG: "
+                },
                 {
                     view: "pager", id: "mypager", css: { "text-align": "right" },
                     template: "{common.first()} {common.prev()} {common.pages()} {common.next()} {common.last()}",
@@ -130,6 +124,11 @@ export default class RazonesPerdida extends JetView {
                         }
                     }
                 },
+                "onAfterFilter": function () {
+                    var numReg = $$("razonesPerdidaGrid").count();
+                    $$("RazonesPerdidaNReg").config.label = "NREG: " + numReg;
+                    $$("RazonesPerdidaNReg").refresh();
+                }
             }
         }
         var _view = {
@@ -151,9 +150,11 @@ export default class RazonesPerdida extends JetView {
             $$('razonesPerdidaGrid').remove(-1);
             return false;
         }, $$('razonesPerdidaGrid'));
+        webix.extend($$("razonesPerdidaGrid"), webix.ProgressBar);
         this.load(id);
     }
     load(id) {
+        $$("razonesPerdidaGrid").showProgress();
         razonesPerdidaService.getRazonesPerdida(usuarioService.getUsuarioCookie())
             .then(data => {
                 $$("razonesPerdidaGrid").clearAll();
@@ -162,8 +163,13 @@ export default class RazonesPerdida extends JetView {
                     $$("razonesPerdidaGrid").select(id);
                     $$("razonesPerdidaGrid").showItem(id);
                 }
+                var numReg = $$("razonesPerdidaGrid").count();
+                $$("RazonesPerdidaNReg").config.label = "NREG: " + numReg;
+                $$("RazonesPerdidaNReg").refresh();
+                $$("razonesPerdidaGrid").hideProgress();
             })
             .catch(err => {
+                $$("razonesPerdidaGrid").hideProgress();
                 messageApi.errorMessageAjax(err);
             })
     }
@@ -184,5 +190,16 @@ export default class RazonesPerdida extends JetView {
                     });
             }
         });
+    }
+    cleanAndload() {
+        $$("razonesPerdidaGrid").eachColumn(function (id, col) {
+            if (col.id == 'actions') return;
+            var filter = this.getFilter(id);
+            if (filter) {
+                if (filter.setValue) filter.setValue("")	// suggest-based filters 
+                else filter.value = "";					// html-based: select & text
+            }
+        });
+        this.load();
     }
 }
