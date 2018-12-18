@@ -28,17 +28,9 @@ export default class Paises extends JetView {
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
+                    view: "button", type: "icon", icon: "mdi mdi-refresh", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
-                        var newRow = { id: -1, paisId: 0 };
-                        $$('paisesGrid').editStop();
-                        var id = $$("paisesGrid").add(newRow);
-                        $$("paisesGrid").showItem(id);
-                        $$("paisesGrid").edit({
-                            row: -1,
-                            column: "nombre"
-                        });
-                        isNewRow = true;
+                        this.cleanAndload();
                     }
                 },
                 {
@@ -182,5 +174,16 @@ export default class Paises extends JetView {
                     });
             }
         });
+    }
+    cleanAndload() {
+        $$("paisesGrid").eachColumn(function (id, col) {
+            if (col.id == 'actions') return;
+            var filter = this.getFilter(id);
+            if (filter) {
+                if (filter.setValue) filter.setValue("")	// suggest-based filters 
+                else filter.value = "";					// html-based: select & text
+            }
+        });
+        this.load();
     }
 }
