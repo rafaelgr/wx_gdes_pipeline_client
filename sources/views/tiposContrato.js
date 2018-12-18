@@ -28,17 +28,9 @@ export default class TiposContrato extends JetView {
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
+                    view: "button", type: "icon", icon: "mdi mdi-refresh", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
-                        var newRow = { id: -1, tipoContratoId: 0 };
-                        $$('tiposContratoGrid').editStop();
-                        var id = $$("tiposContratoGrid").add(newRow);
-                        $$("tiposContratoGrid").showItem(id);
-                        $$("tiposContratoGrid").edit({
-                            row: -1,
-                            column: "nombre"
-                        });
-                        isNewRow = true;
+                        this.cleanAndload();
                     }
                 },
                 {
@@ -52,7 +44,9 @@ export default class TiposContrato extends JetView {
                         });
                     }
                 },
-                {},
+                {
+                    view: "label", id: "TiposContratoNReg", label: "NREG: "
+                },
                 {
                     view: "pager", id: "mypager", css: { "text-align": "right" },
                     template: "{common.first()} {common.prev()} {common.pages()} {common.next()} {common.last()}",
@@ -130,6 +124,11 @@ export default class TiposContrato extends JetView {
                         }
                     }
                 },
+                "onAfterFilter": function () {
+                    var numReg = $$("tiposContratoGrid").count();
+                    $$("TiposContratoNReg").config.label = "NREG: " + numReg;
+                    $$("TiposContratoNReg").refresh();
+                }
             }
         }
         var _view = {
@@ -151,9 +150,11 @@ export default class TiposContrato extends JetView {
             $$('tiposContratoGrid').remove(-1);
             return false;
         }, $$('tiposContratoGrid'));
+        webix.extend($$("tiposContratoGrid"), webix.ProgressBar);
         this.load(id);
     }
     load(id) {
+        $$("tiposContratoGrid").showProgress();
         tiposContratoService.getTiposContrato(usuarioService.getUsuarioCookie())
             .then(data => {
                 $$("tiposContratoGrid").clearAll();
@@ -162,8 +163,13 @@ export default class TiposContrato extends JetView {
                     $$("tiposContratoGrid").select(id);
                     $$("tiposContratoGrid").showItem(id);
                 }
+                var numReg = $$("tiposContratoGrid").count();
+                $$("TiposContratoNReg").config.label = "NREG: " + numReg;
+                $$("TiposContratoNReg").refresh();
+                $$("tiposContratoGrid").hideProgress();                
             })
             .catch(err => {
+                $$("tiposContratoGrid").hideProgress();
                 messageApi.errorMessageAjax(err);
             })
     }
@@ -184,5 +190,16 @@ export default class TiposContrato extends JetView {
                     });
             }
         });
+    }
+    cleanAndload() {
+        $$("tiposContratoGrid").eachColumn(function (id, col) {
+            if (col.id == 'actions') return;
+            var filter = this.getFilter(id);
+            if (filter) {
+                if (filter.setValue) filter.setValue("")	// suggest-based filters 
+                else filter.value = "";					// html-based: select & text
+            }
+        });
+        this.load();
     }
 }
