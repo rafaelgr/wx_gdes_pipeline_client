@@ -28,17 +28,9 @@ export default class FasesOferta extends JetView {
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
+                    view: "button", type: "icon", icon: "mdi mdi-refresh", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
-                        var newRow = { id: -1, faseOfertaId: 0 };
-                        $$('fasesOfertaGrid').editStop();
-                        var id = $$("fasesOfertaGrid").add(newRow);
-                        $$("fasesOfertaGrid").showItem(id);
-                        $$("fasesOfertaGrid").edit({
-                            row: -1,
-                            column: "nombre"
-                        });
-                        isNewRow = true;
+                        this.cleanAndload();
                     }
                 },
                 {
@@ -52,7 +44,9 @@ export default class FasesOferta extends JetView {
                         });
                     }
                 },
-                {},
+                {
+                    view: "label", id: "FasesOfertaNReg", label: "NREG: "
+                },
                 {
                     view: "pager", id: "mypager", css: { "text-align": "right" },
                     template: "{common.first()} {common.prev()} {common.pages()} {common.next()} {common.last()}",
@@ -130,6 +124,11 @@ export default class FasesOferta extends JetView {
                         }
                     }
                 },
+                "onAfterFilter": function () {
+                    var numReg = $$("fasesOfertaGrid").count();
+                    $$("FasesOfertaNReg").config.label = "NREG: " + numReg;
+                    $$("FasesOfertaNReg").refresh();
+                }
             }
         }
         var _view = {
@@ -151,9 +150,11 @@ export default class FasesOferta extends JetView {
             $$('fasesOfertaGrid').remove(-1);
             return false;
         }, $$('fasesOfertaGrid'));
+        webix.extend($$("fasesOfertaGrid"), webix.ProgressBar);
         this.load(id);
     }
     load(id) {
+        $$("fasesOfertaGrid").showProgress();
         fasesOfertaService.getFasesOferta(usuarioService.getUsuarioCookie())
             .then(data => {
                 $$("fasesOfertaGrid").clearAll();
@@ -162,8 +163,13 @@ export default class FasesOferta extends JetView {
                     $$("fasesOfertaGrid").select(id);
                     $$("fasesOfertaGrid").showItem(id);
                 }
+                var numReg = $$("fasesOfertaGrid").count();
+                $$("FasesOfertaNReg").config.label = "NREG: " + numReg;
+                $$("FasesOfertaNReg").refresh();
+                $$("fasesOfertaGrid").hideProgress();
             })
             .catch(err => {
+                $$("fasesOfertaGrid").hideProgress();
                 messageApi.errorMessageAjax(err);
             })
     }
@@ -184,5 +190,16 @@ export default class FasesOferta extends JetView {
                     });
             }
         });
+    }
+    cleanAndload() {
+        $$("fasesOfertaGrid").eachColumn(function (id, col) {
+            if (col.id == 'actions') return;
+            var filter = this.getFilter(id);
+            if (filter) {
+                if (filter.setValue) filter.setValue("")	// suggest-based filters 
+                else filter.value = "";					// html-based: select & text
+            }
+        });
+        this.load();
     }
 }
