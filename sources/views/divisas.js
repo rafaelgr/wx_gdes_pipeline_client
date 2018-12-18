@@ -28,17 +28,9 @@ export default class Divisas extends JetView {
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
+                    view: "button", type: "icon", icon: "mdi mdi-refresh", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
-                        var newRow = { id: -1, divisaId: 0 };
-                        $$('divisasGrid').editStop();
-                        var id = $$("divisasGrid").add(newRow);
-                        $$("divisasGrid").showItem(id);
-                        $$("divisasGrid").edit({
-                            row: -1,
-                            column: "nombre"
-                        });
-                        isNewRow = true;
+                        this.cleanAndload();
                     }
                 },
                 {
@@ -52,7 +44,9 @@ export default class Divisas extends JetView {
                         });
                     }
                 },
-                {},
+                {
+                    view: "label", id: "DivisasNReg", label: "NREG: "
+                },
                 {
                     view: "pager", id: "mypager", css: { "text-align": "right" },
                     template: "{common.first()} {common.prev()} {common.pages()} {common.next()} {common.last()}",
@@ -126,6 +120,11 @@ export default class Divisas extends JetView {
                         }
                     }
                 },
+                "onAfterFilter": function () {
+                    var numReg = $$("divisasGrid").count();
+                    $$("DivisasNReg").config.label = "NREG: " + numReg;
+                    $$("DivisasNReg").refresh();
+                }
             }
         }
         var _view = {
@@ -147,9 +146,11 @@ export default class Divisas extends JetView {
             $$('divisasGrid').remove(-1);
             return false;
         }, $$('divisasGrid'));
+        webix.extend($$("divisasGrid"), webix.ProgressBar);
         this.load(id);
     }
     load(id) {
+        $$("divisasGrid").showProgress();
         divisasService.getDivisas(usuarioService.getUsuarioCookie())
             .then(data => {
                 $$("divisasGrid").clearAll();
@@ -158,8 +159,13 @@ export default class Divisas extends JetView {
                     $$("divisasGrid").select(id);
                     $$("divisasGrid").showItem(id);
                 }
+                var numReg = $$("divisasGrid").count();
+                $$("DivisasNReg").config.label = "NREG: " + numReg;
+                $$("DivisasNReg").refresh();
+                $$("divisasGrid").hideProgress();
             })
             .catch(err => {
+                $$("divisasGrid").hideProgress();
                 messageApi.errorMessageAjax(err);
             })
     }
@@ -180,5 +186,16 @@ export default class Divisas extends JetView {
                     });
             }
         });
+    }
+    cleanAndload() {
+        $$("divisasGrid").eachColumn(function (id, col) {
+            if (col.id == 'actions') return;
+            var filter = this.getFilter(id);
+            if (filter) {
+                if (filter.setValue) filter.setValue("")	// suggest-based filters 
+                else filter.value = "";					// html-based: select & text
+            }
+        });
+        this.load();
     }
 }
