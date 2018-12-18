@@ -14,8 +14,10 @@ import { razonesPerdidaService } from "../services/razonesPerdida_service";
 import { divisasService } from "../services/divisas_service"
 import { messageApi } from "../utilities/messages";
 import { generalApi } from "../utilities/general";
+import { parametrosService } from "../services/parametros_service";
 
 var ofertaId = 0;
+var _contador;
 
 
 export default class OfertasForm extends JetView {
@@ -30,7 +32,7 @@ export default class OfertasForm extends JetView {
                     cols: [
                         { view: "text", name: "nombreCorto", label: translate("Nombre"), required: true, labelPosition: "top" },
                         { view: "text", name: "cliente", label: translate("Cliente"), required: true, labelPosition: "top" },
-                        { view: "text", name: "ubicacion", label: translate("Ubicación"), required: true, labelPosition: "top" }
+                        { view: "text", id: "ubicacion", name: "ubicacion", label: translate("Ubicación"), required: true, labelPosition: "top" }
                     ]
                 },
                 {
@@ -79,8 +81,8 @@ export default class OfertasForm extends JetView {
                 {
                     cols: [
                         { view: "text", name: "ofertaId", label: translate("ID"), labelPosition: "top", readonly: true },
-                        { view: "text", name: "numeroOferta", required: true, label: translate("Nr. Oferta"), labelPosition: "top" },
-                        { view: "text", name: "codigoOferta", required: true, label: translate("Cod. Oferta"), labelPosition: "top" }
+                        { view: "text", id: "numeroOferta", name: "numeroOferta", required: true, label: translate("Nr. Oferta"), labelPosition: "top" },
+                        { view: "text", id: "codigoOferta", name: "codigoOferta", required: true, label: translate("Cod. Oferta"), labelPosition: "top" }
                     ]
                 },
                 {
@@ -300,7 +302,7 @@ export default class OfertasForm extends JetView {
                 { template: translate("ALCANCE DE LOS TRABAJOS"), type: "section" },
                 { view: "textarea", name: "alcance", label: translate("Alcance del Proyecto"), labelPosition: "top" },
                 { view: "textarea", name: "puntosRelevantes", label: translate("Equipo y planificación"), labelPosition: "top" },
-                { view: "textarea", name: "documentosEspeciales", label: translate("Documentos aplicables"), labelPosition: "top" }
+                { view: "textarea", id: "documentosEspeciales", name: "documentosEspeciales", label: translate("Documentos aplicables"), labelPosition: "top" }
             ]
         };
         const cellCuestionesDeContrato = {
@@ -546,6 +548,7 @@ export default class OfertasForm extends JetView {
 
     }
     load(ofertaId) {
+        let usu = usuarioService.getUsuarioCookie();
         if (ofertaId == 0) {
             this.loadUsuarios();
             this.loadAreas();
@@ -561,6 +564,9 @@ export default class OfertasForm extends JetView {
             this.loadEstados();
             this.loadRazonesPerdida();
             this.loadDivisas();
+            this.getNumeroCodigoOferta();
+            this.getDocumentosAplicables(usu.paisId);
+            this.setValoresPorDefectoUsuario(usu);
             return;
         }
         ofertasService.getOferta(usuarioService.getUsuarioCookie(), ofertaId)
@@ -815,5 +821,43 @@ export default class OfertasForm extends JetView {
                 }
                 return;
             });
+    }
+    getNumeroCodigoOferta() {
+        parametrosService.getParametrosContadores(usuarioService.getUsuarioCookie())
+            .then(data => {
+                _contador = data.numeroOferta;
+                $$("numeroOferta").setValue(data.numeroOferta);
+                $$("codigoOferta").setValue(data.codigoOferta);
+            })
+            .catch((err) => {
+                debugger;
+                messageApi.errorMessageAjax(err);
+            });
+    }
+    getDocumentosAplicables(paisId) {
+        let codPais = "";
+        paisesService.getPais(usuarioService.getUsuarioCookie(), paisId)
+            .then(pais => {
+                codPais = pais.codPais;
+                return parametrosService.getParametros(usuarioService.getUsuarioCookie());
+            })
+            .then(parametros => {
+                var docApp = parametros.docAppSpain;
+                if (codPais == "UK") docApp = parametros.docAppUk;
+                if (codPais == "FR") docApp = parametros.docAppFrance;
+                $$("documentosEspeciales").setValue(docApp);
+            })
+            .catch((err) => {
+                messageApi.errorMessageAjax(err);
+            });
+    }
+    setValoresPorDefectoUsuario(usu) {
+        $$("cmbUsuario").setValue(usu.usuarioId);
+        $$("cmbResponsable").setValue(usu.responsableId);
+        $$("cmbPais").setValue(usu.paisId);
+        $$("cmbEmpresa").setValue(usu.empresaId);
+        $$("cmbUnidadNegocio").setValue(usu.unidadNegocioId);
+        $$("cmbArea").setValue(usu.areaId);
+        $$("ubicacion").setValue(usu.ubicacion);
     }
 }

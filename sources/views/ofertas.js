@@ -143,17 +143,9 @@ export default class Ofertas extends JetView {
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
+                    view: "button", type: "icon", icon: "mdi mdi-refresh", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
-                        var newRow = { id: -1, ofertaId: 0 };
-                        $$('ofertasGrid').editStop();
-                        var id = $$("ofertasGrid").add(newRow);
-                        $$("ofertasGrid").showItem(id);
-                        $$("ofertasGrid").edit({
-                            row: -1,
-                            column: "nombre"
-                        });
-                        isNewRow = true;
+                        this.cleanAndload();
                     }
                 },
                 {
@@ -357,8 +349,15 @@ export default class Ofertas extends JetView {
 
         });
     }
-    changeLanguage(lg) {
-        const langs = this.app.getService("locale");
-        langs.setLang(lg)
+    cleanAndload() {
+        $$("ofertasGrid").eachColumn(function (id, col) {
+            if (col.id == 'actions') return;
+            var filter = this.getFilter(id);
+            if (filter) {
+                if (filter.setValue) filter.setValue("")	// suggest-based filters 
+                else filter.value = "";					// html-based: select & text
+            }
+        });
+        this.load();
     }
 }

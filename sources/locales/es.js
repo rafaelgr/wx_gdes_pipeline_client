@@ -115,7 +115,7 @@ export default {
     "Convertida de oportunidad": "Convertida de oportunidad",
     "Fecha conversión": "Fecha conversión",
     "Subrogación": "Subrogación",
-    "Probabilidad": "Porbabilidad",
+    "Probabilidad": "Probabilidad",
     "Comentario subrogación": "Comentario subrogación",
     "Cantidad personal": "Cantidad personal",
     "Comentario UTE": "Comentario UTE",

@@ -2,7 +2,13 @@ import { devConfig } from "../config/config";
 
 export const messageApi = {
     errorMessageAjax: (inXhr) => {
-        var msg = inXhr.response;
+        var msg = "Error desconocido";
+        if (!inXhr.response){
+            // no es un error Ajax
+            msg = inXhr;
+        } else {
+            msg = inXhr.response;
+        }
         webix.alert({
             type: "alert-error",
             title: "ERROR",

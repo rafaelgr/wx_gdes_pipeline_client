@@ -18,6 +18,25 @@ export const parametrosService = {
             });
         });
     },
+    getParametrosContadores: (usu) => {
+        return new webix.promise((success, fail)=>{
+            var url = devConfig.getApiUrl() + "/api/parametros/contadores/" + usu.empresaId + "/" + usu.areaId;
+            webix.ajax()
+            .timeout(10000)
+            .headers({
+                "Content-Type": "application/json",
+                "x-apiKey": usu.apiKey
+            })
+            .get(url)
+            .then(function (result) {
+                success(result.json());
+            })
+            .catch(function (inXhr) {
+                fail(inXhr);
+            });
+        });
+    },
+
     putParametros: (usu, data) => {
         return new webix.promise((success, fail)=>{
             var url = devConfig.getApiUrl() + "/api/parametros";
