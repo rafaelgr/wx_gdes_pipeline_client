@@ -83,17 +83,9 @@ export default class Usuarios extends JetView {
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
-                    click: () => {
-                        var newRow = { id: -1, usuarioId: 0 };
-                        $$('usuariosGrid').editStop();
-                        var id = $$("usuariosGrid").add(newRow);
-                        $$("usuariosGrid").showItem(id);
-                        $$("usuariosGrid").edit({
-                            row: -1,
-                            column: "nombre"
-                        });
-                        isNewRow = true;
+                    view: "button", type: "icon", icon: "mdi mdi-refresh", width: 37, align: "left", hotkey: "Ctrl+L",
+                    click: ()=>{
+                        this.cleanAndload();
                     }
                 },
                 {
@@ -211,8 +203,8 @@ export default class Usuarios extends JetView {
     init(view, url) {
         usuarioService.checkLoggedUser();
         var id = null;
-        if (url[0].params.empresaId) {
-            id = url[0].params.empresaId;
+        if (url[0].params.usuarioId) {
+            id = url[0].params.usuarioId;
         }
         webix.UIManager.addHotKey("Esc", function () {
             $$('usuariosGrid').remove(-1);
@@ -251,5 +243,16 @@ export default class Usuarios extends JetView {
                     })
             }
         });
+    }
+    cleanAndload() {
+        $$("usuariosGrid").eachColumn(function (id, col) {
+            if (col.id == 'actions') return;
+            var filter = this.getFilter(id);
+            if (filter) {
+                if (filter.setValue) filter.setValue("")	// suggest-based filters 
+                else filter.value = "";					// html-based: select & text
+            }
+        });
+        this.load();
     }
 }
