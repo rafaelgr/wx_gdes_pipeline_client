@@ -112,5 +112,10 @@ export const serviciosService = {
     checkFormValues: (data) => {
         if (data.orden == "") data.orden = null;
         return data;
+    },
+    cleanData: (data) => {
+        delete data.nombreArea;
+        delete data.areas;
+        return data;
     }
 }
