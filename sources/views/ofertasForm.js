@@ -545,6 +545,10 @@ export default class OfertasForm extends JetView {
         webix.delay(function () { $$("firstField").focus(); });
         $$("Acc2").collapse();
         $$("Acc3").collapse();
+        // onChange events
+        $$("cmbPais").attachEvent("onChange", (nv, ov) =>{
+            this.getDocumentosAplicables(nv);
+        });
 
     }
     load(ofertaId) {
@@ -860,4 +864,5 @@ export default class OfertasForm extends JetView {
         $$("cmbArea").setValue(usu.areaId);
         $$("ubicacion").setValue(usu.ubicacion);
     }
+
 }
