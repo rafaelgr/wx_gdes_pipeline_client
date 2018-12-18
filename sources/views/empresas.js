@@ -54,7 +54,9 @@ export default class Empresas extends JetView {
                         });
                     }
                 },
-                {},
+                {
+                    view: "label", id: "EmpresasNReg", label: "NREG: "
+                },
                 {
                     view: "pager", id: "mypager", css: { "text-align": "right" },
                     template: "{common.first()} {common.prev()} {common.pages()} {common.next()} {common.last()}",
@@ -131,6 +133,11 @@ export default class Empresas extends JetView {
                         }
                     }
                 },
+                "onAfterFilter": function () {
+                    var numReg = $$("empresasGrid").count();
+                    $$("EmpresasNReg").config.label = "NREG: " + numReg;
+                    $$("EmpresasNReg").refresh();
+                }
             }
         }
         var _view = {
@@ -152,9 +159,11 @@ export default class Empresas extends JetView {
             $$('empresasGrid').remove(-1);
             return false;
         }, $$('empresasGrid'));
+        webix.extend($$("empresasGrid"), webix.ProgressBar);
         this.load(id);
     }
     load(id) {
+        $$("empresasGrid").showProgress();
         empresasService.getEmpresas(usuarioService.getUsuarioCookie())
             .then((data) => {
                 $$("empresasGrid").clearAll();
@@ -163,8 +172,13 @@ export default class Empresas extends JetView {
                     $$("empresasGrid").select(id);
                     $$("empresasGrid").showItem(id);
                 }
+                var numReg = $$("empresasGrid").count();
+                $$("EmpresasNReg").config.label = "NREG: " + numReg;
+                $$("EmpresasNReg").refresh();
+                $$("empresasGrid").hideProgress();
             })
             .catch((err) => {
+                $$("empresasGrid").hideProgress();
                 messageApi.errorMessageAjax(err);
             });
     }
