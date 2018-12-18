@@ -171,7 +171,7 @@ export default {
     "PROYECTOS": "PROYECTOS",
     "RECLAMACIONES": "RECLAMACIONES",
     "NOTAS": "NOTAS",
-    "Servicios realizados": "Servicios realizados",
+    "Actividades realizadas": "Actividades realizadas",
     "Actividades planificadas": "Actividades planificadas",
     "Situación de proyecto": "Situación de proyecto",
     "Importe reclamación (1)": "Importe reclamación (1)",

@@ -35,7 +35,7 @@ export const ofertasService = {
                     fail(inXhr);
                 });
         });
-    },    
+    },
     getSyncOfertas: (usu) => {
         var url = devConfig.getApiUrl() + "/api/ofertas";
         var res = webix.ajax()
@@ -144,6 +144,9 @@ export const ofertasService = {
         delete data.divisa;
         delete data.servicio;
         delete data.responsable;
+        Object.keys(data).forEach((k) => {
+            if (data[k] == "") data[k] = null;
+        });
         return data;
     }
 }

@@ -18,6 +18,7 @@ import { parametrosService } from "../services/parametros_service";
 
 var ofertaId = 0;
 var _contador;
+var _originalFaseOfertaId;
 
 
 export default class OfertasForm extends JetView {
@@ -103,8 +104,8 @@ export default class OfertasForm extends JetView {
                 {
                     cols: [
                         { view: "checkbox", name: "relevante", options: {}, label: translate("Relevante"), labelPosition: "top" },
-                        { view: "checkbox", name: "conversionOportunidad", options: {}, label: translate("Convertida de oportunidad"), labelPosition: "top" },
-                        { view: "datepicker", editable: true, minDate: new Date("2000-01-01"), name: "fechaConversion", label: translate("Fecha conversión"), labelPosition: "top" }
+                        { view: "checkbox", id: "conversionOportunidad", name: "conversionOportunidad", options: {}, label: translate("Convertida de oportunidad"), labelPosition: "top" },
+                        { view: "datepicker", id: "fechaConversionOportunidad", editable: true, minDate: new Date("2000-01-01"), name: "fechaConversionOportunidad", label: translate("Fecha conversión"), labelPosition: "top" }
 
                     ]
                 }
@@ -118,7 +119,7 @@ export default class OfertasForm extends JetView {
                     cols: [
                         { view: "checkbox", name: "subrogacionSN", options: {}, label: translate("Subrogación"), labelPosition: "top", width: 150 },
                         { view: "textarea", name: "subrogacionTXT", label: translate("Comentario subrogación"), labelPosition: "top" },
-                        { view: "text", name: "subrogacionNum", label: translate("Cantidad personal"), labelPosition: "top", width: 150 }
+                        { view: "text", name: "subrogacionNum", label: translate("Cantidad personal"), labelPosition: "top", width: 150, format: "1.111" }
                     ]
                 },
                 {
@@ -309,8 +310,8 @@ export default class OfertasForm extends JetView {
             padding: 5, css: "fondocelda",
             rows: [
                 { template: translate("CUESTIONES DE CONTRATO"), type: "section" },
-                { view: "textarea", name: "codicionesEstandar", label: translate("Comentarios contrato"), labelPosition: "top" },
-                { view: "textarea", name: "garantiasEspeciales", label: translate("Comentarios garantias"), labelPosition: "top" },
+                { view: "textarea", name: "condicionesEstandarTXT", label: translate("Comentarios contrato"), labelPosition: "top" },
+                { view: "textarea", name: "garantiasEspecialesTXT", label: translate("Comentarios garantias"), labelPosition: "top" },
                 { view: "textarea", name: "penalizaciones", label: translate("Penalizaciones"), labelPosition: "top" },
                 { view: "textarea", name: "riesgos", label: translate("Riesgos"), labelPosition: "top" }
             ]
@@ -374,7 +375,7 @@ export default class OfertasForm extends JetView {
             padding: 5, css: "fondocelda",
             rows: [
                 { template: translate("OPORTUNIDADES"), type: "section" },
-                { view: "textarea", name: "serviciosRealizados", label: translate("Servicios realizados"), labelPosition: "top" },
+                { view: "textarea", name: "actividadesRealizadas", label: translate("Actividades realizadas"), labelPosition: "top" },
                 { view: "textarea", name: "actividadesPlanificadas", label: translate("Actividades planificadas"), labelPosition: "top" },
             ]
         };
@@ -546,8 +547,23 @@ export default class OfertasForm extends JetView {
         $$("Acc2").collapse();
         $$("Acc3").collapse();
         // onChange events
-        $$("cmbPais").attachEvent("onChange", (nv, ov) =>{
+        $$("cmbPais").attachEvent("onChange", (nv, ov) => {
             this.getDocumentosAplicables(nv);
+        });
+        $$("cmbFaseOferta").attachEvent("onChange", (nv, ov) => {
+            if (nv != 3 && ofertaId == 0) {
+                // Si en el alta de una oferta la pasan a algo que no sea oferta
+                // Entonces los códigos cambian
+                var c1 = "OP-" + _contador;
+                $$("numeroOferta").setValue(c1);
+                $$("codigoOferta").setValue(c1);
+            }
+            if (nv == 3 && ov == 1) {
+                // Si una oportunidad pasa a oferta grabamos los campos correspondientes
+                $$("conversionOportunidad").setValue(true);
+                $$("fechaConversionOportunidad").setValue(new Date());
+            }
+
         });
 
     }
@@ -579,6 +595,8 @@ export default class OfertasForm extends JetView {
                 oferta.fechaAdjudicacion = new Date(oferta.fechaAdjudicacion);
                 oferta.fechaInicioContrato = new Date(oferta.fechaInicioContrato);
                 oferta.fechaFinContrato = new Date(oferta.fechaFinContrato);
+                oferta.fechaOferta = new Date(oferta.fechaOferta);
+                oferta.fechaUltimoEstado = new Date(oferta.fechaUltimoEstado);
                 $$("frmOfertas").setValues(oferta);
                 this.loadUsuarios(oferta.usuarioId);
                 this.loadAreas(oferta.areaId);
@@ -594,6 +612,7 @@ export default class OfertasForm extends JetView {
                 this.loadEstados(oferta.estadoId);
                 this.loadRazonesPerdida(oferta.razonPerdidaId);
                 this.loadDivisas(oferta.divisaId);
+                _originalFaseOfertaId = oferta.faseOfertaId;
             })
             .catch((err) => {
                 messageApi.errorMessageAjax(err);
@@ -609,7 +628,8 @@ export default class OfertasForm extends JetView {
             return;
         }
         var data = $$("frmOfertas").getValues();
-        data = ofertasService.checkFormValues(data);
+        data = ofertasService.cleanData(data);
+        console.log("DATA: ", data);
         if (ofertaId == 0) {
             data.ofertaId = 0;
             ofertasService.postOferta(usuarioService.getUsuarioCookie(), data)
