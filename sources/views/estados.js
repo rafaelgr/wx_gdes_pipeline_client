@@ -28,17 +28,9 @@ export default class Estados extends JetView {
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
+                    view: "button", type: "icon", icon: "mdi mdi-refresh", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
-                        var newRow = { id: -1, estadoId: 0 };
-                        $$('estadosGrid').editStop();
-                        var id = $$("estadosGrid").add(newRow);
-                        $$("estadosGrid").showItem(id);
-                        $$("estadosGrid").edit({
-                            row: -1,
-                            column: "nombre"
-                        });
-                        isNewRow = true;
+                        this.cleanAndload();
                     }
                 },
                 {
@@ -52,7 +44,9 @@ export default class Estados extends JetView {
                         });
                     }
                 },
-                {},
+                {
+                    view: "label", id: "EstadosNReg", label: "NREG: "
+                },
                 {
                     view: "pager", id: "mypager", css: { "text-align": "right" },
                     template: "{common.first()} {common.prev()} {common.pages()} {common.next()} {common.last()}",
@@ -131,6 +125,11 @@ export default class Estados extends JetView {
                         }
                     }
                 },
+                "onAfterFilter": function () {
+                    var numReg = $$("estadosGrid").count();
+                    $$("EstadosNReg").config.label = "NREG: " + numReg;
+                    $$("EstadosNReg").refresh();
+                }
             }
         }
         var _view = {
@@ -152,9 +151,11 @@ export default class Estados extends JetView {
             $$('estadosGrid').remove(-1);
             return false;
         }, $$('estadosGrid'));
+        webix.extend($$("estadosGrid"), webix.ProgressBar);
         this.load(id);
     }
     load(id) {
+        $$("estadosGrid").showProgress();
         estadosService.getEstados(usuarioService.getUsuarioCookie())
             .then(data => {
                 $$("estadosGrid").clearAll();
@@ -163,8 +164,13 @@ export default class Estados extends JetView {
                     $$("estadosGrid").select(id);
                     $$("estadosGrid").showItem(id);
                 }
+                var numReg = $$("estadosGrid").count();
+                $$("EstadosNReg").config.label = "NREG: " + numReg;
+                $$("EstadosNReg").refresh();
+                $$("estadosGrid").hideProgress();                
             })
             .catch(err => {
+                $$("estadosGrid").hideProgress();     
                 messageApi.errorMessageAjax(err);
             })
     }
@@ -185,5 +191,16 @@ export default class Estados extends JetView {
                     });
             }
         });
+    }
+    cleanAndload() {
+        $$("estadosGrid").eachColumn(function (id, col) {
+            if (col.id == 'actions') return;
+            var filter = this.getFilter(id);
+            if (filter) {
+                if (filter.setValue) filter.setValue("")	// suggest-based filters 
+                else filter.value = "";					// html-based: select & text
+            }
+        });
+        this.load();
     }
 }
