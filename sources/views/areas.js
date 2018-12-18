@@ -38,17 +38,9 @@ export default class Areas extends JetView {
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+L",
+                    view: "button", type: "icon", icon: "mdi mdi-refresh", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
-                        var newRow = { id: -1, areaId: 0 };
-                        $$('areasGrid').editStop();
-                        var id = $$("areasGrid").add(newRow);
-                        $$("areasGrid").showItem(id);
-                        $$("areasGrid").edit({
-                            row: -1,
-                            column: "nombre"
-                        });
-                        isNewRow = true;
+                        this.cleanAndload();
                     }
                 },
                 {
@@ -62,7 +54,9 @@ export default class Areas extends JetView {
                         });
                     }
                 },
-                {},
+                {
+                    view: "label", id: "AreasNReg", label: "NREG: "
+                },
                 {
                     view: "pager", id: "mypager", css: { "text-align": "right" },
                     template: "{common.first()} {common.prev()} {common.pages()} {common.next()} {common.last()}",
@@ -145,6 +139,11 @@ export default class Areas extends JetView {
                         }
                     }
                 },
+                "onAfterFilter": function () {
+                    var numReg = $$("areasGrid").count();
+                    $$("AreasNReg").config.label = "NREG: " + numReg;
+                    $$("AreasNReg").refresh();
+                }
             }
         }
         var _view = {
@@ -166,9 +165,11 @@ export default class Areas extends JetView {
             $$('areasGrid').remove(-1);
             return false;
         }, $$('areasGrid'));
+        webix.extend($$("areasGrid"), webix.ProgressBar);
         this.load(id);
     }
     load(id) {
+        $$("areasGrid").showProgress();
         areasService.getAreas(usuarioService.getUsuarioCookie())
             .then((data) => {
                 $$("areasGrid").clearAll();
@@ -177,8 +178,13 @@ export default class Areas extends JetView {
                     $$("areasGrid").select(id);
                     $$("areasGrid").showItem(id);
                 }
+                var numReg = $$("areasGrid").count();
+                $$("AreasNReg").config.label = "NREG: " + numReg;
+                $$("AreasNReg").refresh();
+                $$("areasGrid").hideProgress();                
             })
             .catch((err) => {
+                $$("areasGrid").hideProgress();                
                 messageApi.errorMessageAjax(err);
             });
     }
@@ -200,5 +206,16 @@ export default class Areas extends JetView {
             }
 
         });
+    }
+    cleanAndload() {
+        $$("areasGrid").eachColumn(function (id, col) {
+            if (col.id == 'actions') return;
+            var filter = this.getFilter(id);
+            if (filter) {
+                if (filter.setValue) filter.setValue("")	// suggest-based filters 
+                else filter.value = "";					// html-based: select & text
+            }
+        });
+        this.load();
     }
 }
