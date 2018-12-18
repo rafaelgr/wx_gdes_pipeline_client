@@ -44,7 +44,9 @@ export default class Paises extends JetView {
                         });
                     }
                 },
-                {},
+                {
+                    view: "label", id: "PaisesNReg", label: "NREG: "
+                },
                 {
                     view: "pager", id: "mypager", css: { "text-align": "right" },
                     template: "{common.first()} {common.prev()} {common.pages()} {common.next()} {common.last()}",
@@ -120,6 +122,11 @@ export default class Paises extends JetView {
                         }
                     }
                 },
+                "onAfterFilter": function () {
+                    var numReg = $$("paisesGrid").count();
+                    $$("PaisesNReg").config.label = "NREG: " + numReg;
+                    $$("PaisesNReg").refresh();
+                }
             }
         }
         var _view = {
@@ -141,9 +148,11 @@ export default class Paises extends JetView {
             $$('paisesGrid').remove(-1);
             return false;
         }, $$('paisesGrid'));
+        webix.extend($$("paisesGrid"), webix.ProgressBar);
         this.load(id);
     }
     load(id) {
+        $$("paisesGrid").showProgress();
         paisesService.getPaises(usuarioService.getUsuarioCookie())
             .then(data => {
                 $$("paisesGrid").clearAll();
@@ -152,8 +161,13 @@ export default class Paises extends JetView {
                     $$("paisesGrid").select(id);
                     $$("paisesGrid").showItem(id);
                 }
+                var numReg = $$("paisesGrid").count();
+                $$("PaisesNReg").config.label = "NREG: " + numReg;
+                $$("PaisesNReg").refresh();
+                $$("paisesGrid").hideProgress();
             })
             .catch(err => {
+                $$("paisesGrid").hideProgress();
                 messageApi.errorMessageAjax(err);
             })
     }

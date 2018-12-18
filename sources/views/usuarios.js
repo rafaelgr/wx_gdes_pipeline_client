@@ -99,7 +99,9 @@ export default class Usuarios extends JetView {
                         });
                     }
                 },
-                {},
+                {
+                    view: "label", id: "UsuariosNReg", label: "NREG: "
+                },
                 {
                     view: "pager", id: "mypager", css: { "text-align": "right" },
                     template: "{common.first()} {common.prev()} {common.pages()} {common.next()} {common.last()}",
@@ -189,6 +191,11 @@ export default class Usuarios extends JetView {
                         }
                     }
                 },
+                "onAfterFilter": function () {
+                    var numReg = $$("usuariosGrid").count();
+                    $$("UsuariosNReg").config.label = "NREG: " + numReg;
+                    $$("UsuariosNReg").refresh();
+                }
             }
         }
         var _view = {
@@ -210,6 +217,7 @@ export default class Usuarios extends JetView {
             $$('usuariosGrid').remove(-1);
             return false;
         }, $$('usuariosGrid'));
+        webix.extend($$("usuariosGrid"), webix.ProgressBar);
         this.load(id);
     }
     load(id) {
@@ -221,8 +229,13 @@ export default class Usuarios extends JetView {
                     $$("usuariosGrid").select(id);
                     $$("usuariosGrid").showItem(id);
                 }
+                var numReg = $$("usuariosGrid").count();
+                $$("UsuariosNReg").config.label = "NREG: " + numReg;
+                $$("UsuariosNReg").refresh();
+                $$("usuariosGrid").hideProgress();
             })
             .catch((err) => {
+                $$("usuariosGrid").hideProgress();
                 messageApi.errorMessageAjax(err);
             });
     }

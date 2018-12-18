@@ -286,7 +286,6 @@ export default class Ofertas extends JetView {
                     }
                 },
                 "onAfterFilter": function () {
-                    console.log("ONAFTERFILTER");
                     var numReg = $$("ofertasGrid").count();
                     $$("OfertasNReg").config.label = "NREG: " + numReg;
                     console.log("NREG ", $$("OfertasNReg"));

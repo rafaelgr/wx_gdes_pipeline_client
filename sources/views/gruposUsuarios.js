@@ -46,7 +46,9 @@ export default class GruposUsuarios extends JetView {
                         });
                     }
                 },
-                {},
+                {
+                    view: "label", id: "GruposUsuariosNReg", label: "NREG: "
+                },
                 {
                     view: "pager", id: "mypager", css: { "text-align": "right" },
                     template: "{common.first()} {common.prev()} {common.pages()} {common.next()} {common.last()}",
@@ -117,6 +119,12 @@ export default class GruposUsuarios extends JetView {
                         }
                     }
                 },
+                "onAfterFilter": function () {
+                    var numReg = $$("gruposUsuariosGrid").count();
+                    $$("GruposUsuariosNReg").config.label = "NREG: " + numReg;
+                    console.log("NREG ", $$("GruposUsuariosNReg"));
+                    $$("GruposUsuariosNReg").refresh();
+                }
             }
         }
         var _view = {
@@ -138,9 +146,11 @@ export default class GruposUsuarios extends JetView {
             $$('gruposUsuariosGrid').remove(-1);
             return false;
         }, $$('gruposUsuariosGrid'));
+        webix.extend($$("gruposUsuariosGrid"), webix.ProgressBar);
         this.load(id);
     }
     load(id) {
+        $$("gruposUsuariosGrid").showProgress({type:"icon"});
         gruposUsuariosService.getGruposUsuarios(usuarioService.getUsuarioCookie())
             .then(data => {
                 $$("gruposUsuariosGrid").clearAll();
@@ -149,8 +159,13 @@ export default class GruposUsuarios extends JetView {
                     $$("gruposUsuariosGrid").select(id);
                     $$("gruposUsuariosGrid").showItem(id);
                 }
+                var numReg = $$("gruposUsuariosGrid").count();
+                $$("GruposUsuariosNReg").config.label = "NREG: " + numReg;
+                $$("GruposUsuariosNReg").refresh();
+                $$("gruposUsuariosGrid").hideProgress();
             })
             .catch(err => {
+                $$("gruposUsuariosGrid").hideProgress();
                 return messageApi.errorMessageAjax(err);
             });
     }
