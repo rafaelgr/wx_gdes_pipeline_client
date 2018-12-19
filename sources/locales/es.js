@@ -189,5 +189,10 @@ export default {
     "Version": "Version",
     "Fecha cambio": "Fecha cambio",
     "Fecha entrega": "Fecha entrega",
-    "Num. Version": "Num. Version"
+    "Num. Version": "Num. Version",
+    "autorizacionX": "Faltan datos para determinar la autorización necesaria. Ponerse en contacto con el Departamento de Apoyo a Ofertas",
+    "autorizacion0": "Aprueba: Responsable de oferta",
+    "autorizacion1": "Aprueba el director del área de servicio",
+    "autorizacion2": "Requiere PPR y autorización conjunta de CM y director de BU",
+    "autorizacion3": "Requiere PPR y comité de ofertas. Aprueba CEO"
 }

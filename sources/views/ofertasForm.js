@@ -96,8 +96,8 @@ export default class OfertasForm extends JetView {
                 {
                     cols: [
                         { view: "combo", id: "cmbProbabilidad", name: "probabilidad", required: true, options: {}, label: translate("Probabilidad"), labelPosition: "top" },
-                        { view: "checkbox", name: "ofertaSingular", options: {}, label: translate("Oferta singular"), labelPosition: "top" },
-                        { view: "textarea", name: "autorizaciones", options: {}, label: translate("Autorizaciones"), labelPosition: "top" },
+                        { view: "checkbox", id: "ofertaSingular", name: "ofertaSingular", options: {}, label: translate("Oferta singular"), labelPosition: "top" },
+                        { view: "textarea", id: "autorizaciones", name: "autorizaciones", options: {}, label: translate("Autorizaciones"), labelPosition: "top" },
 
                     ]
                 },
@@ -892,7 +892,6 @@ export default class OfertasForm extends JetView {
         $$("ubicacion").setValue(usu.ubicacion);
     }
     calcImporte() {
-        console.log("CALC IMPORTE ----");
         // Calcular el importe de contribución a partir del margen
         let importe = +$$("importePresupuesto").getValue();
         let margen = +$$("margenContribucion").getValue();
@@ -906,6 +905,7 @@ export default class OfertasForm extends JetView {
         $$("importeTotal").setValue(importeTotal);
         let importeTotalDivisa = importeTotal * multiplicador;
         if (importeTotalDivisa) $$("importeTotalDivisa").setValue(importeTotalDivisa);
+        this.getTextoAutorizacion();
     }
     calcFromDivisa() {
         let multiplicador = +$$("multiplicador").getValue();
@@ -921,8 +921,27 @@ export default class OfertasForm extends JetView {
             $$("importePrimerAno").setValue(importePrimerAno);
             let importeInversion = +$$("importeInversionDivisa").getValue() / multiplicador;
             $$("importeInversion").setValue(importeInversion);
-            // debugger;
             this.calcImporte();
         }
+    }
+    getTextoAutorizacion() {
+        const translate = this.app.getService("locale")._;
+        let importe = +$$("importePresupuesto").getValue();
+        let ofertaSingular = +$$("ofertaSingular").getValue();
+        let tAut = "0";
+        if (importe > 150000) {
+            tAut = "1";
+        }
+        if (importe > 300000) {
+            tAut = "2";
+        }
+        if (importe > 1000000) {
+            tAut = "3";
+        }
+        if (ofertaSingular) {
+            tAut = "3";
+        }
+        let authTxt = translate('autorizacion' + tAut);
+        $$("autorizaciones").setValue(authTxt);
     }
 }
