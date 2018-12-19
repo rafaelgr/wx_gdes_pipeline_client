@@ -72,7 +72,7 @@ export default {
     "Fase oferta": "Fase oferta",
     "Tipo oportunidad": "Tipo oportunidad",
     "Pais ubicación": "Pais ubicación",
-    "Margen (%)": "Margin (%)",
+    "Margen (%)": "Margen (%)",
     "Cliente": "Cliente",
     "Nombre": "Nombre",
     "Descripción": "Descripción",
@@ -194,5 +194,6 @@ export default {
     "autorizacion0": "Aprueba: Responsable de oferta",
     "autorizacion1": "Aprueba el director del área de servicio",
     "autorizacion2": "Requiere PPR y autorización conjunta de CM y director de BU",
-    "autorizacion3": "Requiere PPR y comité de ofertas. Aprueba CEO"
+    "autorizacion3": "Requiere PPR y comité de ofertas. Aprueba CEO",
+    "Nueva oferta": "Nueva oferta"
 }

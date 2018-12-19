@@ -13,6 +13,7 @@ import { estadosService } from "../services/estados_service";
 import { divisasService } from "../services/divisas_service";
 import { languageService } from "../locales/language_service";
 import { razonesPerdidaService } from "../services/razonesPerdida_service";
+import OfertasWindow from "./ofertasWindow";
 
 var editButton = "<span class='onEdit webix_icon wxi-pencil'></span>";
 var deleteButton = "<span class='onDelete webix_icon wxi-trash'></span>";
@@ -142,6 +143,12 @@ export default class Ofertas extends JetView {
                         this.show('/top/ofertasForm?ofertaId=0');
                     }
                 },
+                {
+                    view: "button", type: "icon", icon: "wxi-plus-square", width: 37, align: "left", hotkey: "Ctrl+M",
+                    click: () => {
+                        this.ofertasWindow.showWindow();
+                    }
+                },                
                 {
                     view: "button", type: "icon", icon: "mdi mdi-refresh", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
@@ -307,6 +314,7 @@ export default class Ofertas extends JetView {
         webix.extend($$("ofertasGrid"), webix.ProgressBar);
         this.load(id);
         languageService.setLanguage(this.app, usu.codigoIdioma);
+        this.ofertasWindow = this.ui(OfertasWindow);
     }
     load(id) {
         $$("ofertasGrid").showProgress({type:"icon"});

@@ -16,7 +16,11 @@ export default class MainToolbar extends JetView {
 				{
 					view: "button", type: "icon", icon: "mdi mdi-menu", width: 37, align: "left",
 					click: function () {
-						$$("main:menu").toggle();
+						if( $$("main:menu").config.hidden){
+							$$("main:menu").show();
+						}
+						else
+							$$("main:menu").hide();
 					}
 				},
 				{ view: "label", label: "<a href='#!/top/inicio'><img src='assets/img/gdes_logo.png' height='35' /></a>", width: 150 },

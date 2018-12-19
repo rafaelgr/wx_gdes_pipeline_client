@@ -6,7 +6,6 @@ export default class MainMenu extends JetView {
         const translate = this.app.getService("locale")._;
         var mainMenu = {
             view: "sidebar",
-            width: 200,
             id: "main:menu",
             activeTitle: true, select: true,
             data: [
@@ -14,7 +13,7 @@ export default class MainMenu extends JetView {
                     id: "inicio", icon: "mdi mdi-home", value: translate("INICIO")
                 },
                 {
-                    id: "administracion", icon: "mdi mdi-switch", open: true, value: translate("ADMINISTRACIÓN"),
+                    icon: "mdi mdi-switch", open: true, value: translate("ADMINISTRACIÓN"),
                     data: [
                         { id: "parametros", value: translate("Parámetros"), icon: "mdi mdi-altimeter", details: "Parámetros de la aplicación", },
                         { id: "gruposUsuarios", value: translate("Grupos de usuarios"), icon: "mdi mdi-account-group", details: "Grupos de usuarios" },
@@ -34,7 +33,7 @@ export default class MainMenu extends JetView {
                     ]
                 },
                 {
-                    id: "gestion", icon: "mdi mdi-buffer", open: true, value: translate("GESTIÓN"),
+                    icon: "mdi mdi-buffer", open: true, value: translate("GESTIÓN"),
                     data: [
                         { id: "ofertas", value: translate("Ofertas"), icon: "mdi mdi-arrow-decision-outline", details: "Ofertas" }
                     ]
