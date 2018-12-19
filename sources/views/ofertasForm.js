@@ -28,7 +28,7 @@ export default class OfertasForm extends JetView {
             padding: 5, css: "fondocelda",
             rows: [
                 { template: translate("DESCRIPTIVOS"), type: "section" },
-                { view: "textarea", name: "descripcion", label: translate("Descripción"), required: true, labelPosition: "top", id: "firstField", height: 100 },
+                { view: "textarea", name: "descripcion", label: translate("Descripción"), required: true, labelPosition: "top", id: "firstField"},
                 {
                     cols: [
                         { view: "text", name: "nombreCorto", label: translate("Nombre"), required: true, labelPosition: "top" },
@@ -57,7 +57,7 @@ export default class OfertasForm extends JetView {
                         { view: "text", name: "duracion", label: translate("Duración"), required: true, labelPosition: "top" }
                     ]
                 },
-                { view: "textarea", name: "notasPlanning", label: translate("Notas Planning"), labelPosition: "top", height: 100 },
+                { view: "textarea", name: "notasPlanning", label: translate("Notas Planning"), labelPosition: "top"},
             ]
         };
         const cellGenerales = {
@@ -102,7 +102,7 @@ export default class OfertasForm extends JetView {
                             rows: [{ view: "checkbox", id: "ofertaSingular", name: "ofertaSingular", options: {}, label: translate("Oferta singular"), labelPosition: "top" }]
                         },
                         {
-                            rows: [{ view: "textarea", id: "autorizaciones", name: "autorizaciones", options: {}, label: translate("Autorizaciones"), labelPosition: "top", height: 100 }]
+                            rows: [{ view: "textarea", id: "autorizaciones", name: "autorizaciones", options: {}, label: translate("Autorizaciones"), labelPosition: "top"}]
                         },
                     ]
                 },
@@ -123,21 +123,21 @@ export default class OfertasForm extends JetView {
                 {
                     cols: [
                         { rows: [{ view: "checkbox", name: "subrogacionSN", options: {}, label: translate("Subrogación"), labelPosition: "top", width: 150 }] },
-                        { rows: [{ view: "textarea", name: "subrogacionTXT", label: translate("Comentario subrogación"), labelPosition: "top", height: 100 }] },
+                        { rows: [{ view: "textarea", name: "subrogacionTXT", label: translate("Comentario subrogación"), labelPosition: "top"}] },
                         { rows: [{ view: "text", name: "subrogacionNum", label: translate("Cantidad personal"), labelPosition: "top", width: 150, format: "1.111" }] }
                     ]
                 },
                 {
                     cols: [
                         { rows: [{ view: "checkbox", name: "uteSN", options: {}, label: translate("UTE"), labelPosition: "top", width: 150 }] },
-                        { rows: [{ view: "textarea", name: "uteTXT", label: translate("Comentario UTE"), labelPosition: "top", height: 100 }] },
+                        { rows: [{ view: "textarea", name: "uteTXT", label: translate("Comentario UTE"), labelPosition: "top"}] },
                         { rows: [{ view: "text", name: "gdesPor", label: translate("GDES Porcentaje"), labelPosition: "top", width: 150 }] }
                     ]
                 },
                 {
                     cols: [
                         { rows: [{ view: "checkbox", name: "subcontrataSN", options: {}, label: translate("Reclutamiento"), labelPosition: "top", width: 150 }] },
-                        { rows: [{ view: "textarea", name: "subcontrataTXT", label: translate("Perfil y cantidad a reclutar"), labelPosition: "top", height: 100 }] },
+                        { rows: [{ view: "textarea", name: "subcontrataTXT", label: translate("Perfil y cantidad a reclutar"), labelPosition: "top"}] },
                         { rows: [{ view: "datepicker", editable: true, minDate: new Date(new Date("1500-01-01")), name: "fechaCreacion", label: translate("Fecha creación"), labelPosition: "top", width: 150 }] }
                     ]
                 }
@@ -274,8 +274,8 @@ export default class OfertasForm extends JetView {
                     cols: [
                         {
                             rows: [
-                                { view: "textarea", name: "descripcionInversion", label: translate("Descripción inversión"), labelPosition: "top", height: 100 },
-                                { view: "textarea", name: "condicionesPago", label: translate("Condiciones de pago"), labelPosition: "top", height: 100 }
+                                { view: "textarea", name: "descripcionInversion", label: translate("Descripción inversión"), labelPosition: "top"},
+                                { view: "textarea", name: "condicionesPago", label: translate("Condiciones de pago"), labelPosition: "top"}
                             ]
                         },
                         {
