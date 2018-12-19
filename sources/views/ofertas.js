@@ -143,7 +143,7 @@ export default class Ofertas extends JetView {
                     }
                 },
                 {
-                    view: "button", type: "icon", icon: "mdi mdi-refresh", width: 37, align: "left", hotkey: "Ctrl+L",
+                    view: "button", type: "icon", icon: "mdi md i-refresh", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
                         this.cleanAndload();
                     }

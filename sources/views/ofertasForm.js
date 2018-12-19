@@ -185,28 +185,28 @@ export default class OfertasForm extends JetView {
                         {},
                         {
                             cols: [
-                                { view: "text", name: "importePresupuesto", required: true, label: translate("Importe GDES"), labelPosition: "top", format: "1.111,00 €" },
-                                { view: "text", name: "importeUTE", label: translate("Importe UTE"), labelPosition: "top", format: "1.111,00 €" },
-                                { view: "text", name: "importeTotal", label: translate("Importe Total"), labelPosition: "top", format: "1.111,00 €" }
+                                { view: "text", id: "importePresupuesto", name: "importePresupuesto", required: true, label: translate("Importe GDES"), labelPosition: "top", format: "1.111,00 €" },
+                                { view: "text", id: "importeUTE", name: "importeUTE", label: translate("Importe UTE"), labelPosition: "top", format: "1.111,00 €" },
+                                { view: "text", id: "importeTotal", name: "importeTotal", label: translate("Importe Total"), labelPosition: "top", format: "1.111,00 €", readonly: true }
                             ]
                         },
                         {
                             cols: [
-                                { view: "text", name: "margenContribucion", required: true, label: translate("Margen contribución"), labelPosition: "top", format: "1.111,00 %" },
-                                { view: "text", name: "importeContribucion", label: translate("Importe margen"), labelPosition: "top", format: "1.111,00 €" },
+                                { view: "text", id: "margenContribucion", name: "margenContribucion", required: true, label: translate("Margen contribución"), labelPosition: "top", format: "1.111,00 %" },
+                                { view: "text", id: "importeContribucion", name: "importeContribucion", label: translate("Importe margen"), labelPosition: "top", format: "1.111,00 €", readonly: true },
                                 {}
                             ]
                         },
                         {
                             cols: [
-                                { view: "text", name: "importeAnual", label: translate("Importe anual"), labelPosition: "top", format: "1.111,00 €" },
-                                { view: "text", name: "importePrimerAno", label: translate("Importe año en curso"), labelPosition: "top", format: "1.111,00 €" },
+                                { view: "text", id: "importeAnual", name: "importeAnual", label: translate("Importe anual"), labelPosition: "top", format: "1.111,00 €" },
+                                { view: "text", id: "importePrimerAno", name: "importePrimerAno", label: translate("Importe año en curso"), labelPosition: "top", format: "1.111,00 €" },
                                 {}
                             ]
                         },
                         {
                             cols: [
-                                { view: "text", name: "importeInversion", label: translate("Valor inversión"), labelPosition: "top", format: "1.111,00 €" },
+                                { view: "text", id: "importeInversion", name: "importeInversion", label: translate("Valor inversión"), labelPosition: "top", format: "1.111,00 €" },
                                 {},
                                 {}
                             ]
@@ -225,34 +225,34 @@ export default class OfertasForm extends JetView {
                             cols: [
                                 { view: "combo", id: "cmbDivisa", name: "divisaId", options: {}, label: translate("Divisa"), labelPosition: "top" },
                                 {},
-                                { view: "text", name: "multiplicador", label: translate("Factor (1€ =)"), labelPosition: "top", format: "1.111,00" },
-                                { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaDivisa", label: translate("Fecha divisa"), labelPosition: "top" },
+                                { view: "text", id: "multiplicador", name: "multiplicador", label: translate("Factor (1€ =)"), labelPosition: "top", format: "1.111,00" },
+                                { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), id: "fechaDivisa", name: "fechaDivisa", label: translate("Fecha divisa"), labelPosition: "top" },
                             ]
                         },
                         {
                             cols: [
-                                { view: "text", name: "importePresupuestoDivisa", label: translate("Importe GDES (DIVISA)"), labelPosition: "top", format: "1.111,00" },
-                                { view: "text", name: "importeUTEDivisa", label: translate("Importe UTE (DIVISA)"), labelPosition: "top", format: "1.111,00" },
-                                { view: "text", name: "importeTotal", label: translate("Importe Total"), labelPosition: "top", format: "1.111,00" }
+                                { view: "text", id: "importePresupuestoDivisa", name: "importePresupuestoDivisa", label: translate("Importe GDES (DIVISA)"), labelPosition: "top", format: "1.111,00" },
+                                { view: "text", id: "importeUTEDivisa", name: "importeUTEDivisa", label: translate("Importe UTE (DIVISA)"), labelPosition: "top", format: "1.111,00" },
+                                { view: "text", id: "importeTotalDivisa", name: "importeTotalDivisa", label: translate("Importe Total"), labelPosition: "top", format: "1.111,00", readonly: true }
                             ]
                         },
                         {
                             cols: [
                                 {},
-                                { view: "text", name: "importeContribucionDivisa", label: translate("Importe margen (DIVISA)"), labelPosition: "top", format: "1.111,00" },
+                                { view: "text", id: "importeContribucionDivisa", name: "importeContribucionDivisa", label: translate("Importe margen (DIVISA)"), labelPosition: "top", format: "1.111,00", readonly: true },
                                 {}
                             ]
                         },
                         {
                             cols: [
-                                { view: "text", name: "importeAnualDivisa", label: translate("Importe anual (DIVISA)"), labelPosition: "top", format: "1.111,00" },
-                                { view: "text", name: "importePrimerAnoDivisa", label: translate("Importe año en curso (DIVISA)"), labelPosition: "top", format: "1.111,00" },
+                                { view: "text", id: "importeAnualDivisa", name: "importeAnualDivisa", label: translate("Importe anual (DIVISA)"), labelPosition: "top", format: "1.111,00" },
+                                { view: "text", id: "importePrimerAnoDivisa", name: "importePrimerAnoDivisa", label: translate("Importe año en curso (DIVISA)"), labelPosition: "top", format: "1.111,00" },
                                 {}
                             ]
                         },
                         {
                             cols: [
-                                { view: "text", name: "importeInversionDivisa", label: translate("Valor inversión (DIVISA)"), labelPosition: "top", format: "1.111,00" },
+                                { view: "text", id: "importeInversionDivisa", name: "importeInversionDivisa", label: translate("Valor inversión (DIVISA)"), labelPosition: "top", format: "1.111,00" },
                                 {},
                                 {}
                             ]
@@ -563,9 +563,16 @@ export default class OfertasForm extends JetView {
                 $$("conversionOportunidad").setValue(true);
                 $$("fechaConversionOportunidad").setValue(new Date());
             }
-
         });
-
+        $$("importePresupuesto").attachEvent("onChange", (nv, ov) => { this.calcImporte(); });
+        $$("margenContribucion").attachEvent("onChange", (nv, ov) => { this.calcImporte(); });
+        $$("importeUTE").attachEvent("onChange", (nv, ov) => { this.calcImporte(); });
+        $$("multiplicador").attachEvent("onChange", (nv, ov) => { this.calcFromDivisa(); });
+        $$("importePresupuestoDivisa").attachEvent("onChange", (nv, ov) => { this.calcFromDivisa(); });
+        $$("importeUTEDivisa").attachEvent("onChange", (nv, ov) => { this.calcFromDivisa(); });
+        $$("importeAnualDivisa").attachEvent("onChange", (nv, ov) => { this.calcFromDivisa(); });
+        $$("importePrimerAnoDivisa").attachEvent("onChange", (nv, ov) => { this.calcFromDivisa(); });
+        $$("importeInversionDivisa").attachEvent("onChange", (nv, ov) => { this.calcFromDivisa(); });
     }
     load(ofertaId) {
         let usu = usuarioService.getUsuarioCookie();
@@ -884,5 +891,38 @@ export default class OfertasForm extends JetView {
         $$("cmbArea").setValue(usu.areaId);
         $$("ubicacion").setValue(usu.ubicacion);
     }
-
+    calcImporte() {
+        console.log("CALC IMPORTE ----");
+        // Calcular el importe de contribución a partir del margen
+        let importe = +$$("importePresupuesto").getValue();
+        let margen = +$$("margenContribucion").getValue();
+        let multiplicador = +$$("multiplicador").getValue();
+        let importeContribucion = (margen * importe * 1.0) / 100.00;
+        let importeContribucionDivisa = importeContribucion * multiplicador * 1.0;
+        $$("importeContribucion").setValue(importeContribucion);
+        if (importeContribucionDivisa) $$("importeContribucionDivisa").setValue(importeContribucionDivisa);
+        // Obliga a recalcular el total
+        let importeTotal = +$$("importePresupuesto").getValue() + +$$("importeUTE").getValue();
+        $$("importeTotal").setValue(importeTotal);
+        let importeTotalDivisa = importeTotal * multiplicador;
+        if (importeTotalDivisa) $$("importeTotalDivisa").setValue(importeTotalDivisa);
+    }
+    calcFromDivisa() {
+        let multiplicador = +$$("multiplicador").getValue();
+        console.log("Multiplicador: ", multiplicador)
+        if (multiplicador != 0) {
+            let importePresupuesto = +$$("importePresupuestoDivisa").getValue() / multiplicador;
+            $$("importePresupuesto").setValue(importePresupuesto);
+            let importeUTE = +$$("importeUTEDivisa").getValue() / multiplicador;
+            $$("importeUTE").setValue(importeUTE);
+            let importeAnual = +$$("importeAnualDivisa").getValue() / multiplicador;
+            $$("importeAnual").setValue(importeAnual);
+            let importePrimerAno = +$$("importePrimerAnoDivisa").getValue() / multiplicador;
+            $$("importePrimerAno").setValue(importePrimerAno);
+            let importeInversion = +$$("importeInversionDivisa").getValue() / multiplicador;
+            $$("importeInversion").setValue(importeInversion);
+            // debugger;
+            this.calcImporte();
+        }
+    }
 }
