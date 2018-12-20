@@ -154,7 +154,7 @@ export default class UsuarioForm extends JetView {
             return;
         }
         var data = $$("frmUsuarios").getValues();
-        delete data.grupo; // ????
+        data = usuarioService.cleanData(data);
         console.log("DATAF: ", data);
         if (usuarioId == 0) {
             data.usuarioId = 0;

@@ -184,7 +184,7 @@ export default class Ofertas extends JetView {
             //pager: "mypager",
             navigation: true,
             columns: [
-                { id: "ofertaId", adjust: true, header: [translate("ID"), { content: "numberFilter" }], sort: "number" },
+                { id: "ofertaId", adjust: true, header: [translate("ID"), { content: "numberFilter" }], sort: "int" },
                 { id: "numeroOferta", header: [translate("Nr. Oferta"), { content: "textFilter" }], sort: "string", editor: "text", minWidth: 100 },
                 { id: "empresaId", header: [translate("Empresa"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colEmpresas, width: 200 },
                 { id: "paisId", header: [translate("Pais"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colPaises, width: 200 },
@@ -302,6 +302,9 @@ export default class Ofertas extends JetView {
         return _view;
     }
     init(view, url) {
+        this.ofertasWindow = this.ui(OfertasWindow);
+    }
+    urlChange(view, url){
         var usu = usuarioService.checkLoggedUser();
         var id = null;
         if (url[0].params.ofertaId) {
@@ -314,7 +317,6 @@ export default class Ofertas extends JetView {
         webix.extend($$("ofertasGrid"), webix.ProgressBar);
         this.load(id);
         languageService.setLanguage(this.app, usu.codigoIdioma);
-        this.ofertasWindow = this.ui(OfertasWindow);
     }
     load(id) {
         $$("ofertasGrid").showProgress({type:"icon"});

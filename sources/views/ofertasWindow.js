@@ -10,7 +10,9 @@ import { fasesOfertaService } from "../services/fasesOferta_service";
 import { tiposOportunidadService } from "../services/tiposOportunidad_service";
 import { tiposContratoService } from "../services/tiposContrato_service";
 import { estadosService } from "../services/estados_service";
+import { parametrosService } from "../services/parametros_service";
 import { generalApi } from "../utilities/general";
+import { messageApi } from "../utilities/messages";
 
 var ofertaId = 0;
 
@@ -19,7 +21,7 @@ export default class OfertasWindow extends JetView {
         const translate = this.app.getService("locale")._;
         const _view1 = {
             view: "layout",
-            id: "ofertasForm",
+            id: "ofertasFormWindow",
             rows: [
                 {
                     view: "toolbar", padding: 3, elements: [
@@ -30,20 +32,20 @@ export default class OfertasWindow extends JetView {
                 {
                     view: "form",
 
-                    id: "frmOfertas",
+                    id: "frmOfertasWindow",
                     elements: [
                         {
                             cols: [
                                 {
-                                    view: "combo", id: "cmbUsuario", name: "usuarioId", required: true, options: {},
+                                    view: "combo", id: "cmbUsuarioW", name: "usuarioId", required: true, options: {},
                                     label: translate("Usuario"), labelPosition: "top"
                                 },
                                 {
-                                    view: "combo", id: "cmbArea", name: "areaId", required: true, options: {},
+                                    view: "combo", id: "cmbAreaW", name: "areaId", required: true, options: {},
                                     label: translate("Area"), labelPosition: "top"
                                 },
                                 {
-                                    view: "combo", id: "cmbUnidadNegocio", name: "unidadNegocioId", required: true, options: {},
+                                    view: "combo", id: "cmbUnidadNegocioW", name: "unidadNegocioId", required: true, options: {},
                                     label: translate("Unidad de negocio"), labelPosition: "top"
                                 }
                             ]
@@ -51,15 +53,15 @@ export default class OfertasWindow extends JetView {
                         {
                             cols: [
                                 {
-                                    view: "combo", id: "cmbResponsable", name: "responsableId", required: true, options: {},
+                                    view: "combo", id: "cmbResponsableW", name: "responsableId", required: true, options: {},
                                     label: translate("Responsable"), labelPosition: "top"
                                 },
                                 {
-                                    view: "combo", id: "cmbEmpresa", name: "empresaId", required: true, options: {},
+                                    view: "combo", id: "cmbEmpresaW", name: "empresaId", required: true, options: {},
                                     label: translate("Empresa"), labelPosition: "top"
                                 },
                                 {
-                                    view: "combo", id: "cmbPais", name: "paisId", required: true, options: {},
+                                    view: "combo", id: "cmbPaisW", name: "paisId", required: true, options: {},
                                     label: translate("Pais"), labelPosition: "top"
                                 },
                             ]
@@ -67,31 +69,45 @@ export default class OfertasWindow extends JetView {
                         {
                             cols: [
                                 { view: "text", name: "ofertaId", label: translate("ID"), labelPosition: "top", readonly: true },
-                                { view: "text", id: "numeroOferta", name: "numeroOferta", required: true, label: translate("Nr. Oferta"), labelPosition: "top" },
-                                { view: "text", id: "codigoOferta", name: "codigoOferta", required: true, label: translate("Cod. Oferta"), labelPosition: "top" }
+                                { view: "text", id: "numeroOfertaW", name: "numeroOferta", required: true, label: translate("Nr. Oferta"), labelPosition: "top" },
+                                { view: "text", id: "codigoOfertaW", name: "codigoOferta", required: true, label: translate("Cod. Oferta"), labelPosition: "top" }
                             ]
                         },
                         {
                             cols: [
-                                { view: "text", name: "nombreCorto", label: translate("Nombre"), required: true, labelPosition: "top" },
-                                { view: "text", name: "cliente", label: translate("Cliente"), required: true, labelPosition: "top" },
-                                { view: "text", id: "ubicacion", name: "ubicacion", label: translate("Ubicación"), required: true, labelPosition: "top" }
+                                { view: "text", name: "nombreCortoW", label: translate("Nombre"), required: true, labelPosition: "top" },
+                                { view: "text", name: "clienteW", label: translate("Cliente"), required: true, labelPosition: "top" },
+                                { view: "text", id: "ubicacionW", name: "ubicacion", label: translate("Ubicación"), required: true, labelPosition: "top" }
                             ]
                         },
-                        { view: "combo", id: "cmbServicio", name: "servicioId", required: true, options: {}, label: translate("Servicio"), labelPosition: "top" },
+                        { view: "combo", id: "cmbServicioW", name: "servicioId", required: true, options: {}, label: translate("Servicio"), labelPosition: "top" },
                         {
                             cols: [
-                                { view: "combo", id: "cmbFaseOferta", name: "faseOfertaId", required: true, options: {}, label: translate("Fase oferta"), labelPosition: "top" },
-                                { view: "combo", id: "cmbTipoOportunidad", name: "tipoOportunidadId", required: true, options: {}, label: translate("Tipo oportunidad"), labelPosition: "top" },
-                                { view: "combo", id: "cmbTipoContrato", name: "tipoContratoId", required: true, options: {}, label: translate("Tipo contrato"), labelPosition: "top" }
+                                { view: "combo", id: "cmbFaseOfertaW", name: "faseOfertaId", required: true, options: {}, label: translate("Fase oferta"), labelPosition: "top" },
+                                { view: "combo", id: "cmbTipoOportunidadW", name: "tipoOportunidadId", required: true, options: {}, label: translate("Tipo oportunidad"), labelPosition: "top" },
+                                { view: "combo", id: "cmbTipoContratoW", name: "tipoContratoId", required: true, options: {}, label: translate("Tipo contrato"), labelPosition: "top" }
                             ]
                         },
                         {
                             cols: [
-                                { view: "combo", id: "cmbEstado", name: "estadoId", required: true, options: {}, label: translate("Estado"), labelPosition: "top" },
-                                {}
+                                { view: "combo", id: "cmbEstadoW", name: "estadoId", required: true, options: {}, label: translate("Estado"), labelPosition: "top" },
+                                { view: "combo", id: "cmbProbabilidadW", name: "probabilidad", required: true, options: {}, label: translate("Probabilidad"), labelPosition: "top" },
+                                { view: "text", id: "importePresupuestoW", name: "importePresupuesto", required: true, label: translate("Importe GDES"), labelPosition: "top", format: "1.111,00 €" },
+                                { view: "text", id: "margenContribucionW", name: "margenContribucion", required: true, label: translate("Margen contribución"), labelPosition: "top", format: "1.111,00 %" }
                             ]
                         },
+                        {
+                            cols: [
+                                { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaAdjudicacion", required: true, label: translate("Fecha adjudicación"), labelPosition: "top" },
+                                { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaEntrega", required: true, label: translate("Fecha entrega"), labelPosition: "top" },
+                                { view: "datepicker", editable: true, minDate: new Date("2000-01-01"), name: "fechaInicioContrato", required: true, label: translate("Fecha inicio contrato"), labelPosition: "top" },
+                                { view: "datepicker", editable: true, minDate: new Date("2000-01-01"), name: "fechaFinContrato", required: true, label: translate("Fecha fin contrato"), labelPosition: "top" },
+                                { view: "text", name: "duracion", label: translate("Duración"), required: true, labelPosition: "top" }
+                            ]
+                        },
+                        { view: "textarea", name: "descripcion", label: translate("Descripción"), required: true, labelPosition: "top" },
+                        { view: "textarea", name: "actividadesRealizadas", label: translate("Actividades realizadas"), labelPosition: "top" },
+                        { view: "textarea", name: "actividadesPlanificadas", label: translate("Actividades planificadas"), labelPosition: "top" },
                         {
                             margin: 5, cols: [
                                 { gravity: 5 },
@@ -127,6 +143,7 @@ export default class OfertasWindow extends JetView {
 
     }
     showWindow() {
+        let usu = usuarioService.getUsuarioCookie();
         this.getRoot().show();
         this.loadUsuarios();
         this.loadAreas();
@@ -139,22 +156,26 @@ export default class OfertasWindow extends JetView {
         this.loadTiposOportunidad();
         this.loadTiposContrato();
         this.loadEstados();
+        this.loadProbabilidades();
+        this.setValoresPorDefectoUsuario(usu);
+        this.getNumeroCodigoOferta();
     }
     cancel() {
         $$('ofertasWindow').hide();
     }
     accept() {
         const translate = this.$scope.app.getService("locale")._;
-        if (!$$("frmOfertas").validate()) {
+        if (!$$("frmOfertasWindow").validate()) {
             messageApi.errorMessage(translate("Debe rellenar los campos correctamente"));
             return;
         }
-        var data = $$("frmOfertas").getValues();
-        data = ofertasService.checkFormValues(data);
+        var data = $$("frmOfertasWindow").getValues();
+        data = ofertasService.cleanData(data);
         if (ofertaId == 0) {
             data.ofertaId = 0;
             ofertasService.postOferta(usuarioService.getUsuarioCookie(), data)
                 .then((result) => {
+                    $$('ofertasWindow').hide();
                     this.$scope.show('/top/ofertas?ofertaId=' + result.ofertaId);
                 })
                 .catch((err) => {
@@ -163,6 +184,7 @@ export default class OfertasWindow extends JetView {
         } else {
             ofertasService.putOferta(usuarioService.getUsuarioCookie(), data)
                 .then(() => {
+                    $$('ofertasWindow').hide();
                     this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
                 })
                 .catch((err) => {
@@ -174,12 +196,12 @@ export default class OfertasWindow extends JetView {
         usuarioService.getUsuarios(usuarioService.getUsuarioCookie())
             .then(rows => {
                 var usuarios = generalApi.prepareDataForCombo('usuarioId', 'nombre', rows);
-                var list = $$("cmbUsuario").getPopup().getList();
+                var list = $$("cmbUsuarioW").getPopup().getList();
                 list.clearAll();
                 list.parse(usuarios);
-                if (id) {
-                    $$("cmbUsuario").setValue(usuarioId);
-                    $$("cmbUsuario").refresh();
+                if (usuarioId) {
+                    $$("cmbUsuarioW").setValue(usuarioId);
+                    $$("cmbUsuarioW").refresh();
                 }
                 return;
             });
@@ -188,12 +210,12 @@ export default class OfertasWindow extends JetView {
         areasService.getAreas(usuarioService.getUsuarioCookie())
             .then(rows => {
                 var areas = generalApi.prepareDataForCombo('areaId', 'nombre', rows);
-                var list = $$("cmbArea").getPopup().getList();
+                var list = $$("cmbAreaW").getPopup().getList();
                 list.clearAll();
                 list.parse(areas);
-                if (id) {
-                    $$("cmbArea").setValue(areaId);
-                    $$("cmbArea").refresh();
+                if (areaId) {
+                    $$("cmbAreaW").setValue(areaId);
+                    $$("cmbAreaW").refresh();
                 }
                 return;
             });
@@ -202,12 +224,12 @@ export default class OfertasWindow extends JetView {
         unidadesNegocioService.getUnidadesNegocio(usuarioService.getUsuarioCookie())
             .then(rows => {
                 var unidades = generalApi.prepareDataForCombo('unidadNegocioId', 'nombre', rows);
-                var list = $$("cmbUnidadNegocio").getPopup().getList();
+                var list = $$("cmbUnidadNegocioW").getPopup().getList();
                 list.clearAll();
                 list.parse(unidades);
-                if (id) {
-                    $$("cmbUnidadNegocio").setValue(unidadNegocioId);
-                    $$("cmbUnidadNegocio").refresh();
+                if (unidadNegocioId) {
+                    $$("cmbUnidadNegocioW").setValue(unidadNegocioId);
+                    $$("cmbUnidadNegocioW").refresh();
                 }
                 return;
             });
@@ -216,12 +238,12 @@ export default class OfertasWindow extends JetView {
         usuarioService.getUsuarios(usuarioService.getUsuarioCookie())
             .then(rows => {
                 var responsables = generalApi.prepareDataForCombo('usuarioId', 'nombre', rows);
-                var list = $$("cmbResponsable").getPopup().getList();
+                var list = $$("cmbResponsableW").getPopup().getList();
                 list.clearAll();
                 list.parse(responsables);
-                if (id) {
-                    $$("cmbResponsable").setValue(usuarioId);
-                    $$("cmbResponsable").refresh();
+                if (usuarioId) {
+                    $$("cmbResponsableW").setValue(usuarioId);
+                    $$("cmbResponsableW").refresh();
                 }
                 return;
             });
@@ -230,12 +252,12 @@ export default class OfertasWindow extends JetView {
         empresasService.getEmpresas(usuarioService.getUsuarioCookie())
             .then(rows => {
                 var empresas = generalApi.prepareDataForCombo('empresaId', 'nombre', rows);
-                var list = $$("cmbEmpresa").getPopup().getList();
+                var list = $$("cmbEmpresaW").getPopup().getList();
                 list.clearAll();
                 list.parse(empresas);
-                if (id) {
-                    $$("cmbEmpresa").setValue(empresaId);
-                    $$("cmbEmpresa").refresh();
+                if (empresaId) {
+                    $$("cmbEmpresaW").setValue(empresaId);
+                    $$("cmbEmpresaW").refresh();
                 }
                 return;
             });
@@ -244,12 +266,12 @@ export default class OfertasWindow extends JetView {
         paisesService.getPaises(usuarioService.getUsuarioCookie())
             .then(rows => {
                 var paises = generalApi.prepareDataForCombo('paisId', 'nombre', rows);
-                var list = $$("cmbPais").getPopup().getList();
+                var list = $$("cmbPaisW").getPopup().getList();
                 list.clearAll();
                 list.parse(paises);
-                if (id) {
-                    $$("cmbPais").setValue(paisId);
-                    $$("cmbPais").refresh();
+                if (paisId) {
+                    $$("cmbPaisW").setValue(paisId);
+                    $$("cmbPaisW").refresh();
                 }
                 return;
             });
@@ -258,12 +280,12 @@ export default class OfertasWindow extends JetView {
         serviciosService.getServicios(usuarioService.getUsuarioCookie())
             .then(rows => {
                 var servicios = generalApi.prepareDataForCombo('servicioId', 'nombre', rows);
-                var list = $$("cmbServicio").getPopup().getList();
+                var list = $$("cmbServicioW").getPopup().getList();
                 list.clearAll();
                 list.parse(servicios);
-                if (id) {
-                    $$("cmbServicio").setValue(servicioId);
-                    $$("cmbServicio").refresh();
+                if (servicioId) {
+                    $$("cmbServicioW").setValue(servicioId);
+                    $$("cmbServicioW").refresh();
                 }
                 return;
             });
@@ -272,12 +294,12 @@ export default class OfertasWindow extends JetView {
         fasesOfertaService.getFasesOferta(usuarioService.getUsuarioCookie())
             .then(rows => {
                 var fasesOferta = generalApi.prepareDataForCombo('faseOfertaId', 'nombre', rows);
-                var list = $$("cmbFaseOferta").getPopup().getList();
+                var list = $$("cmbFaseOfertaW").getPopup().getList();
                 list.clearAll();
                 list.parse(fasesOferta);
-                if (id) {
-                    $$("cmbFaseOferta").setValue(faseOfertaId);
-                    $$("cmbFaseOferta").refresh();
+                if (faseOfertaId) {
+                    $$("cmbFaseOfertaW").setValue(faseOfertaId);
+                    $$("cmbFaseOfertaW").refresh();
                 }
                 return;
             });
@@ -286,12 +308,12 @@ export default class OfertasWindow extends JetView {
         tiposOportunidadService.getTiposOportunidad(usuarioService.getUsuarioCookie())
             .then(rows => {
                 var tipos = generalApi.prepareDataForCombo('tipoOportunidadId', 'nombre', rows);
-                var list = $$("cmbTipoOportunidad").getPopup().getList();
+                var list = $$("cmbTipoOportunidadW").getPopup().getList();
                 list.clearAll();
                 list.parse(tipos);
-                if (id) {
-                    $$("cmbTipoOportunidad").setValue(tipoOportunidadId);
-                    $$("cmbTipoOportunidad").refresh();
+                if (tipoOportunidadId) {
+                    $$("cmbTipoOportunidadW").setValue(tipoOportunidadId);
+                    $$("cmbTipoOportunidadW").refresh();
                 }
                 return;
             });
@@ -300,12 +322,12 @@ export default class OfertasWindow extends JetView {
         tiposContratoService.getTiposContrato(usuarioService.getUsuarioCookie())
             .then(rows => {
                 var tipos = generalApi.prepareDataForCombo('tipoContratoId', 'nombre', rows);
-                var list = $$("cmbTipoContrato").getPopup().getList();
+                var list = $$("cmbTipoContratoW").getPopup().getList();
                 list.clearAll();
                 list.parse(tipos);
-                if (id) {
-                    $$("cmbTipoContrato").setValue(tipoContratoId);
-                    $$("cmbTipoContrato").refresh();
+                if (tipoContratoId) {
+                    $$("cmbTipoContratoW").setValue(tipoContratoId);
+                    $$("cmbTipoContratoW").refresh();
                 }
                 return;
             });
@@ -313,15 +335,51 @@ export default class OfertasWindow extends JetView {
     loadEstados(estadoId) {
         estadosService.getEstados(usuarioService.getUsuarioCookie())
             .then(rows => {
+                console.log("Estdados: ", rows);
                 var estados = generalApi.prepareDataForCombo('estadoId', 'nombre', rows);
-                var list = $$("cmbEstado").getPopup().getList();
+                var list = $$("cmbEstadoW").getPopup().getList();
                 list.clearAll();
                 list.parse(estados);
-                if (id) {
-                    $$("cmbEstado").setValue(estadoId);
-                    $$("cmbEstado").refresh();
+                if (estadoId) {
+                    $$("cmbEstadoW").setValue(estadoId);
+                    $$("cmbEstadoW").refresh();
                 }
                 return;
             });
+    }
+    loadProbabilidades(probabilidad) {
+        var probabilidades = [
+            { id: 0, value: "0%" },
+            { id: 50, value: "50%" },
+            { id: 80, value: "80%" }
+        ];
+        var list = $$("cmbProbabilidadW").getPopup().getList();
+        list.clearAll();
+        list.parse(probabilidades);
+        if (probabilidad) {
+            $$("cmbProbabilidadW").setValue(probabilidad);
+            $$("cmbProbabilidadW").refresh();
+        }
+        return;
+    }
+    getNumeroCodigoOferta() {
+        parametrosService.getParametrosContadores(usuarioService.getUsuarioCookie())
+            .then(data => {
+                $$("numeroOfertaW").setValue(data.numeroOferta);
+                $$("codigoOfertaW").setValue(data.codigoOferta);
+            })
+            .catch((err) => {
+                debugger;
+                messageApi.errorMessageAjax(err);
+            });
+    }
+    setValoresPorDefectoUsuario(usu) {
+        $$("cmbUsuarioW").setValue(usu.usuarioId);
+        $$("cmbResponsableW").setValue(usu.responsableId);
+        $$("cmbPaisW").setValue(usu.paisId);
+        $$("cmbEmpresaW").setValue(usu.empresaId);
+        $$("cmbUnidadNegocioW").setValue(usu.unidadNegocioId);
+        $$("cmbAreaW").setValue(usu.areaId);
+        $$("ubicacionW").setValue(usu.ubicacion);
     }
 }

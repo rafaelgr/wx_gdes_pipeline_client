@@ -668,7 +668,7 @@ export default class OfertasForm extends JetView {
                 var list = $$("cmbUnidadNegocio").getPopup().getList();
                 list.clearAll();
                 list.parse(ofertas);
-                if (id) {
+                if (unidadNegocioId) {
                     $$("cmbUnidadNegocio").setValue(unidadNegocioId);
                     $$("cmbUnidadNegocio").refresh();
                 }
@@ -682,7 +682,7 @@ export default class OfertasForm extends JetView {
                 var list = $$("cmbUsuario").getPopup().getList();
                 list.clearAll();
                 list.parse(usuarios);
-                if (id) {
+                if (usuarioId) {
                     $$("cmbUsuario").setValue(usuarioId);
                     $$("cmbUsuario").refresh();
                 }
@@ -696,7 +696,7 @@ export default class OfertasForm extends JetView {
                 var list = $$("cmbArea").getPopup().getList();
                 list.clearAll();
                 list.parse(areas);
-                if (id) {
+                if (areaId) {
                     $$("cmbArea").setValue(areaId);
                     $$("cmbArea").refresh();
                 }
@@ -710,7 +710,7 @@ export default class OfertasForm extends JetView {
                 var list = $$("cmbResponsable").getPopup().getList();
                 list.clearAll();
                 list.parse(usuarios);
-                if (id) {
+                if (usuarioId) {
                     $$("cmbResponsable").setValue(usuarioId);
                     $$("cmbResponsable").refresh();
                 }
@@ -724,7 +724,7 @@ export default class OfertasForm extends JetView {
                 var list = $$("cmbEmpresa").getPopup().getList();
                 list.clearAll();
                 list.parse(empresas);
-                if (id) {
+                if (empresaId) {
                     $$("cmbEmpresa").setValue(empresaId);
                     $$("cmbEmpresa").refresh();
                 }
@@ -738,7 +738,7 @@ export default class OfertasForm extends JetView {
                 var list = $$("cmbPais").getPopup().getList();
                 list.clearAll();
                 list.parse(paises);
-                if (id) {
+                if (paisId) {
                     $$("cmbPais").setValue(paisId);
                     $$("cmbPais").refresh();
                 }
@@ -752,7 +752,7 @@ export default class OfertasForm extends JetView {
                 var list = $$("cmbServicio").getPopup().getList();
                 list.clearAll();
                 list.parse(servicios);
-                if (id) {
+                if (servicioId) {
                     $$("cmbServicio").setValue(servicioId);
                     $$("cmbServicio").refresh();
                 }
@@ -766,7 +766,7 @@ export default class OfertasForm extends JetView {
                 var list = $$("cmbFaseOferta").getPopup().getList();
                 list.clearAll();
                 list.parse(fasesOferta);
-                if (id) {
+                if (faseOfertaId) {
                     $$("cmbFaseOferta").setValue(faseOfertaId);
                     $$("cmbFaseOferta").refresh();
                 }
@@ -780,7 +780,7 @@ export default class OfertasForm extends JetView {
                 var list = $$("cmbTipoOportunidad").getPopup().getList();
                 list.clearAll();
                 list.parse(tipos);
-                if (id) {
+                if (tipoOportunidadId) {
                     $$("cmbTipoOportunidad").setValue(tipoOportunidadId);
                     $$("cmbTipoOportunidad").refresh();
                 }
@@ -794,7 +794,7 @@ export default class OfertasForm extends JetView {
                 var list = $$("cmbTipoContrato").getPopup().getList();
                 list.clearAll();
                 list.parse(tipos);
-                if (id) {
+                if (tipoContratoId) {
                     $$("cmbTipoContrato").setValue(tipoContratoId);
                     $$("cmbTipoContrato").refresh();
                 }
@@ -823,7 +823,7 @@ export default class OfertasForm extends JetView {
                 var list = $$("cmbEstado").getPopup().getList();
                 list.clearAll();
                 list.parse(estados);
-                if (id) {
+                if (estadoId) {
                     $$("cmbEstado").setValue(estadoId);
                     $$("cmbEstado").refresh();
                 }
@@ -837,7 +837,7 @@ export default class OfertasForm extends JetView {
                 var list = $$("cmbRazonPerdida").getPopup().getList();
                 list.clearAll();
                 list.parse(razones);
-                if (id) {
+                if (razonPerdidaId) {
                     $$("cmbRazonPerdida").setValue(razonPerdidaId);
                     $$("cmbRazonPerdida").refresh();
                 }
@@ -851,7 +851,7 @@ export default class OfertasForm extends JetView {
                 var list = $$("cmbDivisa").getPopup().getList();
                 list.clearAll();
                 list.parse(divisas);
-                if (id) {
+                if (divisaId) {
                     $$("cmbDivisa").setValue(divisaId);
                     $$("cmbDivisa").refresh();
                 }

@@ -49,7 +49,7 @@ export const usuarioService = {
     },
     // getLoginEmail
     getLoginEmail: (email) => {
-        return new webix.promise((success, fail)=>{
+        return new webix.promise((success, fail) => {
             var url = devConfig.getApiUrl() + "/login/email";
             webix.ajax()
                 .timeout(10000)
@@ -155,5 +155,11 @@ export const usuarioService = {
                     fail(inXhr);
                 });
         });
+    },
+    cleanData(data) {
+        delete data.grupo;
+        delete data.getKeyTime;
+        delete data.expKeyTime;
+        return data;
     }
 }
