@@ -325,6 +325,7 @@ export default class Ofertas extends JetView {
             .then((data) => {
                 $$("ofertasGrid").clearAll();
                 $$("ofertasGrid").parse(generalApi.prepareDataForDataTableWidthDates("ofertaId", ['fechaEntrega', 'fechaAdjudicacion', 'fechaInicioContrato', 'fechaFinContrato'], data));
+                $$("ofertasGrid").sort('#ofertaId#','desc','int');
                 if (id) {
                     $$("ofertasGrid").select(id);
                     $$("ofertasGrid").showItem(id);

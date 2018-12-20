@@ -75,8 +75,8 @@ export default class OfertasWindow extends JetView {
                         },
                         {
                             cols: [
-                                { view: "text", name: "nombreCortoW", label: translate("Nombre"), required: true, labelPosition: "top" },
-                                { view: "text", name: "clienteW", label: translate("Cliente"), required: true, labelPosition: "top" },
+                                { view: "text", name: "nombreCorto", label: translate("Nombre"), required: true, labelPosition: "top" },
+                                { view: "text", name: "cliente", label: translate("Cliente"), required: true, labelPosition: "top" },
                                 { view: "text", id: "ubicacionW", name: "ubicacion", label: translate("Ubicación"), required: true, labelPosition: "top" }
                             ]
                         },
