@@ -644,6 +644,7 @@ export default class OfertasForm extends JetView {
         console.log("DATA: ", data);
         if (ofertaId == 0) {
             data.ofertaId = 0;
+            data.fechaOferta = new Date();
             ofertasService.postOferta(usuarioService.getUsuarioCookie(), data)
                 .then((result) => {
                     this.$scope.show('/top/ofertas?ofertaId=' + result.ofertaId);

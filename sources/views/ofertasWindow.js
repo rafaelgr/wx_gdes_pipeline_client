@@ -173,6 +173,7 @@ export default class OfertasWindow extends JetView {
         data = ofertasService.cleanData(data);
         if (ofertaId == 0) {
             data.ofertaId = 0;
+            data.fechaOferta = new Date();
             ofertasService.postOferta(usuarioService.getUsuarioCookie(), data)
                 .then((result) => {
                     $$('ofertasWindow').hide();
