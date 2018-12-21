@@ -336,7 +336,6 @@ export default class OfertasWindow extends JetView {
     loadEstados(estadoId) {
         estadosService.getEstados(usuarioService.getUsuarioCookie())
             .then(rows => {
-                console.log("Estdados: ", rows);
                 var estados = generalApi.prepareDataForCombo('estadoId', 'nombre', rows);
                 var list = $$("cmbEstadoW").getPopup().getList();
                 list.clearAll();
@@ -350,7 +349,7 @@ export default class OfertasWindow extends JetView {
     }
     loadProbabilidades(probabilidad) {
         var probabilidades = [
-            { id: 0, value: "0%" },
+            { id: 20, value: "20%" },
             { id: 50, value: "50%" },
             { id: 80, value: "80%" }
         ];

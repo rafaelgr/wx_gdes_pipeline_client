@@ -804,7 +804,7 @@ export default class OfertasForm extends JetView {
     }
     loadProbabilidades(probabilidad) {
         var probabilidades = [
-            { id: 0, value: "0%" },
+            { id: 20, value: "20%" },
             { id: 50, value: "50%" },
             { id: 80, value: "80%" }
         ];
