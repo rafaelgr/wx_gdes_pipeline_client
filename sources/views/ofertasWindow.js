@@ -11,6 +11,7 @@ import { tiposOportunidadService } from "../services/tiposOportunidad_service";
 import { tiposContratoService } from "../services/tiposContrato_service";
 import { estadosService } from "../services/estados_service";
 import { parametrosService } from "../services/parametros_service";
+import { versionesService } from "../services/versiones_service";
 import { generalApi } from "../utilities/general";
 import { messageApi } from "../utilities/messages";
 
@@ -176,8 +177,13 @@ export default class OfertasWindow extends JetView {
             data.fechaOferta = new Date();
             ofertasService.postOferta(usuarioService.getUsuarioCookie(), data)
                 .then((result) => {
+                    data.ofertaId = result.ofertaId;
+                    var data2 = this.$scope.crearVersion(0, data);
+                    return versionesService.postVersion(usuarioService.getUsuarioCookie(), data2);
+                })
+                .then(result => {
                     $$('ofertasWindow').hide();
-                    this.$scope.show('/top/ofertas?ofertaId=' + result.ofertaId);
+                    this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
                 })
                 .catch((err) => {
                     messageApi.errorMessageAjax(err);
@@ -381,5 +387,34 @@ export default class OfertasWindow extends JetView {
         $$("cmbUnidadNegocioW").setValue(usu.unidadNegocioId);
         $$("cmbAreaW").setValue(usu.areaId);
         $$("ubicacionW").setValue(usu.ubicacion);
+    }
+    crearVersion(version, data) {
+        var usu = usuarioService.getUsuarioCookie();
+        var data2 = {
+            ofertaId: data.ofertaId,
+            fechaCambio: new Date(),
+            fechaEntrega: data.fechaEntrega,
+            usuarioId: usu.usuarioId,
+            importePresupuesto: data.importePresupuesto,
+            importePresupuestoDivisa: null,
+            importeUTE: null,
+            importeUTEDivisa: null,
+            importeTotal: data.importePresupuesto,
+            importeTotalDivisa: null,
+            margenContribucion: data.margenContribucion,
+            importeContribucion: null,
+            importeContribucionDivisa: null,
+            importeAnual: null,
+            importeAnualDivisa: null,
+            importePrimerAno: null,
+            importePrimerAnoDivisa: null,
+            importeInversion: null,
+            importeInversionDivisa: null,
+            observaciones: 'AUTO',
+            divisaId: null,
+            multiplicador: null,
+            numVersion: version
+        };
+        return data2;
     }
 }

@@ -17,8 +17,10 @@ import { generalApi } from "../utilities/general";
 import { parametrosService } from "../services/parametros_service";
 
 var ofertaId = 0;
+var numVersion = 0;
 var _contador;
 var _originalFaseOfertaId;
+var _originalImporte;
 
 
 export default class OfertasForm extends JetView {
@@ -525,7 +527,10 @@ export default class OfertasForm extends JetView {
                 {
                     view: "toolbar", padding: 3, elements: [
                         { view: "icon", icon: "mdi mdi-arrow-decision-outline", width: 37, align: "left" },
-                        { view: "label", label: translate("Ofertas") }
+                        { view: "label", label: translate("Ofertas")},
+                        { view: "label", id:"sId", label: " ID: " + ofertaId },
+                        { view: "label", id: "sVersion", label: " VRS: " + numVersion },
+
                     ]
                 },
                 {
@@ -625,6 +630,14 @@ export default class OfertasForm extends JetView {
                 this.loadRazonesPerdida(oferta.razonPerdidaId);
                 this.loadDivisas(oferta.divisaId);
                 _originalFaseOfertaId = oferta.faseOfertaId;
+                _originalImporte = oferta.importePresupuesto;
+                ofertaId = oferta.ofertaId;
+                numVersion = oferta.version;
+                $$("sId").config.label = "ID: " + ofertaId;
+                $$("sId").refresh();
+                $$("sVersion").config.label = "VRS: " + numVersion;
+                $$("sVersion").refresh();
+
             })
             .catch((err) => {
                 messageApi.errorMessageAjax(err);

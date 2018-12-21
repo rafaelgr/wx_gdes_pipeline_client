@@ -11,7 +11,7 @@ export default class Inicio extends JetView {
         }
     }
     init() {
-        let usuario = usuarioService.getUsuarioCookie();
-        languageService.setLanguage(this.app, usuario.codigoIdioma);
+        var usu = usuarioService.checkLoggedUser();
+        languageService.setLanguage(this.app, usu.codigoIdioma);
     }
 }

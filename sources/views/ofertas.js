@@ -233,7 +233,7 @@ export default class Ofertas extends JetView {
                 "onDelete": function (event, id, node) {
                     var dtable = this;
                     var curRow = this.data.pull[id.row];
-                    var name = curRow.nombre;
+                    var name = curRow.nombreCorto;
                     this.$scope.delete(id.row, name);
                 },
                 "onEdit": function (event, id, node) {
