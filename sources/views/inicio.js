@@ -15,3 +15,5 @@ export default class Inicio extends JetView {
         languageService.setLanguage(this.app, usu.codigoIdioma);
     }
 }
+
+
