@@ -30,7 +30,7 @@ export default class OfertasForm extends JetView {
             padding: 5, css: "fondocelda",
             rows: [
                 { template: translate("DESCRIPTIVOS"), type: "section" },
-                { view: "textarea", name: "descripcion", label: translate("Descripción"), required: true, labelPosition: "top", id: "firstField"},
+                { view: "textarea", name: "descripcion", label: translate("Descripción"), required: true, labelPosition: "top", id: "firstField" },
                 {
                     cols: [
                         { view: "text", name: "nombreCorto", label: translate("Nombre"), required: true, labelPosition: "top" },
@@ -59,7 +59,7 @@ export default class OfertasForm extends JetView {
                         { view: "text", name: "duracion", label: translate("Duración"), required: true, labelPosition: "top" }
                     ]
                 },
-                { view: "textarea", name: "notasPlanning", label: translate("Notas Planning"), labelPosition: "top"},
+                { view: "textarea", name: "notasPlanning", label: translate("Notas Planning"), labelPosition: "top" },
             ]
         };
         const cellGenerales = {
@@ -104,7 +104,7 @@ export default class OfertasForm extends JetView {
                             rows: [{ view: "checkbox", id: "ofertaSingular", name: "ofertaSingular", options: {}, label: translate("Oferta singular"), labelPosition: "top" }]
                         },
                         {
-                            rows: [{ view: "textarea", id: "autorizaciones", name: "autorizaciones", options: {}, label: translate("Autorizaciones"), labelPosition: "top"}]
+                            rows: [{ view: "textarea", id: "autorizaciones", name: "autorizaciones", options: {}, label: translate("Autorizaciones"), labelPosition: "top" }]
                         },
                     ]
                 },
@@ -125,21 +125,21 @@ export default class OfertasForm extends JetView {
                 {
                     cols: [
                         { rows: [{ view: "checkbox", name: "subrogacionSN", options: {}, label: translate("Subrogación"), labelPosition: "top", width: 150 }] },
-                        { rows: [{ view: "textarea", name: "subrogacionTXT", label: translate("Comentario subrogación"), labelPosition: "top"}] },
+                        { rows: [{ view: "textarea", name: "subrogacionTXT", label: translate("Comentario subrogación"), labelPosition: "top" }] },
                         { rows: [{ view: "text", name: "subrogacionNum", label: translate("Cantidad personal"), labelPosition: "top", width: 150, format: "1.111" }] }
                     ]
                 },
                 {
                     cols: [
                         { rows: [{ view: "checkbox", name: "uteSN", options: {}, label: translate("UTE"), labelPosition: "top", width: 150 }] },
-                        { rows: [{ view: "textarea", name: "uteTXT", label: translate("Comentario UTE"), labelPosition: "top"}] },
+                        { rows: [{ view: "textarea", name: "uteTXT", label: translate("Comentario UTE"), labelPosition: "top" }] },
                         { rows: [{ view: "text", name: "gdesPor", label: translate("GDES Porcentaje"), labelPosition: "top", width: 150 }] }
                     ]
                 },
                 {
                     cols: [
                         { rows: [{ view: "checkbox", name: "subcontrataSN", options: {}, label: translate("Reclutamiento"), labelPosition: "top", width: 150 }] },
-                        { rows: [{ view: "textarea", name: "subcontrataTXT", label: translate("Perfil y cantidad a reclutar"), labelPosition: "top"}] },
+                        { rows: [{ view: "textarea", name: "subcontrataTXT", label: translate("Perfil y cantidad a reclutar"), labelPosition: "top" }] },
                         { rows: [{ view: "datepicker", editable: true, minDate: new Date(new Date("1500-01-01")), name: "fechaCreacion", label: translate("Fecha creación"), labelPosition: "top", width: 150 }] }
                     ]
                 }
@@ -276,8 +276,8 @@ export default class OfertasForm extends JetView {
                     cols: [
                         {
                             rows: [
-                                { view: "textarea", name: "descripcionInversion", label: translate("Descripción inversión"), labelPosition: "top"},
-                                { view: "textarea", name: "condicionesPago", label: translate("Condiciones de pago"), labelPosition: "top"}
+                                { view: "textarea", name: "descripcionInversion", label: translate("Descripción inversión"), labelPosition: "top" },
+                                { view: "textarea", name: "condicionesPago", label: translate("Condiciones de pago"), labelPosition: "top" }
                             ]
                         },
                         {
@@ -527,8 +527,8 @@ export default class OfertasForm extends JetView {
                 {
                     view: "toolbar", padding: 3, elements: [
                         { view: "icon", icon: "mdi mdi-arrow-decision-outline", width: 37, align: "left" },
-                        { view: "label", label: translate("Ofertas")},
-                        { view: "label", id:"sId", label: " ID: " + ofertaId },
+                        { view: "label", label: translate("Ofertas") },
+                        { view: "label", id: "sId", label: " ID: " + ofertaId },
                         { view: "label", id: "sVersion", label: " VRS: " + numVersion },
 
                     ]
@@ -574,15 +574,15 @@ export default class OfertasForm extends JetView {
                 $$("fechaConversionOportunidad").setValue(new Date());
             }
         });
-        $$("importePresupuesto").attachEvent("onChange", (nv, ov) => { this.calcImporte(); });
-        $$("margenContribucion").attachEvent("onChange", (nv, ov) => { this.calcImporte(); });
-        $$("importeUTE").attachEvent("onChange", (nv, ov) => { this.calcImporte(); });
-        $$("multiplicador").attachEvent("onChange", (nv, ov) => { this.calcFromDivisa(); });
-        $$("importePresupuestoDivisa").attachEvent("onChange", (nv, ov) => { this.calcFromDivisa(); });
-        $$("importeUTEDivisa").attachEvent("onChange", (nv, ov) => { this.calcFromDivisa(); });
-        $$("importeAnualDivisa").attachEvent("onChange", (nv, ov) => { this.calcFromDivisa(); });
-        $$("importePrimerAnoDivisa").attachEvent("onChange", (nv, ov) => { this.calcFromDivisa(); });
-        $$("importeInversionDivisa").attachEvent("onChange", (nv, ov) => { this.calcFromDivisa(); });
+        $$("importePresupuesto").attachEvent("onBlur", (nv, ov) => { this.calcImporte(); });
+        $$("margenContribucion").attachEvent("onBlur", (nv, ov) => { this.calcImporte(); });
+        $$("importeUTE").attachEvent("onBlur", (nv, ov) => { this.calcImporte(); });
+        $$("multiplicador").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });
+        $$("importePresupuestoDivisa").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });
+        $$("importeUTEDivisa").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });
+        $$("importeAnualDivisa").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });
+        $$("importePrimerAnoDivisa").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });
+        $$("importeInversionDivisa").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });
     }
     load(ofertaId) {
         let usu = usuarioService.getUsuarioCookie();
@@ -608,6 +608,7 @@ export default class OfertasForm extends JetView {
         }
         ofertasService.getOferta(usuarioService.getUsuarioCookie(), ofertaId)
             .then((oferta) => {
+                console.log("OFERTA: ", oferta)
                 oferta.fechaEntrega = new Date(oferta.fechaEntrega);
                 oferta.fechaAdjudicacion = new Date(oferta.fechaAdjudicacion);
                 oferta.fechaInicioContrato = new Date(oferta.fechaInicioContrato);
@@ -919,14 +920,20 @@ export default class OfertasForm extends JetView {
         let importeContribucionDivisa = importeContribucion * multiplicador * 1.0;
         $$("importeContribucion").setValue(importeContribucion);
         if (importeContribucionDivisa) $$("importeContribucionDivisa").setValue(importeContribucionDivisa);
+        let importeDivisa = importe * multiplicador;
+        if (importeDivisa) $$("importePresupuestoDivisa").setValue(importeDivisa);
         // Obliga a recalcular el total
         let importeTotal = +$$("importePresupuesto").getValue() + +$$("importeUTE").getValue();
         $$("importeTotal").setValue(importeTotal);
         let importeTotalDivisa = importeTotal * multiplicador;
         if (importeTotalDivisa) $$("importeTotalDivisa").setValue(importeTotalDivisa);
+        let importeUTE = +$$("importeUTE").getValue();
+        let importeUTEDivisa = importeUTE * multiplicador
+        if (importeUTEDivisa) $$("importeUTEDivisa").setValue(importeUTEDivisa);
         this.getTextoAutorizacion();
     }
     calcFromDivisa() {
+        debugger;
         let multiplicador = +$$("multiplicador").getValue();
         console.log("Multiplicador: ", multiplicador)
         if (multiplicador != 0) {
