@@ -1,5 +1,6 @@
 import { JetView, plugins } from "webix-jet";
 import { usuarioService } from "../services/usuario_service";
+import { versionesService } from "../services/versiones_service";
 
 
 export default class MainToolbar extends JetView {
@@ -16,7 +17,7 @@ export default class MainToolbar extends JetView {
 				{
 					view: "button", type: "icon", icon: "mdi mdi-menu", width: 37, align: "left",
 					click: function () {
-						if( $$("main:menu").config.hidden){
+						if ($$("main:menu").config.hidden) {
 							$$("main:menu").show();
 						}
 						else
@@ -33,7 +34,12 @@ export default class MainToolbar extends JetView {
 						return html;
 					}
 				},
-				{ view: "label", 
+				{
+					view: "label", id: "version",
+					label: "VRS 0.0.1"
+				},
+				{
+					view: "label",
 					label: `
 						<div>
 						<img style="vertical-align:middle" src='assets/img/handshake.png' height='35' />
@@ -56,8 +62,13 @@ export default class MainToolbar extends JetView {
 		return mainToolBar;
 	}
 	init() {
-
+		// LLamar para obtener la versión
+		versionesService.getVersion().then(data => {
+			$$('version').config.label = data.version;
+			$$('version').refresh();
+		}).catch(err=>{
+			console.log("ERR VRS:", err);
+		});
 	}
-
 }
 
