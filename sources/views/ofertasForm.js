@@ -15,12 +15,23 @@ import { divisasService } from "../services/divisas_service"
 import { messageApi } from "../utilities/messages";
 import { generalApi } from "../utilities/general";
 import { parametrosService } from "../services/parametros_service";
+import { versionesService } from '../services/versiones_service';
 
 var ofertaId = 0;
 var numVersion = 0;
 var _contador;
 var _originalFaseOfertaId;
 var _originalImporte;
+
+var _importePresupuesto;
+var _importeUTE;
+var _importeTotal;
+var _margenContribucion;
+var _importeContribucion;
+var _importeAnual;
+var _importePrimerAno;
+var _importeInversion;
+var _multiplicador;
 
 
 export default class OfertasForm extends JetView {
@@ -604,6 +615,8 @@ export default class OfertasForm extends JetView {
             this.getNumeroCodigoOferta();
             this.getDocumentosAplicables(usu.paisId);
             this.setValoresPorDefectoUsuario(usu);
+            ofertaId = 0;
+            numVersion = 0;
             return;
         }
         ofertasService.getOferta(usuarioService.getUsuarioCookie(), ofertaId)
@@ -638,7 +651,7 @@ export default class OfertasForm extends JetView {
                 $$("sId").refresh();
                 $$("sVersion").config.label = "VRS: " + numVersion;
                 $$("sVersion").refresh();
-
+                this.salvarLosImportesOriginales(oferta);
             })
             .catch((err) => {
                 messageApi.errorMessageAjax(err);
@@ -660,20 +673,53 @@ export default class OfertasForm extends JetView {
             data.ofertaId = 0;
             data.fechaOferta = new Date();
             ofertasService.postOferta(usuarioService.getUsuarioCookie(), data)
-                .then((result) => {
-                    this.$scope.show('/top/ofertas?ofertaId=' + result.ofertaId);
-                })
-                .catch((err) => {
-                    messageApi.errorMessageAjax(err);
-                });
+            .then((result) => {
+                data.ofertaId = result.ofertaId;
+                return this.$scope.guardarVersionCero(data);
+            })
+            .then(()=> {
+                this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
+            })
+            .catch((err) => {
+                messageApi.errorMessageAjax(err);
+            });
         } else {
-            ofertasService.putOferta(usuarioService.getUsuarioCookie(), data)
-                .then(() => {
-                    this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
-                })
-                .catch((err) => {
-                    messageApi.errorMessageAjax(err);
+            // Comprobar si ha habido cambios de importes para crear versión.
+            if (!this.$scope.comprobarCambioDeImportes()) {
+                ofertasService.putOferta(usuarioService.getUsuarioCookie(), data)
+                    .then(() => {
+                        this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
+                    })
+                    .catch((err) => {
+                        messageApi.errorMessageAjax(err);
+                    });
+            } else {
+                webix.confirm(translate("Han cambiado las condiciones económicas de la oferta. ¿Quiere guardar una versión con las condiciones anteriores?"), (action) => {
+                    if (action === true) {
+                        console.log("HA HABIDO CAMBIO DE IMPORTES");
+                        data.version = data.version + 1;
+                        this.$scope.guardarVersionAntigua(data.version)
+                            .then(() => {
+                                return ofertasService.putOferta(usuarioService.getUsuarioCookie(), data);
+                            })
+                            .then(() => {
+                                this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
+                            })
+                            .catch((err) => {
+                                messageApi.errorMessageAjax(err);
+                            });
+                    } else {
+                        ofertasService.putOferta(usuarioService.getUsuarioCookie(), data)
+                            .then(() => {
+                                this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
+                            })
+                            .catch((err) => {
+                                messageApi.errorMessageAjax(err);
+                            });
+                    }
                 });
+            }
+
         }
     }
     loadUnidadesNegocio(unidadNegocioId) {
@@ -881,7 +927,6 @@ export default class OfertasForm extends JetView {
                 $$("codigoOferta").setValue(data.codigoOferta);
             })
             .catch((err) => {
-                debugger;
                 messageApi.errorMessageAjax(err);
             });
     }
@@ -933,7 +978,6 @@ export default class OfertasForm extends JetView {
         this.getTextoAutorizacion();
     }
     calcFromDivisa() {
-        debugger;
         let multiplicador = +$$("multiplicador").getValue();
         console.log("Multiplicador: ", multiplicador)
         if (multiplicador != 0) {
@@ -969,5 +1013,91 @@ export default class OfertasForm extends JetView {
         }
         let authTxt = translate('autorizacion' + tAut);
         $$("autorizaciones").setValue(authTxt);
+    }
+
+    // comprobarCambioDeImportes:
+    // Esta función comprueba si los importes han cambiado desde que se 
+    // cargó la ventana para su modificación. La idea es que si se ha produciso el
+    // cambio se oferte guardar la versión anterior.
+    comprobarCambioDeImportes() {
+        let cambioImporte = false;
+        if (_importePresupuesto != $$('importePresupuesto').getValue() ||
+            _importeUTE != $$('importeUTE').getValue() ||
+            _importeTotal != $$('importeTotal').getValue() ||
+            _margenContribucion != $$('margenContribucion').getValue() ||
+            _importeContribucion != $$('importeContribucion').getValue() ||
+            _importeAnual != $$('importeAnual').getValue() ||
+            _importePrimerAno != $$('importePrimerAno').getValue() ||
+            _importeInversion != $$('importeInversion').getValue() ||
+            _multiplicador != $$('multiplicador').getValue()) {
+            cambioImporte = true;
+        }
+        return cambioImporte;
+    }
+
+    // salvarLosImportesOriginales: 
+    // En esta función se salvan los importes originales cuando se cargó el formulario 
+    // para poder comparalos cuando se salve con los actuales.
+    salvarLosImportesOriginales(oferta) {
+        _importePresupuesto = oferta.importePresupuesto;
+        _importeUTE = oferta.importeUTE;
+        _importeTotal = oferta.importeTotal;
+        _margenContribucion = oferta.margenContribucion;
+        _importeContribucion = oferta.importeContribucion;
+        _importeAnual = oferta.importeAnual;
+        _importePrimerAno = oferta.importePrimerAno;
+        _importeInversion = oferta.importeInversion;
+        _multiplicador = oferta.multiplicador;
+    }
+
+    // guardarVersionAntigua:
+    // Crea un nuevo registro de versión con los datos de la oferta antigua
+    // y el número de versión pasado.
+    // IMPORTANTE: devuelve una promesa.
+    guardarVersionAntigua(nversion) {
+        let divisaId = null;
+        if ($$('cmbDivisa').getValue()) divisaId = $$('cmbDivisa').getValue();
+        let usu = usuarioService.getUsuarioCookie()
+        let data = {
+            ofertaId: ofertaId,
+            fechaCambio: new Date(),
+            usuarioId: usu.usuarioId,
+            importePresupuesto: _importePresupuesto,
+            importeUTE: _importeUTE,
+            importeTotal: _importeTotal,
+            margenContribucion: _margenContribucion,
+            importeContribucion: _importeContribucion,
+            importeAnual: _importeAnual,
+            importePrimerAno: _importePrimerAno,
+            importeInversion: _importeInversion,
+            divisaId: divisaId,
+            multiplicador: _multiplicador,
+            numVersion: nversion
+        };
+        return versionesService.postVersion(usu, data);
+    }
+
+    // guardarVersionCero
+    // Crea el registro de version cero con la oferta actual 
+    // modificados. IMPORTANTE: devuelve una promesa.
+    guardarVersionCero(oferta) {
+        let usu = usuarioService.getUsuarioCookie()
+        let data = {
+            ofertaId: oferta.ofertaId,
+            fechaCambio: new Date(),
+            usuarioId: usu.usuarioId,
+            importePresupuesto: oferta.importePresupuesto,
+            importeUTE: oferta.importeUTE,
+            importeTotal: oferta.importeTotal,
+            margenContribucion: oferta.margenContribucion,
+            importeContribucion: oferta.importeContribucion,
+            importeAnual: oferta.importeAnual,
+            importePrimerAno: oferta.importePrimerAno,
+            importeInversion: oferta.importeInversion,
+            divisaId: oferta.divisaId,
+            multiplicador: oferta.multiplicador,
+            numVersion: 0
+        };
+        return versionesService.postVersion(usu, data);
     }
 }
