@@ -36,7 +36,7 @@ export default class MainToolbar extends JetView {
 				},
 				{
 					view: "label", id: "version",
-					label: "VRS 0.0.1"
+					label: ""
 				},
 				{
 					view: "label",
@@ -62,8 +62,10 @@ export default class MainToolbar extends JetView {
 		return mainToolBar;
 	}
 	init() {
+		console.log("INIT MAINTOOLBAR");
 		// LLamar para obtener la versión
 		versionesService.getVersionApp().then(data => {
+			console.log("VRESION: ", data);
 			$$('version').config.label = data.version;
 			$$('version').refresh();
 		}).catch(err=>{

@@ -2,7 +2,7 @@ import { devConfig } from "../config/config";
 export const versionesService = {
     getVersionApp: () => {
         return new webix.promise((success, fail) => {
-            var url = devConfig.getApiUrl() + "/versiones";
+            var url = devConfig.getApiUrl() + "/version";
             webix.ajax()
                 .timeout(10000)
                 .headers({
