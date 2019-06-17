@@ -1,0 +1,24 @@
+[
+    {
+        "entrega_ropa_id": 4,
+        "entrega_ropa_linea_id": 5,
+        "fecha_entrega": "24/01/2011",
+        "codigo_empleado": 18,
+        "nombre_empleado": "FERNANDEZ ZANON, CARLOS",
+        "tipo_prenda": "Botas",
+        "marca": "VENTYS",
+        "numero": 12,
+        "coste": 256
+    },
+    {
+        "entrega_ropa_id": 4,
+        "entrega_ropa_linea_id": 6,
+        "fecha_entrega": "24/01/2011",
+        "codigo_empleado": 18,
+        "nombre_empleado": "FERNANDEZ ZANON, CARLOS",
+        "tipo_prenda": "Chalecos",
+        "marca": "ERT677",
+        "numero": 14,
+        "coste": 125
+    }
+]
