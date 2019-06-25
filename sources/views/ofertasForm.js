@@ -16,6 +16,7 @@ import { messageApi } from "../utilities/messages";
 import { generalApi } from "../utilities/general";
 import { parametrosService } from "../services/parametros_service";
 import { versionesService } from '../services/versiones_service';
+import PprReport from "./pprReport";
 
 var ofertaId = 0;
 var numVersion = 0;
@@ -541,6 +542,9 @@ export default class OfertasForm extends JetView {
                         { view: "label", label: translate("Ofertas") },
                         { view: "label", id: "sId", label: " ID: " + ofertaId },
                         { view: "label", id: "sVersion", label: " VRS: " + numVersion },
+                        { view: "icon", icon: "mdi mdi-message-processing", width: 37, click: this.rptType1 },
+                        { view: "icon", icon: "mdi mdi-message-text", width: 37, click: this.rptType2 },
+                        { view: "icon", icon: "mdi mdi-message-settings", width: 37, click: this.rptType3 },
 
                     ]
                 },
@@ -549,8 +553,7 @@ export default class OfertasForm extends JetView {
                     cols: [
                         { header: "Datos de la oferta", id: "Acc1", body: ofertaData, collapsed: false },
                         { header: "Versiones", id: "Acc2", body: { $subview: "versiones" }, collapsed: true },
-                        { header: "Seguidores", id: "Acc3", body: "Seguidores", collapsed: true },
-                        { header: "PPR", id: "Acc4", body: { $subview: "pprReport"}, collapsed: true }
+                        { header: "Seguidores", id: "Acc3", body: "Seguidores", collapsed: true }
                     ]
                 }
 
@@ -594,6 +597,8 @@ export default class OfertasForm extends JetView {
         $$("importeAnualDivisa").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });
         $$("importePrimerAnoDivisa").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });
         $$("importeInversionDivisa").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });
+        this.pprReport = this.ui(PprReport);
+        console.log("PPRREPORT: ", this.pprReport);
     }
     load(ofertaId) {
         let usu = usuarioService.getUsuarioCookie();
@@ -673,16 +678,16 @@ export default class OfertasForm extends JetView {
             data.ofertaId = 0;
             data.fechaOferta = new Date();
             ofertasService.postOferta(usuarioService.getUsuarioCookie(), data)
-            .then((result) => {
-                data.ofertaId = result.ofertaId;
-                return this.$scope.guardarVersionCero(data);
-            })
-            .then(()=> {
-                this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
-            })
-            .catch((err) => {
-                messageApi.errorMessageAjax(err);
-            });
+                .then((result) => {
+                    data.ofertaId = result.ofertaId;
+                    return this.$scope.guardarVersionCero(data);
+                })
+                .then(() => {
+                    this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
+                })
+                .catch((err) => {
+                    messageApi.errorMessageAjax(err);
+                });
         } else {
             // Comprobar si ha habido cambios de importes para crear versión.
             if (!this.$scope.comprobarCambioDeImportes()) {
@@ -1100,4 +1105,17 @@ export default class OfertasForm extends JetView {
         };
         return versionesService.postVersion(usu, data);
     }
+
+    rptType1() {
+        this.$scope.pprReport.showWindow(ofertaId, 1);
+    }
+
+    rptType2() {
+        this.$scope.pprReport.showWindow(ofertaId, 2);
+    }
+
+    rptType3() {
+        this.$scope.pprReport.showWindow(ofertaId, 3);
+    }
+
 }
