@@ -546,11 +546,11 @@ export default class OfertasForm extends JetView {
                 },
                 {
                     view: "accordion",
-                    multi: false,
                     cols: [
-                        { header: "Datos de la oferta", id: "Acc1", body: ofertaData },
-                        { header: "Versiones", id: "Acc2", body: { $subview: "versiones" } },
-                        { header: "Seguidores", id: "Acc3", body: "Seguidores" }
+                        { header: "Datos de la oferta", id: "Acc1", body: ofertaData, collapsed: false },
+                        { header: "Versiones", id: "Acc2", body: { $subview: "versiones" }, collapsed: true },
+                        { header: "Seguidores", id: "Acc3", body: "Seguidores", collapsed: true },
+                        { header: "PPR", id: "Acc4", body: { $subview: "pprReport"}, collapsed: true }
                     ]
                 }
 
