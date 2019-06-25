@@ -76,8 +76,8 @@ export default class PprReport extends JetView {
         // Create a new report instance
         var report = new Stimulsoft.Report.StiReport();
         report.loadFile(file);
-
-        devConfig.getConfigMysql()
+        let usu = usuarioService.getUsuarioCookie()
+        devConfig.getConfigMysql(usu)
         .then(data => {
             debugger;
             var myconfig = data;

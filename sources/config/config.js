@@ -4,7 +4,7 @@ export const devConfig = {
         if (!PRODUCTION) urlApi = "http://localhost:8060";
         return urlApi;
     },
-    getConfigMysql: () => {
+    getConfigMysql: (usu) => {
         return new webix.promise((success, fail) => {
             if (!PRODUCTION) {
                 var data = {
