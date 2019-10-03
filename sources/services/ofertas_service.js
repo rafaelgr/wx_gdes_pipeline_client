@@ -20,7 +20,7 @@ export const ofertasService = {
     },
     getOfertasUsuario: (usu) => {
         return new webix.promise((success, fail) => {
-            var url = devConfig.getApiUrl() + "/api/ofertas/usuario/" + usu.usuarioId + "/" + usu.grupoUsuarioId;
+            var url = devConfig.getApiUrl() + "/api/ofertas/usuario/" + usu.usuarioId + "/" + usu.grupoUsuarioId + "/" + usu.grupoUsuarioId2 + "/" + usu.grupoUsuarioId3;
             webix.ajax()
                 .timeout(10000)
                 .headers({

@@ -47,6 +47,21 @@ export default class UsuarioForm extends JetView {
                         {
                             cols: [
                                 {
+                                    width: 100
+                                },
+                                {
+                                    view: "combo", id: "cmbGrupo2", name: "grupoUsuarioId2", options: {},
+                                    label: translate("Grupo (2)"), labelPosition: "top"
+                                },
+                                {
+                                    view: "combo", id: "cmbGrupo3", name: "grupoUsuarioId3", options: {},
+                                    label: translate("Grupo (3)"), labelPosition: "top"
+                                }
+                            ]
+                        },
+                        {
+                            cols: [
+                                {
                                     view: "text", name: "codigoIdioma", width: 100, required: true,
                                     label: translate("Idioma"), labelPosition: "top"
                                 },
@@ -121,9 +136,10 @@ export default class UsuarioForm extends JetView {
     load(grupoUsuarioId) {
         if (grupoUsuarioId == 0) {
             this.loadGruposUsuarios();
+            this.loadGruposUsuarios2();
+            this.loadGruposUsuarios3();
             this.loadAreas();
             this.loadEmpresas();
-            this.loadGruposUsuarios();
             this.loadResponsables();
             this.loadUnidadesNegocio();
             this.loadPaises();
@@ -133,9 +149,10 @@ export default class UsuarioForm extends JetView {
             .then((usuario) => {
                 $$("frmUsuarios").setValues(usuario);
                 this.loadGruposUsuarios(usuario.grupoUsuarioId);
+                this.loadGruposUsuarios2(usuario.grupoUsuarioId2);
+                this.loadGruposUsuarios3(usuario.grupoUsuarioId3);
                 this.loadAreas(usuario.areaId);
                 this.loadEmpresas(usuario.empresaId);
-                this.loadGruposUsuarios(usuario.grupoUsuarioId);
                 this.loadResponsables(usuario.responsableId);
                 this.loadUnidadesNegocio(usuario.unidadNegocioId);
                 this.loadPaises(usuario.paisId);
@@ -154,6 +171,8 @@ export default class UsuarioForm extends JetView {
             return;
         }
         var data = $$("frmUsuarios").getValues();
+        if (!data.grupoUsuarioId2) delete data.grupoUsuarioId2;
+        if (!data.grupoUsuarioId3) delete data.grupoUsuarioId3;
         data = usuarioService.cleanData(data);
         console.log("DATAF: ", data);
         if (usuarioId == 0) {
@@ -182,7 +201,7 @@ export default class UsuarioForm extends JetView {
                 var list = $$("cmbGrupo").getPopup().getList();
                 list.clearAll();
                 list.parse(grupos);
-                if (id) {
+                if (grupoUsuarioId) {
                     $$("cmbGrupo").setValue(grupoUsuarioId);
                     $$("cmbGrupo").refresh();
                 }
@@ -255,6 +274,34 @@ export default class UsuarioForm extends JetView {
                 if (id) {
                     $$("cmbUnidadNegocio").setValue(unidadNegocioId);
                     $$("cmbUnidadNegocio").refresh();
+                }
+                return;
+            });
+    }
+    loadGruposUsuarios2(id) {
+        gruposUsuariosService.getGruposUsuarios(usuarioService.getUsuarioCookie())
+            .then(rows => {
+                var grupos = generalApi.prepareDataForCombo('grupoUsuarioId', 'nombre', rows);
+                var list = $$("cmbGrupo2").getPopup().getList();
+                list.clearAll();
+                list.parse(grupos);
+                if (id) {
+                    $$("cmbGrupo2").setValue(id);
+                    $$("cmbGrupo2").refresh();
+                }
+                return;
+            });
+    }
+    loadGruposUsuarios3(id) {
+        gruposUsuariosService.getGruposUsuarios(usuarioService.getUsuarioCookie())
+            .then(rows => {
+                var grupos = generalApi.prepareDataForCombo('grupoUsuarioId', 'nombre', rows);
+                var list = $$("cmbGrupo3").getPopup().getList();
+                list.clearAll();
+                list.parse(grupos);
+                if (id) {
+                    $$("cmbGrupo3").setValue(id);
+                    $$("cmbGrupo3").refresh();
                 }
                 return;
             });
