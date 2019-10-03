@@ -148,7 +148,7 @@ export default class Ofertas extends JetView {
                     click: () => {
                         this.ofertasWindow.showWindow();
                     }
-                },                
+                },
                 {
                     view: "button", type: "icon", icon: "mdi mdi-refresh", width: 37, align: "left", hotkey: "Ctrl+L",
                     click: () => {
@@ -304,7 +304,7 @@ export default class Ofertas extends JetView {
     init(view, url) {
         this.ofertasWindow = this.ui(OfertasWindow);
     }
-    urlChange(view, url){
+    urlChange(view, url) {
         var usu = usuarioService.checkLoggedUser();
         var id = null;
         if (url[0].params.ofertaId) {
@@ -319,27 +319,42 @@ export default class Ofertas extends JetView {
         languageService.setLanguage(this.app, usu.codigoIdioma);
     }
     load(id) {
-        $$("ofertasGrid").showProgress({type:"icon"});
-        
-        ofertasService.getOfertas(usuarioService.getUsuarioCookie())
+        $$("ofertasGrid").showProgress({ type: "icon" });
+        var usu = usuarioService.getUsuarioCookie();
+        if (usu.esAdministrador) {
+            ofertasService.getOfertas(usu)
             .then((data) => {
-                $$("ofertasGrid").clearAll();
-                $$("ofertasGrid").parse(generalApi.prepareDataForDataTableWidthDates("ofertaId", ['fechaEntrega', 'fechaAdjudicacion', 'fechaInicioContrato', 'fechaFinContrato'], data));
-                $$("ofertasGrid").sort('#ofertaId#','desc','int');
-                if (id) {
-                    $$("ofertasGrid").select(id);
-                    $$("ofertasGrid").showItem(id);
-                }
-                var numReg = $$("ofertasGrid").count();
-                $$("OfertasNReg").config.label = "NREG: " + numReg;
-                $$("OfertasNReg").refresh();
-                $$("ofertasGrid").hideProgress();
-
+                this.cargarOfertas(data, id);
             })
             .catch((err) => {
                 $$("ofertasGrid").hideProgress();
                 messageApi.errorMessageAjax(err);
             });
+        } else {
+            ofertasService.getOfertasUsuario(usu)
+            .then((data) => {
+                $$("ofertasGrid").hideProgress();
+                this.cargarOfertas(data, id);
+            })
+            .catch((err) => {
+                $$("ofertasGrid").hideProgress();
+                messageApi.errorMessageAjax(err);
+            });
+        }
+
+    }
+    cargarOfertas(data, id) {
+        $$("ofertasGrid").clearAll();
+        $$("ofertasGrid").parse(generalApi.prepareDataForDataTableWidthDates("ofertaId", ['fechaEntrega', 'fechaAdjudicacion', 'fechaInicioContrato', 'fechaFinContrato'], data));
+        $$("ofertasGrid").sort('#ofertaId#', 'desc', 'int');
+        if (id) {
+            $$("ofertasGrid").select(id);
+            $$("ofertasGrid").showItem(id);
+        }
+        var numReg = $$("ofertasGrid").count();
+        $$("OfertasNReg").config.label = "NREG: " + numReg;
+        $$("OfertasNReg").refresh();
+        $$("ofertasGrid").hideProgress();
     }
     edit(id) {
         this.show('/top/ofertasForm?ofertaId=' + id);

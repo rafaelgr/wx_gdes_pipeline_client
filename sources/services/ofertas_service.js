@@ -18,6 +18,24 @@ export const ofertasService = {
                 });
         });
     },
+    getOfertasUsuario: (usu) => {
+        return new webix.promise((success, fail) => {
+            var url = devConfig.getApiUrl() + "/api/ofertas/usuario/" + usu.usuarioId + "/" + usu.grupoUsuarioId;
+            webix.ajax()
+                .timeout(10000)
+                .headers({
+                    "Content-Type": "application/json",
+                    "x-apiKey": usu.apiKey
+                })
+                .get(url)
+                .then((result) => {
+                    success(result.json());
+                })
+                .catch((inXhr) => {
+                    fail(inXhr);
+                });
+        });
+    },
     getOfertasSeguidores: (usu) => {
         return new webix.promise((success, fail) => {
             var url = devConfig.getApiUrl() + "/api/ofertas/seguidores/" + usu.responsableId + "/" + usu.usuarioId;
