@@ -62,6 +62,36 @@ export default class UsuarioForm extends JetView {
                         {
                             cols: [
                                 {
+                                    width: 100
+                                },
+                                {
+                                    view: "combo", id: "cmbGrupo4", name: "grupoUsuarioId4", options: {},
+                                    label: translate("Grupo (4)"), labelPosition: "top"
+                                },
+                                {
+                                    view: "combo", id: "cmbGrupo5", name: "grupoUsuarioId5", options: {},
+                                    label: translate("Grupo (5)"), labelPosition: "top"
+                                }
+                            ]
+                        },
+                        {
+                            cols: [
+                                {
+                                    width: 100
+                                },
+                                {
+                                    view: "combo", id: "cmbGrupo6", name: "grupoUsuarioId6", options: {},
+                                    label: translate("Grupo (6)"), labelPosition: "top"
+                                },
+                                {
+                                    view: "combo", id: "cmbGrupo7", name: "grupoUsuarioId7", options: {},
+                                    label: translate("Grupo (7)"), labelPosition: "top"
+                                }
+                            ]
+                        },                        
+                        {
+                            cols: [
+                                {
                                     view: "text", name: "codigoIdioma", width: 100, required: true,
                                     label: translate("Idioma"), labelPosition: "top"
                                 },
@@ -138,6 +168,10 @@ export default class UsuarioForm extends JetView {
             this.loadGruposUsuarios();
             this.loadGruposUsuarios2();
             this.loadGruposUsuarios3();
+            this.loadGruposUsuarios4();
+            this.loadGruposUsuarios5();
+            this.loadGruposUsuarios6();
+            this.loadGruposUsuarios7();
             this.loadAreas();
             this.loadEmpresas();
             this.loadResponsables();
@@ -151,6 +185,10 @@ export default class UsuarioForm extends JetView {
                 this.loadGruposUsuarios(usuario.grupoUsuarioId);
                 this.loadGruposUsuarios2(usuario.grupoUsuarioId2);
                 this.loadGruposUsuarios3(usuario.grupoUsuarioId3);
+                this.loadGruposUsuarios4(usuario.grupoUsuarioId4);
+                this.loadGruposUsuarios5(usuario.grupoUsuarioId5);
+                this.loadGruposUsuarios6(usuario.grupoUsuarioId6);
+                this.loadGruposUsuarios7(usuario.grupoUsuarioId7);
                 this.loadAreas(usuario.areaId);
                 this.loadEmpresas(usuario.empresaId);
                 this.loadResponsables(usuario.responsableId);
@@ -173,6 +211,10 @@ export default class UsuarioForm extends JetView {
         var data = $$("frmUsuarios").getValues();
         if (!data.grupoUsuarioId2) delete data.grupoUsuarioId2;
         if (!data.grupoUsuarioId3) delete data.grupoUsuarioId3;
+        if (!data.grupoUsuarioId4) delete data.grupoUsuarioId4;
+        if (!data.grupoUsuarioId5) delete data.grupoUsuarioId5;
+        if (!data.grupoUsuarioId6) delete data.grupoUsuarioId6;
+        if (!data.grupoUsuarioId7) delete data.grupoUsuarioId7;
         data = usuarioService.cleanData(data);
         console.log("DATAF: ", data);
         if (usuarioId == 0) {
@@ -306,4 +348,60 @@ export default class UsuarioForm extends JetView {
                 return;
             });
     }
+    loadGruposUsuarios4(id) {
+        gruposUsuariosService.getGruposUsuarios(usuarioService.getUsuarioCookie())
+            .then(rows => {
+                var grupos = generalApi.prepareDataForCombo('grupoUsuarioId', 'nombre', rows);
+                var list = $$("cmbGrupo4").getPopup().getList();
+                list.clearAll();
+                list.parse(grupos);
+                if (id) {
+                    $$("cmbGrupo4").setValue(id);
+                    $$("cmbGrupo4").refresh();
+                }
+                return;
+            });
+    }
+    loadGruposUsuarios5(id) {
+        gruposUsuariosService.getGruposUsuarios(usuarioService.getUsuarioCookie())
+            .then(rows => {
+                var grupos = generalApi.prepareDataForCombo('grupoUsuarioId', 'nombre', rows);
+                var list = $$("cmbGrupo5").getPopup().getList();
+                list.clearAll();
+                list.parse(grupos);
+                if (id) {
+                    $$("cmbGrupo5").setValue(id);
+                    $$("cmbGrupo5").refresh();
+                }
+                return;
+            });
+    }   
+    loadGruposUsuarios6(id) {
+        gruposUsuariosService.getGruposUsuarios(usuarioService.getUsuarioCookie())
+            .then(rows => {
+                var grupos = generalApi.prepareDataForCombo('grupoUsuarioId', 'nombre', rows);
+                var list = $$("cmbGrupo6").getPopup().getList();
+                list.clearAll();
+                list.parse(grupos);
+                if (id) {
+                    $$("cmbGrupo6").setValue(id);
+                    $$("cmbGrupo6").refresh();
+                }
+                return;
+            });
+    }
+    loadGruposUsuarios7(id) {
+        gruposUsuariosService.getGruposUsuarios(usuarioService.getUsuarioCookie())
+            .then(rows => {
+                var grupos = generalApi.prepareDataForCombo('grupoUsuarioId', 'nombre', rows);
+                var list = $$("cmbGrupo7").getPopup().getList();
+                list.clearAll();
+                list.parse(grupos);
+                if (id) {
+                    $$("cmbGrupo7").setValue(id);
+                    $$("cmbGrupo7").refresh();
+                }
+                return;
+            });
+    }         
 }

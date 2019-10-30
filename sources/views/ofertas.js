@@ -186,30 +186,17 @@ export default class Ofertas extends JetView {
             columns: [
                 { id: "ofertaId", adjust: true, header: [translate("ID"), { content: "numberFilter" }], sort: "int" },
                 { id: "numeroOferta", header: [translate("Nr. Oferta"), { content: "textFilter" }], sort: "string", editor: "text", minWidth: 100 },
-                { id: "empresaId", header: [translate("Empresa"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colEmpresas, width: 200 },
                 { id: "paisId", header: [translate("Pais"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colPaises, width: 200 },
                 { id: "faseOfertaId", header: [translate("Fase oferta"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colFasesOferta, width: 200 },
                 { id: "tipoOportunidadId", header: [translate("Tipo oportunidad"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colTiposOportunidad, width: 200 },
+                { id: "unidadNegocioId", header: [translate("Unidad de negocio"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUnidadesNegocio, width: 200 },
                 { id: "areaId", header: [translate("Area"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colAreas, width: 200 },
                 { id: "ubicacion", header: [translate("Ubicación"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
-                { id: "paisUbicacion", header: [translate("Pais ubicación"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
                 { id: "cliente", header: [translate("Cliente"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
                 { id: "nombreCorto", header: [translate("Nombre"), { content: "textFilter" }], sort: "string", editor: "text", width: 250 },
-                { id: "descripcion", header: [translate("Descripción"), { content: "textFilter" }], sort: "string", editor: "text", width: 250 },
                 { id: "estadoId", header: [translate("Estado"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colEstados, width: 200 },
                 { id: "importePresupuesto", adjust: true, header: [translate("Importe"), { content: "numberFilter" }], sort: "int", format: webix.i18n.priceFormat, css: { 'text-align': 'right' } },
-                { id: "divisaId", header: [translate("Divisa"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colDivisas, width: 200 },
                 { id: "margenContribucion", adjust: true, header: [translate("Margen (%)"), { content: "numberFilter" }], sort: "int", format: webix.i18n.numberFormat, css: { 'text-align': 'right' } },
-                {
-                    id: "fechaEntrega", header: [{ text: translate("Fecha entrega"), css: { "text-align": "center" } }, { content: "textFilter" }],
-                    editor: "editdate", width: 200, format: webix.i18n.dateFormatStr, sort: "string"
-                },
-                { id: "responsableId", header: [translate("Responsable"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUsuarios, width: 200 },
-                { id: "autorizaciones", header: [translate("Autorizaciones"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
-                { id: "uteSN", fillspace: true, header: [translate("UTE"), { content: "textFilter" }], template: "{common.checkbox()}", sort: "string", editor: "checkbox", minWidth: 100 },
-                { id: "gdesPor", adjust: true, header: [translate("UTE (%)"), { content: "numberFilter" }], sort: "int", format: webix.i18n.numberFormat, css: { 'text-align': 'right' } },
-                { id: "numeroPedido", header: [translate("Num. Pedido"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
-                { id: "competidores", header: [translate("Competidores"), { content: "textFilter" }], sort: "string", editor: "text", width: 250 },
                 { id: "probabilidad", adjust: true, header: [translate("Probabilidad (%)"), { content: "numberFilter" }], sort: "int", format: webix.i18n.numberFormat, css: { 'text-align': 'right' } },
                 {
                     id: "fechaAdjudicacion", header: [{ text: translate("Fecha adjudicación"), css: { "text-align": "center" } }, { content: "textFilter" }],
@@ -224,8 +211,27 @@ export default class Ofertas extends JetView {
                     editor: "editdate", width: 200, format: webix.i18n.dateFormatStr, sort: "string"
                 },
                 { id: "duracion", header: [translate("Duración"), { content: "textFilter" }], sort: "string", editor: "text", width: 250 },
-                { id: "razonPerdidaId", header: [translate("Razón pérdida"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colRazonesPerdida, width: 200 },
-                { id: "unidadNegocioId", header: [translate("Unidad de negocio"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUnidadesNegocio, width: 200 },
+
+
+                // { id: "empresaId", header: [translate("Empresa"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colEmpresas, width: 200 },
+                
+                
+                
+                // { id: "paisUbicacion", header: [translate("Pais ubicación"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
+                // { id: "descripcion", header: [translate("Descripción"), { content: "textFilter" }], sort: "string", editor: "text", width: 250 },
+                // { id: "divisaId", header: [translate("Divisa"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colDivisas, width: 200 },
+                // {
+                //     id: "fechaEntrega", header: [{ text: translate("Fecha entrega"), css: { "text-align": "center" } }, { content: "textFilter" }],
+                //     editor: "editdate", width: 200, format: webix.i18n.dateFormatStr, sort: "string"
+                // },
+                // { id: "responsableId", header: [translate("Responsable"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUsuarios, width: 200 },
+                // { id: "autorizaciones", header: [translate("Autorizaciones"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
+                // { id: "uteSN", fillspace: true, header: [translate("UTE"), { content: "textFilter" }], template: "{common.checkbox()}", sort: "string", editor: "checkbox", minWidth: 100 },
+                // { id: "gdesPor", adjust: true, header: [translate("UTE (%)"), { content: "numberFilter" }], sort: "int", format: webix.i18n.numberFormat, css: { 'text-align': 'right' } },
+                // { id: "numeroPedido", header: [translate("Num. Pedido"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
+                // { id: "competidores", header: [translate("Competidores"), { content: "textFilter" }], sort: "string", editor: "text", width: 250 },
+                // { id: "razonPerdidaId", header: [translate("Razón pérdida"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colRazonesPerdida, width: 200 },
+                
                 { id: "actions", header: [{ text: translate("Acciones"), css: { "text-align": "center" } }], template: editButton + deleteButton, css: { "text-align": "center" } }
             ],
             rightSplit: 1,
