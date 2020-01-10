@@ -4,6 +4,8 @@ import { gruposUsuariosService } from "../services/gruposUsuarios_service";
 import { parametrosService } from "../services/parametros_service";
 import { messageApi } from "../utilities/messages";
 
+import GruposUsuariosLineas from './gruposUsuariosLineas';
+
 var gruposUsuarioId = 0;
 
 export default class GruposUsuariosForm extends JetView {
@@ -44,6 +46,9 @@ export default class GruposUsuariosForm extends JetView {
                             ]
                         }
                     ]
+                },
+                {
+                    $subview: GruposUsuariosLineas
                 },
                 { minheight: 600 }
             ]
