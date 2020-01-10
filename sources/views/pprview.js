@@ -56,14 +56,17 @@ export default class PprView extends JetView {
     }
 
     rptType1() {
-        this.$scope.pprReport2.showWindow(ofertaId, 1);
+        //this.$scope.pprReport2.showWindow(ofertaId, 1);
+        window.open(`report.html?ofertaId=${ofertaId}&type=1`, '_blank');
     }
 
     rptType2() {
-        this.$scope.pprReport2.showWindow(ofertaId, 2);
+        //this.$scope.pprReport2.showWindow(ofertaId, 2);
+        window.open(`report.html?ofertaId=${ofertaId}&type=2`, '_blank');
     }
 
     rptType3() {
-        this.$scope.pprReport2.showWindow(ofertaId, 3);
+        //this.$scope.pprReport2.showWindow(ofertaId, 3);
+        window.open(`report.html?ofertaId=${ofertaId}&type=3`, '_blank');
     }
 }

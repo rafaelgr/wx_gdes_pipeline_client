@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>REPORT</title>
+    <script type="text/javascript" src="//cdn.webix.com/edge/webix.js"></script>
+    <!-- Stimusloft Reports.JS -->
+	<script src="./stireport/js/stimulsoft.reports.js" type="text/javascript"></script>
+    <script src="./stireport/js/stimulsoft.viewer.js" type="text/javascript"></script>
+    <script>
+    const PRODUCTION = false;
+    iniReports = () => {
+        // Create the report viewer with default options
+        viewer = new Stimulsoft.Viewer.StiViewer(null, "StiViewer", false);
+        options = new Stimulsoft.Viewer.StiViewerOptions();
+        Stimulsoft.Base.Localization.StiLocalization.setLocalizationFile("../localization/es.xml", true);
+        Stimulsoft.Base.StiLicense.key = "6vJhGtLLLz2GNviWmUTrhSqnOItdDwjBylQzQcAOiHltN9ZO4D78QwpEoh6+UpBm5mrGyhSAIsuWoljPQdUv6R6vgv" +
+            "iStsx8W3jirJvfPH27oRYrC2WIPEmaoAZTNtqb+nDxUpJlSmG62eA46oRJDV8kJ2cJSEx19GMJXYgZvv7yQT9aJHYa" +
+            "SrTVD7wdhpNVS1nQC3OtisVd7MQNQeM40GJxcZpyZDPfvld8mK6VX0RTPJsQZ7UcCEH4Y3LaKzA5DmUS+mwSnjXz/J" +
+            "Fv1uO2JNkfcioieXfYfTaBIgZlKecarCS5vBgMrXly3m5kw+YwpJ2v+cMXuDk3UrZgrdxNnOhg8ZHPg9ijHxqUomZZ" +
+            "BzKpVQU0d06ne60j/liMH5KirAI2JCVfBcBvIcyliJos8LAWr9q/1sPR9y7LmA1eyS1/dXaxmEaqi5ubhLqlf+OS0x" +
+            "FX6tlBBgegqHlIj6Fytwvq5YlGAZ0Cra05JhnKh/ohYlADQz6Jbg5sOKyn5EbejvPS3tWr0LRBH2FO6+mJaSEAwzGm" +
+            "oWT057ScSvGgQmfx8wCqSF+PgK/zTzjy75Oh";
+        options.appearance.scrollbarsMode = true;
+        options.appearance.fullScreenMode = true;
+        options.toolbar.showSendEmailButton = true;
+    }
+
+    obtainReport = (ofertaId, type) => {
+        StiOptions.WebServer.url = getApiUrl() + "/streport";
+        var file = "reports/proposal_report.mrt";
+        if (type == 1) file = "reports/proposal_report_short.mrt";
+        if (type == 3) file = "reports/proposal_report_annex.mrt";
+        // Create a new report instance
+        var report = new Stimulsoft.Report.StiReport();
+        report.loadFile(file);
+        let usu = getUsuarioCookie()
+        getConfigMysql(usu)
+        .then(data => {
+            debugger;
+            var myconfig = data;
+            var connectionString = "Server=" + myconfig.host + ";";
+            connectionString += "Port=" + myconfig.port + ";"
+            connectionString += "Database=" + myconfig.database + ";"
+            connectionString += "UserId=" + myconfig.user + ";"
+            connectionString += "Pwd=" + myconfig.password + ";";
+            report.dictionary.databases.list[0].connectionString = connectionString;
+    
+            // Parámetros
+            report.dictionary.variables.items[0].val = ofertaId;
+        
+            // Assign report to the viewer, the report will be built automatically after rendering the viewer
+            viewer.report = report;
+            viewer.renderHtml("report_viewer");
+        })
+        .catch(err => {
+            console.log("ERR: ", err);
+        })
+
+    }
+    getApiUrl = () => {
+        var urlApi = "";
+        if (!PRODUCTION) urlApi = "http://localhost:8060";
+        return urlApi;
+    }
+    getConfigMysql = (usu) => {
+        return new webix.promise((success, fail) => {
+            if (!PRODUCTION) {
+                var data = {
+                    host: "localhost",
+                    port: "3306",
+                    database: "gdes_pipeline_dev",
+                    user: "root",
+                    password: "aritel"
+                };
+                success(data);
+            } else {
+                webix.ajax()
+                .timeout(10000)
+                .headers({
+                    "Content-Type": "application/json",
+                    "x-apiKey": usu.apiKey
+                })
+                .get("/pwbi/config")
+                .then((result) => {
+                    success(result.json());
+                })
+                .catch((inXhr) => {
+                    fail(inXhr);
+                });
+            }
+        });
+    }   
+    getUsuarioCookie = () => {
+        var usuario = getCookie('gdes_pipeline_usuario');
+        if (!usuario) return null;
+        return JSON.parse(usuario);
+    } 
+    getCookie = (c_name) => {
+        var i, x, y, ARRcookies = document.cookie.split(";");
+        for (i = 0; i < ARRcookies.length; i++) {
+            x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+            y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+            x = x.replace(/^\s+|\s+$/g, "");
+            if (x == c_name) {
+                return decodeURI(y);
+            }
+        }
+    }    
+    </script>
+</head>
+<body>
+    <div id='report_viewer'></div>
+    <script>
+        console.log(window.location.href);
+        var url = new URL(window.location.href);
+        var ofertaId = url.searchParams.get("ofertaId");
+        var type = url.searchParams.get("type");
+        console.log('OfertadId %s Type %s', ofertaId, type);
+        iniReports();
+        obtainReport(ofertaId, type);
+    </script>
+</body>
+</html>
