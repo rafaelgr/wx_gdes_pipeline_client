@@ -28,7 +28,8 @@ export default class MainMenu extends JetView {
                         { id: "tiposContrato", value: translate("Tipos de contrato"), icon: "mdi mdi-shape-outline", details: "Tipos de contrato" },
                         { id: "estados", value: translate("Estados"), icon: "mdi mdi-thumbs-up-down", details: "Estados" },
                         { id: "razonesPerdida", value: translate("Razon perdida"), icon: "mdi mdi-thumb-down", details: "Razon perdida" },
-                        { id: "divisas", value: translate("Divisas"), icon: "mdi mdi-currency-eur", details: "Divisas" }
+                        { id: "divisas", value: translate("Divisas"), icon: "mdi mdi-currency-eur", details: "Divisas" },
+                        { id: "ubicaciones", value: translate("Ubicaciones"), icon: "mdi  mdi-map-marker-outline", details: "Ubicaciones" }
 
                     ]
                 },
@@ -47,3 +48,4 @@ export default class MainMenu extends JetView {
     }
 }
 
+//
