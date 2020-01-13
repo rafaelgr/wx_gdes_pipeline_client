@@ -136,7 +136,7 @@ export default class UsuarioForm extends JetView {
                                     label: translate("Correo Azure"), labelPosition: "top"
                                 },
                                 {
-                                    view: "text", name: "ubicacion", required: true,
+                                    view: "text", name: "ubicacion", 
                                     label: translate("Ubicación"), labelPosition: "top"
                                 }
                             ]
