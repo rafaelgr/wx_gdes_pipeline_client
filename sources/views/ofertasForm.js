@@ -615,6 +615,7 @@ export default class OfertasForm extends JetView {
         if (ofertaId == 0) {
             this.loadUsuarios();
             this.loadAreas();
+            this.loadUbicaciones();
             this.loadUnidadesNegocio();
             this.loadResponsables();
             this.loadEmpresas();
@@ -646,6 +647,7 @@ export default class OfertasForm extends JetView {
                 $$("frmOfertas").setValues(oferta);
                 this.loadUsuarios(oferta.usuarioId);
                 this.loadAreas(oferta.areaId);
+                this.loadUbicaciones(oferta.ubicacionId);
                 this.loadUnidadesNegocio(oferta.unidadNegocioId);
                 this.loadResponsables(oferta.responsableId);
                 this.loadEmpresas(oferta.empresaId);

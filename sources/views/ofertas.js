@@ -13,6 +13,7 @@ import { estadosService } from "../services/estados_service";
 import { divisasService } from "../services/divisas_service";
 import { languageService } from "../locales/language_service";
 import { razonesPerdidaService } from "../services/razonesPerdida_service";
+import { ubicacionesService } from "../services/ubicaciones_service";
 import OfertasWindow from "./ofertasWindow";
 
 var editButton = "<span class='onEdit webix_icon wxi-pencil'></span>";
@@ -69,6 +70,14 @@ if (areaResult.err) {
     messageApi.errorMessageAjax(areaResult.err);
 } else {
     colAreas = generalApi.prepareDataForCombo('areaId', 'nombre', areaResult.data);
+}
+
+var colUbicaciones = [];
+var ubicacionResult = ubicacionesService.getSyncUbicaciones(usuarioService.getUsuarioCookie());
+if (ubicacionResult.err) {
+    messageApi.errorMessageAjax(ubicacionResult.err);
+} else {
+    colUbicaciones = generalApi.prepareDataForCombo('ubicacionId', 'nombre', ubicacionResult.data);
 }
 
 var colEstados = [];
@@ -191,7 +200,8 @@ export default class Ofertas extends JetView {
                 { id: "tipoOportunidadId", header: [translate("Tipo oportunidad"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colTiposOportunidad, width: 200 },
                 { id: "unidadNegocioId", header: [translate("Unidad de negocio"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUnidadesNegocio, width: 200 },
                 { id: "areaId", header: [translate("Area"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colAreas, width: 200 },
-                { id: "ubicacion", header: [translate("Ubicación"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
+                // { id: "ubicacion", header: [translate("Ubicación"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
+                { id: "ubicacionId", header: [translate("Ubicacion"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUbicaciones, width: 200 },
                 { id: "cliente", header: [translate("Cliente"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
                 { id: "nombreCorto", header: [translate("Nombre"), { content: "textFilter" }], sort: "string", editor: "text", width: 250 },
                 { id: "estadoId", header: [translate("Estado"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colEstados, width: 200 },
