@@ -39,7 +39,7 @@ export default class UsuarioForm extends JetView {
                                     label: translate("Nombre usuario"), labelPosition: "top"
                                 },
                                 {
-                                    view: "combo", id: "cmbGrupo", name: "grupoUsuarioId", required: true, options: {},
+                                    view: "combo", id: "cmbGrupo", name: "grupoUsuarioId", options: {},
                                     label: translate("Grupo visualización (1)"), labelPosition: "top"
                                 }
                             ]
@@ -209,12 +209,13 @@ export default class UsuarioForm extends JetView {
             return;
         }
         var data = $$("frmUsuarios").getValues();
-        if (!data.grupoUsuarioId2) delete data.grupoUsuarioId2;
-        if (!data.grupoUsuarioId3) delete data.grupoUsuarioId3;
-        if (!data.grupoUsuarioId4) delete data.grupoUsuarioId4;
-        if (!data.grupoUsuarioId5) delete data.grupoUsuarioId5;
-        if (!data.grupoUsuarioId6) delete data.grupoUsuarioId6;
-        if (!data.grupoUsuarioId7) delete data.grupoUsuarioId7;
+        if (!data.grupoUsuarioId || data.grupoUsuarioId === -1) data.grupoUsuarioId = null;
+        if (!data.grupoUsuarioId2 || data.grupoUsuarioId2 === -1) data.grupoUsuarioId2 = null;
+        if (!data.grupoUsuarioId3 || data.grupoUsuarioId3 === -1) data.grupoUsuarioId3 = null;
+        if (!data.grupoUsuarioId4 || data.grupoUsuarioId4 === -1) data.grupoUsuarioId4 = null;
+        if (!data.grupoUsuarioId5 || data.grupoUsuarioId5 === -1) data.grupoUsuarioId5 = null;
+        if (!data.grupoUsuarioId6 || data.grupoUsuarioId6 === -1) data.grupoUsuarioId6 = null;
+        if (!data.grupoUsuarioId7 || data.grupoUsuarioId7 === -1) data.grupoUsuarioId7 = null;
         data = usuarioService.cleanData(data);
         console.log("DATAF: ", data);
         if (usuarioId == 0) {
@@ -235,20 +236,6 @@ export default class UsuarioForm extends JetView {
                     messageApi.errorMessageAjax(err);
                 });
         }
-    }
-    loadGruposUsuarios(grupoUsuarioId) {
-        gruposUsuariosService.getGruposUsuarios(usuarioService.getUsuarioCookie())
-            .then(rows => {
-                var grupos = generalApi.prepareDataForCombo('grupoUsuarioId', 'nombre', rows);
-                var list = $$("cmbGrupo").getPopup().getList();
-                list.clearAll();
-                list.parse(grupos);
-                if (grupoUsuarioId) {
-                    $$("cmbGrupo").setValue(grupoUsuarioId);
-                    $$("cmbGrupo").refresh();
-                }
-                return;
-            });
     }
     loadResponsables(responsableId) {
         usuarioService.getUsuarios(usuarioService.getUsuarioCookie())
@@ -320,10 +307,26 @@ export default class UsuarioForm extends JetView {
                 return;
             });
     }
+    loadGruposUsuarios(grupoUsuarioId) {
+        gruposUsuariosService.getGruposUsuarios(usuarioService.getUsuarioCookie())
+            .then(rows => {
+                var grupos = generalApi.prepareDataForCombo('grupoUsuarioId', 'nombre', rows);
+                grupos.push({id: -1, value: ""});
+                var list = $$("cmbGrupo").getPopup().getList();
+                list.clearAll();
+                list.parse(grupos);
+                if (grupoUsuarioId) {
+                    $$("cmbGrupo").setValue(grupoUsuarioId);
+                    $$("cmbGrupo").refresh();
+                }
+                return;
+            });
+    }
     loadGruposUsuarios2(id) {
         gruposUsuariosService.getGruposUsuarios(usuarioService.getUsuarioCookie())
             .then(rows => {
                 var grupos = generalApi.prepareDataForCombo('grupoUsuarioId', 'nombre', rows);
+                grupos.push({id: -1, value: ""});
                 var list = $$("cmbGrupo2").getPopup().getList();
                 list.clearAll();
                 list.parse(grupos);
@@ -338,6 +341,7 @@ export default class UsuarioForm extends JetView {
         gruposUsuariosService.getGruposUsuarios(usuarioService.getUsuarioCookie())
             .then(rows => {
                 var grupos = generalApi.prepareDataForCombo('grupoUsuarioId', 'nombre', rows);
+                grupos.push({id: -1, value: ""});
                 var list = $$("cmbGrupo3").getPopup().getList();
                 list.clearAll();
                 list.parse(grupos);
@@ -352,6 +356,7 @@ export default class UsuarioForm extends JetView {
         gruposUsuariosService.getGruposUsuarios(usuarioService.getUsuarioCookie())
             .then(rows => {
                 var grupos = generalApi.prepareDataForCombo('grupoUsuarioId', 'nombre', rows);
+                grupos.push({id: -1, value: ""});
                 var list = $$("cmbGrupo4").getPopup().getList();
                 list.clearAll();
                 list.parse(grupos);
@@ -366,6 +371,7 @@ export default class UsuarioForm extends JetView {
         gruposUsuariosService.getGruposUsuarios(usuarioService.getUsuarioCookie())
             .then(rows => {
                 var grupos = generalApi.prepareDataForCombo('grupoUsuarioId', 'nombre', rows);
+                grupos.push({id: -1, value: ""});
                 var list = $$("cmbGrupo5").getPopup().getList();
                 list.clearAll();
                 list.parse(grupos);
@@ -380,6 +386,7 @@ export default class UsuarioForm extends JetView {
         gruposUsuariosService.getGruposUsuarios(usuarioService.getUsuarioCookie())
             .then(rows => {
                 var grupos = generalApi.prepareDataForCombo('grupoUsuarioId', 'nombre', rows);
+                grupos.push({id: -1, value: ""});
                 var list = $$("cmbGrupo6").getPopup().getList();
                 list.clearAll();
                 list.parse(grupos);
@@ -394,6 +401,7 @@ export default class UsuarioForm extends JetView {
         gruposUsuariosService.getGruposUsuarios(usuarioService.getUsuarioCookie())
             .then(rows => {
                 var grupos = generalApi.prepareDataForCombo('grupoUsuarioId', 'nombre', rows);
+                grupos.push({id: -1, value: ""});
                 var list = $$("cmbGrupo7").getPopup().getList();
                 list.clearAll();
                 list.parse(grupos);
