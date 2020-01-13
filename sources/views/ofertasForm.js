@@ -48,8 +48,17 @@ export default class OfertasForm extends JetView {
                     cols: [
                         { view: "text", name: "nombreCorto", label: translate("Nombre"), required: true, labelPosition: "top" },
                         { view: "text", name: "cliente", label: translate("Cliente"), required: true, labelPosition: "top" },
-                        { view: "combo", id: "cmbUbicacion", name: "ubicacionId", required: true, options: {}, label: translate("Ubicacion"), labelPosition: "top" }
-                        // { view: "text", id: "ubicacion", name: "ubicacion", label: translate("Ubicación"), required: true, labelPosition: "top" }
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "combo", id: "cmbUbicacion", name: "ubicacionId", required: true, options: {}, label: translate("Ubicacion"), labelPosition: "top" },
+                        {
+                            view: "button", type: "icon", icon: "wxi-plus", width: 37, align: "left",
+                            click: () => {
+                                console.log('nueva ubicacion');
+                            }
+                        }
                     ]
                 },
                 {
@@ -985,7 +994,7 @@ export default class OfertasForm extends JetView {
         $$("cmbEmpresa").setValue(usu.empresaId);
         $$("cmbUnidadNegocio").setValue(usu.unidadNegocioId);
         $$("cmbArea").setValue(usu.areaId);
-        $$("ubicacion").setValue(usu.ubicacion);
+        // $$("ubicacion").setValue(usu.ubicacion);
     }
     calcImporte() {
         // Calcular el importe de contribución a partir del margen
