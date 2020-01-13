@@ -16,6 +16,7 @@ import { messageApi } from "../utilities/messages";
 import { generalApi } from "../utilities/general";
 import { parametrosService } from "../services/parametros_service";
 import { versionesService } from '../services/versiones_service';
+import { ubicacionesService } from '../services/ubicaciones_service';
 // import PprReport from "./pprReport";
 
 var ofertaId = 0;
@@ -47,7 +48,8 @@ export default class OfertasForm extends JetView {
                     cols: [
                         { view: "text", name: "nombreCorto", label: translate("Nombre"), required: true, labelPosition: "top" },
                         { view: "text", name: "cliente", label: translate("Cliente"), required: true, labelPosition: "top" },
-                        { view: "text", id: "ubicacion", name: "ubicacion", label: translate("Ubicación"), required: true, labelPosition: "top" }
+                        { view: "combo", id: "cmbUbicacion", name: "ubicacionId", required: true, options: {}, label: translate("Ubicacion"), labelPosition: "top" }
+                        // { view: "text", id: "ubicacion", name: "ubicacion", label: translate("Ubicación"), required: true, labelPosition: "top" }
                     ]
                 },
                 {
@@ -773,6 +775,20 @@ export default class OfertasForm extends JetView {
                 if (areaId) {
                     $$("cmbArea").setValue(areaId);
                     $$("cmbArea").refresh();
+                }
+                return;
+            });
+    }
+    loadUbicaciones(ubicacionId) {
+        ubicacionesService.getUbicaciones(usuarioService.getUsuarioCookie())
+            .then(rows => {
+                var ubicaciones = generalApi.prepareDataForCombo('ubicacionId', 'nombre', rows);
+                var list = $$("cmbUbicacion").getPopup().getList();
+                list.clearAll();
+                list.parse(ubicaciones);
+                if (ubicacionId) {
+                    $$("cmbUbicacion").setValue(ubicacionId);
+                    $$("cmbUbicacion").refresh();
                 }
                 return;
             });
