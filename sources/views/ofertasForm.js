@@ -507,6 +507,8 @@ export default class OfertasForm extends JetView {
         const ofertaData = {
             view: "form",
             id: "frmOfertas",
+            scroll: true,
+            height: 1080,
             elements: [
                 {
                     view: "tabview",
@@ -561,6 +563,11 @@ export default class OfertasForm extends JetView {
             ]
         }
         return _view;
+    }
+    urlChange(view, url) {
+        // Cambiar el form para adaptarlo a desplazamientos
+        console.log('Change url');
+        $$('frmOfertas').config.height = window.innerHeight - 150;
     }
     init(view, url) {
         usuarioService.checkLoggedUser();
