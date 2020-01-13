@@ -16,7 +16,7 @@ export default class GruposUsuarios extends JetView {
         var toolbarGruposUsuarios = {
             view: "toolbar", padding: 3, elements: [
                 { view: "icon", icon: "mdi mdi-account-group", width: 37, align: "left" },
-                { view: "label", label: translate("Grupos de usuarios") }
+                { view: "label", label: translate("Grupos de visualización") }
             ]
         }
         var pagerGruposUsuarios = {

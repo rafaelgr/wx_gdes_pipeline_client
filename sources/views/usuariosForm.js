@@ -40,7 +40,7 @@ export default class UsuarioForm extends JetView {
                                 },
                                 {
                                     view: "combo", id: "cmbGrupo", name: "grupoUsuarioId", required: true, options: {},
-                                    label: translate("Grupo"), labelPosition: "top"
+                                    label: translate("Grupo visualización (1)"), labelPosition: "top"
                                 }
                             ]
                         },
@@ -51,11 +51,11 @@ export default class UsuarioForm extends JetView {
                                 },
                                 {
                                     view: "combo", id: "cmbGrupo2", name: "grupoUsuarioId2", options: {},
-                                    label: translate("Grupo (2)"), labelPosition: "top"
+                                    label: translate("Grupo visualización (2)"), labelPosition: "top"
                                 },
                                 {
                                     view: "combo", id: "cmbGrupo3", name: "grupoUsuarioId3", options: {},
-                                    label: translate("Grupo (3)"), labelPosition: "top"
+                                    label: translate("Grupo visualización (3)"), labelPosition: "top"
                                 }
                             ]
                         },
@@ -66,11 +66,11 @@ export default class UsuarioForm extends JetView {
                                 },
                                 {
                                     view: "combo", id: "cmbGrupo4", name: "grupoUsuarioId4", options: {},
-                                    label: translate("Grupo (4)"), labelPosition: "top"
+                                    label: translate("Grupo visualización (4)"), labelPosition: "top"
                                 },
                                 {
                                     view: "combo", id: "cmbGrupo5", name: "grupoUsuarioId5", options: {},
-                                    label: translate("Grupo (5)"), labelPosition: "top"
+                                    label: translate("Grupo visualización (5)"), labelPosition: "top"
                                 }
                             ]
                         },
@@ -81,11 +81,11 @@ export default class UsuarioForm extends JetView {
                                 },
                                 {
                                     view: "combo", id: "cmbGrupo6", name: "grupoUsuarioId6", options: {},
-                                    label: translate("Grupo (6)"), labelPosition: "top"
+                                    label: translate("Grupo visualización (6)"), labelPosition: "top"
                                 },
                                 {
                                     view: "combo", id: "cmbGrupo7", name: "grupoUsuarioId7", options: {},
-                                    label: translate("Grupo (7)"), labelPosition: "top"
+                                    label: translate("Grupo visualización (7)"), labelPosition: "top"
                                 }
                             ]
                         },                        
