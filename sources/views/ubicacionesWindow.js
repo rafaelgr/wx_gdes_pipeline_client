@@ -1,32 +1,40 @@
 import { JetView } from "webix-jet";
 import { usuarioService } from "../services/usuario_service";
-import { gruposUsuariosLineasService } from "../services/gruposUsuariosLineas_service";
+import { ubicacionesService } from "../services/ubicaciones_service";
 import { parametrosService } from "../services/parametros_service";
 import { messageApi } from "../utilities/messages";
 import { generalApi } from "../utilities/general";
 
-var grpUsuarioId = 0;
-
-export default class GruposUsuariosLineasWindow extends JetView {
+export default class UbicacionesWindow extends JetView {
     config() {
         const translate = this.app.getService("locale")._;
         const _view1 = {
             view: "layout",
-            id: "grupoUsuarioLineasForm",
+            id: "ubicacionesWindowsForm",
             rows: [
                 {
                     view: "toolbar", padding: 3, elements: [
-                        { view: "icon", icon: "mdi mdi-account-group", width: 37, align: "left" },
+                        { view: "icon", icon: "mdi mdi-map-marker-outline", width: 37, align: "left" },
                         { view: "label", label: translate("Asociar usuario") }
                     ]
                 },
                 {
                     view: "form",
 
-                    id: "frmGruposUsuariosLineas",
+                    id: "frmUbicacionesWindow",
                     elements: [
-                        { view: "combo", id: "cmbUsuario", name: "usuarioId", required: true, options: {}, label: translate("Usuario"), labelPosition: "top" },
-
+                        {
+                            cols: [
+                                {
+                                    view: "text", name: "ubicacionId", width: 100, disabled: true,
+                                    label: translate("ID"), labelPosition: "top"
+                                },
+                                {
+                                    view: "text", name: "nombre", required: true, 
+                                    label: translate("Nombre ubicacion"), labelPosition: "top"
+                                }
+                            ]
+                        },
                         {
                             margin: 5, cols: [
                                 { gravity: 5 },
@@ -41,7 +49,7 @@ export default class GruposUsuariosLineasWindow extends JetView {
         }
         var _view = {
             view: "window",
-            id: "gruposUsuariosLineasWindow",
+            id: "ubicacionesWindow",
             position: "center", move: true, resize: true,
             width: 600,
             head: {
@@ -49,7 +57,7 @@ export default class GruposUsuariosLineasWindow extends JetView {
                     {},
                     {
                         view: "icon", icon: "mdi mdi-close", click: () => {
-                            $$('gruposUsuariosLineasWindow').hide();
+                            $$('ubicacionesWindow').hide();
                         }
                     }
                 ]
@@ -62,45 +70,30 @@ export default class GruposUsuariosLineasWindow extends JetView {
         console.log('Init window');
     }
     showWindow(grupoUsuarioId) {
-        $$('gruposUsuariosLineasWindow').show();
-        grpUsuarioId = grupoUsuarioId;
-        this.loadUsuarios();
+        $$('ubicacionesWindow').show();
     }
     cancel() {
-        $$('gruposUsuariosLineasWindow').hide();
+        $$('ubicacionesWindow').hide();
     }
     accept() {
         const translate = this.$scope.app.getService("locale")._;
-        if (!$$("frmGruposUsuariosLineas").validate()) {
+        if (!$$("frmUbicacionesWindow").validate()) {
             messageApi.errorMessage(translate("Debe rellenar los campos correctamente"));
             return;
         }
-        var data = $$("frmGruposUsuariosLineas").getValues();
-        const linea = {
-            grupoUsuarioLineaId: 0,
-            grupoUsuarioId: grpUsuarioId,
-            usuarioId: data.usuarioId
+        var data = $$("frmUbicacionesWindow").getValues();
+        const ubicacion = {
+            ubicacionId: 0,
+            nombre: data.nombre
         }
-        gruposUsuariosLineasService.postGrupoUsuarioLineas(usuarioService.getUsuarioCookie(), linea)
+        ubicacionesService.postUbicacion(usuarioService.getUsuarioCookie(), ubicacion)
         .then(result => {
-            this.$scope.getParentView().load(grpUsuarioId);
-            $$('gruposUsuariosLineasWindow').hide();
+            this.$scope.getParentView().loadUbicaciones(result.ubicacionId);
+            console.log('Result', result);
+            $$('ubicacionesWindow').hide();
         })
         .catch(err => {
             messageApi.errorMessageAjax(err);
         })
-    }
-    loadUsuarios() {
-        usuarioService.getUsuarios(usuarioService.getUsuarioCookie())
-            .then(rows => {
-                var usuarios = generalApi.prepareDataForCombo('usuarioId', 'nombre', rows);
-                var list = $$("cmbUsuario").getPopup().getList();
-                list.clearAll();
-                list.parse(usuarios);
-                return;
-            })
-            .catch(err => {
-                clg("Error", err)
-            });
     }
 }

@@ -17,6 +17,7 @@ import { generalApi } from "../utilities/general";
 import { parametrosService } from "../services/parametros_service";
 import { versionesService } from '../services/versiones_service';
 import { ubicacionesService } from '../services/ubicaciones_service';
+import UbicacionesWindow from "./ubicacionesWindow";
 // import PprReport from "./pprReport";
 
 var ofertaId = 0;
@@ -55,8 +56,9 @@ export default class OfertasForm extends JetView {
                         { view: "combo", id: "cmbUbicacion", name: "ubicacionId", required: true, options: {}, label: translate("Ubicacion"), labelPosition: "top" },
                         {
                             view: "button", type: "icon", icon: "wxi-plus", width: 37, align: "left",
+                            tooltip: translate("Crear nueva ubicación"),
                             click: () => {
-                                console.log('nueva ubicacion');
+                                this.ubicacionesWindow.showWindow();
                             }
                         }
                     ]
@@ -618,6 +620,7 @@ export default class OfertasForm extends JetView {
         $$("importeInversionDivisa").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });
         // this.pprReport = this.ui(PprReport);
         // console.log("PPRREPORT: ", this.pprReport);
+        this.ubicacionesWindow = this.ui(UbicacionesWindow);
     }
     load(ofertaId) {
         let usu = usuarioService.getUsuarioCookie();
