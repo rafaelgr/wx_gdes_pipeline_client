@@ -59,7 +59,7 @@ export default class GruposUsuariosLineasWindow extends JetView {
         return _view;
     }
     init(view, url) {
-        console.log('Init window');
+        
     }
     showWindow(grupoUsuarioId) {
         $$('gruposUsuariosLineasWindow').show();

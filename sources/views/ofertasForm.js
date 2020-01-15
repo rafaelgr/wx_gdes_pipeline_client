@@ -579,7 +579,6 @@ export default class OfertasForm extends JetView {
     }
     urlChange(view, url) {
         // Cambiar el form para adaptarlo a desplazamientos
-        console.log('Change url');
         $$('frmOfertas').config.height = window.innerHeight - 150;
     }
     init(view, url) {
@@ -619,7 +618,6 @@ export default class OfertasForm extends JetView {
         $$("importePrimerAnoDivisa").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });
         $$("importeInversionDivisa").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });
         // this.pprReport = this.ui(PprReport);
-        // console.log("PPRREPORT: ", this.pprReport);
         this.ubicacionesWindow = this.ui(UbicacionesWindow);
     }
     load(ofertaId) {
@@ -649,7 +647,6 @@ export default class OfertasForm extends JetView {
         }
         ofertasService.getOferta(usuarioService.getUsuarioCookie(), ofertaId)
             .then((oferta) => {
-                console.log("OFERTA: ", oferta)
                 oferta.fechaEntrega = new Date(oferta.fechaEntrega);
                 oferta.fechaAdjudicacion = new Date(oferta.fechaAdjudicacion);
                 oferta.fechaInicioContrato = new Date(oferta.fechaInicioContrato);
@@ -731,7 +728,6 @@ export default class OfertasForm extends JetView {
             } else {
                 webix.confirm(translate("Han cambiado las condiciones económicas de la oferta. ¿Quiere guardar una versión con las condiciones anteriores?"), (action) => {
                     if (action === true) {
-                        console.log("HA HABIDO CAMBIO DE IMPORTES");
                         data.version = data.version + 1;
                         this.$scope.guardarVersionAntigua(data.version)
                             .then(() => {
@@ -1028,7 +1024,6 @@ export default class OfertasForm extends JetView {
     }
     calcFromDivisa() {
         let multiplicador = +$$("multiplicador").getValue();
-        console.log("Multiplicador: ", multiplicador)
         if (multiplicador != 0) {
             let importePresupuesto = +$$("importePresupuestoDivisa").getValue() / multiplicador;
             $$("importePresupuesto").setValue(importePresupuesto);

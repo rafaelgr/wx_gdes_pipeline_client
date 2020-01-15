@@ -67,7 +67,6 @@ export default class UbicacionesWindow extends JetView {
         return _view;
     }
     init(view, url) {
-        console.log('Init window');
     }
     showWindow(grupoUsuarioId) {
         $$('ubicacionesWindow').show();
@@ -89,7 +88,6 @@ export default class UbicacionesWindow extends JetView {
         ubicacionesService.postUbicacion(usuarioService.getUsuarioCookie(), ubicacion)
         .then(result => {
             this.$scope.getParentView().loadUbicaciones(result.ubicacionId);
-            console.log('Result', result);
             $$('ubicacionesWindow').hide();
         })
         .catch(err => {

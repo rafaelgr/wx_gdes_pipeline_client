@@ -122,7 +122,6 @@ export default class GruposUsuarios extends JetView {
                 "onAfterFilter": function () {
                     var numReg = $$("gruposUsuariosGrid").count();
                     $$("GruposUsuariosNReg").config.label = "NREG: " + numReg;
-                    console.log("NREG ", $$("GruposUsuariosNReg"));
                     $$("GruposUsuariosNReg").refresh();
                 }
             }

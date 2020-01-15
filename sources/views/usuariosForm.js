@@ -217,7 +217,6 @@ export default class UsuarioForm extends JetView {
         if (!data.grupoUsuarioId6 || data.grupoUsuarioId6 === -1) data.grupoUsuarioId6 = null;
         if (!data.grupoUsuarioId7 || data.grupoUsuarioId7 === -1) data.grupoUsuarioId7 = null;
         data = usuarioService.cleanData(data);
-        console.log("DATAF: ", data);
         if (usuarioId == 0) {
             data.usuarioId = 0;
             usuarioService.postUsuario(usuarioService.getUsuarioCookie(), data)

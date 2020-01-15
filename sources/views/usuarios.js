@@ -158,7 +158,6 @@ export default class Usuarios extends JetView {
                 "onAfterEditStop": function (state, editor, ignoreUpdate) {
                     var cIndex = this.getColumnIndex(editor.column);
                     var length = this.config.columns.length;
-                    console.log("isNewRow: ", isNewRow, " CIndex: ", cIndex, " length-2: ", length-2);
                     if (isNewRow && cIndex != length - 2) return false;
                     if ((state.value != state.old) || isNewRow) {
                         isNewRow = false;
