@@ -67,7 +67,7 @@ export default class OfertasForm extends JetView {
                     cols: [
                         { view: "text", name: "periodo", label: translate("Periodo"), labelPosition: "top" },
                         { view: "text", name: "numeroLicitacion", label: translate("Nr. Licitación"), labelPosition: "top" },
-                        { view: "text", name: "paisUbicacion", label: translate("Pais Ubicación"), labelPosition: "top" }
+                        { view: "text", name: "paisUbicacion", label: translate("Pais Ubicación"), labelPosition: "top", required: true }
                     ]
                 },
                 {
@@ -697,7 +697,13 @@ export default class OfertasForm extends JetView {
         }
         var data = $$("frmOfertas").getValues();
         data = ofertasService.cleanData(data);
-        console.log("DATA: ", data);
+        if (!data.margenContribucion) {
+            data.margenContribucion = 0;
+        }
+        if (data.estadoId === 5 && !data.razonPerdidaId) {
+            messageApi.errorMessage(translate("Debe incluir una razón de pérdida de la oferta"));
+            return;            
+        }
         if (ofertaId == 0) {
             data.ofertaId = 0;
             data.fechaOferta = new Date();
