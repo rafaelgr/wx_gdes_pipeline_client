@@ -4,12 +4,16 @@ import { messageApi } from "../utilities/messages";
 import { generalApi } from "../utilities/general";
 import { ofertasHitosService } from "../services/ofertasHitos_service";
 import { divisasService } from "../services/divisas_service";
+import OfertasHitosWindow from './ofertasHitosWindow'
+
 
 var editButton = "<span class='onEdit webix_icon wxi-pencil'></span>";
 var deleteButton = "<span class='onDelete webix_icon wxi-trash'></span>";
 var currentIdDatatableView;
 var currentRowDatatableView
 var isNewRow = false;
+
+var _ofertaId = 0;
 
 var colDivisas = [];
 var divisaResult = divisasService.getSyncDivisas(usuarioService.getUsuarioCookie());
@@ -25,7 +29,7 @@ export default class OfertasHitos extends JetView {
         var toolbarOfertasHitos = {
             view: "toolbar", padding: 3, elements: [
                 { view: "icon", icon: "mdi mdi-calendar-clock", width: 37, align: "left" },
-                { view: "label", label: translate("OfertasHitos") }
+                { view: "label", label: translate("Oferta hitos de facturación") }
             ]
         }
         var pagerOfertasHitos = {
@@ -33,7 +37,7 @@ export default class OfertasHitos extends JetView {
                 {
                     view: "button", type: "icon", icon: "wxi-plus", width: 37, align: "left", hotkey: "Ctrl+F",
                     click: () => {
-                        // TODO: Aqui habrá que llamar a una window
+                        this.win3.showWindow(_ofertaId, 0);
                     }
                 },
                 {
@@ -45,7 +49,7 @@ export default class OfertasHitos extends JetView {
                 {
                     view: "button", type: "icon", icon: "wxi-download", width: 37, align: "right",
                     click: () => {
-                        webix.toExcel($$("divisasGrid"), {
+                        webix.toExcel($$("ofertasHitosGrid"), {
                             filename: "divisas",
                             name: "OfertasHitos",
                             rawValues: true,
@@ -66,7 +70,7 @@ export default class OfertasHitos extends JetView {
         };
         var datatableOfertasHitos = {
             view: "datatable",
-            id: "divisasGrid",
+            id: "ofertasHitosGrid",
             pager: "mypagerOfHitos",
             select: "row",
             columns: [
@@ -82,9 +86,8 @@ export default class OfertasHitos extends JetView {
             ],
             onClick: {
                 "onDelete": function (event, id, node) {
-                    var dtable = this;
                     var curRow = this.data.pull[id.row];
-                    var name = curRow.nombre;
+                    var name = webix.i18n.dateFormatStr(curRow.fecha) + " " + webix.i18n.priceFormat(curRow.importe);
                     this.$scope.delete(id.row, name);
                 },
                 "onEdit": function (event, id, node) {
@@ -118,7 +121,7 @@ export default class OfertasHitos extends JetView {
                                 ofertasHitosService.postDivisa(usuarioService.getUsuarioCookie(), data)
                                     .then(result => {
                                         this.$scope.load(result.divisaId);
-                                        $$('divisasGrid').editStop();
+                                        $$('ofertasHitosGrid').editStop();
                                     })
                                     .catch(err => {
                                         messageApi.errorMessageAjax(err);
@@ -136,7 +139,7 @@ export default class OfertasHitos extends JetView {
                     }
                 },
                 "onAfterFilter": function () {
-                    var numReg = $$("divisasGrid").count();
+                    var numReg = $$("ofertasHitosGrid").count();
                     $$("OfertasHitosNReg").config.label = "NREG: " + numReg;
                     $$("OfertasHitosNReg").refresh();
                 }
@@ -154,54 +157,45 @@ export default class OfertasHitos extends JetView {
     init(view, url) {
         usuarioService.checkLoggedUser();
         var ofertaId = this.getParentView()._data.ofertaId;
-        webix.UIManager.addHotKey("Esc", function () {
-            $$('divisasGrid').remove(-1);
-            return false;
-        }, $$('divisasGrid'));
-        webix.extend($$("divisasGrid"), webix.ProgressBar);
+        _ofertaId = ofertaId;
+        this.win3 = this.ui(OfertasHitosWindow);
         this.load(ofertaId);
     }
     load(id) {
-        $$("divisasGrid").showProgress();
         ofertasHitosService.getOfertasHitosOferta(usuarioService.getUsuarioCookie(), id)
             .then(data => {
                 data = ofertasHitosService.prepareData(data);
-                $$("divisasGrid").clearAll();
-                $$("divisasGrid").parse(generalApi.prepareDataForDataTable("ofertaHitoId", data));
-                var numReg = $$("divisasGrid").count();
+                $$("ofertasHitosGrid").clearAll();
+                $$("ofertasHitosGrid").parse(generalApi.prepareDataForDataTable("ofertaHitoId", data));
+                var numReg = $$("ofertasHitosGrid").count();
                 $$("OfertasHitosNReg").config.label = "NREG: " + numReg;
                 $$("OfertasHitosNReg").refresh();
-                $$("divisasGrid").hideProgress();
             })
             .catch(err => {
-                $$("divisasGrid").hideProgress();
                 messageApi.errorMessageAjax(err);
             })
     }
     edit(id) {
-        // TODO: Revisar el para window
-        // this.show('/top/divisasForm?divisaId=' + id);
+        this.win3.showWindow(_ofertaId, id);
+
     }
     delete(id, name) {
-
-        // TODO: Revisar el tratamiento con la nueva tabla
-
-        // const translate = this.app.getService("locale")._;
-        // var self = this;
-        // webix.confirm(translate("¿Seguro que quiere eliminar ") + name + "?", function (action) {
-        //     if (action === true) {
-        //         ofertasHitosService.deleteDivisa(usuarioService.getUsuarioCookie(), id)
-        //             .then(result => {
-        //                 self.load();
-        //             })
-        //             .catch(err => {
-        //                 messageApi.errorMessageAjax(err);
-        //             });
-        //     }
-        // });
+        const translate = this.app.getService("locale")._;
+        var self = this;
+        webix.confirm(translate("¿Seguro que quiere eliminar ") + name + "?", function (action) {
+            if (action === true) {
+                ofertasHitosService.deleteOfertaHito(usuarioService.getUsuarioCookie(), id)
+                    .then(result => {
+                        self.load(_ofertaId);
+                    })
+                    .catch(err => {
+                        messageApi.errorMessageAjax(err);
+                    });
+            }
+        });
     }
     cleanAndload() {
-        $$("divisasGrid").eachColumn(function (id, col) {
+        $$("ofertasHitosGrid").eachColumn(function (id, col) {
             if (col.id == 'actions') return;
             var filter = this.getFilter(id);
             if (filter) {
@@ -209,6 +203,6 @@ export default class OfertasHitos extends JetView {
                 else filter.value = "";					// html-based: select & text
             }
         });
-        this.load();
+        this.load(_ofertaId);
     }
 }
