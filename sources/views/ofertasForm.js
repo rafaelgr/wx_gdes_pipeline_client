@@ -117,7 +117,7 @@ export default class OfertasForm extends JetView {
                     cols: [
                         { view: "combo", id: "cmbUsuario", name: "usuarioId", required: true, options: {}, label: translate("Rble Oferta"), labelPosition: "top" },
                         { view: "combo", id: "cmbResponsable", name: "responsableId", required: true, options: {}, label: translate("Supervisado por"), labelPosition: "top" },
-                        { rows: [{ view: "checkbox", name: "lanoral", options: {}, label: translate("Laboral"), labelPosition: "top", width: 100 }] },
+                        { rows: [{ view: "checkbox", name: "laboral", options: {}, label: translate("Laboral"), labelPosition: "top", width: 100 }] },
                         { rows: [{ view: "checkbox", name: "finanzas", options: {}, label: translate("Finanzas"), labelPosition: "top", width: 100 }] },
                     ]
                 },
@@ -472,7 +472,7 @@ export default class OfertasForm extends JetView {
                         },
                         {
                             rows: [
-                                { view: "textarea", name: "consideracionesEconomicas", label: translate("Consideraciones economicas"), labelPosition: "top" }
+                                {}
                             ]
                         }
                     ]
@@ -494,21 +494,78 @@ export default class OfertasForm extends JetView {
                 ]
             }
         };
+        const cellDatosComplementarios2 = {
+            padding: 5, css: "fondocelda",
+            rows: [
+                {
+                    cols: [
+                        { view: "textarea", name: "alcance", label: translate("Alcance de los trabajos (Descripción completa)"), labelPosition: "top" },
+                        { view: "textarea", name: "riesgos", label: translate("Riesgos y mitigaciones"), labelPosition: "top" },
+                        { view: "textarea", name: "condicionesEstandarTXT", label: translate("Datos contractuales (Penalizaciones, Garantías, Seguros, etc)"), labelPosition: "top" },
+
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "textarea", name: "criteriosEvaluacion", label: translate("Criterios de Evaluación"), labelPosition: "top" },
+                        { view: "textarea", name: "estrategiaGDES", label: translate("Estrategia tomada en la Oferta"), labelPosition: "top" },
+                        { view: "textarea", name: "garantiasEspecialesTXT", label: translate("Datos Laborales"), labelPosition: "top" },
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "textarea", name: "datosComerciales", label: translate("Información comercial"), labelPosition: "top" },
+                        { view: "textarea", name: "diferencialGDES", label: translate("Valor añadido GDES"), labelPosition: "top" },
+                        { view: "textarea", name: "consideracionesEconomicas", label: translate("Consideraciones incluidas en la oferta económica"), labelPosition: "top" }
+
+                    ]
+                },
+                {
+                    cols: [
+                        {
+                            rows: [
+                                {
+                                    cols: [
+                                        { view: "text", name: "proveedorActual", label: translate("Proveedor Actual"), labelPosition: "top" },
+                                        { view: "text", name: "principalCompetidor", label: translate("Principal Competidor"), labelPosition: "top" }
+                                    ]
+                                },
+                                { view: "text", name: "competidores", label: translate("Competidores"), labelPosition: "top" },
+                            ]
+                        },
+                        { view: "textarea", name: "sinergias", label: translate("Sinergias con otros contratos"), labelPosition: "top" },
+                        {
+                            rows: [
+                                {
+                                    cols: [
+                                        {
+        
+                                        },
+                                        { view: "datepicker", editable: true, minDate: new Date("2000-01-01"), name: "fechaComite", label: translate("Fecha Comite Oferta"), labelPosition: "top", width:150 },
+                                    ]
+        
+                                }
+                            ]
+                        },
+                        
+                    ]
+                }
+            ]
+        }
         const cellAlcanceDeLosTrabajos = {
             padding: 5, css: "fondocelda",
             rows: [
                 { template: translate("ALCANCE DE LOS TRABAJOS"), type: "section" },
-                { view: "textarea", name: "alcance", label: translate("Alcance del Proyecto"), labelPosition: "top" },
+                
             ]
         };
         const cellCuestionesDeContrato = {
             padding: 5, css: "fondocelda",
             rows: [
                 { template: translate("CUESTIONES DE CONTRATO"), type: "section" },
-                { view: "textarea", name: "condicionesEstandarTXT", label: translate("Comentarios contrato"), labelPosition: "top" },
-                { view: "textarea", name: "garantiasEspecialesTXT", label: translate("Comentarios garantias"), labelPosition: "top" },
+                
+                
                 { view: "textarea", name: "penalizaciones", label: translate("Penalizaciones"), labelPosition: "top" },
-                { view: "textarea", name: "riesgos", label: translate("Riesgos"), labelPosition: "top" }
             ]
         };
         const cellConcurrenciaYMercado = {
@@ -517,28 +574,22 @@ export default class OfertasForm extends JetView {
                 { template: translate("CONCURRENCIA Y SITUACIÓN DE MERCADO"), type: "section" },
                 {
                     cols: [
-                        { view: "text", name: "proveedorActual", label: translate("Proveedor Actual"), labelPosition: "top" },
                         {}
                     ]
                 },
                 {
                     cols: [
-                        { view: "text", name: "competidores", label: translate("Competidores"), labelPosition: "top" },
-                        { view: "text", name: "principalCompetidor", label: translate("Principal Competidor"), labelPosition: "top" }
+                        {}
                     ]
                 },
-                { view: "textarea", name: "criteriosEvaluacion", label: translate("Criterios de Evaluación"), labelPosition: "top" },
-                { view: "textarea", name: "datosComerciales", label: translate("Datos Comerciales"), labelPosition: "top" }
+                
+
             ]
         };
         const cellValoresYEstrategia = {
             padding: 5, css: "fondocelda",
             rows: [
                 { template: translate("GDES VALORES Y ESTRATEGIA"), type: "section" },
-                { view: "textarea", name: "diferencialGDES", label: translate("Propuesta diferencial GDES"), labelPosition: "top" },
-                { view: "textarea", name: "estrategiaGDES", label: translate("Estrategia GDES"), labelPosition: "top" },
-                { view: "textarea", name: "sinergias", label: translate("Sinergias con otros contratos"), labelPosition: "top" }
-
             ]
         };
         const tabDatosComplementarios = {
@@ -547,14 +598,7 @@ export default class OfertasForm extends JetView {
                 rows: [
                     {
                         cols: [
-                            cellAlcanceDeLosTrabajos,
-                            cellCuestionesDeContrato
-                        ]
-                    },
-                    {
-                        cols: [
-                            cellConcurrenciaYMercado,
-                            cellValoresYEstrategia
+                            cellDatosComplementarios2
                         ]
                     }
                 ]
