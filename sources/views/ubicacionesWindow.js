@@ -15,7 +15,7 @@ export default class UbicacionesWindow extends JetView {
                 {
                     view: "toolbar", padding: 3, elements: [
                         { view: "icon", icon: "mdi mdi-map-marker-outline", width: 37, align: "left" },
-                        { view: "label", label: translate("Asociar usuario") }
+                        { view: "label", label: translate("Crear ubicación") }
                     ]
                 },
                 {

@@ -166,9 +166,9 @@ export default class OfertasForm extends JetView {
                 },
                 {
                     cols: [
-                        { view: "text", id: "importePresupuestoDivisa", name: "importePresupuestoDivisa", required: true, label: translate("Importe GDES (DIVISA)"), labelPosition: "top", format: "1.111,00" },
+                        { view: "text", id: "importePresupuestoDivisa", name: "importePresupuestoDivisa", required: true, label: translate("Importe GDES"), labelPosition: "top", format: "1.111,00" },
                         { view: "text", id: "margenContribucion", name: "margenContribucion", required: true, label: translate("Margen contribución"), labelPosition: "top", format: "1.111,00 %" },
-                        { view: "text", id: "importeContribucionDivisa", name: "importeContribucionDivisa", label: translate("Importe margen (DIVISA)"), labelPosition: "top", format: "1.111,00", disabled: true },
+                        { view: "text", id: "importeContribucionDivisa", name: "importeContribucionDivisa", label: translate("Importe margen"), labelPosition: "top", format: "1.111,00", disabled: true },
                     ]
                 },
                 {

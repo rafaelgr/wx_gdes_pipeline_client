@@ -14,6 +14,9 @@ import { parametrosService } from "../services/parametros_service";
 import { versionesService } from "../services/versiones_service";
 import { generalApi } from "../utilities/general";
 import { messageApi } from "../utilities/messages";
+import { ubicacionesService } from '../services/ubicaciones_service';
+import { divisasService } from "../services/divisas_service"
+
 
 var ofertaId = 0;
 
@@ -23,6 +26,7 @@ export default class OfertasWindow extends JetView {
         const _view1 = {
             view: "layout",
             id: "ofertasFormWindow",
+            minHeight:600,
             rows: [
                 {
                     view: "toolbar", padding: 3, elements: [
@@ -32,91 +36,146 @@ export default class OfertasWindow extends JetView {
                 },
                 {
                     view: "form",
-
+                    scroll: true,
                     id: "frmOfertasWindow",
                     elements: [
                         {
-                            cols: [
+                            cols:[
+                                { view: "textarea", name: "descripcion", label: translate("Título del contrato"), required: true, labelPosition: "top" },
                                 {
-                                    view: "combo", id: "cmbUsuarioW", name: "usuarioId", required: true, options: {},
-                                    label: translate("Usuario"), labelPosition: "top"
-                                },
-                                {
-                                    view: "combo", id: "cmbAreaW", name: "areaId", required: true, options: {},
-                                    label: translate("Area"), labelPosition: "top"
-                                },
-                                {
-                                    view: "combo", id: "cmbUnidadNegocioW", name: "unidadNegocioId", required: true, options: {},
-                                    label: translate("Unidad de negocio"), labelPosition: "top"
+                                    rows: [
+                                        {
+                                            cols: [
+                                                { view: "text", name: "nombreCorto", label: translate("Nombre resumen"), required: true, labelPosition: "top" },
+                                                { view: "text", name: "cliente", label: translate("Cliente"), required: true, labelPosition: "top" },
+                                            ]
+                                        },
+                                        {
+                                            cols: [
+                                                { view: "combo", id: "cmbUicacionW", name: "ubicacionId", required: true, options: {}, label: translate("Ubicacion"), labelPosition: "top" },
+                                                { view: "text", name: "paisUbicacion", label: translate("Pais Ubicación"), labelPosition: "top", required: true }
+                                            ]
+                                        }
+                                    ]
                                 }
                             ]
                         },
                         {
                             cols: [
-                                {
-                                    view: "combo", id: "cmbResponsableW", name: "responsableId", required: true, options: {},
-                                    label: translate("Responsable"), labelPosition: "top"
-                                },
-                                {
-                                    view: "combo", id: "cmbEmpresaW", name: "empresaId", required: true, options: {},
-                                    label: translate("Empresa"), labelPosition: "top"
-                                },
-                                {
-                                    view: "combo", id: "cmbPaisW", name: "paisId", required: true, options: {},
-                                    label: translate("Pais"), labelPosition: "top"
-                                },
+                                { view: "text", name: "periodo", label: translate("Periodo"), labelPosition: "top" },
+                                { view: "text", name: "numeroLicitacion", label: translate("Nr. Licitación"), labelPosition: "top" },
+                                { view: "text", name: "implicaTecnologico", label: translate("¿Implica desarrollo tecnológico?"), labelPosition: "top" },
                             ]
                         },
                         {
                             cols: [
-                                { view: "text", name: "ofertaId", label: translate("ID"), labelPosition: "top", readonly: true },
-                                { view: "text", id: "numeroOfertaW", name: "numeroOferta", required: true, label: translate("Nr. Oferta"), labelPosition: "top" },
-                                { view: "text", id: "codigoOfertaW", name: "codigoOferta", required: true, label: translate("Cod. Oferta"), labelPosition: "top" }
-                            ]
-                        },
-                        {
-                            cols: [
-                                { view: "text", name: "nombreCorto", label: translate("Nombre"), required: true, labelPosition: "top" },
-                                { view: "text", name: "cliente", label: translate("Cliente"), required: true, labelPosition: "top" },
-                                { view: "text", id: "ubicacionW", name: "ubicacion", label: translate("Ubicación"), required: true, labelPosition: "top" }
-                            ]
-                        },
-                        { view: "combo", id: "cmbServicioW", name: "servicioId", required: true, options: {}, label: translate("Servicio"), labelPosition: "top" },
-                        {
-                            cols: [
-                                { view: "combo", id: "cmbFaseOfertaW", name: "faseOfertaId", required: true, options: {}, label: translate("Fase oferta"), labelPosition: "top" },
-                                { view: "combo", id: "cmbTipoOportunidadW", name: "tipoOportunidadId", required: true, options: {}, label: translate("Tipo oportunidad"), labelPosition: "top" },
-                                { view: "combo", id: "cmbTipoContratoW", name: "tipoContratoId", required: true, options: {}, label: translate("Tipo contrato"), labelPosition: "top" }
+                                { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaEntrega", required: true, label: translate("Fecha entrega"), labelPosition: "top" },
+                                { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaAdjudicacion", required: true, label: translate("Fecha adjudicación"), labelPosition: "top" },
+                                { view: "datepicker", editable: true, minDate: new Date("2000-01-01"), name: "fechaInicioContrato", required: true, label: translate("Fecha inicio"), labelPosition: "top" },
+                                { view: "datepicker", editable: true, minDate: new Date("2000-01-01"), name: "fechaFinContrato", required: true, label: translate("Fecha fin"), labelPosition: "top" },
+                                { view: "text", name: "duracion", label: translate("Duración"), required: true, labelPosition: "top" }
                             ]
                         },
                         {
                             cols: [
                                 { view: "combo", id: "cmbEstadoW", name: "estadoId", required: true, options: {}, label: translate("Estado"), labelPosition: "top" },
-                                { view: "combo", id: "cmbProbabilidadW", name: "probabilidad", required: true, options: {}, label: translate("Probabilidad"), labelPosition: "top" },
-                                { view: "text", id: "importePresupuestoW", name: "importePresupuesto", required: true, label: translate("Importe GDES"), labelPosition: "top", format: "1.111,00 €" },
-                                { view: "text", id: "margenContribucionW", name: "margenContribucion", required: true, label: translate("Margen contribución"), labelPosition: "top", format: "1.111,00 %" }
+                                { view: "text", name: "numeroPedido", label: translate("Num. Pedido"), labelPosition: "top" },
+                                { view: "combo", id: "cmbRazonPerdidaW", name: "razonPerdidaId", options: {}, label: translate("Razón pérdida"), labelPosition: "top" },
+                                { view: "text", name: "uteTXT", label: translate("UTE (% - Nombre)"), labelPosition: "top" }
                             ]
                         },
                         {
                             cols: [
-                                { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaAdjudicacion", required: true, label: translate("Fecha adjudicación"), labelPosition: "top" },
-                                { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaEntrega", required: true, label: translate("Fecha entrega"), labelPosition: "top" },
-                                { view: "datepicker", editable: true, minDate: new Date("2000-01-01"), name: "fechaInicioContrato", required: true, label: translate("Fecha inicio contrato"), labelPosition: "top" },
-                                { view: "datepicker", editable: true, minDate: new Date("2000-01-01"), name: "fechaFinContrato", required: true, label: translate("Fecha fin contrato"), labelPosition: "top" },
-                                { view: "text", name: "duracion", label: translate("Duración"), required: true, labelPosition: "top" }
+                                { view: "combo", id: "cmbUsuarioW", name: "usuarioId", required: true, options: {}, label: translate("Rble Oferta"), labelPosition: "top" },
+                                { view: "combo", id: "cmbResponsableW", name: "responsableId", required: true, options: {}, label: translate("Supervisado por"), labelPosition: "top" },
+                                { rows: [{ view: "checkbox", name: "laboral", options: {}, label: translate("Laboral"), labelPosition: "top", width: 100 }] },
+                                { rows: [{ view: "checkbox", name: "finanzas", options: {}, label: translate("Finanzas"), labelPosition: "top", width: 100 }] },
                             ]
                         },
-                        { view: "textarea", name: "descripcion", label: translate("Descripción"), required: true, labelPosition: "top" },
-                        { view: "textarea", name: "actividadesRealizadas", label: translate("Actividades realizadas"), labelPosition: "top" },
-                        { view: "textarea", name: "actividadesPlanificadas", label: translate("Actividades planificadas"), labelPosition: "top" },
+                        {
+                            cols: [
+                                { view: "combo", id: "cmbAreaW", name: "areaId", required: true, options: {}, label: translate("Area"), labelPosition: "top" },
+                                { view: "combo", id: "cmbUnidadNegocioW", name: "unidadNegocioId", required: true, options: {}, label: translate("Unidad negocio"), labelPosition: "top" },
+                                { view: "combo", id: "cmbEmpresaW", name: "empresaId", required: true, options: {}, label: translate("Empresa"), labelPosition: "top" },
+                                { view: "combo", id: "cmbPaisW", name: "paisId", required: true, options: {}, label: translate("Pais"), labelPosition: "top" }
+                            ]
+                        },         
+                        {
+                            cols: [
+                                { view: "combo", id: "cmbServicioW", name: "servicioId", required: true, options: {}, label: translate("Servicio"), labelPosition: "top" },
+                            ]
+                        },      
+                        {
+                            cols: [
+                                { view: "text", id: "numeroOfertaW", name: "numeroOferta", required: true, label: translate("Nr. Oferta"), labelPosition: "top" },
+                                { view: "text", id: "codigoOfertaW", name: "codigoOferta", required: true, label: translate("Cod. Oferta"), labelPosition: "top" },
+                                { view: "text", id: "codigoOpW", name: "codigoOp", label: translate("Código Op."), labelPosition: "top" },
+                                { view: "checkbox", id: "conversionOportunidadW", name: "conversionOportunidad", options: {}, label: translate("Convertido op"), labelPosition: "top" },
+                            ]
+                        },
+                        {
+                            cols: [
+                                { view: "combo", id: "cmbProbabilidadW", name: "probabilidad", required: true, options: {}, label: translate("Probabilidad"), labelPosition: "top" },
+                                { view: "combo", id: "cmbFaseOfertaW", name: "faseOfertaId", required: true, options: {}, label: translate("Fase oferta"), labelPosition: "top" },
+                                { view: "combo", id: "cmbTipoOportunidadW", name: "tipoOportunidadId", required: true, options: {}, label: translate("Tipo oportunidad"), labelPosition: "top" },
+                                { view: "combo", id: "cmbTipoContratoW", name: "tipoContratoId", required: true, options: {}, label: translate("Tipo contrato"), labelPosition: "top" }
+        
+                            ]
+                        },
+                        {
+                            cols: [
+                                { view: "combo", id: "cmbDivisaW", name: "divisaId", options: {}, label: translate("Divisa"), labelPosition: "top" },
+                                { view: "text", id: "multiplicadorW", name: "multiplicador", label: translate("Factor (1€ =)"), labelPosition: "top", format: "1.111,00" },
+                                { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), id: "fechaDivisaW", name: "fechaDivisa", label: translate("Fecha divisa"), labelPosition: "top" },
+                            ]
+                        },      
+                        {
+                            cols: [
+                                { view: "text", id: "importePresupuestoDivisaW", name: "importePresupuestoDivisa", required: true, label: translate("Importe GDES"), labelPosition: "top", format: "1.111,00" },
+                                { view: "text", id: "margenContribucionW", name: "margenContribucion", required: true, label: translate("Margen contribución"), labelPosition: "top", format: "1.111,00 %" },
+                                { view: "text", id: "importeContribucionDivisaW", name: "importeContribucionDivisa", label: translate("Importe margen"), labelPosition: "top", format: "1.111,00", disabled: true },
+                            ]
+                        },
+                        {
+                            cols: [
+                                { view: "text", id: "importePresupuestoW", name: "importePresupuesto", required: true, label: translate(""), labelPosition: "top", format: "1.111,00 €", disabled: true },
+                                {},
+                                { view: "text", id: "importeContribucionW", name: "importeContribucion", label: translate(""), labelPosition: "top", format: "1.111,00 €", disabled: true },
+                            ]
+                        },  
+                        {
+                            cols: [
+                                { view: "text", id: "importeUTEDivisaW", name: "importeUTEDivisa", label: translate("Importe UTE"), labelPosition: "top", format: "1.111,00" },
+                                { view: "text", id: "importeTotalDivisaW", name: "importeTotalDivisa", label: translate("Importe Total"), labelPosition: "top", format: "1.111,00", disabled: true },
+                                { view: "text", id: "importeMaxLicitacionDivisaW", name: "importeMaxLicitacionDivisa", label: translate("Importe Max Licitacion"), labelPosition: "top", format: "1.111,00" },
+        
+                            ]
+                        },
+                        {
+                            cols: [
+                                { view: "text", id: "importeUTEW", name: "importeUTE", label: translate(""), labelPosition: "top", format: "1.111,00 €", disabled: true },
+                                { view: "text", id: "importeTotalW", name: "importeTotal", label: translate(""), labelPosition: "top", format: "1.111,00 €", disabled: true },
+                                { view: "text", id: "importeMaxLicitacionW", name: "importeMaxLicitacion", label: translate(""), labelPosition: "top", format: "1.111,00 €", disabled: true },
+                            ]
+                        },   
+                        {
+                            cols: [
+                                {},
+                                { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaCreacion", label: translate("Fecha creación"), labelPosition: "top"},
+                                { view: "datepicker", id: "fechaConversionOportunidadW", editable: true, minDate: new Date("2000-01-01"), name: "fechaConversionOportunidad", label: translate("Fecha conversión"), labelPosition: "top" }
+        
+                            ]
+                        },
+                                                                              
+//-----------------------------------------------
+
                         {
                             margin: 5, cols: [
                                 { gravity: 5 },
                                 { view: "button", label: translate("Cancelar"), click: this.cancel, hotkey: "esc" },
                                 { view: "button", label: translate("Aceptar"), click: this.accept, type: "form", hotkey: "enter" }
                             ]
-                        },
-                        { minlength: 600 }
+                        }
                     ]
                 }
             ]
@@ -141,7 +200,6 @@ export default class OfertasWindow extends JetView {
         return _view;
     }
     init(view, url) {
-
     }
     showWindow() {
         let usu = usuarioService.getUsuarioCookie();
@@ -159,7 +217,15 @@ export default class OfertasWindow extends JetView {
         this.loadEstados();
         this.loadProbabilidades();
         this.setValoresPorDefectoUsuario(usu);
+        this.loadUbicaciones();
+        this.loadDivisas(1);
+        $$("multiplicadorW").setValue(1);
         this.getNumeroCodigoOferta();
+        $$("margenContribucionW").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });
+        $$("multiplicadorW").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });
+        $$("importePresupuestoDivisaW").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });
+        $$("importeUTEDivisaW").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });
+        $$("importeMaxLicitacionDivisaW").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });
     }
     cancel() {
         $$('ofertasWindow').hide();
@@ -386,7 +452,6 @@ export default class OfertasWindow extends JetView {
         $$("cmbEmpresaW").setValue(usu.empresaId);
         $$("cmbUnidadNegocioW").setValue(usu.unidadNegocioId);
         $$("cmbAreaW").setValue(usu.areaId);
-        $$("ubicacionW").setValue(usu.ubicacion);
     }
     crearVersion(version, data) {
         var usu = usuarioService.getUsuarioCookie();
@@ -416,5 +481,72 @@ export default class OfertasWindow extends JetView {
             numVersion: version
         };
         return data2;
+    }
+    loadUbicaciones(ubicacionId) {
+        ubicacionesService.getUbicaciones(usuarioService.getUsuarioCookie())
+            .then(rows => {
+                var ubicaciones = generalApi.prepareDataForCombo('ubicacionId', 'nombre', rows);
+                var list = $$("cmbUicacionW").getPopup().getList();
+                list.clearAll();
+                list.parse(ubicaciones);
+                if (ubicacionId) {
+                    $$("cmbUicacionW").setValue(ubicacionId);
+                    $$("cmbUicacionW").refresh();
+                }
+                return;
+            });
+    }
+    loadDivisas(divisaId) {
+        divisasService.getDivisas(usuarioService.getUsuarioCookie())
+            .then(rows => {
+                var divisas = generalApi.prepareDataForCombo('divisaId', 'nombre', rows);
+                var list = $$("cmbDivisaW").getPopup().getList();
+                list.clearAll();
+                list.parse(divisas);
+                if (divisaId) {
+                    $$("cmbDivisaW").setValue(divisaId);
+                    $$("cmbDivisaW").refresh();
+                }
+                return;
+            });
+    }
+    calcImporte() {
+        // Calcular el importe de contribución a partir del margen
+        let importe = +$$("importePresupuestoW").getValue();
+        let margen = +$$("margenContribucionW").getValue();
+        let multiplicador = +$$("multiplicadorW").getValue();
+        let importeContribucion = 0;
+        if (margen !== 0) {
+            importeContribucion = (margen * importe * 1.0) / 100.00;
+        } 
+        let importeContribucionDivisa = importeContribucion * multiplicador * 1.0;
+        $$("importeContribucionW").setValue(importeContribucion);
+        $$("importeContribucionDivisaW").setValue(importeContribucionDivisa);
+        let importeDivisa = importe * multiplicador;
+        if (importeDivisa) $$("importePresupuestoDivisaW").setValue(importeDivisa);
+        // Obliga a recalcular el total
+        let importeTotal = +$$("importePresupuestoW").getValue() + +$$("importeUTEW").getValue();
+        $$("importeTotalW").setValue(importeTotal);
+        let importeTotalDivisa = importeTotal * multiplicador;
+        if (importeTotalDivisa) $$("importeTotalDivisaW").setValue(importeTotalDivisa);
+        let importeUTE = +$$("importeUTEW").getValue();
+        let importeUTEDivisa = importeUTE * multiplicador
+        if (importeUTEDivisa) $$("importeUTEDivisaW").setValue(importeUTEDivisa);
+    }
+    calcFromDivisa() {
+        let multiplicador = +$$("multiplicadorW").getValue();
+        if (multiplicador != 0) {
+            let importePresupuesto = +$$("importePresupuestoDivisaW").getValue() / multiplicador;
+            $$("importePresupuestoW").setValue(importePresupuesto);
+            let importeUTE = +$$("importeUTEDivisaW").getValue() / multiplicador;
+            $$("importeUTEW").setValue(importeUTE);
+            // let importeAnual = +$$("importeAnualDivisa").getValue() / multiplicador;
+            // $$("importeAnual").setValue(importeAnual);
+            // let importePrimerAno = +$$("importePrimerAnoDivisa").getValue() / multiplicador;
+            // $$("importePrimerAno").setValue(importePrimerAno);
+            let importeMaxLicitacion = +$$("importeMaxLicitacionDivisaW").getValue() / multiplicador;
+            $$("importeMaxLicitacionW").setValue(importeMaxLicitacion);
+            this.calcImporte();
+        }
     }
 }
