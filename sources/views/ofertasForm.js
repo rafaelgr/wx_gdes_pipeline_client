@@ -1281,8 +1281,6 @@ export default class OfertasForm extends JetView {
             _importeTotal != $$('importeTotal').getValue() ||
             _margenContribucion != $$('margenContribucion').getValue() ||
             _importeContribucion != $$('importeContribucion').getValue() ||
-            _importeAnual != $$('importeAnual').getValue() ||
-            _importePrimerAno != $$('importePrimerAno').getValue() ||
             _importeInversion != $$('importeInversion').getValue() ||
             _multiplicador != $$('multiplicador').getValue()) {
             cambioImporte = true;
