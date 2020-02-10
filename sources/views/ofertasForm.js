@@ -115,7 +115,7 @@ export default class OfertasForm extends JetView {
                 { template: translate("OTROS DATOS (1)"), type: "section" },
                 {
                     cols: [
-                        { view: "combo", id: "cmbUsuario", name: "usuarioId", required: true, options: {}, label: translate("Rble Oferta"), labelPosition: "top" },
+                        { view: "combo", id: "cmbUsuResponsableId", name: "usuResponsableId", required: true, options: {}, label: translate("Rble Oferta"), labelPosition: "top" },
                         { view: "combo", id: "cmbResponsable", name: "responsableId", required: true, options: {}, label: translate("Supervisado por"), labelPosition: "top" },
                         { rows: [{ view: "checkbox", name: "laboral", options: {}, label: translate("Laboral"), labelPosition: "top", width: 100 }] },
                         { rows: [{ view: "checkbox", name: "finanzas", options: {}, label: translate("Finanzas"), labelPosition: "top", width: 100 }] },
@@ -228,7 +228,7 @@ export default class OfertasForm extends JetView {
                 },
                 {
                     cols: [
-                        {},
+                        { view: "combo", id: "cmbUsuario", name: "usuarioId", required: true, options: {}, label: translate("Usuario"), labelPosition: "top" },
                         { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaCreacion", label: translate("Fecha creación"), labelPosition: "top"},
                         { view: "datepicker", id: "fechaConversionOportunidad", editable: true, minDate: new Date("2000-01-01"), name: "fechaConversionOportunidad", label: translate("Fecha conversión"), labelPosition: "top" }
 
@@ -829,6 +829,7 @@ export default class OfertasForm extends JetView {
         let usu = usuarioService.getUsuarioCookie();
         if (ofertaId == 0) {
             this.loadUsuarios();
+            this.loadUsuariosResponsables();
             this.loadAreas();
             this.loadUbicaciones();
             this.loadUnidadesNegocio();
@@ -861,6 +862,7 @@ export default class OfertasForm extends JetView {
                 oferta.fechaUltimoEstado = new Date(oferta.fechaUltimoEstado);
                 $$("frmOfertas").setValues(oferta);
                 this.loadUsuarios(oferta.usuarioId);
+                this.loadUsuariosResponsables(oferta.usuResponsableId);
                 this.loadAreas(oferta.areaId);
                 this.loadUbicaciones(oferta.ubicacionId);
                 this.loadUnidadesNegocio(oferta.unidadNegocioId);
@@ -985,6 +987,20 @@ export default class OfertasForm extends JetView {
                 if (usuarioId) {
                     $$("cmbUsuario").setValue(usuarioId);
                     $$("cmbUsuario").refresh();
+                }
+                return;
+            });
+    }
+    loadUsuariosResponsables(usuResponsableId) {
+        usuarioService.getUsuarios(usuarioService.getUsuarioCookie())
+            .then(rows => {
+                var usuarios = generalApi.prepareDataForCombo('usuarioId', 'nombre', rows);
+                var list = $$("cmbUsuResponsableId").getPopup().getList();
+                list.clearAll();
+                list.parse(usuarios);
+                if (usuResponsableId) {
+                    $$("cmbUsuResponsableId").setValue(usuResponsableId);
+                    $$("cmbUsuResponsableId").refresh();
                 }
                 return;
             });
@@ -1202,6 +1218,7 @@ export default class OfertasForm extends JetView {
     }
     setValoresPorDefectoUsuario(usu) {
         $$("cmbUsuario").setValue(usu.usuarioId);
+        $$("cmbUsuResponsableId").setValue(usu.usuarioId);
         $$("cmbResponsable").setValue(usu.responsableId);
         $$("cmbPais").setValue(usu.paisId);
         $$("cmbEmpresa").setValue(usu.empresaId);
