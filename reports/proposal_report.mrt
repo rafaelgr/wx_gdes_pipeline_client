@@ -12,7 +12,7 @@
     <DataSources isList="true" count="1">
       <Ofertas Ref="3" type="Stimulsoft.Report.Dictionary.StiMySqlSource" isKey="true">
         <Alias>Ofertas</Alias>
-        <Columns isList="true" count="65">
+        <Columns isList="true" count="66">
           <value>ofertaId,System.Int32</value>
           <value>nombreCorto,System.String</value>
           <value>cliente,System.String</value>
@@ -78,6 +78,7 @@
           <value>finanzas,System.Boolean</value>
           <value>codigoOp,System.String</value>
           <value>fechaComite,System.DateTime</value>
+          <value>usuResponsableOferta,System.String</value>
         </Columns>
         <CommandTimeout>30</CommandTimeout>
         <Dictionary isRef="1" />
@@ -100,7 +101,7 @@ o.probabilidad, o.documentosEspeciales, o.descripcion, subrogacionNum,
 u2.nombre AS usuario, o.anexos, o.financieros,
 o.notasPlanning, o.subrogacionTXT, o.subcontrataSN, o.subcontrataTXT,o.uteTXT,
 o.importeAnual, o.importeTotal, o.observaciones,
-u3.nombre AS responsableOferta,
+u3.nombre AS responsableOferta, u4.nombre AS usuResponsableOferta,
 o.implicaTecnologico, o.importeMaxLicitacion, o.tasaRetorno,o.payBack, o.laboral, o.finanzas, o.codigoOp,
 DATE_FORMAT(fechaComite, '%Y-%m-%d') AS fechaComite
 FROM ofertas AS o
@@ -108,6 +109,7 @@ LEFT JOIN areas AS a ON a.areaId = o.areaId
 LEFT JOIN empresas AS e ON e.empresaId = o.empresaId
 LEFT JOIN usuarios AS u ON u.usuarioId = o.responsableId
 LEFT JOIN usuarios AS u2 ON u2.usuarioId = o.usuarioId
+LEFT JOIN usuarios AS u4 ON u4.usuarioId = o.usuResponsableId
 LEFT JOIN tipos_oportunidad AS tpo ON tpo.tipoOportunidadId = o.tipoOportunidadId
 LEFT JOIN ubicaciones AS ub ON ub.ubicacionId = o.ubicacionId
 LEFT JOIN (SELECT u.usuarioId, u2.nombre FROM  usuarios AS u LEFT JOIN usuarios AS u2 ON u2.usuarioId = u.responsableId) AS u3 ON u3.usuarioId = o.usuarioId
@@ -124,7 +126,7 @@ WHERE o.ofertaId = {ofertaId}</SqlCommand>
   <EngineVersion>EngineV2</EngineVersion>
   <GlobalizationStrings isList="true" count="0" />
   <MetaTags isList="true" count="0" />
-  <Pages isList="true" count="3">
+  <Pages isList="true" count="4">
     <Page1 Ref="4" type="Page" isKey="true">
       <Border>None;Black;2;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
@@ -1809,7 +1811,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Parent isRef="99" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
-          <Text>Economical condicions</Text>
+          <Text>Economical conditions</Text>
           <TextBrush>Black</TextBrush>
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
@@ -2009,7 +2011,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
               <VertAlignment>Center</VertAlignment>
             </Text154>
             <HorizontalLinePrimitive7 Ref="140" type="HorizontalLinePrimitive" isKey="true">
-              <ClientRectangle>0,0.8,27.6,0.0254</ClientRectangle>
+              <ClientRectangle>0.2,0.8,27.6,0.0254</ClientRectangle>
               <Color>Black</Color>
               <EndCap Ref="141" type="Cap" isKey="true">
                 <Color>Black</Color>
@@ -2045,8 +2047,157 @@ This document is strictly confidential to the GD Energy Services Group of compan
         <TextBrush>[50:0:0:0]</TextBrush>
       </Watermark>
     </Page6>
+    <Page3 Ref="144" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="5">
+        <Text121 Ref="145" type="Text" isKey="true">
+          <AllowHtmlTags>True</AllowHtmlTags>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,1.8,17,15.6</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Editable>True</Editable>
+          <Font>Arial,9</Font>
+          <Guid>feb13ef377f94fe39355db7c9caa5a4e</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text121</Name>
+          <Page isRef="144" />
+          <Parent isRef="144" />
+          <ShrinkFontToFit>True</ShrinkFontToFit>
+          <ShrinkFontToFitMinimumSize>8</ShrinkFontToFitMinimumSize>
+          <Text>{Ofertas.financieros}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+          <TextQuality>Wysiwyg</TextQuality>
+          <Type>DataColumn</Type>
+        </Text121>
+        <Text111 Ref="146" type="Text" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>[31:73:125]</Brush>
+          <ClientRectangle>17.6,1.4,10,0.4</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>Arial,9,Bold</Font>
+          <Guid>efb635fe2c104624a92e630eb48977c8</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text111</Name>
+          <Page isRef="144" />
+          <Parent isRef="144" />
+          <ShrinkFontToFit>True</ShrinkFontToFit>
+          <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
+          <Text>FINANTIALS ASSUMPTIONS</Text>
+          <TextBrush>[255:255:255]</TextBrush>
+          <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text111>
+        <Text110 Ref="147" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>17.6,1.8,10,15.6</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Editable>True</Editable>
+          <Font>Arial,9</Font>
+          <Guid>3fb5dd2f57dd4d109a23f483c544b7c0</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text110</Name>
+          <Page isRef="144" />
+          <Parent isRef="144" />
+          <ShrinkFontToFit>True</ShrinkFontToFit>
+          <ShrinkFontToFitMinimumSize>8</ShrinkFontToFitMinimumSize>
+          <Text>{Ofertas.consideracionesEconomicas}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+          <Type>Expression</Type>
+        </Text110>
+        <Text109 Ref="148" type="Text" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>[31:73:125]</Brush>
+          <ClientRectangle>0,1.4,17.2,0.4</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>Arial,9,Bold</Font>
+          <Guid>2c8131136a0d4e3eb9d05f63a8045dd1</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text109</Name>
+          <Page isRef="144" />
+          <Parent isRef="144" />
+          <ShrinkFontToFit>True</ShrinkFontToFit>
+          <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
+          <Text>FINANTIALS</Text>
+          <TextBrush>[255:255:255]</TextBrush>
+          <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text109>
+        <DataBand2 Ref="149" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,27.7,0.8</ClientRectangle>
+          <Components isList="true" count="3">
+            <Image3 Ref="150" type="Image" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>24.4,0,3.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Guid>f73e6e07ea9047b0a96fd812efe23a2d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Image3</Name>
+              <Page isRef="144" />
+              <Parent isRef="149" />
+              <Stretch>True</Stretch>
+            </Image3>
+            <Text189 Ref="151" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,23.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9,Bold</Font>
+              <Guid>8a80052571994470bfec75cea9b2393c</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text189</Name>
+              <Page isRef="144" />
+              <Parent isRef="149" />
+              <Text>{Ofertas.nombreCorto}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text189>
+            <HorizontalLinePrimitive4 Ref="152" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,0.8,27.6,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="153" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>d81cbfc9da5c44bb8f5bed9d615f45a2</Guid>
+              <Name>HorizontalLinePrimitive4</Name>
+              <Page isRef="144" />
+              <Parent isRef="149" />
+              <Size>2</Size>
+              <StartCap Ref="154" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive4>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Filters isList="true" count="0" />
+          <Guid>a8cd0b54032a4321a20d2c1a86b8c819</Guid>
+          <Name>DataBand2</Name>
+          <Page isRef="144" />
+          <Parent isRef="144" />
+          <Sort isList="true" count="0" />
+        </DataBand2>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>ff826bee9942449e9bd4e158d04fe721</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page3</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>21</PageHeight>
+      <PageWidth>29.7</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="155" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page3>
   </Pages>
-  <PrinterSettings Ref="144" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <PrinterSettings Ref="156" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
   <ReferencedAssemblies isList="true" count="8">
     <value>System.Dll</value>
     <value>System.Drawing.Dll</value>
@@ -2058,10 +2209,10 @@ This document is strictly confidential to the GD Energy Services Group of compan
     <value>Stimulsoft.Report.Dll</value>
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
-  <ReportChanged>1/24/2020 8:58:53 AM</ReportChanged>
+  <ReportChanged>2/10/2020 11:09:05 AM</ReportChanged>
   <ReportCreated>5/7/2018 1:08:45 PM</ReportCreated>
   <ReportFile>C:\PROYECTOS\wx_gdes_pipeline_client\reports\proposal_report.mrt</ReportFile>
-  <ReportGuid>26ed2453212341ce9c37bbe0183e0c67</ReportGuid>
+  <ReportGuid>8922c372aaa044a68756505987522716</ReportGuid>
   <ReportImage isNull="true" />
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
