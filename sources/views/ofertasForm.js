@@ -924,6 +924,7 @@ export default class OfertasForm extends JetView {
         } else {
             // Comprobar si ha habido cambios de importes para crear versión.
             if (!this.$scope.comprobarCambioDeImportes()) {
+                console.log('DATOS A GRABAR', data);
                 ofertasService.putOferta(usuarioService.getUsuarioCookie(), data)
                     .then(() => {
                         this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
@@ -946,6 +947,7 @@ export default class OfertasForm extends JetView {
                                 messageApi.errorMessageAjax(err);
                             });
                     } else {
+                        console.log('DATOS A GRABAR', data);
                         ofertasService.putOferta(usuarioService.getUsuarioCookie(), data)
                             .then(() => {
                                 this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);

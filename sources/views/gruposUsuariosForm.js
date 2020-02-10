@@ -49,8 +49,7 @@ export default class GruposUsuariosForm extends JetView {
                 },
                 {
                     $subview: GruposUsuariosLineas
-                },
-                { minheight: 600 }
+                }
             ]
         }
         return _view;
