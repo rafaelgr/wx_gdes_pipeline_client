@@ -104,7 +104,7 @@ export default class OfertasForm extends JetView {
                         { view: "combo", id: "cmbEstado", name: "estadoId", required: true, options: {}, label: translate("Estado"), labelPosition: "top" },
                         { view: "text", name: "numeroPedido", label: translate("Num. Pedido"), labelPosition: "top" },
                         { view: "combo", id: "cmbRazonPerdida", name: "razonPerdidaId", options: {}, label: translate("Razón pérdida"), labelPosition: "top" },
-                        { view: "textarea", name: "uteTXT", label: translate("UTE (% - Nombre)"), labelPosition: "top" }
+                        { view: "text", name: "uteTXT", label: translate("UTE (% - Nombre)"), labelPosition: "top" }
                     ]
                 }
             ]
@@ -824,6 +824,7 @@ export default class OfertasForm extends JetView {
         $$("importeMaxLicitacionDivisa").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });
         // this.pprReport = this.ui(PprReport);
         this.ubicacionesWindow = this.ui(UbicacionesWindow);
+        //
     }
     load(ofertaId) {
         let usu = usuarioService.getUsuarioCookie();
