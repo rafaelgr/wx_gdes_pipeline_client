@@ -361,7 +361,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Name>Text16</Name>
           <Page isRef="4" />
           <Parent isRef="4" />
-          <Text>{Ofertas.responsable}</Text>
+          <Text>{Ofertas.usuResponsableOferta}</Text>
           <TextBrush>Black</TextBrush>
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
@@ -2410,10 +2410,10 @@ This document is strictly confidential to the GD Energy Services Group of compan
     <value>Stimulsoft.Report.Dll</value>
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
-  <ReportChanged>2/10/2020 11:11:28 AM</ReportChanged>
+  <ReportChanged>2/24/2020 9:44:41 AM</ReportChanged>
   <ReportCreated>5/7/2018 1:08:45 PM</ReportCreated>
   <ReportFile>C:\PROYECTOS\wx_gdes_pipeline_client\reports\proposal_report_short.mrt</ReportFile>
-  <ReportGuid>1b5a4d0aa57d45e3a83f75380bcdc0d8</ReportGuid>
+  <ReportGuid>1e92dc77ea6f4219852acdddb69205e2</ReportGuid>
   <ReportImage isNull="true" />
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
