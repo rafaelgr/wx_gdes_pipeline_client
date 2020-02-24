@@ -745,6 +745,7 @@ export default class OfertasForm extends JetView {
                 {
                     margin: 5, cols: [
                         { gravity: 5 },
+                        { view: "button", label: translate("Copiar Oferta"), click: this.copiarOferta },
                         { view: "button", label: translate("Cancelar"), click: this.cancel, hotkey: "esc" },
                         { view: "button", label: translate("Aceptar"), click: this.accept, type: "form" }
 
@@ -964,6 +965,7 @@ export default class OfertasForm extends JetView {
 
         }
     }
+
     loadUnidadesNegocio(unidadNegocioId) {
         unidadesNegocioService.getUnidadesNegocio(usuarioService.getUsuarioCookie())
             .then(rows => {
@@ -978,6 +980,7 @@ export default class OfertasForm extends JetView {
                 return;
             });
     }
+
     loadUsuarios(usuarioId) {
         usuarioService.getUsuarios(usuarioService.getUsuarioCookie())
             .then(rows => {
@@ -992,6 +995,7 @@ export default class OfertasForm extends JetView {
                 return;
             });
     }
+
     loadUsuariosResponsables(usuResponsableId) {
         usuarioService.getUsuarios(usuarioService.getUsuarioCookie())
             .then(rows => {
@@ -1006,6 +1010,7 @@ export default class OfertasForm extends JetView {
                 return;
             });
     }
+
     loadAreas(areaId) {
         areasService.getAreas(usuarioService.getUsuarioCookie())
             .then(rows => {
@@ -1020,6 +1025,7 @@ export default class OfertasForm extends JetView {
                 return;
             });
     }
+
     loadUbicaciones(ubicacionId) {
         ubicacionesService.getUbicaciones(usuarioService.getUsuarioCookie())
             .then(rows => {
@@ -1034,6 +1040,7 @@ export default class OfertasForm extends JetView {
                 return;
             });
     }
+
     loadResponsables(usuarioId) {
         usuarioService.getUsuarios(usuarioService.getUsuarioCookie())
             .then(rows => {
@@ -1048,6 +1055,7 @@ export default class OfertasForm extends JetView {
                 return;
             });
     }
+
     loadEmpresas(empresaId) {
         empresasService.getEmpresas(usuarioService.getUsuarioCookie())
             .then(rows => {
@@ -1062,6 +1070,7 @@ export default class OfertasForm extends JetView {
                 return;
             });
     }
+
     loadPaises(paisId) {
         paisesService.getPaises(usuarioService.getUsuarioCookie())
             .then(rows => {
@@ -1076,6 +1085,7 @@ export default class OfertasForm extends JetView {
                 return;
             });
     }
+
     loadServicios(servicioId) {
         serviciosService.getServicios(usuarioService.getUsuarioCookie())
             .then(rows => {
@@ -1090,6 +1100,7 @@ export default class OfertasForm extends JetView {
                 return;
             });
     }
+
     loadFasesOferta(faseOfertaId) {
         fasesOfertaService.getFasesOferta(usuarioService.getUsuarioCookie())
             .then(rows => {
@@ -1104,6 +1115,7 @@ export default class OfertasForm extends JetView {
                 return;
             });
     }
+
     loadTiposOportunidad(tipoOportunidadId) {
         tiposOportunidadService.getTiposOportunidad(usuarioService.getUsuarioCookie())
             .then(rows => {
@@ -1118,6 +1130,7 @@ export default class OfertasForm extends JetView {
                 return;
             });
     }
+
     loadTiposContrato(tipoContratoId) {
         tiposContratoService.getTiposContrato(usuarioService.getUsuarioCookie())
             .then(rows => {
@@ -1132,6 +1145,7 @@ export default class OfertasForm extends JetView {
                 return;
             });
     }
+
     loadProbabilidades(probabilidad) {
         var probabilidades = [
             { id: 20, value: "20%" },
@@ -1147,6 +1161,7 @@ export default class OfertasForm extends JetView {
         }
         return;
     }
+
     loadEstados(estadoId) {
         estadosService.getEstados(usuarioService.getUsuarioCookie())
             .then(rows => {
@@ -1161,6 +1176,7 @@ export default class OfertasForm extends JetView {
                 return;
             });
     }
+
     loadRazonesPerdida(razonPerdidaId) {
         razonesPerdidaService.getRazonesPerdida(usuarioService.getUsuarioCookie())
             .then(rows => {
@@ -1175,6 +1191,7 @@ export default class OfertasForm extends JetView {
                 return;
             });
     }
+
     loadDivisas(divisaId) {
         divisasService.getDivisas(usuarioService.getUsuarioCookie())
             .then(rows => {
@@ -1189,9 +1206,11 @@ export default class OfertasForm extends JetView {
                 return;
             });
     }
+
     getNumeroCodigoOferta() {
         parametrosService.getParametrosContadores(usuarioService.getUsuarioCookie())
             .then(data => {
+                console.log('DATA_NUMCOD', data);
                 _contador = data.numeroOferta;
                 $$("numeroOferta").setValue(data.numeroOferta);
                 $$("codigoOferta").setValue(data.codigoOferta);
@@ -1200,6 +1219,7 @@ export default class OfertasForm extends JetView {
                 messageApi.errorMessageAjax(err);
             });
     }
+
     getDocumentosAplicables(paisId) {
         let codPais = "";
         paisesService.getPais(usuarioService.getUsuarioCookie(), paisId)
@@ -1217,6 +1237,7 @@ export default class OfertasForm extends JetView {
                 messageApi.errorMessageAjax(err);
             });
     }
+
     setValoresPorDefectoUsuario(usu) {
         $$("cmbUsuario").setValue(usu.usuarioId);
         $$("cmbUsuResponsableId").setValue(usu.usuarioId);
@@ -1227,6 +1248,7 @@ export default class OfertasForm extends JetView {
         $$("cmbArea").setValue(usu.areaId);
         // $$("ubicacion").setValue(usu.ubicacion);
     }
+
     calcImporte() {
         // Calcular el importe de contribución a partir del margen
         let importe = +$$("importePresupuesto").getValue();
@@ -1251,6 +1273,7 @@ export default class OfertasForm extends JetView {
         if (importeUTEDivisa) $$("importeUTEDivisa").setValue(importeUTEDivisa);
         this.getTextoAutorizacion();
     }
+
     calcFromDivisa() {
         let multiplicador = +$$("multiplicador").getValue();
         if (multiplicador != 0) {
@@ -1269,6 +1292,7 @@ export default class OfertasForm extends JetView {
             this.calcImporte();
         }
     }
+
     getTextoAutorizacion() {
         const translate = this.app.getService("locale")._;
         let importe = +$$("importePresupuesto").getValue();
@@ -1385,5 +1409,38 @@ export default class OfertasForm extends JetView {
     // rptType3() {
     //     this.$scope.pprReport.showWindow(ofertaId, 3);
     // }
+
+    copiarOferta() {
+        const translate = this.$scope.app.getService("locale")._;
+        webix.confirm(translate("¿Seguro que quiere crear una nueva oferta copiando los datos de esta?"), (action) => {
+            if (action === true) {
+                var oferta;
+                parametrosService.getParametrosContadores(usuarioService.getUsuarioCookie())
+                .then(data2 => {
+                    console.log('DATA2', data2);
+                    _contador = data2.numeroOferta;
+                    $$("numeroOferta").setValue(data2.numeroOferta);
+                    $$("codigoOferta").setValue(data2.codigoOferta);
+                    var data = $$("frmOfertas").getValues();
+                    data = ofertasService.cleanData(data);
+                    data.ofertaId = 0;
+                    data.fechaOferta = new Date();
+                    console.log('DATA', data);
+                    oferta = data;
+                    return ofertasService.postOferta(usuarioService.getUsuarioCookie(), data);
+                })
+                .then((result) => {
+                    oferta.ofertaId = result.ofertaId;
+                    return this.$scope.guardarVersionCero(oferta);
+                })
+                .then(() => {
+                    this.$scope.show('/top/ofertas?ofertaId=' + oferta.ofertaId);
+                })
+                .catch((err) => {
+                    messageApi.errorMessageAjax(err);
+                });
+            }
+        })
+    }
 
 }
