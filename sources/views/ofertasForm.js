@@ -1320,6 +1320,22 @@ export default class OfertasForm extends JetView {
     // cambio se oferte guardar la versión anterior.
     comprobarCambioDeImportes() {
         let cambioImporte = false;
+        const cambiador = {
+            importePresupuestoAnt: _importePresupuesto,
+            importePresupuesto: $$('importePresupuesto').getValue(),
+            importeUTEAnt: _importeUTE,
+            importeUTE: $$('importeUTE').getValue(),
+            importeTotalAnt: _importeTotal,
+            importeTotal: $$('importeTotal').getValue(),
+            margenContribucionAnt: _margenContribucion,
+            margenContribucion:$$('margenContribucion').getValue(),
+            importeContribucionAnt: _importeContribucion,
+            importeContribucion: $$('importeContribucion').getValue(),
+            importeInversionAnt: _importeInversion,
+            importeInversion: $$('importeInversion').getValue(),
+            multiplicadorAnt:  _multiplicador,
+            multiplicador: $$('multiplicador').getValue()
+        };
         if (_importePresupuesto != $$('importePresupuesto').getValue() ||
             _importeUTE != $$('importeUTE').getValue() ||
             _importeTotal != $$('importeTotal').getValue() ||
