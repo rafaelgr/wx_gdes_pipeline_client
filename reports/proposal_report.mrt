@@ -393,22 +393,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextBrush>Black</TextBrush>
           <Type>Expression</Type>
         </Text19>
-        <Text20 Ref="25" type="Text" isKey="true">
-          <Brush>Transparent</Brush>
-          <ClientRectangle>5.6,13.6,5.8,0.6</ClientRectangle>
-          <Conditions isList="true" count="0" />
-          <Editable>True</Editable>
-          <Font>Arial,10</Font>
-          <Guid>f3e60aa2e7e64b29a5abe84c02f0271f</Guid>
-          <Margins>0,0,0,0</Margins>
-          <Name>Text20</Name>
-          <Page isRef="4" />
-          <Parent isRef="4" />
-          <TextBrush>Black</TextBrush>
-          <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
-          <Type>Expression</Type>
-        </Text20>
-        <Text21 Ref="26" type="Text" isKey="true">
+        <Text21 Ref="25" type="Text" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>Transparent</Brush>
           <ClientRectangle>11.8,12.4,4.8,0.8</ClientRectangle>
@@ -424,7 +409,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Type>Expression</Type>
           <VertAlignment>Center</VertAlignment>
         </Text21>
-        <Text22 Ref="27" type="Text" isKey="true">
+        <Text22 Ref="26" type="Text" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>Transparent</Brush>
           <ClientRectangle>11.8,13.2,4.8,2.8</ClientRectangle>
@@ -440,7 +425,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text22>
-        <Text23 Ref="28" type="Text" isKey="true">
+        <Text23 Ref="27" type="Text" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>Transparent</Brush>
           <ClientRectangle>22.6,12.4,4.8,0.8</ClientRectangle>
@@ -456,7 +441,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Type>Expression</Type>
           <VertAlignment>Center</VertAlignment>
         </Text23>
-        <Text24 Ref="29" type="Text" isKey="true">
+        <Text24 Ref="28" type="Text" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>Transparent</Brush>
           <ClientRectangle>22.6,13.2,4.8,2.8</ClientRectangle>
@@ -472,7 +457,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text24>
-        <Text25 Ref="30" type="Text" isKey="true">
+        <Text25 Ref="29" type="Text" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>Transparent</Brush>
           <ClientRectangle>16.8,12.4,2.8,0.8</ClientRectangle>
@@ -488,7 +473,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Type>Expression</Type>
           <VertAlignment>Center</VertAlignment>
         </Text25>
-        <Text26 Ref="31" type="Text" isKey="true">
+        <Text26 Ref="30" type="Text" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>Transparent</Brush>
           <ClientRectangle>16.8,13.2,2.8,2.8</ClientRectangle>
@@ -504,7 +489,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text26>
-        <Text27 Ref="32" type="Text" isKey="true">
+        <Text27 Ref="31" type="Text" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>Transparent</Brush>
           <ClientRectangle>19.8,12.4,2.6,0.8</ClientRectangle>
@@ -520,7 +505,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Type>Expression</Type>
           <VertAlignment>Center</VertAlignment>
         </Text27>
-        <Text28 Ref="33" type="Text" isKey="true">
+        <Text28 Ref="32" type="Text" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>Transparent</Brush>
           <ClientRectangle>19.8,13.2,2.6,2.8</ClientRectangle>
@@ -536,7 +521,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text28>
-        <Text16 Ref="34" type="Text" isKey="true">
+        <Text16 Ref="33" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>5.6,13,5.8,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -550,30 +535,48 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextBrush>Black</TextBrush>
           <Type>DataColumn</Type>
         </Text16>
-        <HorizontalLinePrimitive1 Ref="35" type="HorizontalLinePrimitive" isKey="true">
+        <Text20 Ref="34" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>5.6,13.6,5.8,0.6</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>Arial,10</Font>
+          <Guid>900cbcbc36c4497bac3c8e372f7ccb63</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text20</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <ShrinkFontToFit>True</ShrinkFontToFit>
+          <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
+          <Text>{Ofertas.fechaComite}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextFormat Ref="35" type="DateFormat" isKey="true" />
+          <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+          <Type>Expression</Type>
+        </Text20>
+        <HorizontalLinePrimitive1 Ref="36" type="HorizontalLinePrimitive" isKey="true">
           <ClientRectangle>0,12,27.6,0.0254</ClientRectangle>
           <Color>Black</Color>
-          <EndCap Ref="36" type="Cap" isKey="true">
+          <EndCap Ref="37" type="Cap" isKey="true">
             <Color>Black</Color>
           </EndCap>
           <Name>HorizontalLinePrimitive1</Name>
           <Page isRef="4" />
           <Parent isRef="4" />
-          <StartCap Ref="37" type="Cap" isKey="true">
+          <StartCap Ref="38" type="Cap" isKey="true">
             <Color>Black</Color>
           </StartCap>
         </HorizontalLinePrimitive1>
-        <HorizontalLinePrimitive2 Ref="38" type="HorizontalLinePrimitive" isKey="true">
+        <HorizontalLinePrimitive2 Ref="39" type="HorizontalLinePrimitive" isKey="true">
           <ClientRectangle>0,16.4,27.6,0.0254</ClientRectangle>
           <Color>Black</Color>
-          <EndCap Ref="39" type="Cap" isKey="true">
+          <EndCap Ref="40" type="Cap" isKey="true">
             <Color>Black</Color>
           </EndCap>
           <Guid>855b3b63044740448c12f42d649fcf81</Guid>
           <Name>HorizontalLinePrimitive2</Name>
           <Page isRef="4" />
           <Parent isRef="4" />
-          <StartCap Ref="40" type="Cap" isKey="true">
+          <StartCap Ref="41" type="Cap" isKey="true">
             <Color>Black</Color>
           </StartCap>
         </HorizontalLinePrimitive2>
@@ -587,16 +590,16 @@ This document is strictly confidential to the GD Energy Services Group of compan
       <PageWidth>29.7</PageWidth>
       <PaperSize>A4</PaperSize>
       <Report isRef="0" />
-      <Watermark Ref="41" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+      <Watermark Ref="42" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
         <Font>Arial,100</Font>
         <TextBrush>[50:0:0:0]</TextBrush>
       </Watermark>
     </Page1>
-    <Page2 Ref="42" type="Page" isKey="true">
+    <Page2 Ref="43" type="Page" isKey="true">
       <Border>None;Black;2;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <Components isList="true" count="46">
-        <Text31 Ref="43" type="Text" isKey="true">
+        <Text31 Ref="44" type="Text" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>[31:73:125]</Brush>
           <ClientRectangle>0,1.6,8.8,0.4</ClientRectangle>
@@ -605,14 +608,14 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>c3b40c25113342daa21f763c4e81c56c</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text31</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <Text>1. SCOPE OF WORKS</Text>
           <TextBrush>[255:255:255]</TextBrush>
           <Type>Expression</Type>
           <VertAlignment>Center</VertAlignment>
         </Text31>
-        <Text32 Ref="44" type="Text" isKey="true">
+        <Text32 Ref="45" type="Text" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>[31:73:125]</Brush>
           <ClientRectangle>9.2,1.6,9.2,0.4</ClientRectangle>
@@ -621,14 +624,14 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>01ed659cd0aa49c585fdff6bece2bcc4</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text32</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <Text>2. GEOGRAPHICAL SCOPE</Text>
           <TextBrush>[255:255:255]</TextBrush>
           <Type>Expression</Type>
           <VertAlignment>Center</VertAlignment>
         </Text32>
-        <Text33 Ref="45" type="Text" isKey="true">
+        <Text33 Ref="46" type="Text" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>[31:73:125]</Brush>
           <ClientRectangle>18.8,1.6,8.8,0.4</ClientRectangle>
@@ -637,14 +640,14 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>a31c1343476947c388d8341791301f10</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text33</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <Text>3. PROJECT DEADLINES</Text>
           <TextBrush>[255:255:255]</TextBrush>
           <Type>Expression</Type>
           <VertAlignment>Center</VertAlignment>
         </Text33>
-        <Text34 Ref="46" type="Text" isKey="true">
+        <Text34 Ref="47" type="Text" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>[31:73:125]</Brush>
           <ClientRectangle>0,10.2,8.8,0.4</ClientRectangle>
@@ -653,8 +656,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>352ed8fc3882430f8af7e17020eab627</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text34</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>4. ORGANIZATION</Text>
@@ -663,7 +666,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Type>Expression</Type>
           <VertAlignment>Center</VertAlignment>
         </Text34>
-        <Text36 Ref="47" type="Text" isKey="true">
+        <Text36 Ref="48" type="Text" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>[31:73:125]</Brush>
           <ClientRectangle>9.2,10.2,9.2,0.4</ClientRectangle>
@@ -672,8 +675,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>b1b3216b39d84547a4205661ab6fa6b7</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text36</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>5. BUSINESS DEVELOPMENT ISSUES</Text>
@@ -682,7 +685,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Type>Expression</Type>
           <VertAlignment>Center</VertAlignment>
         </Text36>
-        <Text38 Ref="48" type="Text" isKey="true">
+        <Text38 Ref="49" type="Text" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>[31:73:125]</Brush>
           <ClientRectangle>18.8,10.2,8.8,0.4</ClientRectangle>
@@ -691,8 +694,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>dac3ff6e07f244639e13a7a821ecdbd5</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text38</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>6. GDES STRATEGY &amp; VALUE</Text>
@@ -701,7 +704,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Type>Expression</Type>
           <VertAlignment>Center</VertAlignment>
         </Text38>
-        <Text40 Ref="49" type="Text" isKey="true">
+        <Text40 Ref="50" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>0,2.2,3,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -709,8 +712,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>ef0069e761f2453688ad6bab152aa2ca</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text40</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Contract:</Text>
@@ -718,7 +721,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text40>
-        <Text41 Ref="50" type="Text" isKey="true">
+        <Text41 Ref="51" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>3.2,2.2,5.6,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -726,8 +729,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>6da910ae58284a84aebafa4d70143ddd</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text41</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.uteTXT}</Text>
@@ -735,7 +738,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text41>
-        <Text42 Ref="51" type="Text" isKey="true">
+        <Text42 Ref="52" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>0,2.8,8.8,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -743,8 +746,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>a9a37d31561148cf8995656091a26ab4</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text42</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Scope:</Text>
@@ -752,7 +755,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text42>
-        <Text43 Ref="52" type="Text" isKey="true">
+        <Text43 Ref="53" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>0,3.4,8.8,6.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -760,8 +763,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>71279bd2101841f493e7cd38c19ac7cb</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text43</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>8</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.alcance}</Text>
@@ -769,7 +772,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text43>
-        <Text46 Ref="53" type="Text" isKey="true">
+        <Text46 Ref="54" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,2.2,9.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -777,8 +780,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>fe4e1302609e4114b4050b7ebb350c87</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text46</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Location:</Text>
@@ -786,7 +789,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text46>
-        <Text47 Ref="54" type="Text" isKey="true">
+        <Text47 Ref="55" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,2.8,9.2,7.2</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -795,8 +798,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>ae32375c6aa7481b86135de6e2d7fbd8</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text47</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>8</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.ubicacion}</Text>
@@ -804,7 +807,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text47>
-        <Text48 Ref="55" type="Text" isKey="true">
+        <Text48 Ref="56" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>0,10.8,5.4,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -812,8 +815,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>733b9c025811429e9aefcce01e6a1ffe</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text48</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Team and organization chart:</Text>
@@ -821,7 +824,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text48>
-        <Text66 Ref="56" type="Text" isKey="true">
+        <Text66 Ref="57" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>18.8,2,3.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -829,8 +832,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>942598e31ed846c6a8a9c73f9a6ad2d2</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text66</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Tender delivery date:</Text>
@@ -838,7 +841,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text66>
-        <Text67 Ref="57" type="Text" isKey="true">
+        <Text67 Ref="58" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>22.2,2,5.4,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -846,17 +849,17 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>5c5c4fe11b104153b25ebc3bd602bda4</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text67</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.fechaEntrega}</Text>
           <TextBrush>Black</TextBrush>
-          <TextFormat Ref="58" type="DateFormat" isKey="true" />
+          <TextFormat Ref="59" type="DateFormat" isKey="true" />
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text67>
-        <Text68 Ref="59" type="Text" isKey="true">
+        <Text68 Ref="60" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>18.8,2.4,3.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -864,8 +867,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>08346b359e5443e1b3612d28689accc4</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text68</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Resolution date:</Text>
@@ -873,7 +876,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text68>
-        <Text69 Ref="60" type="Text" isKey="true">
+        <Text69 Ref="61" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>22.2,2.4,5.4,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -881,17 +884,17 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>2697d11283d24d4e9cb40c5ae7090e6e</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text69</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.fechaAdjudicacion}</Text>
           <TextBrush>Black</TextBrush>
-          <TextFormat Ref="61" type="DateFormat" isKey="true" />
+          <TextFormat Ref="62" type="DateFormat" isKey="true" />
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text69>
-        <Text70 Ref="62" type="Text" isKey="true">
+        <Text70 Ref="63" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>18.8,2.8,3.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -899,8 +902,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>09763ffe2b90463eac566e53291eadd6</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text70</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Contract length:</Text>
@@ -908,7 +911,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text70>
-        <Text71 Ref="63" type="Text" isKey="true">
+        <Text71 Ref="64" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>22.2,2.8,5.4,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -916,8 +919,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>dd87abd9d1894e25b0b0b2b2764aa0d1</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text71</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.duracion}</Text>
@@ -925,7 +928,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text71>
-        <Text72 Ref="64" type="Text" isKey="true">
+        <Text72 Ref="65" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>18.8,3.2,3.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -933,8 +936,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>8e67d6e0cf4d4c2d8b429a8b179b4049</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text72</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Start contract date:</Text>
@@ -942,7 +945,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text72>
-        <Text73 Ref="65" type="Text" isKey="true">
+        <Text73 Ref="66" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>22.2,3.2,5.4,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -950,17 +953,17 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>b946f93e9722440e91bed588817c93a2</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text73</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.fechaInicioContrato}</Text>
           <TextBrush>Black</TextBrush>
-          <TextFormat Ref="66" type="DateFormat" isKey="true" />
+          <TextFormat Ref="67" type="DateFormat" isKey="true" />
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text73>
-        <Text74 Ref="67" type="Text" isKey="true">
+        <Text74 Ref="68" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>18.8,3.6,3.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -968,8 +971,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>0697369ae73b474596e9f3efab93336d</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text74</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>End contract date:</Text>
@@ -977,7 +980,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text74>
-        <Text75 Ref="68" type="Text" isKey="true">
+        <Text75 Ref="69" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>22.2,3.6,5.4,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -985,17 +988,17 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>3752aab9cc2548a597208656e1f4c1a8</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text75</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.fechaFinContrato}</Text>
           <TextBrush>Black</TextBrush>
-          <TextFormat Ref="69" type="DateFormat" isKey="true" />
+          <TextFormat Ref="70" type="DateFormat" isKey="true" />
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text75>
-        <Text76 Ref="70" type="Text" isKey="true">
+        <Text76 Ref="71" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>18.8,4,8.8,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1003,8 +1006,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>bf9dc1dc11c64b3e95e9a1361f56b734</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text76</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Plannig notes:</Text>
@@ -1012,7 +1015,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text76>
-        <Text77 Ref="71" type="Text" isKey="true">
+        <Text77 Ref="72" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>18.8,4.6,8.8,5.4</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1021,8 +1024,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>ef92321012d442b1a61f602fc0ef6e49</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text77</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>8</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.notasPlanning}</Text>
@@ -1030,7 +1033,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text77>
-        <Text78 Ref="72" type="Text" isKey="true">
+        <Text78 Ref="73" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,11.6,2.6,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1038,8 +1041,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>af145927004e428da3dc906db91c4bb6</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text78</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Present supplier:</Text>
@@ -1047,7 +1050,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text78>
-        <Text79 Ref="73" type="Text" isKey="true">
+        <Text79 Ref="74" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>11.8,11.6,6.6,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1055,8 +1058,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>85210f3ee2c541e287072c4f17b9dc9b</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text79</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.proveedorActual}</Text>
@@ -1064,7 +1067,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text79>
-        <Text80 Ref="74" type="Text" isKey="true">
+        <Text80 Ref="75" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,10.8,2.6,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1072,8 +1075,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>916270609941452489d5e0ebc3eace29</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text80</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Competitors:</Text>
@@ -1081,7 +1084,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text80>
-        <Text81 Ref="75" type="Text" isKey="true">
+        <Text81 Ref="76" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>11.8,10.8,6.6,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1090,8 +1093,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>4ce6f7ddff1340db95ac36eeaf813b97</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text81</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.competidores}</Text>
@@ -1099,7 +1102,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text81>
-        <Text82 Ref="76" type="Text" isKey="true">
+        <Text82 Ref="77" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,11.2,2.6,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1107,8 +1110,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>6a012a3d2d434fe19f08980ecb4b22f1</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text82</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Main competitor:</Text>
@@ -1116,7 +1119,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text82>
-        <Text83 Ref="77" type="Text" isKey="true">
+        <Text83 Ref="78" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>11.8,11.2,6.6,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1124,8 +1127,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>3ff60c9c4144471cb3aa6b22c4c3c522</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text83</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.principalCompetidor}</Text>
@@ -1133,7 +1136,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text83>
-        <Text84 Ref="78" type="Text" isKey="true">
+        <Text84 Ref="79" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,12.2,9.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1141,8 +1144,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>d19a9cfced654d0baa3f8d276af2ca9b</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text84</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Comercial issues:</Text>
@@ -1150,7 +1153,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text84>
-        <Text85 Ref="79" type="Text" isKey="true">
+        <Text85 Ref="80" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,12.8,9.2,2</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1158,8 +1161,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>2571c4edcdc14320bf5c7ffeb9084f60</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text85</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>8</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.datosComerciales}</Text>
@@ -1167,7 +1170,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text85>
-        <Text86 Ref="80" type="Text" isKey="true">
+        <Text86 Ref="81" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>18.8,10.8,8.8,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1175,8 +1178,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>fd460c6b18c04228bdc4372d0742476b</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text86</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Contract Synergies</Text>
@@ -1184,7 +1187,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text86>
-        <Text87 Ref="81" type="Text" isKey="true">
+        <Text87 Ref="82" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>18.8,11.4,8.8,1.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1192,8 +1195,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>e7dd5ded93b4479fa1ea98743f2958e4</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text87</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>8</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.sinergias}</Text>
@@ -1201,7 +1204,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text87>
-        <Text44 Ref="82" type="Text" isKey="true">
+        <Text44 Ref="83" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>0,11.4,8.8,3.4</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1210,8 +1213,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>874101bacf6a469db541f3da19beaa41</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text44</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>8</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.puntosRelevantes}</Text>
@@ -1219,7 +1222,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text44>
-        <Text13 Ref="83" type="Text" isKey="true">
+        <Text13 Ref="84" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>0,15,3.4,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1227,8 +1230,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>88a93c1505fa48848b82fdbc8f075ce5</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text13</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Labor issues:</Text>
@@ -1236,7 +1239,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text13>
-        <Text37 Ref="84" type="Text" isKey="true">
+        <Text37 Ref="85" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>0,15.6,8.8,2.8</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1244,8 +1247,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>f0c8d90e829a4df1a05d423c5d8af878</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text37</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>8</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.garantiasEspecialesTXT}</Text>
@@ -1253,7 +1256,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text37>
-        <Text52 Ref="85" type="Text" isKey="true">
+        <Text52 Ref="86" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>20.6,18.4,7,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1262,14 +1265,14 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <HorAlignment>Right</HorAlignment>
           <Margins>0,0,0,0</Margins>
           <Name>Text52</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <Text>Página 1</Text>
           <TextBrush>Black</TextBrush>
           <Type>Expression</Type>
           <VertAlignment>Center</VertAlignment>
         </Text52>
-        <Text39 Ref="86" type="Text" isKey="true">
+        <Text39 Ref="87" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,15,9.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1277,8 +1280,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>40fd6ed42576424090d0d2afc6a86868</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text39</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Evaluation criteria:</Text>
@@ -1286,7 +1289,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text39>
-        <Text53 Ref="87" type="Text" isKey="true">
+        <Text53 Ref="88" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,15.8,9.2,2.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1295,8 +1298,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>8b73ec3519c44b28b9149792d467dfa0</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text53</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>8</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.criteriosEvaluacion}</Text>
@@ -1304,7 +1307,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text53>
-        <Text35 Ref="88" type="Text" isKey="true">
+        <Text35 Ref="89" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>18.8,13.2,8.8,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1312,8 +1315,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>888c4dd9d3b242fb8ea40e565e42af72</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text35</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>GDES Estrategy</Text>
@@ -1321,7 +1324,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text35>
-        <Text45 Ref="89" type="Text" isKey="true">
+        <Text45 Ref="90" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>18.8,13.8,8.8,1.8</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1329,8 +1332,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>2fa7d7db2cb6492e8f19b6281da84604</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text45</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>8</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.estrategiaGDES}</Text>
@@ -1338,7 +1341,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text45>
-        <Text49 Ref="90" type="Text" isKey="true">
+        <Text49 Ref="91" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>18.8,15.8,8.8,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1346,8 +1349,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>76675f31e1514497927803d9055cda7e</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text49</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>GDES Value</Text>
@@ -1355,7 +1358,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text49>
-        <Text50 Ref="91" type="Text" isKey="true">
+        <Text50 Ref="92" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>18.8,16.4,8.8,1.8</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1363,8 +1366,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>57adc1d978bb41f2aebe8e8e5fd456e4</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text50</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>8</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.diferencialGDES}</Text>
@@ -1372,11 +1375,11 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text50>
-        <DataBand1 Ref="92" type="DataBand" isKey="true">
+        <DataBand1 Ref="93" type="DataBand" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>0,0.4,27.7,0.8</ClientRectangle>
           <Components isList="true" count="3">
-            <Image2 Ref="93" type="Image" isKey="true">
+            <Image2 Ref="94" type="Image" isKey="true">
               <Brush>Transparent</Brush>
               <CanShrink>True</CanShrink>
               <ClientRectangle>24.2,0,3.4,0.8</ClientRectangle>
@@ -1384,35 +1387,35 @@ This document is strictly confidential to the GD Energy Services Group of compan
               <Guid>14a7976ff1eb450cac2f087e9b95f39f</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Image2</Name>
-              <Page isRef="42" />
-              <Parent isRef="92" />
+              <Page isRef="43" />
+              <Parent isRef="93" />
               <Stretch>True</Stretch>
             </Image2>
-            <Text30 Ref="94" type="Text" isKey="true">
+            <Text30 Ref="95" type="Text" isKey="true">
               <Brush>Transparent</Brush>
               <ClientRectangle>0,0,23.8,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Font>Arial,14,Bold</Font>
               <Margins>0,0,0,0</Margins>
               <Name>Text30</Name>
-              <Page isRef="42" />
-              <Parent isRef="92" />
+              <Page isRef="43" />
+              <Parent isRef="93" />
               <Text>{Ofertas.nombreCorto}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text30>
-            <HorizontalLinePrimitive3 Ref="95" type="HorizontalLinePrimitive" isKey="true">
+            <HorizontalLinePrimitive3 Ref="96" type="HorizontalLinePrimitive" isKey="true">
               <ClientRectangle>0,0.8,27.6,0.0254</ClientRectangle>
               <Color>Black</Color>
-              <EndCap Ref="96" type="Cap" isKey="true">
+              <EndCap Ref="97" type="Cap" isKey="true">
                 <Color>Black</Color>
               </EndCap>
               <Name>HorizontalLinePrimitive3</Name>
-              <Page isRef="42" />
-              <Parent isRef="92" />
+              <Page isRef="43" />
+              <Parent isRef="93" />
               <Size>2</Size>
-              <StartCap Ref="97" type="Cap" isKey="true">
+              <StartCap Ref="98" type="Cap" isKey="true">
                 <Color>Black</Color>
               </StartCap>
             </HorizontalLinePrimitive3>
@@ -1420,8 +1423,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Conditions isList="true" count="0" />
           <Filters isList="true" count="0" />
           <Name>DataBand1</Name>
-          <Page isRef="42" />
-          <Parent isRef="42" />
+          <Page isRef="43" />
+          <Parent isRef="43" />
           <Sort isList="true" count="0" />
         </DataBand1>
       </Components>
@@ -1434,16 +1437,16 @@ This document is strictly confidential to the GD Energy Services Group of compan
       <PageWidth>29.7</PageWidth>
       <PaperSize>A4</PaperSize>
       <Report isRef="0" />
-      <Watermark Ref="98" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+      <Watermark Ref="99" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
         <Font>Arial,100</Font>
         <TextBrush>[50:0:0:0]</TextBrush>
       </Watermark>
     </Page2>
-    <Page6 Ref="99" type="Page" isKey="true">
+    <Page6 Ref="100" type="Page" isKey="true">
       <Border>None;Black;2;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <Components isList="true" count="30">
-        <Text54 Ref="100" type="Text" isKey="true">
+        <Text54 Ref="101" type="Text" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>[31:73:125]</Brush>
           <ClientRectangle>0,1.6,8.8,0.4</ClientRectangle>
@@ -1452,14 +1455,14 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>c3b40c25113342daa21f763c4e81c56c</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text54</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <Text>7. RISKS &amp; MITIGATIONS</Text>
           <TextBrush>[255:255:255]</TextBrush>
           <Type>Expression</Type>
           <VertAlignment>Center</VertAlignment>
         </Text54>
-        <Text57 Ref="101" type="Text" isKey="true">
+        <Text57 Ref="102" type="Text" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>[31:73:125]</Brush>
           <ClientRectangle>0,10.2,8.8,0.4</ClientRectangle>
@@ -1468,8 +1471,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>352ed8fc3882430f8af7e17020eab627</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text57</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>8. CONTRACT ISSUES</Text>
@@ -1478,7 +1481,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Type>Expression</Type>
           <VertAlignment>Center</VertAlignment>
         </Text57>
-        <Text58 Ref="102" type="Text" isKey="true">
+        <Text58 Ref="103" type="Text" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>[31:73:125]</Brush>
           <ClientRectangle>9.2,1.6,9.2,0.4</ClientRectangle>
@@ -1487,8 +1490,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>b1b3216b39d84547a4205661ab6fa6b7</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text58</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>9. FINANTIALS</Text>
@@ -1497,7 +1500,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Type>Expression</Type>
           <VertAlignment>Center</VertAlignment>
         </Text58>
-        <Text59 Ref="103" type="Text" isKey="true">
+        <Text59 Ref="104" type="Text" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>[31:73:125]</Brush>
           <ClientRectangle>18.6,1.6,8.8,0.4</ClientRectangle>
@@ -1506,8 +1509,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>dac3ff6e07f244639e13a7a821ecdbd5</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text59</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>10. COMMENTS</Text>
@@ -1516,7 +1519,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Type>Expression</Type>
           <VertAlignment>Center</VertAlignment>
         </Text59>
-        <Text93 Ref="104" type="Text" isKey="true">
+        <Text93 Ref="105" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,20.4,8.8,1</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1524,8 +1527,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>75f9521e96c04d008192a8ca19a833a0</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text93</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.descripcionInversion}</Text>
@@ -1533,7 +1536,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text93>
-        <Text151 Ref="105" type="Text" isKey="true">
+        <Text151 Ref="106" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>20.6,18.4,7,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1542,14 +1545,14 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <HorAlignment>Right</HorAlignment>
           <Margins>0,0,0,0</Margins>
           <Name>Text151</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <Text>Página 2</Text>
           <TextBrush>Black</TextBrush>
           <Type>Expression</Type>
           <VertAlignment>Center</VertAlignment>
         </Text151>
-        <Text98 Ref="106" type="Text" isKey="true">
+        <Text98 Ref="107" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>0,2.2,8.8,7.4</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1558,8 +1561,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>cbcdc9c07a5f48e99729426c34116d05</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text98</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>8</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.riesgos}</Text>
@@ -1567,7 +1570,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text98>
-        <Text104 Ref="107" type="Text" isKey="true">
+        <Text104 Ref="108" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>0,11,8.8,7.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1575,8 +1578,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>bbd8a189cf4843439df1507fecdfcccd</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text104</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>8</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.condicionesEstandarTXT}</Text>
@@ -1584,7 +1587,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text104>
-        <Text92 Ref="108" type="Text" isKey="true">
+        <Text92 Ref="109" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>18.6,2.2,8.8,16</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1593,15 +1596,15 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>cc01e461238340229396ef35657d7f7d</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text92</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>8</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.observaciones}</Text>
           <TextBrush>Black</TextBrush>
           <Type>Expression</Type>
         </Text92>
-        <Text155 Ref="109" type="Text" isKey="true">
+        <Text155 Ref="110" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,2.8,4.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1609,8 +1612,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>a4e5f8b7520e468a8eaf8d17cf57282b</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text155</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>GDES Revenue:</Text>
@@ -1618,7 +1621,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text155>
-        <Text156 Ref="110" type="Text" isKey="true">
+        <Text156 Ref="111" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>13.6,2.8,4.8,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1626,13 +1629,13 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>43b3c3c3d6b84a42a1a2ba461e5035b1</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text156</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.importeGdes}</Text>
           <TextBrush>Black</TextBrush>
-          <TextFormat Ref="111" type="CurrencyFormat" isKey="true">
+          <TextFormat Ref="112" type="CurrencyFormat" isKey="true">
             <DecimalDigits>0</DecimalDigits>
             <DecimalSeparator>,</DecimalSeparator>
             <GroupSeparator>.</GroupSeparator>
@@ -1644,7 +1647,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text156>
-        <Text157 Ref="112" type="Text" isKey="true">
+        <Text157 Ref="113" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,3.4,4.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1652,8 +1655,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>91209a62702f4d78b8454c4af50563c1</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text157</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Contribution Margin (%):</Text>
@@ -1661,7 +1664,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text157>
-        <Text158 Ref="113" type="Text" isKey="true">
+        <Text158 Ref="114" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>13.6,3.4,4.8,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1669,17 +1672,17 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>e7d77477da204db19282936225066643</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text158</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.margenContribucion}</Text>
           <TextBrush>Black</TextBrush>
-          <TextFormat Ref="114" type="CustomFormat" isKey="true" />
+          <TextFormat Ref="115" type="CustomFormat" isKey="true" />
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text158>
-        <Text62 Ref="115" type="Text" isKey="true">
+        <Text62 Ref="116" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,5.4,4.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1687,8 +1690,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>cf64bffc22c8406fbf7800c485a84474</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text62</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Capex</Text>
@@ -1696,7 +1699,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text62>
-        <Text63 Ref="116" type="Text" isKey="true">
+        <Text63 Ref="117" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>13.6,5.4,4.8,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1704,13 +1707,13 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>7c47fdb525354b47a6b68420f37d0364</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text63</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.importeInversion}</Text>
           <TextBrush>Black</TextBrush>
-          <TextFormat Ref="117" type="CurrencyFormat" isKey="true">
+          <TextFormat Ref="118" type="CurrencyFormat" isKey="true">
             <DecimalDigits>0</DecimalDigits>
             <DecimalSeparator>,</DecimalSeparator>
             <GroupSeparator>.</GroupSeparator>
@@ -1722,7 +1725,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text63>
-        <Text163 Ref="118" type="Text" isKey="true">
+        <Text163 Ref="119" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,7.6,9.2,0.8</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1730,8 +1733,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>3d604f2668f24455b41814afb66856aa</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text163</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Capex description:</Text>
@@ -1739,7 +1742,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text163>
-        <Text164 Ref="119" type="Text" isKey="true">
+        <Text164 Ref="120" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,8.2,9.2,2.4</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1747,8 +1750,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>dacfbfaf6a4c4a0c83d7b5f48c4c5cc9</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text164</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>8</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.descripcionInversion}</Text>
@@ -1756,7 +1759,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text164>
-        <Text159 Ref="120" type="Text" isKey="true">
+        <Text159 Ref="121" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,2.2,4.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1764,8 +1767,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>ebfc427b71e749178ec27adadabc464f</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text159</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Total Project Revenue:</Text>
@@ -1773,7 +1776,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text159>
-        <Text160 Ref="121" type="Text" isKey="true">
+        <Text160 Ref="122" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>13.6,2.2,4.8,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1781,13 +1784,13 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>630cf3a6d1424adbb3f4563939bc7e8b</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text160</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.importeTotal}</Text>
           <TextBrush>Black</TextBrush>
-          <TextFormat Ref="122" type="CurrencyFormat" isKey="true">
+          <TextFormat Ref="123" type="CurrencyFormat" isKey="true">
             <DecimalDigits>0</DecimalDigits>
             <DecimalSeparator>,</DecimalSeparator>
             <GroupSeparator>.</GroupSeparator>
@@ -1799,7 +1802,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text160>
-        <Text165 Ref="123" type="Text" isKey="true">
+        <Text165 Ref="124" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,11,9.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1807,8 +1810,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>bd133196198e4111b260d547283d491a</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text165</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Economical conditions</Text>
@@ -1816,7 +1819,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text165>
-        <Text166 Ref="124" type="Text" isKey="true">
+        <Text166 Ref="125" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,11.8,9.2,7</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1825,8 +1828,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>040e617a3d9443cf8ab6666c36d9ba67</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text166</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>8</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.consideracionesEconomicas}</Text>
@@ -1834,7 +1837,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text166>
-        <Text51 Ref="125" type="Text" isKey="true">
+        <Text51 Ref="126" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,4,4.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1842,8 +1845,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>6b1cfbdd6aa6470cb582a73f59960293</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text51</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Contribution Margin (€):</Text>
@@ -1851,7 +1854,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text51>
-        <Text55 Ref="126" type="Text" isKey="true">
+        <Text55 Ref="127" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>13.6,4,4.8,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1859,13 +1862,13 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>f1f4172e4a0b4d7380655c6fa4f6d32e</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text55</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.importeContribucion}</Text>
           <TextBrush>Black</TextBrush>
-          <TextFormat Ref="127" type="CurrencyFormat" isKey="true">
+          <TextFormat Ref="128" type="CurrencyFormat" isKey="true">
             <DecimalSeparator>,</DecimalSeparator>
             <GroupSeparator>.</GroupSeparator>
             <NegativePattern>8</NegativePattern>
@@ -1875,7 +1878,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text55>
-        <Text60 Ref="128" type="Text" isKey="true">
+        <Text60 Ref="129" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,4.8,4.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1883,8 +1886,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>0f34a939158c4bd096c29a31c5660dad</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text60</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Probability:</Text>
@@ -1892,7 +1895,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text60>
-        <Text61 Ref="129" type="Text" isKey="true">
+        <Text61 Ref="130" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>13.6,4.8,4.8,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1900,17 +1903,17 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>e8415f8d6b8f46e3be69ee164af6603f</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text61</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.probabilidad}</Text>
           <TextBrush>Black</TextBrush>
-          <TextFormat Ref="130" type="CustomFormat" isKey="true" />
+          <TextFormat Ref="131" type="CustomFormat" isKey="true" />
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text61>
-        <Text65 Ref="131" type="Text" isKey="true">
+        <Text65 Ref="132" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,6,4.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1918,8 +1921,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>395723a5ab5e4a81ad6c129b9170d8dd</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text65</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Rate of Return:</Text>
@@ -1927,7 +1930,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text65>
-        <Text88 Ref="132" type="Text" isKey="true">
+        <Text88 Ref="133" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>13.6,6,4.8,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1935,17 +1938,17 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>d42008c51fab4b6a85cfd118ba144d6f</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text88</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.tasaRetorno}</Text>
           <TextBrush>Black</TextBrush>
-          <TextFormat Ref="133" type="CustomFormat" isKey="true" />
+          <TextFormat Ref="134" type="CustomFormat" isKey="true" />
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text88>
-        <Text89 Ref="134" type="Text" isKey="true">
+        <Text89 Ref="135" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>9.2,6.6,4.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1953,8 +1956,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>dba6e899f165495bbeeefa7244a16452</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text89</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>Pay-back:</Text>
@@ -1962,7 +1965,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text89>
-        <Text90 Ref="135" type="Text" isKey="true">
+        <Text90 Ref="136" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>13.6,6.6,4.8,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -1970,21 +1973,21 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>75387b3a0a084bf19b28447e8dc33839</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text90</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.payBack}</Text>
           <TextBrush>Black</TextBrush>
-          <TextFormat Ref="136" type="CustomFormat" isKey="true" />
+          <TextFormat Ref="137" type="CustomFormat" isKey="true" />
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>DataColumn</Type>
         </Text90>
-        <DataBand5 Ref="137" type="DataBand" isKey="true">
+        <DataBand5 Ref="138" type="DataBand" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>0,0.4,27.7,0.8</ClientRectangle>
           <Components isList="true" count="3">
-            <Image6 Ref="138" type="Image" isKey="true">
+            <Image6 Ref="139" type="Image" isKey="true">
               <Brush>Transparent</Brush>
               <CanShrink>True</CanShrink>
               <ClientRectangle>24.2,0,3.4,0.8</ClientRectangle>
@@ -1992,35 +1995,35 @@ This document is strictly confidential to the GD Energy Services Group of compan
               <Guid>14a7976ff1eb450cac2f087e9b95f39f</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Image6</Name>
-              <Page isRef="99" />
-              <Parent isRef="137" />
+              <Page isRef="100" />
+              <Parent isRef="138" />
               <Stretch>True</Stretch>
             </Image6>
-            <Text154 Ref="139" type="Text" isKey="true">
+            <Text154 Ref="140" type="Text" isKey="true">
               <Brush>Transparent</Brush>
               <ClientRectangle>0,0,23.8,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Font>Arial,14,Bold</Font>
               <Margins>0,0,0,0</Margins>
               <Name>Text154</Name>
-              <Page isRef="99" />
-              <Parent isRef="137" />
+              <Page isRef="100" />
+              <Parent isRef="138" />
               <Text>{Ofertas.nombreCorto}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text154>
-            <HorizontalLinePrimitive7 Ref="140" type="HorizontalLinePrimitive" isKey="true">
+            <HorizontalLinePrimitive7 Ref="141" type="HorizontalLinePrimitive" isKey="true">
               <ClientRectangle>0.2,0.8,27.6,0.0254</ClientRectangle>
               <Color>Black</Color>
-              <EndCap Ref="141" type="Cap" isKey="true">
+              <EndCap Ref="142" type="Cap" isKey="true">
                 <Color>Black</Color>
               </EndCap>
               <Name>HorizontalLinePrimitive7</Name>
-              <Page isRef="99" />
-              <Parent isRef="137" />
+              <Page isRef="100" />
+              <Parent isRef="138" />
               <Size>2</Size>
-              <StartCap Ref="142" type="Cap" isKey="true">
+              <StartCap Ref="143" type="Cap" isKey="true">
                 <Color>Black</Color>
               </StartCap>
             </HorizontalLinePrimitive7>
@@ -2028,8 +2031,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Conditions isList="true" count="0" />
           <Filters isList="true" count="0" />
           <Name>DataBand5</Name>
-          <Page isRef="99" />
-          <Parent isRef="99" />
+          <Page isRef="100" />
+          <Parent isRef="100" />
           <Sort isList="true" count="0" />
         </DataBand5>
       </Components>
@@ -2042,16 +2045,16 @@ This document is strictly confidential to the GD Energy Services Group of compan
       <PageWidth>29.7</PageWidth>
       <PaperSize>A4</PaperSize>
       <Report isRef="0" />
-      <Watermark Ref="143" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+      <Watermark Ref="144" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
         <Font>Arial,100</Font>
         <TextBrush>[50:0:0:0]</TextBrush>
       </Watermark>
     </Page6>
-    <Page3 Ref="144" type="Page" isKey="true">
+    <Page3 Ref="145" type="Page" isKey="true">
       <Border>None;Black;2;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <Components isList="true" count="5">
-        <Text121 Ref="145" type="Text" isKey="true">
+        <Text121 Ref="146" type="Text" isKey="true">
           <AllowHtmlTags>True</AllowHtmlTags>
           <Brush>Transparent</Brush>
           <ClientRectangle>0,1.8,17,15.6</ClientRectangle>
@@ -2061,8 +2064,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>feb13ef377f94fe39355db7c9caa5a4e</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text121</Name>
-          <Page isRef="144" />
-          <Parent isRef="144" />
+          <Page isRef="145" />
+          <Parent isRef="145" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>8</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.financieros}</Text>
@@ -2071,7 +2074,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextQuality>Wysiwyg</TextQuality>
           <Type>DataColumn</Type>
         </Text121>
-        <Text111 Ref="146" type="Text" isKey="true">
+        <Text111 Ref="147" type="Text" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>[31:73:125]</Brush>
           <ClientRectangle>17.6,1.4,10,0.4</ClientRectangle>
@@ -2080,8 +2083,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>efb635fe2c104624a92e630eb48977c8</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text111</Name>
-          <Page isRef="144" />
-          <Parent isRef="144" />
+          <Page isRef="145" />
+          <Parent isRef="145" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>FINANTIALS ASSUMPTIONS</Text>
@@ -2090,7 +2093,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Type>Expression</Type>
           <VertAlignment>Center</VertAlignment>
         </Text111>
-        <Text110 Ref="147" type="Text" isKey="true">
+        <Text110 Ref="148" type="Text" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>17.6,1.8,10,15.6</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -2099,8 +2102,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>3fb5dd2f57dd4d109a23f483c544b7c0</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text110</Name>
-          <Page isRef="144" />
-          <Parent isRef="144" />
+          <Page isRef="145" />
+          <Parent isRef="145" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>8</ShrinkFontToFitMinimumSize>
           <Text>{Ofertas.consideracionesEconomicas}</Text>
@@ -2108,7 +2111,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
           <Type>Expression</Type>
         </Text110>
-        <Text109 Ref="148" type="Text" isKey="true">
+        <Text109 Ref="149" type="Text" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>[31:73:125]</Brush>
           <ClientRectangle>0,1.4,17.2,0.4</ClientRectangle>
@@ -2117,8 +2120,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Guid>2c8131136a0d4e3eb9d05f63a8045dd1</Guid>
           <Margins>0,0,0,0</Margins>
           <Name>Text109</Name>
-          <Page isRef="144" />
-          <Parent isRef="144" />
+          <Page isRef="145" />
+          <Parent isRef="145" />
           <ShrinkFontToFit>True</ShrinkFontToFit>
           <ShrinkFontToFitMinimumSize>6</ShrinkFontToFitMinimumSize>
           <Text>FINANTIALS</Text>
@@ -2127,11 +2130,11 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Type>Expression</Type>
           <VertAlignment>Center</VertAlignment>
         </Text109>
-        <DataBand2 Ref="149" type="DataBand" isKey="true">
+        <DataBand2 Ref="150" type="DataBand" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>0,0.4,27.7,0.8</ClientRectangle>
           <Components isList="true" count="3">
-            <Image3 Ref="150" type="Image" isKey="true">
+            <Image3 Ref="151" type="Image" isKey="true">
               <Brush>Transparent</Brush>
               <CanShrink>True</CanShrink>
               <ClientRectangle>24.4,0,3.2,0.8</ClientRectangle>
@@ -2139,11 +2142,11 @@ This document is strictly confidential to the GD Energy Services Group of compan
               <Guid>f73e6e07ea9047b0a96fd812efe23a2d</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Image3</Name>
-              <Page isRef="144" />
-              <Parent isRef="149" />
+              <Page isRef="145" />
+              <Parent isRef="150" />
               <Stretch>True</Stretch>
             </Image3>
-            <Text189 Ref="151" type="Text" isKey="true">
+            <Text189 Ref="152" type="Text" isKey="true">
               <Brush>Transparent</Brush>
               <ClientRectangle>0,0,23.8,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
@@ -2151,25 +2154,25 @@ This document is strictly confidential to the GD Energy Services Group of compan
               <Guid>8a80052571994470bfec75cea9b2393c</Guid>
               <Margins>0,0,0,0</Margins>
               <Name>Text189</Name>
-              <Page isRef="144" />
-              <Parent isRef="149" />
+              <Page isRef="145" />
+              <Parent isRef="150" />
               <Text>{Ofertas.nombreCorto}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text189>
-            <HorizontalLinePrimitive4 Ref="152" type="HorizontalLinePrimitive" isKey="true">
+            <HorizontalLinePrimitive4 Ref="153" type="HorizontalLinePrimitive" isKey="true">
               <ClientRectangle>0,0.8,27.6,0.0254</ClientRectangle>
               <Color>Black</Color>
-              <EndCap Ref="153" type="Cap" isKey="true">
+              <EndCap Ref="154" type="Cap" isKey="true">
                 <Color>Black</Color>
               </EndCap>
               <Guid>d81cbfc9da5c44bb8f5bed9d615f45a2</Guid>
               <Name>HorizontalLinePrimitive4</Name>
-              <Page isRef="144" />
-              <Parent isRef="149" />
+              <Page isRef="145" />
+              <Parent isRef="150" />
               <Size>2</Size>
-              <StartCap Ref="154" type="Cap" isKey="true">
+              <StartCap Ref="155" type="Cap" isKey="true">
                 <Color>Black</Color>
               </StartCap>
             </HorizontalLinePrimitive4>
@@ -2178,8 +2181,8 @@ This document is strictly confidential to the GD Energy Services Group of compan
           <Filters isList="true" count="0" />
           <Guid>a8cd0b54032a4321a20d2c1a86b8c819</Guid>
           <Name>DataBand2</Name>
-          <Page isRef="144" />
-          <Parent isRef="144" />
+          <Page isRef="145" />
+          <Parent isRef="145" />
           <Sort isList="true" count="0" />
         </DataBand2>
       </Components>
@@ -2191,13 +2194,13 @@ This document is strictly confidential to the GD Energy Services Group of compan
       <PageHeight>21</PageHeight>
       <PageWidth>29.7</PageWidth>
       <Report isRef="0" />
-      <Watermark Ref="155" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+      <Watermark Ref="156" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
         <Font>Arial,100</Font>
         <TextBrush>[50:0:0:0]</TextBrush>
       </Watermark>
     </Page3>
   </Pages>
-  <PrinterSettings Ref="156" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <PrinterSettings Ref="157" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
   <ReferencedAssemblies isList="true" count="8">
     <value>System.Dll</value>
     <value>System.Drawing.Dll</value>
@@ -2209,10 +2212,10 @@ This document is strictly confidential to the GD Energy Services Group of compan
     <value>Stimulsoft.Report.Dll</value>
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
-  <ReportChanged>2/24/2020 9:44:18 AM</ReportChanged>
+  <ReportChanged>2/27/2020 5:45:00 PM</ReportChanged>
   <ReportCreated>5/7/2018 1:08:45 PM</ReportCreated>
   <ReportFile>C:\PROYECTOS\wx_gdes_pipeline_client\reports\proposal_report.mrt</ReportFile>
-  <ReportGuid>cac0e87d8e6e4d9fb388c3b7b4e079a8</ReportGuid>
+  <ReportGuid>7c9374d6af1a45588ab906f2fd064315</ReportGuid>
   <ReportImage isNull="true" />
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
