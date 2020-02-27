@@ -913,6 +913,7 @@ export default class OfertasForm extends JetView {
         }
         if (ofertaId == 0) {
             data.ofertaId = 0;
+            data.version = 0;
             data.fechaOferta = new Date();
             ofertasService.postOferta(usuarioService.getUsuarioCookie(), data)
                 .then((result) => {
@@ -926,6 +927,9 @@ export default class OfertasForm extends JetView {
                     messageApi.errorMessageAjax(err);
                 });
         } else {
+            if (!data.version) {
+                data.version = 0;
+            }
             // Comprobar si ha habido cambios de importes para crear versión.
             if (!this.$scope.comprobarCambioDeImportes()) {
                 console.log('DATOS A GRABAR', data);
@@ -937,10 +941,10 @@ export default class OfertasForm extends JetView {
                         messageApi.errorMessageAjax(err);
                     });
             } else {
-                webix.confirm(translate("Han cambiado las condiciones económicas de la oferta. ¿Quiere guardar una versión con las condiciones anteriores?"), (action) => {
+                webix.confirm(translate("Han cambiado las condiciones económicas de la oferta. ¿Quiere crear una versión con las nuevas condiciones?"), (action) => {
                     if (action === true) {
                         data.version = data.version + 1;
-                        this.$scope.guardarVersionAntigua(data.version)
+                        this.$scope.guardarVersionNueva(data.version)
                             .then(() => {
                                 return ofertasService.putOferta(usuarioService.getUsuarioCookie(), data);
                             })
@@ -951,14 +955,16 @@ export default class OfertasForm extends JetView {
                                 messageApi.errorMessageAjax(err);
                             });
                     } else {
-                        console.log('DATOS A GRABAR', data);
-                        ofertasService.putOferta(usuarioService.getUsuarioCookie(), data)
-                            .then(() => {
-                                this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
-                            })
-                            .catch((err) => {
-                                messageApi.errorMessageAjax(err);
-                            });
+                        this.$scope.guardarVersionActual(data.version)
+                        .then(()=> {
+                            return ofertasService.putOferta(usuarioService.getUsuarioCookie(), data);
+                        })
+                        .then(() => {
+                            this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
+                        })
+                        .catch((err) => {
+                            messageApi.errorMessageAjax(err);
+                        });
                     }
                 });
             }
@@ -1385,6 +1391,48 @@ export default class OfertasForm extends JetView {
             importeInversion: _importeInversion,
             divisaId: divisaId,
             multiplicador: _multiplicador,
+            numVersion: nversion
+        };
+        return versionesService.postVersion(usu, data);
+    }
+
+    guardarVersionActual(nversion) {
+        let divisaId = null;
+        if ($$('cmbDivisa').getValue()) divisaId = $$('cmbDivisa').getValue();
+        let usu = usuarioService.getUsuarioCookie()
+        let data = {
+            ofertaId: ofertaId,
+            fechaCambio: new Date(),
+            usuarioId: usu.usuarioId,
+            importePresupuesto: $$('importePresupuesto').getValue(),
+            importeUTE: $$('importeUTE').getValue(),
+            importeTotal: $$('importeTotal').getValue(),
+            margenContribucion: $$('margenContribucion').getValue(),
+            importeContribucion: $$('importeContribucion').getValue(),
+            importeInversion: $$('importeInversion').getValue(),
+            divisaId: divisaId,
+            multiplicador: $$('multiplicador').getValue(),
+            numVersion: nversion
+        };
+        return versionesService.putVersion(usu, data);
+    }
+
+    guardarVersionNueva(nversion) {
+        let divisaId = null;
+        if ($$('cmbDivisa').getValue()) divisaId = $$('cmbDivisa').getValue();
+        let usu = usuarioService.getUsuarioCookie()
+        let data = {
+            ofertaId: ofertaId,
+            fechaCambio: new Date(),
+            usuarioId: usu.usuarioId,
+            importePresupuesto: $$('importePresupuesto').getValue(),
+            importeUTE: $$('importeUTE').getValue(),
+            importeTotal: $$('importeTotal').getValue(),
+            margenContribucion: $$('margenContribucion').getValue(),
+            importeContribucion: $$('importeContribucion').getValue(),
+            importeInversion: $$('importeInversion').getValue(),
+            divisaId: divisaId,
+            multiplicador: $$('multiplicador').getValue(),
             numVersion: nversion
         };
         return versionesService.postVersion(usu, data);
