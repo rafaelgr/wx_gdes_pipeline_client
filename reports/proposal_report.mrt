@@ -826,7 +826,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
         </Text48>
         <Text66 Ref="57" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>18.8,2,3.2,0.6</ClientRectangle>
+          <ClientRectangle>18.8,2,4.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,9,Bold</Font>
           <Guid>942598e31ed846c6a8a9c73f9a6ad2d2</Guid>
@@ -843,7 +843,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
         </Text66>
         <Text67 Ref="58" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>22.2,2,5.4,0.6</ClientRectangle>
+          <ClientRectangle>23.2,2,4.4,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,9</Font>
           <Guid>5c5c4fe11b104153b25ebc3bd602bda4</Guid>
@@ -861,7 +861,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
         </Text67>
         <Text68 Ref="60" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>18.8,2.4,3.2,0.6</ClientRectangle>
+          <ClientRectangle>18.8,2.4,4.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,9,Bold</Font>
           <Guid>08346b359e5443e1b3612d28689accc4</Guid>
@@ -878,7 +878,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
         </Text68>
         <Text69 Ref="61" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>22.2,2.4,5.4,0.6</ClientRectangle>
+          <ClientRectangle>23.2,2.4,4.4,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,9</Font>
           <Guid>2697d11283d24d4e9cb40c5ae7090e6e</Guid>
@@ -896,7 +896,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
         </Text69>
         <Text70 Ref="63" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>18.8,2.8,3.2,0.6</ClientRectangle>
+          <ClientRectangle>18.8,2.8,4.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,9,Bold</Font>
           <Guid>09763ffe2b90463eac566e53291eadd6</Guid>
@@ -913,7 +913,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
         </Text70>
         <Text71 Ref="64" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>22.2,2.8,5.4,0.6</ClientRectangle>
+          <ClientRectangle>23.2,2.8,4.4,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,9</Font>
           <Guid>dd87abd9d1894e25b0b0b2b2764aa0d1</Guid>
@@ -930,7 +930,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
         </Text71>
         <Text72 Ref="65" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>18.8,3.2,3.2,0.6</ClientRectangle>
+          <ClientRectangle>18.8,3.2,4.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,9,Bold</Font>
           <Guid>8e67d6e0cf4d4c2d8b429a8b179b4049</Guid>
@@ -947,7 +947,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
         </Text72>
         <Text73 Ref="66" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>22.2,3.2,5.4,0.6</ClientRectangle>
+          <ClientRectangle>23.2,3.2,4.4,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,9</Font>
           <Guid>b946f93e9722440e91bed588817c93a2</Guid>
@@ -965,7 +965,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
         </Text73>
         <Text74 Ref="68" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>18.8,3.6,3.2,0.6</ClientRectangle>
+          <ClientRectangle>18.8,3.6,4.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,9,Bold</Font>
           <Guid>0697369ae73b474596e9f3efab93336d</Guid>
@@ -982,7 +982,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
         </Text74>
         <Text75 Ref="69" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>22.2,3.6,5.4,0.6</ClientRectangle>
+          <ClientRectangle>23.2,3.6,4.4,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,9</Font>
           <Guid>3752aab9cc2548a597208656e1f4c1a8</Guid>
@@ -1035,7 +1035,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
         </Text77>
         <Text78 Ref="73" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>9.2,11.6,2.6,0.6</ClientRectangle>
+          <ClientRectangle>9.2,11.6,3,0.4</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,9,Bold</Font>
           <Guid>af145927004e428da3dc906db91c4bb6</Guid>
@@ -1052,7 +1052,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
         </Text78>
         <Text79 Ref="74" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>11.8,11.6,6.6,0.6</ClientRectangle>
+          <ClientRectangle>12.2,11.6,6.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,9</Font>
           <Guid>85210f3ee2c541e287072c4f17b9dc9b</Guid>
@@ -1069,7 +1069,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
         </Text79>
         <Text80 Ref="75" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>9.2,10.8,2.6,0.6</ClientRectangle>
+          <ClientRectangle>9.2,10.8,3,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,9,Bold</Font>
           <Guid>916270609941452489d5e0ebc3eace29</Guid>
@@ -1086,7 +1086,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
         </Text80>
         <Text81 Ref="76" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>11.8,10.8,6.6,0.6</ClientRectangle>
+          <ClientRectangle>12.2,10.8,6.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Editable>True</Editable>
           <Font>Arial,9</Font>
@@ -1104,7 +1104,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
         </Text81>
         <Text82 Ref="77" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>9.2,11.2,2.6,0.6</ClientRectangle>
+          <ClientRectangle>9.2,11.2,3,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,9,Bold</Font>
           <Guid>6a012a3d2d434fe19f08980ecb4b22f1</Guid>
@@ -1121,7 +1121,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
         </Text82>
         <Text83 Ref="78" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>11.8,11.2,6.6,0.6</ClientRectangle>
+          <ClientRectangle>12.2,11.2,6.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,9</Font>
           <Guid>3ff60c9c4144471cb3aa6b22c4c3c522</Guid>
@@ -1138,7 +1138,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
         </Text83>
         <Text84 Ref="79" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>9.2,12.2,9.2,0.6</ClientRectangle>
+          <ClientRectangle>9.2,12,9.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,9,Bold</Font>
           <Guid>d19a9cfced654d0baa3f8d276af2ca9b</Guid>
@@ -1155,7 +1155,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
         </Text84>
         <Text85 Ref="80" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>9.2,12.8,9.2,2</ClientRectangle>
+          <ClientRectangle>9.2,12.6,9.2,2.2</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,9</Font>
           <Guid>2571c4edcdc14320bf5c7ffeb9084f60</Guid>
@@ -2212,10 +2212,10 @@ This document is strictly confidential to the GD Energy Services Group of compan
     <value>Stimulsoft.Report.Dll</value>
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
-  <ReportChanged>2/27/2020 5:45:00 PM</ReportChanged>
+  <ReportChanged>2/27/2020 5:56:08 PM</ReportChanged>
   <ReportCreated>5/7/2018 1:08:45 PM</ReportCreated>
   <ReportFile>C:\PROYECTOS\wx_gdes_pipeline_client\reports\proposal_report.mrt</ReportFile>
-  <ReportGuid>7c9374d6af1a45588ab906f2fd064315</ReportGuid>
+  <ReportGuid>3d6dc4ab9a8d485ea9fac3dc03bdfde4</ReportGuid>
   <ReportImage isNull="true" />
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
