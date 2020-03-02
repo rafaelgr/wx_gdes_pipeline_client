@@ -2191,10 +2191,10 @@ This document is strictly confidential to the GD Energy Services Group of compan
     <value>Stimulsoft.Report.Dll</value>
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
-  <ReportChanged>3/2/2020 10:06:26 AM</ReportChanged>
+  <ReportChanged>3/2/2020 10:20:48 AM</ReportChanged>
   <ReportCreated>5/7/2018 1:08:45 PM</ReportCreated>
   <ReportFile>C:\PROYECTOS\wx_gdes_pipeline_client\reports\proposal_report.mrt</ReportFile>
-  <ReportGuid>7d8d685c23e041149cf51734c3fa456b</ReportGuid>
+  <ReportGuid>9d6e4ef7ae85492b983a928af1ccee13</ReportGuid>
   <ReportImage isNull="true" />
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
