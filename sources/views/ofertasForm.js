@@ -908,6 +908,11 @@ export default class OfertasForm extends JetView {
         if (!data.margenContribucion) {
             data.margenContribucion = 0;
         }
+        // Control de valores nulos en determinados casos 
+        if (!data.importeUTE) data.importeUTE = 0;
+        if (!data.margenContribucion) data.margenContribucion = 0;
+        if (!data.importeContribucion) data.importeContribucion = 0;
+        if (!data.importeInversion) data.importeInversion = 0;
         if (data.estadoId === 5 && !data.razonPerdidaId) {
             messageApi.errorMessage(translate("Debe incluir una razón de pérdida de la oferta"));
             return;            
