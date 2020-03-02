@@ -809,6 +809,7 @@ export default class OfertasForm extends JetView {
             }
             if (nv == 3 && ov == 1) {
                 // Si una oportunidad pasa a oferta grabamos los campos correspondientes
+                $$("codigoOp").setValue($$("codigoOferta").getValue());
                 $$("conversionOportunidad").setValue(true);
                 $$("fechaConversionOportunidad").setValue(new Date());
             }
