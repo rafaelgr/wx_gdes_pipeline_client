@@ -26,7 +26,7 @@ export default class OfertasWindow extends JetView {
         const _view1 = {
             view: "layout",
             id: "ofertasFormWindow",
-            minHeight:600,
+            minHeight:800,
             rows: [
                 {
                     view: "toolbar", padding: 3, elements: [
@@ -184,7 +184,7 @@ export default class OfertasWindow extends JetView {
             view: "window",
             id: "ofertasWindow",
             position: "center", move: true, resize: true,
-            width: 900,
+            width: 1024,
             head: {
                 view: "toolbar", cols: [
                     {},
