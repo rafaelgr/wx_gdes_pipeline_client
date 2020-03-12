@@ -799,6 +799,9 @@ export default class OfertasForm extends JetView {
         $$("cmbPais").attachEvent("onChange", (nv, ov) => {
             this.getDocumentosAplicables(nv);
         });
+        $$("cmbEstado").attachEvent("onChange", (nv, ov) => {
+            this.cambioEstado(nv);
+        });
         $$("cmbFaseOferta").attachEvent("onChange", (nv, ov) => {
             if (nv != 3 && ofertaId == 0) {
                 // Si en el alta de una oferta la pasan a algo que no sea oferta
@@ -1162,7 +1165,8 @@ export default class OfertasForm extends JetView {
         var probabilidades = [
             { id: 20, value: "20%" },
             { id: 50, value: "50%" },
-            { id: 80, value: "80%" }
+            { id: 80, value: "80%" },
+            { id: 100, value: "100%" }
         ];
         var list = $$("cmbProbabilidad").getPopup().getList();
         list.clearAll();
@@ -1511,6 +1515,14 @@ export default class OfertasForm extends JetView {
                 });
             }
         })
+    }
+
+    cambioEstado(nv) {
+        // Oferta ganada
+        if (nv === 2) {
+            $$("cmbProbabilidad").setValue({ id: 100, value: "100%" });
+            $$("cmbProbabilidad").refresh();
+        }
     }
 
 }
