@@ -85,10 +85,10 @@ export default class OfertasForm extends JetView {
                 },
                 {
                     cols: [
-                        { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaEntrega", required: true, label: translate("Fecha entrega"), labelPosition: "top" },
-                        { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaAdjudicacion", required: true, label: translate("Fecha adjudicación"), labelPosition: "top" },
-                        { view: "datepicker", editable: true, minDate: new Date("2000-01-01"), name: "fechaInicioContrato", required: true, label: translate("Fecha inicio"), labelPosition: "top" },
-                        { view: "datepicker", editable: true, minDate: new Date("2000-01-01"), name: "fechaFinContrato", required: true, label: translate("Fecha fin"), labelPosition: "top" },
+                        { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaEntrega", required: true, label: translate("F. Entrega"), labelPosition: "top"},
+                        { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaAdjudicacion", required: true, label: translate("F. Adjudicación"), labelPosition: "top" },
+                        { view: "datepicker", editable: true, minDate: new Date("2000-01-01"), name: "fechaInicioContrato", required: true, label: translate("F. Inicio"), labelPosition: "top" },
+                        { view: "datepicker", editable: true, minDate: new Date("2000-01-01"), name: "fechaFinContrato", required: true, label: translate("F. Fin"), labelPosition: "top" },
                         { view: "text", name: "duracion", label: translate("Duración"), required: true, labelPosition: "top" }
                     ]
                 },
@@ -499,7 +499,7 @@ export default class OfertasForm extends JetView {
             rows: [
                 {
                     cols: [
-                        { view: "textarea", name: "alcance", label: translate("Alcance de los trabajos (Descripción completa)"), labelPosition: "top" },
+                        { view: "textarea", name: "alcance", label: translate("Alcance de los trabajos (Descripción completa)"), labelPosition: "top", height:100 },
                         { view: "textarea", name: "riesgos", label: translate("Riesgos y mitigaciones"), labelPosition: "top" },
                         { view: "textarea", name: "condicionesEstandarTXT", label: translate("Datos contractuales (Penalizaciones, Garantías, Seguros, etc)"), labelPosition: "top" },
 
@@ -507,14 +507,14 @@ export default class OfertasForm extends JetView {
                 },
                 {
                     cols: [
-                        { view: "textarea", name: "criteriosEvaluacion", label: translate("Criterios de Evaluación"), labelPosition: "top" },
+                        { view: "textarea", name: "criteriosEvaluacion", label: translate("Criterios de Evaluación"), labelPosition: "top", height:100  },
                         { view: "textarea", name: "estrategiaGDES", label: translate("Estrategia tomada en la Oferta"), labelPosition: "top" },
                         { view: "textarea", name: "garantiasEspecialesTXT", label: translate("Datos Laborales"), labelPosition: "top" },
                     ]
                 },
                 {
                     cols: [
-                        { view: "textarea", name: "datosComerciales", label: translate("Información comercial"), labelPosition: "top" },
+                        { view: "textarea", name: "datosComerciales", label: translate("Información comercial"), labelPosition: "top", height:100  },
                         { view: "textarea", name: "diferencialGDES", label: translate("Valor añadido GDES"), labelPosition: "top" },
                         { view: "textarea", name: "consideracionesEconomicas", label: translate("Consideraciones incluidas en la oferta económica"), labelPosition: "top" }
 
