@@ -367,7 +367,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
         </Text17>
         <Text18 Ref="23" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>5.6,12.4,5.8,0.6</ClientRectangle>
+          <ClientRectangle>5.6,13,5.8,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,10</Font>
           <Guid>1a38f1d6fcf94785bd4b9fc8ffb1bcc4</Guid>
@@ -523,7 +523,7 @@ This document is strictly confidential to the GD Energy Services Group of compan
         </Text28>
         <Text16 Ref="33" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>5.6,13,5.8,0.6</ClientRectangle>
+          <ClientRectangle>5.6,12.4,5.8,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,10</Font>
           <Guid>c708a717801a494ca4569d880d6148d8</Guid>
@@ -2191,10 +2191,10 @@ This document is strictly confidential to the GD Energy Services Group of compan
     <value>Stimulsoft.Report.Dll</value>
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
-  <ReportChanged>3/2/2020 10:20:48 AM</ReportChanged>
+  <ReportChanged>3/27/2020 11:21:30 AM</ReportChanged>
   <ReportCreated>5/7/2018 1:08:45 PM</ReportCreated>
   <ReportFile>C:\PROYECTOS\wx_gdes_pipeline_client\reports\proposal_report.mrt</ReportFile>
-  <ReportGuid>9d6e4ef7ae85492b983a928af1ccee13</ReportGuid>
+  <ReportGuid>1e92679508864d4fa88701516361ac7b</ReportGuid>
   <ReportImage isNull="true" />
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
