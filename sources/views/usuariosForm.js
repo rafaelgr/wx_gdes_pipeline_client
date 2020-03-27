@@ -209,6 +209,7 @@ export default class UsuarioForm extends JetView {
             return;
         }
         var data = $$("frmUsuarios").getValues();
+        delete data.rr2;
         if (!data.grupoUsuarioId || data.grupoUsuarioId === -1) data.grupoUsuarioId = null;
         if (!data.grupoUsuarioId2 || data.grupoUsuarioId2 === -1) data.grupoUsuarioId2 = null;
         if (!data.grupoUsuarioId3 || data.grupoUsuarioId3 === -1) data.grupoUsuarioId3 = null;

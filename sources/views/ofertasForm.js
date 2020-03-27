@@ -115,8 +115,8 @@ export default class OfertasForm extends JetView {
                 { template: translate("OTROS DATOS (1)"), type: "section" },
                 {
                     cols: [
-                        { view: "combo", id: "cmbUsuResponsableId", name: "usuResponsableId", required: true, options: {}, label: translate("Rble Oferta"), labelPosition: "top" },
-                        { view: "combo", id: "cmbResponsable", name: "responsableId", required: true, options: {}, label: translate("Supervisado por"), labelPosition: "top" },
+                        { view: "combo", id: "cmbResponsable", name: "responsableId", required: true, options: {}, label: translate("Rble Oferta"), labelPosition: "top" },
+                        { view: "combo", id: "cmbUsuResponsableId", name: "usuResponsableId", required: true, options: {}, label: translate("Supervisado por"), labelPosition: "top" },
                         { rows: [{ view: "checkbox", name: "laboral", options: {}, label: translate("Laboral"), labelPosition: "top", width: 100 }] },
                         { rows: [{ view: "checkbox", name: "finanzas", options: {}, label: translate("Finanzas"), labelPosition: "top", width: 100 }] },
                     ]
@@ -1256,7 +1256,7 @@ export default class OfertasForm extends JetView {
 
     setValoresPorDefectoUsuario(usu) {
         $$("cmbUsuario").setValue(usu.usuarioId);
-        $$("cmbUsuResponsableId").setValue(usu.usuarioId);
+        this.loadRR2();
         $$("cmbResponsable").setValue(usu.responsableId);
         $$("cmbPais").setValue(usu.paisId);
         $$("cmbEmpresa").setValue(usu.empresaId);
@@ -1523,6 +1523,17 @@ export default class OfertasForm extends JetView {
             $$("cmbProbabilidad").setValue({ id: 100, value: "100%" });
             $$("cmbProbabilidad").refresh();
         }
+    }
+
+    loadRR2() {
+        let usu = usuarioService.getUsuarioCookie();
+        usuarioService.getUsuario(usu, usu.usuarioId)
+        .then(data => {
+            $$("cmbUsuResponsableId").setValue(data.rr2);
+        })
+        .catch((err) => {
+            messageApi.errorMessageAjax(err);
+        })
     }
 
 }
