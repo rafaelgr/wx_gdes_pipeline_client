@@ -207,6 +207,12 @@ export default class OfertasWindow extends JetView {
             $$("cmbProbabilidadW").refresh();
         }
         });
+        $$("cmbAreaW").attachEvent("onChange", (nv, ov) => {
+            this.cambioArea(nv);
+        }); 
+        $$("cmbEmpresaW").attachEvent("onChange", (nv, ov) => {
+            this.cambioEmpresa(nv);
+        });  
     }
     showWindow() {
         let usu = usuarioService.getUsuarioCookie();
@@ -572,5 +578,26 @@ export default class OfertasWindow extends JetView {
             $$("importeMaxLicitacionW").setValue(importeMaxLicitacion);
             this.calcImporte();
         }
+    }
+    cambioArea(nv) {
+        let usu = usuarioService.getUsuarioCookie();
+        areasService.getArea(usu, nv)
+        .then(data => {
+            $$("cmbUnidadNegocioW").setValue(data.unidadNegocioId);
+        })
+        .catch((err) => {
+            messageApi.errorMessageAjax(err);
+        })
+    }
+
+    cambioEmpresa(nv) {
+        let usu = usuarioService.getUsuarioCookie();
+        empresasService.getEmpresa(usu, nv)
+        .then(data => {
+            $$("cmbPaisW").setValue(data.paisId);
+        })
+        .catch((err) => {
+            messageApi.errorMessageAjax(err);
+        })
     }
 }

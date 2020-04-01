@@ -64,7 +64,7 @@ export default class MainToolbar extends JetView {
 	init() {
 		// LLamar para obtener la versión
 		versionesService.getVersionApp().then(data => {
-			$$('version').config.label = data.version;
+			$$('version').config.label = data.version + "*";
 			$$('version').refresh();
 		}).catch(err=>{
 			console.log("ERR VRS:", err);
