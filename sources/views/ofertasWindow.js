@@ -16,7 +16,7 @@ import { generalApi } from "../utilities/general";
 import { messageApi } from "../utilities/messages";
 import { ubicacionesService } from '../services/ubicaciones_service';
 import { divisasService } from "../services/divisas_service"
-
+import { razonesPerdidaService } from "../services/razonesPerdida_service";
 
 var ofertaId = 0;
 
@@ -200,6 +200,13 @@ export default class OfertasWindow extends JetView {
         return _view;
     }
     init(view, url) {
+        $$("cmbEstadoW").attachEvent("onChange", (nv, ov) => {
+            // Oferta ganada
+            if (nv === 2) {
+            $$("cmbProbabilidadW").setValue({ id: 100, value: "100%" });
+            $$("cmbProbabilidadW").refresh();
+        }
+        });
     }
     showWindow() {
         let usu = usuarioService.getUsuarioCookie();
@@ -219,6 +226,7 @@ export default class OfertasWindow extends JetView {
         this.setValoresPorDefectoUsuario(usu);
         this.loadUbicaciones();
         this.loadDivisas(1);
+        this.loadRazonesPerdida();
         $$("multiplicadorW").setValue(1);
         this.getNumeroCodigoOferta();
         $$("margenContribucionW").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });
@@ -423,7 +431,8 @@ export default class OfertasWindow extends JetView {
         var probabilidades = [
             { id: 20, value: "20%" },
             { id: 50, value: "50%" },
-            { id: 80, value: "80%" }
+            { id: 80, value: "80%" },
+            { id: 100, value: "100%" },
         ];
         var list = $$("cmbProbabilidadW").getPopup().getList();
         list.clearAll();
@@ -506,6 +515,20 @@ export default class OfertasWindow extends JetView {
                 if (divisaId) {
                     $$("cmbDivisaW").setValue(divisaId);
                     $$("cmbDivisaW").refresh();
+                }
+                return;
+            });
+    }
+    loadRazonesPerdida(razonPerdidaId) {
+        razonesPerdidaService.getRazonesPerdida(usuarioService.getUsuarioCookie())
+            .then(rows => {
+                var razones = generalApi.prepareDataForCombo('razonPerdidaId', 'nombre', rows);
+                var list = $$("cmbRazonPerdidaW").getPopup().getList();
+                list.clearAll();
+                list.parse(razones);
+                if (razonPerdidaId) {
+                    $$("cmbRazonPerdidaW").setValue(razonPerdidaId);
+                    $$("cmbRazonPerdidaW").refresh();
                 }
                 return;
             });
