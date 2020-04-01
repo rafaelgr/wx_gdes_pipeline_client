@@ -802,6 +802,12 @@ export default class OfertasForm extends JetView {
         $$("cmbEstado").attachEvent("onChange", (nv, ov) => {
             this.cambioEstado(nv);
         });
+        $$("cmbArea").attachEvent("onChange", (nv, ov) => {
+            this.cambioArea(nv);
+        }); 
+        $$("cmbEmpresa").attachEvent("onChange", (nv, ov) => {
+            this.cambioEmpresa(nv);
+        });        
         $$("cmbFaseOferta").attachEvent("onChange", (nv, ov) => {
             if (nv != 3 && ofertaId == 0) {
                 // Si en el alta de una oferta la pasan a algo que no sea oferta
@@ -866,6 +872,7 @@ export default class OfertasForm extends JetView {
                 oferta.fechaFinContrato = new Date(oferta.fechaFinContrato);
                 oferta.fechaOferta = new Date(oferta.fechaOferta);
                 oferta.fechaUltimoEstado = new Date(oferta.fechaUltimoEstado);
+                if (oferta.fechaComite) oferta.fechaComite = new Date(oferta.fechaComite);
                 $$("frmOfertas").setValues(oferta);
                 this.loadUsuarios(oferta.usuarioId);
                 this.loadUsuariosResponsables(oferta.usuResponsableId);
@@ -900,7 +907,8 @@ export default class OfertasForm extends JetView {
     cancel() {
         this.$scope.show('/top/ofertas');
     }
-    accept() {
+
+    accept(sinsalir) {
         const translate = this.$scope.app.getService("locale")._;
         if (!$$("frmOfertas").validate({ hidden: true })) {
             messageApi.errorMessage(translate("Debe rellenar los campos correctamente"));
@@ -944,36 +952,43 @@ export default class OfertasForm extends JetView {
                 console.log('DATOS A GRABAR', data);
                 ofertasService.putOferta(usuarioService.getUsuarioCookie(), data)
                     .then(() => {
-                        this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
+                        if (sinsalir) this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
                     })
                     .catch((err) => {
                         messageApi.errorMessageAjax(err);
                     });
             } else {
-                webix.confirm(translate("Han cambiado las condiciones económicas de la oferta. ¿Quiere crear una versión con las nuevas condiciones?"), (action) => {
-                    if (action === true) {
-                        data.version = data.version + 1;
-                        this.$scope.guardarVersionNueva(data.version)
-                            .then(() => {
+
+                webix.confirm({
+                    title: translate("Cambio de condiciones"),
+                    text: translate("Han cambiado las condiciones económicas de la oferta. ¿Quiere crear una versión con las nuevas condiciones?"),
+                    ok: translate("Crear versión"),
+                    cancel: translate("No crear"),
+                    callback: (action) => {
+                        if (action === true) {
+                            data.version = data.version + 1;
+                            this.$scope.guardarVersionNueva(data.version)
+                                .then(() => {
+                                    return ofertasService.putOferta(usuarioService.getUsuarioCookie(), data);
+                                })
+                                .then(() => {
+                                    if (sinsalir) this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
+                                })
+                                .catch((err) => {
+                                    messageApi.errorMessageAjax(err);
+                                });
+                        } else {
+                            this.$scope.guardarVersionActual(data.version)
+                            .then(()=> {
                                 return ofertasService.putOferta(usuarioService.getUsuarioCookie(), data);
                             })
                             .then(() => {
-                                this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
+                                if (sinsalir) this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
                             })
                             .catch((err) => {
                                 messageApi.errorMessageAjax(err);
                             });
-                    } else {
-                        this.$scope.guardarVersionActual(data.version)
-                        .then(()=> {
-                            return ofertasService.putOferta(usuarioService.getUsuarioCookie(), data);
-                        })
-                        .then(() => {
-                            this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
-                        })
-                        .catch((err) => {
-                            messageApi.errorMessageAjax(err);
-                        });
+                        }
                     }
                 });
             }
@@ -1530,6 +1545,28 @@ export default class OfertasForm extends JetView {
         usuarioService.getUsuario(usu, usu.usuarioId)
         .then(data => {
             $$("cmbUsuResponsableId").setValue(data.rr2);
+        })
+        .catch((err) => {
+            messageApi.errorMessageAjax(err);
+        })
+    }
+
+    cambioArea(nv) {
+        let usu = usuarioService.getUsuarioCookie();
+        areasService.getArea(usu, nv)
+        .then(data => {
+            $$("cmbUnidadNegocio").setValue(data.unidadNegocioId);
+        })
+        .catch((err) => {
+            messageApi.errorMessageAjax(err);
+        })
+    }
+
+    cambioEmpresa(nv) {
+        let usu = usuarioService.getUsuarioCookie();
+        empresasService.getEmpresa(usu, nv)
+        .then(data => {
+            $$("cmbPais").setValue(data.paisId);
         })
         .catch((err) => {
             messageApi.errorMessageAjax(err);
