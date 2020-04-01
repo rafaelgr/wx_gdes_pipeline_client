@@ -161,7 +161,7 @@ export default class OfertasWindow extends JetView {
                         {
                             cols: [
                                 {},
-                                { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaCreacion", label: translate("Fecha creación"), labelPosition: "top"},
+                                { view: "datepicker", id:"fechaCreacionW", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaCreacion", label: translate("Fecha creación"), labelPosition: "top"},
                                 { view: "datepicker", id: "fechaConversionOportunidadW", editable: true, minDate: new Date("2000-01-01"), name: "fechaConversionOportunidad", label: translate("Fecha conversión"), labelPosition: "top" }
         
                             ]
@@ -228,6 +228,7 @@ export default class OfertasWindow extends JetView {
         this.loadDivisas(1);
         this.loadRazonesPerdida();
         $$("multiplicadorW").setValue(1);
+        $$("fechaCreacionW").setValue(new Date());
         this.getNumeroCodigoOferta();
         $$("margenContribucionW").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });
         $$("multiplicadorW").attachEvent("onBlur", (nv, ov) => { this.calcFromDivisa(); });

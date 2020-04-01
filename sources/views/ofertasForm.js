@@ -229,7 +229,7 @@ export default class OfertasForm extends JetView {
                 {
                     cols: [
                         { view: "combo", id: "cmbUsuario", name: "usuarioId", required: true, options: {}, label: translate("Usuario"), labelPosition: "top" },
-                        { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaCreacion", label: translate("Fecha creación"), labelPosition: "top"},
+                        { view: "datepicker",id:"fechaCreacion", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaCreacion", label: translate("Fecha creación"), labelPosition: "top"},
                         { view: "datepicker", id: "fechaConversionOportunidad", editable: true, minDate: new Date("2000-01-01"), name: "fechaConversionOportunidad", label: translate("Fecha conversión"), labelPosition: "top" }
 
                     ]
@@ -860,6 +860,7 @@ export default class OfertasForm extends JetView {
             this.getDocumentosAplicables(usu.paisId);
             this.setValoresPorDefectoUsuario(usu);
             $$("multiplicador").setValue(1);
+            this.$$("fechaCreacion").setValue(new Date());
             ofertaId = 0;
             numVersion = 0;
             return;
@@ -873,6 +874,7 @@ export default class OfertasForm extends JetView {
                 oferta.fechaOferta = new Date(oferta.fechaOferta);
                 oferta.fechaUltimoEstado = new Date(oferta.fechaUltimoEstado);
                 if (oferta.fechaComite) oferta.fechaComite = new Date(oferta.fechaComite);
+                if (oferta.fechaCreacion) oferta.fechaCreacion = new Date(oferta.fechaCreacion);
                 $$("frmOfertas").setValues(oferta);
                 this.loadUsuarios(oferta.usuarioId);
                 this.loadUsuariosResponsables(oferta.usuResponsableId);
@@ -934,13 +936,16 @@ export default class OfertasForm extends JetView {
             data.fechaOferta = new Date();
             ofertasService.postOferta(usuarioService.getUsuarioCookie(), data)
                 .then((result) => {
+                    console.log('Vuelve del post');
                     data.ofertaId = result.ofertaId;
                     return this.$scope.guardarVersionCero(data);
                 })
                 .then(() => {
+                    console.log('Vuelve de la creación de version');
                     this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
                 })
                 .catch((err) => {
+                    console.log('ERR POST', err);
                     messageApi.errorMessageAjax(err);
                 });
         } else {
