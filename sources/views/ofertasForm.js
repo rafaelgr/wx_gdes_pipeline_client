@@ -78,18 +78,18 @@ export default class OfertasForm extends JetView {
                 },
                 {
                     cols: [
-                        { view: "text", name: "periodo", label: translate("Periodo"), labelPosition: "top" },
-                        { view: "text", name: "numeroLicitacion", label: translate("Nr. Licitación"), labelPosition: "top" },
-                        { view: "text", name: "implicaTecnologico", label: translate("¿Implica desarrollo tecnológico?"), labelPosition: "top" },
-                    ]
-                },
-                {
-                    cols: [
                         { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaEntrega", required: true, label: translate("F. Entrega"), labelPosition: "top"},
                         { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaAdjudicacion", required: true, label: translate("F. Adjudicación"), labelPosition: "top" },
                         { view: "datepicker", editable: true, minDate: new Date("2000-01-01"), name: "fechaInicioContrato", required: true, label: translate("F. Inicio"), labelPosition: "top" },
                         { view: "datepicker", editable: true, minDate: new Date("2000-01-01"), name: "fechaFinContrato", required: true, label: translate("F. Fin"), labelPosition: "top" },
-                        { view: "text", name: "duracion", label: translate("Duración"), required: true, labelPosition: "top" }
+                    ]
+                },                
+                {
+                    cols: [
+                        { view: "text", name: "duracion", label: translate("Duración"), required: true, labelPosition: "top" },
+                        { view: "text", name: "periodo", label: translate("Periodo"), labelPosition: "top" },
+                        { view: "text", name: "numeroLicitacion", label: translate("Nr. Licitación"), labelPosition: "top" },
+                        { view: "text", name: "implicaTecnologico", label: translate("¿Desarrollo tecnológico?"), labelPosition: "top" },
                     ]
                 },
                 {
@@ -117,8 +117,6 @@ export default class OfertasForm extends JetView {
                     cols: [
                         { view: "combo", id: "cmbResponsable", name: "responsableId", required: true, options: {}, label: translate("Rble Oferta"), labelPosition: "top" },
                         { view: "combo", id: "cmbUsuResponsableId", name: "usuResponsableId", required: true, options: {}, label: translate("Supervisado por"), labelPosition: "top" },
-                        { rows: [{ view: "checkbox", name: "laboral", options: {}, label: translate("Laboral"), labelPosition: "top", width: 100 }] },
-                        { rows: [{ view: "checkbox", name: "finanzas", options: {}, label: translate("Finanzas"), labelPosition: "top", width: 100 }] },
                     ]
                 },
                 {
@@ -131,6 +129,12 @@ export default class OfertasForm extends JetView {
                 },
                 {
                     cols: [
+                        {
+                            cols: [
+                                { rows: [{ view: "checkbox", name: "laboral", options: {}, label: translate("Laboral"), labelPosition: "top" }] },
+                                { rows: [{ view: "checkbox", name: "finanzas", options: {}, label: translate("Finanzas"), labelPosition: "top" }] },
+                            ]
+                        },
                         { view: "combo", id: "cmbServicio", name: "servicioId", required: true, options: {}, label: translate("Servicio"), labelPosition: "top" },
                     ]
                 },
