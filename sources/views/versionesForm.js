@@ -78,7 +78,7 @@ export default class VersionesForm extends JetView {
             versionesService.getVersion(usuarioService.getUsuarioCookie(), versionId)
                 .then((version) => {
                     version.fechaCambio = new Date(version.fechaCambio);
-                    version.fechaEntrega = new Date(version.fechaEntrega);
+                    if (version.fechaEntrega) version.fechaEntrega = new Date(version.fechaEntrega);
                     $$("frmVersiones").setValues(version);
                 })
                 .catch((err) => {

@@ -12,7 +12,7 @@ export const generalApi = {
         rows.forEach(function (e) {
             e.id = e[idColumn];
             datesColumns.forEach(function (dc) {
-                e[dc] = new Date(e[dc]);
+                if (e[dc]) e[dc] = new Date(e[dc]);
             });
             _rows2.push(e);
         });
