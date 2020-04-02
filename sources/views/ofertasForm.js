@@ -751,6 +751,7 @@ export default class OfertasForm extends JetView {
                         { gravity: 5 },
                         { view: "button", label: translate("Copiar Oferta"), click: this.copiarOferta },
                         { view: "button", label: translate("Cancelar"), click: this.cancel, hotkey: "esc" },
+                        { view: "button", label: translate("Guardar sin salir"), click: this.accept2 },
                         { view: "button", label: translate("Aceptar"), click: this.accept, type: "form" }
 
                     ]
@@ -916,7 +917,7 @@ export default class OfertasForm extends JetView {
         this.$scope.show('/top/ofertas');
     }
 
-    accept(sinsalir) {
+    accept() {
         const translate = this.$scope.app.getService("locale")._;
         if (!$$("frmOfertas").validate({ hidden: true })) {
             messageApi.errorMessage(translate("Debe rellenar los campos correctamente"));
@@ -963,7 +964,7 @@ export default class OfertasForm extends JetView {
                 console.log('DATOS A GRABAR', data);
                 ofertasService.putOferta(usuarioService.getUsuarioCookie(), data)
                     .then(() => {
-                        if (sinsalir) this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
+                        this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
                     })
                     .catch((err) => {
                         messageApi.errorMessageAjax(err);
@@ -983,7 +984,7 @@ export default class OfertasForm extends JetView {
                                     return ofertasService.putOferta(usuarioService.getUsuarioCookie(), data);
                                 })
                                 .then(() => {
-                                    if (sinsalir) this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
+                                    this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
                                 })
                                 .catch((err) => {
                                     messageApi.errorMessageAjax(err);
@@ -994,7 +995,7 @@ export default class OfertasForm extends JetView {
                                 return ofertasService.putOferta(usuarioService.getUsuarioCookie(), data);
                             })
                             .then(() => {
-                                if (sinsalir) this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
+                                this.$scope.show('/top/ofertas?ofertaId=' + data.ofertaId);
                             })
                             .catch((err) => {
                                 messageApi.errorMessageAjax(err);
@@ -1581,6 +1582,97 @@ export default class OfertasForm extends JetView {
         .catch((err) => {
             messageApi.errorMessageAjax(err);
         })
+    }
+
+    accept2() {
+        const translate = this.$scope.app.getService("locale")._;
+        if (!$$("frmOfertas").validate({ hidden: true })) {
+            messageApi.errorMessage(translate("Debe rellenar los campos correctamente"));
+            return;
+        }
+        var data = $$("frmOfertas").getValues();
+        data = ofertasService.cleanData(data);
+        if (!data.margenContribucion) {
+            data.margenContribucion = 0;
+        }
+        // Control de valores nulos en determinados casos 
+        if (!data.importeUTE) data.importeUTE = 0;
+        if (!data.margenContribucion) data.margenContribucion = 0;
+        if (!data.importeContribucion) data.importeContribucion = 0;
+        if (!data.importeInversion) data.importeInversion = 0;
+        if (data.estadoId === 5 && !data.razonPerdidaId) {
+            messageApi.errorMessage(translate("Debe incluir una razón de pérdida de la oferta"));
+            return;            
+        }
+        if (ofertaId == 0) {
+            data.ofertaId = 0;
+            data.version = 0;
+            data.fechaOferta = new Date();
+            ofertasService.postOferta(usuarioService.getUsuarioCookie(), data)
+                .then((result) => {
+                    console.log('Vuelve del post');
+                    data.ofertaId = result.ofertaId;
+                    return this.$scope.guardarVersionCero(data);
+                })
+                .then(() => {
+                    console.log('Vuelve de la creación de version');
+                    messageApi.normalMessage(translate("Oferta guardada"), "");
+                })
+                .catch((err) => {
+                    console.log('ERR POST', err);
+                    messageApi.errorMessageAjax(err);
+                });
+        } else {
+            if (!data.version) {
+                data.version = 0;
+            }
+            // Comprobar si ha habido cambios de importes para crear versión.
+            if (!this.$scope.comprobarCambioDeImportes()) {
+                console.log('DATOS A GRABAR', data);
+                ofertasService.putOferta(usuarioService.getUsuarioCookie(), data)
+                    .then(() => {
+                        messageApi.normalMessage(translate("Oferta guardada"), "");
+                    })
+                    .catch((err) => {
+                        messageApi.errorMessageAjax(err);
+                    });
+            } else {
+
+                webix.confirm({
+                    title: translate("Cambio de condiciones"),
+                    text: translate("Han cambiado las condiciones económicas de la oferta. ¿Quiere crear una versión con las nuevas condiciones?"),
+                    ok: translate("Crear versión"),
+                    cancel: translate("No crear"),
+                    callback: (action) => {
+                        if (action === true) {
+                            data.version = data.version + 1;
+                            this.$scope.guardarVersionNueva(data.version)
+                                .then(() => {
+                                    return ofertasService.putOferta(usuarioService.getUsuarioCookie(), data);
+                                })
+                                .then(() => {
+                                    messageApi.normalMessage(translate("Oferta guardada"), "");
+                                })
+                                .catch((err) => {
+                                    messageApi.errorMessageAjax(err);
+                                });
+                        } else {
+                            this.$scope.guardarVersionActual(data.version)
+                            .then(()=> {
+                                return ofertasService.putOferta(usuarioService.getUsuarioCookie(), data);
+                            })
+                            .then(() => {
+                                messageApi.normalMessage(translate("Oferta guardada"), "");
+                            })
+                            .catch((err) => {
+                                messageApi.errorMessageAjax(err);
+                            });
+                        }
+                    }
+                });
+            }
+
+        }
     }
 
 }

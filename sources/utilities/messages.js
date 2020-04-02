@@ -26,9 +26,9 @@ export const messageApi = {
             text: msg
         });
     },
-    normalMessage: (msg) => {
+    normalMessage: (msg, tit="INFORMATION") => {
         webix.alert({
-            title: "INFORMATION",
+            title: tit,
             text: msg
         });
     }
