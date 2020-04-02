@@ -822,6 +822,7 @@ export default class OfertasForm extends JetView {
                 $$("codigoOp").setValue($$("codigoOferta").getValue());
                 $$("conversionOportunidad").setValue(true);
                 $$("fechaConversionOportunidad").setValue(new Date());
+                this.getNumeroCodigoOferta();
             }
         });
         $$("importePresupuesto").attachEvent("onBlur", (nv, ov) => { this.calcImporte(); });
@@ -1247,7 +1248,6 @@ export default class OfertasForm extends JetView {
     getNumeroCodigoOferta() {
         parametrosService.getParametrosContadores(usuarioService.getUsuarioCookie())
             .then(data => {
-                console.log('DATA_NUMCOD', data);
                 _contador = data.numeroOferta;
                 $$("numeroOferta").setValue(data.numeroOferta);
                 $$("codigoOferta").setValue(data.codigoOferta);

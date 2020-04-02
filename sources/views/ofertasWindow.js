@@ -228,6 +228,7 @@ export default class OfertasWindow extends JetView {
                 $$("codigoOpW").setValue($$("codigoOfertaW").getValue());
                 $$("conversionOportunidadW").setValue(true);
                 $$("fechaConversionOportunidadW").setValue(new Date());
+                this.getNumeroCodigoOferta();
             }
         });
     }
