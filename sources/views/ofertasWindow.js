@@ -19,6 +19,7 @@ import { divisasService } from "../services/divisas_service"
 import { razonesPerdidaService } from "../services/razonesPerdida_service";
 
 var ofertaId = 0;
+var _contador;
 
 export default class OfertasWindow extends JetView {
     config() {
@@ -213,6 +214,22 @@ export default class OfertasWindow extends JetView {
         $$("cmbEmpresaW").attachEvent("onChange", (nv, ov) => {
             this.cambioEmpresa(nv);
         });  
+        $$("cmbFaseOfertaW").attachEvent("onChange", (nv, ov) => {
+            if (nv != 3 && ofertaId == 0) {
+                // Si en el alta de una oferta la pasan a algo que no sea oferta
+                // Entonces los códigos cambian
+                var c1 = "OP-" + _contador;
+                console.log('VAL', c1);
+                $$("numeroOfertaW").setValue(c1);
+                $$("codigoOfertaW").setValue(c1);
+            }
+            if (nv == 3 && ov == 1) {
+                // Si una oportunidad pasa a oferta grabamos los campos correspondientes
+                $$("codigoOpW").setValue($$("codigoOfertaW").getValue());
+                $$("conversionOportunidadW").setValue(true);
+                $$("fechaConversionOportunidadW").setValue(new Date());
+            }
+        });
     }
     showWindow() {
         let usu = usuarioService.getUsuarioCookie();
@@ -599,5 +616,18 @@ export default class OfertasWindow extends JetView {
         .catch((err) => {
             messageApi.errorMessageAjax(err);
         })
+    }
+
+    getNumeroCodigoOferta() {
+        parametrosService.getParametrosContadores(usuarioService.getUsuarioCookie())
+            .then(data => {
+                console.log('DATA_NUMCOD', data);
+                _contador = data.numeroOferta;
+                $$("numeroOfertaW").setValue(data.numeroOferta);
+                $$("codigoOfertaW").setValue(data.codigoOferta);
+            })
+            .catch((err) => {
+                messageApi.errorMessageAjax(err);
+            });
     }
 }

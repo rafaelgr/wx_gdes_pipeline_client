@@ -813,6 +813,7 @@ export default class OfertasForm extends JetView {
                 // Si en el alta de una oferta la pasan a algo que no sea oferta
                 // Entonces los códigos cambian
                 var c1 = "OP-" + _contador;
+                console.log('VAL', c1);
                 $$("numeroOferta").setValue(c1);
                 $$("codigoOferta").setValue(c1);
             }
