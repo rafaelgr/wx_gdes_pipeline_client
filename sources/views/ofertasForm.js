@@ -1610,16 +1610,13 @@ export default class OfertasForm extends JetView {
             data.fechaOferta = new Date();
             ofertasService.postOferta(usuarioService.getUsuarioCookie(), data)
                 .then((result) => {
-                    console.log('Vuelve del post');
                     data.ofertaId = result.ofertaId;
                     return this.$scope.guardarVersionCero(data);
                 })
                 .then(() => {
-                    console.log('Vuelve de la creación de version');
                     messageApi.normalMessage(translate("Oferta guardada"), "");
                 })
                 .catch((err) => {
-                    console.log('ERR POST', err);
                     messageApi.errorMessageAjax(err);
                 });
         } else {
