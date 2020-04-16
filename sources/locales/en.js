@@ -1,7 +1,7 @@
 export default {
     "INICIO": "INICIO",
     "ADMINISTRACIÓN": "ADMINISTRACIÓN",
-    "Parámetros": "Parámetros",
+    "Parámetros": "Parameters",
     "paginainicio": `
         <h1>Página inicial [EN]</h1>
         <p>Esta es la página inicial en español</p>
