@@ -1525,6 +1525,7 @@ export default class OfertasForm extends JetView {
                     data = ofertasService.cleanData(data);
                     data.ofertaId = 0;
                     data.fechaOferta = new Date();
+                    data.fechaCreacion = new Date();
                     console.log('DATA', data);
                     oferta = data;
                     return ofertasService.postOferta(usuarioService.getUsuarioCookie(), data);
