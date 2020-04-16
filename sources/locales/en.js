@@ -3,7 +3,7 @@ export default {
     "ADMINISTRACIÓN": "ADMINISTRACIÓN",
     "Parámetros": "Parámetros",
     "paginainicio": `
-        <h1>Página inicial</h1>
+        <h1>Página inicial [EN]</h1>
         <p>Esta es la página inicial en español</p>
     `,
     "Año en curso": "Año en curso",
