@@ -66,6 +66,10 @@ export default class Ubicaciones extends JetView {
             columns: [
                 { id: "ubicacionId", adjust: true, header: [translate("ID"), { content: "numberFilter" }], sort: "number" },
                 { id: "nombre", fillspace: true, header: [translate("Nombre ubicacion"), { content: "textFilter" }], sort: "string", editor: "text" },
+                { id: "latitud", adjust: true, header: [translate("Latitud"), { content: "numberFilter" }], sort: "int", css: { 'text-align': 'right' }, editor: "text" },
+                { id: "longitud", adjust: true, header: [translate("Longitud"), { content: "numberFilter" }], sort: "int", css: { 'text-align': 'right' }, editor: "text" },
+                // { id: "latitud", fillspace: true, header: [translate("Latitud"), { content: "textFilter" }], sort: "string", editor: "text" },
+                // { id: "longitud", fillspace: true, header: [translate("Longitud"), { content: "textFilter" }], sort: "string", editor: "text" },
                 { id: "actions", header: [{ text: translate("Acciones"), css: { "text-align": "center" } }], template: editButton + deleteButton, css: { "text-align": "center" } }
             ],
             onClick: {
@@ -82,9 +86,7 @@ export default class Ubicaciones extends JetView {
             editable: true,
             editaction: "dblclick",
             rules: {
-                "nombre": webix.rules.isNotEmpty,
-                "cod": webix.rules.isNotEmpty,
-                "paisId": webix.rules.isNotEmpty
+                "nombre": webix.rules.isNotEmpty
             },
             on: {
                 "onAfterEditStart": function (id) {
