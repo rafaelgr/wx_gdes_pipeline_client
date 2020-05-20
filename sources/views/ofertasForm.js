@@ -41,82 +41,263 @@ export default class OfertasForm extends JetView {
     config() {
         const translate = this.app.getService("locale")._;
         const cellDesc2 = {
-            padding: 5, css: "fondocelda",
+            padding: 10, margin: 10, css: "fondocelda",
             rows: [
                 { template: translate("DESCRIPTIVOS"), type: "section" },
                 {
-                    cols:[
-                        { view: "textarea", name: "descripcion", label: translate("Título del contrato"), required: true, labelPosition: "top", id: "firstField" },
+                    cols: [
+                        { view: "textarea", gravity: 4, name: "descripcion", label: translate("Título del contrato"), required: true, labelPosition: "top", id: "firstField" },
+                        { view: "text", gravity: 1, name: "periodo", label: translate("Periodo"), labelPosition: "top" },
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "text", gravity: 2, name: "nombreCorto", label: translate("Nombre resumen"), required: true, labelPosition: "top" },
                         {
+                            gravity: 1,
+                            cols: [
+                                { view: "combo", id: "cmbUbicacion", name: "ubicacionId", required: true, options: {}, label: translate("Ubicacion"), labelPosition: "top" },
+                                {
+                                    view: "button", type: "icon", icon: "wxi-plus", width: 37, align: "left",
+                                    tooltip: translate("Crear nueva ubicación"),
+                                    click: () => {
+                                        this.ubicacionesWindow.showWindow();
+                                    }
+                                }
+                            ]
+                        },
+                        { view: "text", gravity: 1, name: "paisUbicacion", label: translate("Pais Ubicación"), labelPosition: "top", required: true },
+                        { view: "text", gravity: 1, name: "cliente", label: translate("Cliente"), required: true, labelPosition: "top" },
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "combo", gravity: 4, id: "cmbServicio", name: "servicioId", required: true, options: {}, label: translate("Servicio"), labelPosition: "top" },
+                        { view: "text", gravity: 1, name: "numeroLicitacion", label: translate("Nr. Licitación"), labelPosition: "top" },
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "text", name: "implicaTecnologico", label: translate("¿Desarrollo tecnológico?"), labelPosition: "top" },
+                    ]
+                },
+                {
+                    css: "espaciador"
+                },
+                {
+                    cols: [
+                        {
+                            gravity: 3,
                             rows: [
                                 {
                                     cols: [
-                                        { view: "text", name: "nombreCorto", label: translate("Nombre resumen"), required: true, labelPosition: "top" },
-                                        { view: "text", name: "cliente", label: translate("Cliente"), required: true, labelPosition: "top" },
+                                        { view: "combo", id: "cmbFaseOferta", name: "faseOfertaId", required: true, options: {}, label: translate("Fase oferta"), labelPosition: "top" },
+                                        { view: "combo", id: "cmbEstado", name: "estadoId", required: true, options: {}, label: translate("Estado"), labelPosition: "top" },
+                                        { view: "combo", id: "cmbProbabilidad", name: "probabilidad", required: true, options: {}, label: translate("Probabilidad"), labelPosition: "top" },
                                     ]
                                 },
                                 {
                                     cols: [
-                                        {
-                                            cols: [
-                                                { view: "combo", id: "cmbUbicacion", name: "ubicacionId", required: true, options: {}, label: translate("Ubicacion"), labelPosition: "top" },
-                                                {
-                                                    view: "button", type: "icon", icon: "wxi-plus", width: 37, align: "left",
-                                                    tooltip: translate("Crear nueva ubicación"),
-                                                    click: () => {
-                                                        this.ubicacionesWindow.showWindow();
-                                                    }
-                                                }
-                                            ]
-                                        },
-                                        { view: "text", name: "paisUbicacion", label: translate("Pais Ubicación"), labelPosition: "top", required: true }
+                                        { view: "text", id: "numeroOferta", name: "numeroOferta", required: true, label: translate("Nr. Oferta"), labelPosition: "top" },
+                                        { view: "text", id: "codigoOferta", name: "codigoOferta", required: true, label: translate("Cod. Oferta"), labelPosition: "top" },
+                                        { view: "text", id: "codigoOp", name: "codigoOp", label: translate("Código Op."), labelPosition: "top" },
+                                    ]
+                                }
+                            ]
+                        },
+                        { view: "textarea", gravity: 2, name: "notasEstado", label: translate("Notas sobre versiones de la Oferta"), labelPosition: "top" }
+                    ]
+                },
+                {
+                    cols: [
+                        {
+                            gravity: 3,
+                            rows: [
+                                {
+                                    cols: [
+                                        { view: "combo", id: "cmbTipoOportunidad", name: "tipoOportunidadId", required: true, options: {}, label: translate("Tipo oportunidad"), labelPosition: "top" },
+                                        { view: "combo", id: "cmbTipoContrato", name: "tipoContratoId", required: true, options: {}, label: translate("Tipo contrato"), labelPosition: "top" },
+                                        { view: "checkbox", name: "relevante", options: {}, label: translate("Relevante"), labelPosition: "top" },
+                                    ]
+                                },
+                                {
+                                    cols: [
+                                        { view: "text", name: "numeroPedido", label: translate("Num. Pedido"), labelPosition: "top" },
+                                        { view: "combo", id: "cmbRazonPerdida", name: "razonPerdidaId", options: {}, label: translate("Razón pérdida"), labelPosition: "top" },
+                                        {}
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            gravity: 2,
+                            rows: [
+                                {
+                                    cols: [
+                                        { view: "checkbox", id: "conversionOportunidad", name: "conversionOportunidad", options: {}, label: translate("Convertido op"), labelPosition: "top" },
+                                        { view: "datepicker", id: "fechaConversionOportunidad", editable: true, minDate: new Date("2000-01-01"), name: "fechaConversionOportunidad", label: translate("Fecha conversión"), labelPosition: "top" }
+                                    ]
+                                },
+                                {
+                                    cols: [
+                                        { view: "checkbox", id: "ofertaSingular", name: "ofertaSingular", options: {}, label: translate("Oferta singular"), labelPosition: "top" },
+                                        { view: "textarea", id: "autorizaciones", name: "autorizaciones", options: {}, label: translate("Autorizaciones"), labelPosition: "top" }
                                     ]
                                 }
                             ]
                         }
                     ]
                 },
+                {}
+            ]
+        };
+        const cellPlanificacion = {
+            padding: 10, margin: 10, css: "fondocelda",
+            rows: [
+                { template: translate("PLANIFICACION"), type: "section" },
                 {
                     cols: [
-                        { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaEntrega", required: true, label: translate("F. Entrega"), labelPosition: "top"},
-                        { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaAdjudicacion", required: true, label: translate("F. Adjudicación"), labelPosition: "top" },
-                        { view: "datepicker", editable: true, minDate: new Date("2000-01-01"), name: "fechaInicioContrato", required: true, label: translate("F. Inicio"), labelPosition: "top" },
-                        { view: "datepicker", editable: true, minDate: new Date("2000-01-01"), name: "fechaFinContrato", required: true, label: translate("F. Fin"), labelPosition: "top" },
+                        {
+                            gravity: 3,
+                            rows: [
+                                {
+                                    cols: [
+                                        { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaEntrega", required: true, label: translate("F. Entrega"), labelPosition: "top"},
+                                        { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaAdjudicacion", required: true, label: translate("F. Adjudicación"), labelPosition: "top" },
+                                        {}
+                                    ]
+                                },
+                                {
+                                    cols: [
+                                        { view: "datepicker", editable: true, minDate: new Date("2000-01-01"), name: "fechaInicioContrato", required: true, label: translate("F. Inicio"), labelPosition: "top" },
+                                        { view: "datepicker", editable: true, minDate: new Date("2000-01-01"), name: "fechaFinContrato", required: true, label: translate("F. Fin"), labelPosition: "top" },
+                                        { view: "text", name: "duracion", label: translate("Duración"), required: true, labelPosition: "top" },
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            gravity: 2,
+                            rows: [
+                                { view: "textarea", name: "notasPlanning", label: translate("Notas Planning"), labelPosition: "top" },
+                            ]
+                        }
                     ]
-                },                
-                {
-                    cols: [
-                        { view: "text", name: "duracion", label: translate("Duración"), required: true, labelPosition: "top" },
-                        { view: "text", name: "periodo", label: translate("Periodo"), labelPosition: "top" },
-                        { view: "text", name: "numeroLicitacion", label: translate("Nr. Licitación"), labelPosition: "top" },
-                        { view: "text", name: "implicaTecnologico", label: translate("¿Desarrollo tecnológico?"), labelPosition: "top" },
-                    ]
-                },
-                {
-                    cols: [
-                        { view: "textarea", name: "notasPlanning", label: translate("Notas Planning"), labelPosition: "top" },
-                        { view: "textarea", name: "puntosRelevantes", label: translate("Equipo y organización"), labelPosition: "top" },
+                }
+                // {
+                //     cols: [
+                //     ]
+                // },
+                // {
+                //     cols: [
 
+                //     ]
+                // },
+                // {
+                //     cols: [
+                //         {
+                //             cols: [
+
+                //             ]
+                //         },
+                        
+                //     ]
+                // }
+            ]
+        };
+        const cellEconomico2 = {
+            padding: 10, margin: 10, css: "fondocelda",
+            rows: [
+                { template: translate("ECONOMICOS"), type: "section" },
+                {
+                    cols: [
+                        { view: "combo", id: "cmbDivisa", name: "divisaId", options: {}, label: translate("Divisa"), labelPosition: "top" },
+                        { view: "text", id: "multiplicador", name: "multiplicador", label: translate("Factor (1€ =)"), labelPosition: "top", format: "1.111,00" },
                     ]
                 },
                 {
                     cols: [
-                        { view: "combo", id: "cmbEstado", name: "estadoId", required: true, options: {}, label: translate("Estado"), labelPosition: "top" },
-                        { view: "text", name: "numeroPedido", label: translate("Num. Pedido"), labelPosition: "top" },
-                        { view: "combo", id: "cmbRazonPerdida", name: "razonPerdidaId", options: {}, label: translate("Razón pérdida"), labelPosition: "top" },
-                        { view: "text", name: "uteTXT", label: translate("UTE (% - Nombre)"), labelPosition: "top" }
+                        {},
+                        { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), id: "fechaDivisa", name: "fechaDivisa", label: translate("Fecha divisa"), labelPosition: "top" },
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "text", id: "importePresupuestoDivisa", name: "importePresupuestoDivisa", required: true, label: translate("Importe GDES"), labelPosition: "top", format: "1.111,00" },
+                        { view: "text", id: "importePresupuesto", name: "importePresupuesto", required: true, label: translate(""), labelPosition: "top", format: "1.111,00 €", disabled: true },
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "text", id: "margenContribucion", name: "margenContribucion", required: true, label: translate("Margen contribución"), labelPosition: "top", format: "1.111,00 %" },
+                        {}
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "text", id: "importeContribucionDivisa", name: "importeContribucionDivisa", label: translate("Importe margen"), labelPosition: "top", format: "1.111,00", disabled: true },
+                        { view: "text", id: "importeContribucion", name: "importeContribucion", label: translate(""), labelPosition: "top", format: "1.111,00 €", disabled: true },
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "textarea", name: "consideracionesEconomicas", label: translate("Consideraciones incluidas en la oferta económica"), labelPosition: "top" },
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "text", id: "importeInversionDivisa", name: "importeInversionDivisa", label: translate("Inversión (Capex)"), labelPosition: "top", format: "1.111,00" },
+                        { view: "text", id: "importeInversion", name: "importeInversion", label: translate(""), labelPosition: "top", format: "1.111,00 €", disabled: true },
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "text", id: "tasaRetorno", name: "tasaRetorno", label: translate("Tasa retorno"), labelPosition: "top", format: "1.111,00" },
+                        { view: "text", id: "payBack", name: "payBack", label: translate("Pay-back"), labelPosition: "top", format: "1.111,00" },
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "textarea", name: "descripcionInversion", label: translate("Descripción inversión"), labelPosition: "top" },
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "text", name: "uteTXT", label: translate("UTE (% - Nombre)"), labelPosition: "top" },
+                        {}
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "text", id: "importeUTEDivisa", name: "importeUTEDivisa", label: translate("Importe UTE"), labelPosition: "top", format: "1.111,00" },
+                        { view: "text", id: "importeUTE", name: "importeUTE", label: translate(""), labelPosition: "top", format: "1.111,00 €", disabled: true },
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "text", id: "importeTotalDivisa", name: "importeTotalDivisa", label: translate("Importe Total"), labelPosition: "top", format: "1.111,00", disabled: true },
+                        { view: "text", id: "importeTotal", name: "importeTotal", label: translate(""), labelPosition: "top", format: "1.111,00 €", disabled: true },
+                    ]
+                },
+                {
+                    cols: [
+                        { view: "text", id: "importeMaxLicitacionDivisa", name: "importeMaxLicitacionDivisa", label: translate("Importe Max Licitacion"), labelPosition: "top", format: "1.111,00" },
+                        { view: "text", id: "importeMaxLicitacion", name: "importeMaxLicitacion", label: translate(""), labelPosition: "top", format: "1.111,00 €", disabled: true },
                     ]
                 }
             ]
         };
-        const cellOtros2 = {
-            padding: 5, css: "fondocelda",
+        const cellGeneral = {
+            padding: 10, matgin: 10, css: "fondocelda",
             rows: [
-                { template: translate("OTROS DATOS (1)"), type: "section" },
+                { template: translate("GENERAL"), type: "section" },
                 {
                     cols: [
+                        { view: "combo", id: "cmbUsuario", name: "usuarioId", required: true, options: {}, label: translate("Usuario"), labelPosition: "top" },
                         { view: "combo", id: "cmbResponsable", name: "responsableId", required: true, options: {}, label: translate("Rble Oferta"), labelPosition: "top" },
                         { view: "combo", id: "cmbUsuResponsableId", name: "usuResponsableId", required: true, options: {}, label: translate("Supervisado por"), labelPosition: "top" },
+                        {},
+                        {}
                     ]
                 },
                 {
@@ -124,478 +305,113 @@ export default class OfertasForm extends JetView {
                         { view: "combo", id: "cmbArea", name: "areaId", required: true, options: {}, label: translate("Area"), labelPosition: "top" },
                         { view: "combo", id: "cmbUnidadNegocio", name: "unidadNegocioId", required: true, options: {}, label: translate("Unidad negocio"), labelPosition: "top" },
                         { view: "combo", id: "cmbEmpresa", name: "empresaId", required: true, options: {}, label: translate("Empresa"), labelPosition: "top" },
-                        { view: "combo", id: "cmbPais", name: "paisId", required: true, options: {}, label: translate("Pais"), labelPosition: "top" }
+                        { view: "combo", id: "cmbPais", name: "paisId", required: true, options: {}, label: translate("Pais"), labelPosition: "top" },
+                        { view: "datepicker",id:"fechaCreacion", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaCreacion", label: translate("Fecha creación"), labelPosition: "top"},
+                    ]
+                }
+                // {
+                //     cols: [
+
+                        
+                //     ]
+                // },
+                // {
+                //     cols: [
+                //         
+                        
+
+                //     ]
+                // },
+                // 
+            ]
+        };
+        const tabDatosOportunidad = {
+            header: translate("Datos oportunidad"),
+            body: {
+                cols: [
+                    {
+                        gravity: 5,
+                        rows: [
+                            cellDesc2,
+                            cellPlanificacion,
+                            cellGeneral
+                        ]
+                    },
+                    {
+                        gravity: 2,
+                        rows: [
+                            cellEconomico2
+                        ]
+                    }
+                ]
+            }
+        };
+
+        const cellDatosComplementarios2 = {
+            padding: 10, margin: 10, css: "fondocelda",
+            cols: [
+                {
+                    rows: [
+                        { view: "textarea", name: "alcance", label: translate("Alcance de los trabajos (Descripción completa)"), labelPosition: "top", height:100 },
+                        { view: "textarea", name: "sinergias", label: translate("Sinergias con otros contratos"), labelPosition: "top" },
+                        { view: "textarea", name: "estrategiaGDES", label: translate("Estrategia tomada en la Oferta"), labelPosition: "top" },
+                        { view: "textarea", name: "diferencialGDES", label: translate("Valor añadido GDES"), labelPosition: "top" },
+                        { view: "textarea", id: "documentosEspeciales", name: "documentosEspeciales", label: translate("Documentos aplicables"), labelPosition: "top" }
                     ]
                 },
                 {
-                    cols: [
+                    rows: [
+                        { view: "textarea", name: "riesgos", label: translate("Riesgos y mitigaciones"), labelPosition: "top" },
+                        { view: "textarea", name: "puntosRelevantes", label: translate("Equipo y organización"), labelPosition: "top" },
+                        { view: "textarea", name: "garantiasEspecialesTXT", label: translate("Datos Laborales"), labelPosition: "top" },
+                    ]
+                },
+                {
+                    rows: [
+                        { view: "text", name: "competidores", label: translate("Competidores"), labelPosition: "top" },
+                        {
+                            cols: [
+                                { view: "text", name: "principalCompetidor", label: translate("Principal Competidor"), labelPosition: "top" },
+                                {}
+                            ]
+                        },
+                        {
+                            cols: [
+                                { view: "text", name: "proveedorActual", label: translate("Proveedor Actual"), labelPosition: "top" },
+                                {}
+                            ]
+                        },
+                        {
+                            cols: [
+                                { view: "textarea", name: "datosComerciales", label: translate("Información comercial"), labelPosition: "top", height:100  },
+                            ]
+                        },
+                        {
+                            cols: [
+                                { view: "textarea", name: "criteriosEvaluacion", label: translate("Criterios de Evaluación"), labelPosition: "top", height:100  },
+                            ]
+                        },
+                        {
+                            cols: [
+                                { view: "textarea", name: "condicionesEstandarTXT", label: translate("Datos contractuales (Penalizaciones, Garantías, Seguros, etc)"), labelPosition: "top", height:100  },
+                            ]
+                        },
                         {
                             cols: [
                                 { rows: [{ view: "checkbox", name: "laboral", options: {}, label: translate("Laboral"), labelPosition: "top" }] },
                                 { rows: [{ view: "checkbox", name: "finanzas", options: {}, label: translate("Finanzas"), labelPosition: "top" }] },
                             ]
                         },
-                        { view: "combo", id: "cmbServicio", name: "servicioId", required: true, options: {}, label: translate("Servicio"), labelPosition: "top" },
-                    ]
-                },
-                {
-                    cols: [
-                        { view: "text", id: "numeroOferta", name: "numeroOferta", required: true, label: translate("Nr. Oferta"), labelPosition: "top" },
-                        { view: "text", id: "codigoOferta", name: "codigoOferta", required: true, label: translate("Cod. Oferta"), labelPosition: "top" },
-                        { view: "text", id: "codigoOp", name: "codigoOp", label: translate("Código Op."), labelPosition: "top" },
-                        { view: "checkbox", id: "conversionOportunidad", name: "conversionOportunidad", options: {}, label: translate("Convertido op"), labelPosition: "top" },
-                    ]
-                },
-                {
-                    cols: [
-                        { view: "combo", id: "cmbProbabilidad", name: "probabilidad", required: true, options: {}, label: translate("Probabilidad"), labelPosition: "top" },
-                        { view: "combo", id: "cmbFaseOferta", name: "faseOfertaId", required: true, options: {}, label: translate("Fase oferta"), labelPosition: "top" },
-                        { view: "combo", id: "cmbTipoOportunidad", name: "tipoOportunidadId", required: true, options: {}, label: translate("Tipo oportunidad"), labelPosition: "top" },
-                        { view: "combo", id: "cmbTipoContrato", name: "tipoContratoId", required: true, options: {}, label: translate("Tipo contrato"), labelPosition: "top" }
-
-                    ]
-                }
-            ]
-        };
-        const cellEconomico2 = {
-            padding: 5, css: "fondocelda",
-            rows: [
-                { template: translate("ECONOMICOS"), type: "section" },
-                {
-                    cols: [
-                        { view: "combo", id: "cmbDivisa", name: "divisaId", options: {}, label: translate("Divisa"), labelPosition: "top" },
-                        { view: "text", id: "multiplicador", name: "multiplicador", label: translate("Factor (1€ =)"), labelPosition: "top", format: "1.111,00" },
-                        { view: "datepicker", editable: true, minDate: new Date(new Date("2000-01-01")), id: "fechaDivisa", name: "fechaDivisa", label: translate("Fecha divisa"), labelPosition: "top" },
-                    ]
-                },
-                {
-                    cols: [
-                        { view: "text", id: "importePresupuestoDivisa", name: "importePresupuestoDivisa", required: true, label: translate("Importe GDES"), labelPosition: "top", format: "1.111,00" },
-                        { view: "text", id: "margenContribucion", name: "margenContribucion", required: true, label: translate("Margen contribución"), labelPosition: "top", format: "1.111,00 %" },
-                        { view: "text", id: "importeContribucionDivisa", name: "importeContribucionDivisa", label: translate("Importe margen"), labelPosition: "top", format: "1.111,00", disabled: true },
-                    ]
-                },
-                {
-                    cols: [
-                        { view: "text", id: "importePresupuesto", name: "importePresupuesto", required: true, label: translate(""), labelPosition: "top", format: "1.111,00 €", disabled: true },
-                        {},
-                        { view: "text", id: "importeContribucion", name: "importeContribucion", label: translate(""), labelPosition: "top", format: "1.111,00 €", disabled: true },
-                    ]
-                },
-                {
-                    cols: [
-                        { view: "text", id: "importeUTEDivisa", name: "importeUTEDivisa", label: translate("Importe UTE"), labelPosition: "top", format: "1.111,00" },
-                        { view: "text", id: "importeTotalDivisa", name: "importeTotalDivisa", label: translate("Importe Total"), labelPosition: "top", format: "1.111,00", disabled: true },
-                        { view: "text", id: "importeMaxLicitacionDivisa", name: "importeMaxLicitacionDivisa", label: translate("Importe Max Licitacion"), labelPosition: "top", format: "1.111,00" },
-
-                    ]
-                },
-                {
-                    cols: [
-                        { view: "text", id: "importeUTE", name: "importeUTE", label: translate(""), labelPosition: "top", format: "1.111,00 €", disabled: true },
-                        { view: "text", id: "importeTotal", name: "importeTotal", label: translate(""), labelPosition: "top", format: "1.111,00 €", disabled: true },
-                        { view: "text", id: "importeMaxLicitacion", name: "importeMaxLicitacion", label: translate(""), labelPosition: "top", format: "1.111,00 €", disabled: true },
-                    ]
-                },
-                {
-                    cols: [
-                        { view: "text", id: "importeInversionDivisa", name: "importeInversionDivisa", label: translate("Inversión (Capex)"), labelPosition: "top", format: "1.111,00" },
-                        { view: "text", id: "tasaRetorno", name: "tasaRetorno", label: translate("Tasa retorno"), labelPosition: "top", format: "1.111,00" },
-                        { view: "text", id: "payBack", name: "payBack", label: translate("Pay-back"), labelPosition: "top", format: "1.111,00" },
-                    ]
-                },
-                {
-                    cols: [
-                        { view: "text", id: "importeInversion", name: "importeInversion", label: translate(""), labelPosition: "top", format: "1.111,00 €", disabled: true },
-                        {},
-                        {}
-                    ]
-                },
-                {
-                    cols: [
-                        { view: "textarea", name: "descripcionInversion", label: translate("Descripción inversión"), labelPosition: "top" },
-                        { view: "textarea", name: "notasEstado", label: translate("Notas sobre versiones de la Oferta"), labelPosition: "top" }
-                    ]
-                }
-            ]
-        };
-        const cellOtros22 = {
-            padding: 5, css: "fondocelda",
-            rows: [
-                { template: translate("OTROS DATOS (2)"), type: "section" },
-                {
-                    cols: [
-                        { view: "checkbox", name: "relevante", options: {}, label: translate("Relevante"), labelPosition: "top" },
-                        { view: "checkbox", id: "ofertaSingular", name: "ofertaSingular", options: {}, label: translate("Oferta singular"), labelPosition: "top" },
-                        { view: "textarea", id: "autorizaciones", name: "autorizaciones", options: {}, label: translate("Autorizaciones"), labelPosition: "top" }
-                    ]
-                },
-                {
-                    cols: [
-                        { view: "combo", id: "cmbUsuario", name: "usuarioId", required: true, options: {}, label: translate("Usuario"), labelPosition: "top" },
-                        { view: "datepicker",id:"fechaCreacion", editable: true, minDate: new Date(new Date("2000-01-01")), name: "fechaCreacion", label: translate("Fecha creación"), labelPosition: "top"},
-                        { view: "datepicker", id: "fechaConversionOportunidad", editable: true, minDate: new Date("2000-01-01"), name: "fechaConversionOportunidad", label: translate("Fecha conversión"), labelPosition: "top" }
-
-                    ]
-                },
-                { view: "textarea", id: "documentosEspeciales", name: "documentosEspeciales", label: translate("Documentos aplicables"), labelPosition: "top" }
-            ]
-        };
-        const cellDescriptivos = {
-            padding: 5, css: "fondocelda",
-            rows: [
-                {
-                   
-                },
-                {
-                    cols: [
-                        { view: "combo", id: "cmbUbicacion", name: "ubicacionId", required: true, options: {}, label: translate("Ubicacion"), labelPosition: "top" },
-                        {
-                            view: "button", type: "icon", icon: "wxi-plus", width: 37, align: "left",
-                            tooltip: translate("Crear nueva ubicación"),
-                            click: () => {
-                                this.ubicacionesWindow.showWindow();
-                            }
-                        }
-                    ]
-                },
-                {
-                    cols: [
-                        { view: "text", name: "numeroLicitacion", label: translate("Nr. Licitación"), labelPosition: "top" },
-
-                    ]
-                },
-                {
-                    cols: [
-                        {}
-                    ]
-                },
-                {
-                    cols: [
-                    ]
-                },
-                
-            ]
-        };
-        const cellGenerales = {
-            padding: 5, css: "fondocelda",
-            rows: [
-                { template: translate("GENERALES"), type: "section" },
-                {
-                    cols: [
-                        
-                        {
-
-                        }
-                    ]
-                },
-                {
-                    cols: [
-                        {}
-                    ]
-                },
-                {},
-                {
-                    cols: [
-                        { view: "text", name: "ofertaId", label: translate("ID"), labelPosition: "top", readonly: true },
-                    ]
-                },
-                {
-                    cols: [
-                        {}
-                    ]
-                },
-                {
-                    cols: [
-                        {
-                            rows: [{}]
-                        },
-                        {
-                            rows: [{}]
-                        },
-                        {
-                            rows: [{}]
-                        },
-                    ]
-                },
-                {
-                    cols: [
-                        
-                        {}
-
-                    ]
-                }
-            ]
-        };
-        const cellOtrosDatos = {
-            padding: 5, css: "fondocelda",
-            rows: [
-                { template: translate("OTROS DATOS"), type: "section" },
-                {
-                    cols: [
-                        { rows: [{ view: "checkbox", name: "subrogacionSN", options: {}, label: translate("Subrogación"), labelPosition: "top", width: 150 }] },
-                        { rows: [{ view: "textarea", name: "subrogacionTXT", label: translate("Comentario subrogación"), labelPosition: "top" }] },
-                        { rows: [{ view: "text", name: "subrogacionNum", label: translate("Cantidad personal"), labelPosition: "top", width: 150, format: "1.111" }] }
-                    ]
-                },
-                {
-                    cols: [
-                        { rows: [{ view: "checkbox", name: "uteSN", options: {}, label: translate("UTE"), labelPosition: "top", width: 150 }] },
-                        { rows: [] },
-                        { rows: [{ view: "text", name: "gdesPor", label: translate("GDES Porcentaje"), labelPosition: "top", width: 150 }] }
-                    ]
-                },
-                {
-                    cols: [
-                        { rows: [{ view: "checkbox", name: "subcontrataSN", options: {}, label: translate("Reclutamiento"), labelPosition: "top", width: 150 }] },
-                        { rows: [{ view: "textarea", name: "subcontrataTXT", label: translate("Perfil y cantidad a reclutar"), labelPosition: "top" }] },
-                    ]
-                }
-            ]
-        };
-        const cellEstado = {
-            padding: 5, css: "fondocelda",
-            rows: [
-                { template: translate("ESTADO"), type: "section" },
-                {
-                    cols: [
-                        
-                        {}
-                    ]
-                },
-                {
-                    cols: [
-                        {}
-                    ]
-                },
-                
-            ]
-        };
-        const tabDatosOportunidad = {
-            header: translate("Datos oportunidad"),
-            body: {
-                rows: [
-                    {
-                        cols: [
-                            cellDesc2,
-                            cellEconomico2
-                        ]
-                    },
-                    {
-                        cols: [
-                            cellOtros2,
-                            cellOtros22
-                        ]
-                    }
-                ]
-            }
-        };
-        const cellBasicosEuros = {
-            padding: 5, css: "fondocelda",
-            rows: [
-                { template: translate("BASICOS (€)"), type: "section" },
-                {
-                    rows: [
-                        {},
-                        {
-                            cols: [
-                                {}
-                            ]
-                        },
-                        {
-                            cols: [
-                                {}
-                            ]
-                        },
-                        {
-                            cols: [
-                                { view: "text", id: "importeAnual", name: "importeAnual", label: translate("Importe anual"), labelPosition: "top", format: "1.111,00 €" },
-                                { view: "text", id: "importePrimerAno", name: "importePrimerAno", label: translate("Importe año en curso"), labelPosition: "top", format: "1.111,00 €" },
-                                {}
-                            ]
-                        },
                         {
                             cols: [
                                 {},
-                                {}
+                                { view: "datepicker", editable: true, minDate: new Date("2000-01-01"), name: "fechaComite", label: translate("Fecha Comite Oferta"), labelPosition: "top", width:150 },
                             ]
                         }
-                    ]
-                }
-            ]
-        };
-        const cellBasicosOtraDivisa = {
-            padding: 5, css: "fondocelda",
-            rows: [
-                { template: translate("BASICOS (OTRA DIVISA)"), type: "section" },
-                {
-                    rows: [
-                        {
-                            cols: [
-                                {},
-                            ]
-                        },
-                        {
-                            cols: [
-                                {}
-                            ]
-                        },
-                        {
-                            cols: [
-                                {},
-                                {}
-                            ]
-                        },
-                        {
-                            cols: [
-                                { view: "text", id: "importeAnualDivisa", name: "importeAnualDivisa", label: translate("Importe anual (DIVISA)"), labelPosition: "top", format: "1.111,00" },
-                                { view: "text", id: "importePrimerAnoDivisa", name: "importePrimerAnoDivisa", label: translate("Importe año en curso (DIVISA)"), labelPosition: "top", format: "1.111,00" },
-                                {}
-                            ]
-                        },
-                        {
-                            cols: [
-                                {},
-                                {}
-                            ]
-                        }
-                    ]
-                }
-            ]
-        };
-        const cellOtrosEconomicos = {
-            padding: 5, css: "fondocelda",
-            rows: [
-                { template: translate("OTROS DATOS"), type: "section" },
-                {
-                    cols: [
-                        {
-                            rows: [
-                                { view: "textarea", name: "condicionesPago", label: translate("Condiciones de pago"), labelPosition: "top" }
-                            ]
-                        },
-                        {
-                            rows: [
-                                {}
-                            ]
-                        }
-                    ]
-                }
-            ]
-        };
-        const tabDatosEconomicos = {
-            header: translate("Datos económicos"),
-            body: {
-                rows: [
-                    {
-                        cols: [
-                            cellBasicosEuros,
-                            cellBasicosOtraDivisa
-                        ]
-
-                    },
-                    cellOtrosEconomicos
-                ]
-            }
-        };
-        const cellDatosComplementarios2 = {
-            padding: 5, css: "fondocelda",
-            rows: [
-                {
-                    cols: [
-                        { view: "textarea", name: "alcance", label: translate("Alcance de los trabajos (Descripción completa)"), labelPosition: "top", height:100 },
-                        { view: "textarea", name: "riesgos", label: translate("Riesgos y mitigaciones"), labelPosition: "top" },
-                        { view: "textarea", name: "condicionesEstandarTXT", label: translate("Datos contractuales (Penalizaciones, Garantías, Seguros, etc)"), labelPosition: "top" },
-
-                    ]
-                },
-                {
-                    cols: [
-                        { view: "textarea", name: "criteriosEvaluacion", label: translate("Criterios de Evaluación"), labelPosition: "top", height:100  },
-                        { view: "textarea", name: "estrategiaGDES", label: translate("Estrategia tomada en la Oferta"), labelPosition: "top" },
-                        { view: "textarea", name: "garantiasEspecialesTXT", label: translate("Datos Laborales"), labelPosition: "top" },
-                    ]
-                },
-                {
-                    cols: [
-                        { view: "textarea", name: "datosComerciales", label: translate("Información comercial"), labelPosition: "top", height:100  },
-                        { view: "textarea", name: "diferencialGDES", label: translate("Valor añadido GDES"), labelPosition: "top" },
-                        { view: "textarea", name: "consideracionesEconomicas", label: translate("Consideraciones incluidas en la oferta económica"), labelPosition: "top" }
-
-                    ]
-                },
-                {
-                    cols: [
-                        {
-                            rows: [
-                                {
-                                    cols: [
-                                        { view: "text", name: "proveedorActual", label: translate("Proveedor Actual"), labelPosition: "top" },
-                                        { view: "text", name: "principalCompetidor", label: translate("Principal Competidor"), labelPosition: "top" }
-                                    ]
-                                },
-                                { view: "text", name: "competidores", label: translate("Competidores"), labelPosition: "top" },
-                            ]
-                        },
-                        { view: "textarea", name: "sinergias", label: translate("Sinergias con otros contratos"), labelPosition: "top" },
-                        {
-                            rows: [
-                                {
-                                    cols: [
-                                        {
-        
-                                        },
-                                        { view: "datepicker", editable: true, minDate: new Date("2000-01-01"), name: "fechaComite", label: translate("Fecha Comite Oferta"), labelPosition: "top", width:150 },
-                                    ]
-        
-                                }
-                            ]
-                        },
-                        
                     ]
                 }
             ]
         }
-        const cellAlcanceDeLosTrabajos = {
-            padding: 5, css: "fondocelda",
-            rows: [
-                { template: translate("ALCANCE DE LOS TRABAJOS"), type: "section" },
-                
-            ]
-        };
-        const cellCuestionesDeContrato = {
-            padding: 5, css: "fondocelda",
-            rows: [
-                { template: translate("CUESTIONES DE CONTRATO"), type: "section" },
-                
-                
-                { view: "textarea", name: "penalizaciones", label: translate("Penalizaciones"), labelPosition: "top" },
-            ]
-        };
-        const cellConcurrenciaYMercado = {
-            padding: 5, css: "fondocelda",
-            rows: [
-                { template: translate("CONCURRENCIA Y SITUACIÓN DE MERCADO"), type: "section" },
-                {
-                    cols: [
-                        {}
-                    ]
-                },
-                {
-                    cols: [
-                        {}
-                    ]
-                },
-                
-
-            ]
-        };
-        const cellValoresYEstrategia = {
-            padding: 5, css: "fondocelda",
-            rows: [
-                { template: translate("GDES VALORES Y ESTRATEGIA"), type: "section" },
-            ]
-        };
         const tabDatosComplementarios = {
             header: translate("Datos complementarios"),
             body: {
@@ -739,7 +555,6 @@ export default class OfertasForm extends JetView {
                     multiview: { keepViews: true },
                     cells: [
                         tabDatosOportunidad,
-                        // tabDatosEconomicos,
                         tabDatosComplementarios,
                         tabDatosFinancieros,
                         tabAnotaciones,
