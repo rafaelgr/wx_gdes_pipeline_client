@@ -352,7 +352,7 @@ export default class OfertasForm extends JetView {
             cols: [
                 {
                     rows: [
-                        { view: "textarea", name: "alcance", label: translate("Alcance de los trabajos (Descripción completa)"), labelPosition: "top", height:100 },
+                        { view: "textarea", name: "alcance", label: translate("Alcance de los trabajos (Descripción completa)"), labelPosition: "top", height:400 },
                         { view: "textarea", name: "sinergias", label: translate("Sinergias con otros contratos"), labelPosition: "top" },
                         { view: "textarea", name: "estrategiaGDES", label: translate("Estrategia tomada en la Oferta"), labelPosition: "top" },
                         { view: "textarea", name: "diferencialGDES", label: translate("Valor añadido GDES"), labelPosition: "top" },
@@ -361,14 +361,14 @@ export default class OfertasForm extends JetView {
                 },
                 {
                     rows: [
-                        { view: "textarea", name: "riesgos", label: translate("Riesgos y mitigaciones"), labelPosition: "top" },
+                        { view: "textarea", name: "riesgos", label: translate("Riesgos y mitigaciones"), labelPosition: "top", height:400  },
                         { view: "textarea", name: "puntosRelevantes", label: translate("Equipo y organización"), labelPosition: "top" },
                         { view: "textarea", name: "garantiasEspecialesTXT", label: translate("Datos Laborales"), labelPosition: "top" },
                     ]
                 },
                 {
                     rows: [
-                        { view: "text", name: "competidores", label: translate("Competidores"), labelPosition: "top" },
+                        { view: "text", name: "competidores", label: translate("Competidores"), labelPosition: "top", height:85 },
                         {
                             cols: [
                                 { view: "text", name: "principalCompetidor", label: translate("Principal Competidor"), labelPosition: "top" },
