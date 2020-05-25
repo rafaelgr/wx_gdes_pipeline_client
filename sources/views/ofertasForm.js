@@ -252,7 +252,7 @@ export default class OfertasForm extends JetView {
                 },
                 {
                     cols: [
-                        { view: "text", id: "tasaRetorno", name: "tasaRetorno", label: translate("Tasa retorno"), labelPosition: "top", format: "1.111,00" },
+                        { view: "text", id: "tasaRetorno", name: "tasaRetorno", label: translate("Tasa retorno"), labelPosition: "top", format: "1.111,00 %" },
                         { view: "text", id: "payBack", name: "payBack", label: translate("Pay-back"), labelPosition: "top", format: "1.111,00" },
                     ]
                 },
