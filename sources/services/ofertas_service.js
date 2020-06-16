@@ -1,4 +1,5 @@
 import { devConfig } from "../config/config";
+import moment from 'moment';
 export const ofertasService = {
     getOfertas: (usu) => {
         return new webix.promise((success, fail) => {
@@ -168,6 +169,17 @@ export const ofertasService = {
         Object.keys(data).forEach((k) => {
             if (data[k] == "") data[k] = null;
         });
+        return data;
+    },
+    corregirFechas: (data) => {
+        console.log("Fechas:", data.fechaInicioContrato, data.fechaFinContrato, data.fechaAdjudicacion, data.fechaOferta);
+        if (data.fechaInicioContrato) data.fechaInicioContrato = moment(data.fechaInicioContrato).format('YYYY-MM-DD');
+        if (data.fechaFinContrato) data.fechaFinContrato = moment(data.fechaFinContrato).format('YYYY-MM-DD');
+        if (data.fechaAdjudicacion) data.fechaAdjudicacion = moment(data.fechaAdjudicacion).format('YYYY-MM-DD');
+        if (data.fechaOferta) data.fechaOferta = moment(data.fechaOferta).format('YYYY-MM-DD');
+        if (data.fechaUltimoEstado) data.fechaUltimoEstado = moment(data.fechaUltimoEstado).format('YYYY-MM-DD');
+        if (data.fechaDivisa) data.fechaDivisa = moment(data.fechaDivisa).format('YYYY-MM-DD');
+        if (data.fechaCreacion) data.fechaCreacion = moment(data.fechaCreacion).format('YYYY-MM-DD');
         return data;
     }
 }

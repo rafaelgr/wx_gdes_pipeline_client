@@ -207,7 +207,7 @@ export default class Ofertas extends JetView {
                 { id: "cliente", header: [translate("Cliente"), { content: "textFilter" }], sort: "string", editor: "text", width: 150 },
                 { id: "nombreCorto", header: [translate("Nombre"), { content: "textFilter" }], sort: "string", editor: "text", width: 350 },
                 { id: "estadoId", header: [translate("Estado"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colEstados, width: 100 },
-                { id: "importePresupuesto", adjust: true, header: [translate("Importe"), { content: "numberFilter" }], sort: "int", format: webix.i18n.priceFormat, css: { 'text-align': 'right' }, width: 100 },
+                { id: "importePresupuesto", adjust: true, header: [translate("Importe"), { content: "numberFilter" }], sort: "int", format: webix.i18n.priceFormat, css: { 'text-align': 'right' }, width: 100},
                 { id: "margenContribucion", header: [translate("Margen (%)"), { content: "numberFilter" }], sort: "int", format: webix.i18n.numberFormat, css: { 'text-align': 'right' }, width: 100 },
                 {
                     id: "fechaInicioContrato", header: [{ text: translate("Fecha inicio contrato"), css: { "text-align": "center" } }, { content: "textFilter" }],
@@ -289,6 +289,7 @@ export default class Ofertas extends JetView {
                             delete currentRowDatatableView.id;
                             var data = currentRowDatatableView;
                             data = ofertasService.cleanData(data);
+                            data = ofertasService.corregirFechas(data);
                             if (data.ofertaId == 0) {
                                 ofertasService.postOferta(usuarioService.getUsuarioCookie(), data)
                                     .then((result) => {
