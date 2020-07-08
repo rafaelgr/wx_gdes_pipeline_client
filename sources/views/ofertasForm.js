@@ -1431,6 +1431,9 @@ export default class OfertasForm extends JetView {
                 })
                 .then(() => {
                     messageApi.normalMessage(translate("Oferta guardada"), "");
+                    this.$scope.show('/top/ofertasForm?ofertaId=' + data.ofertaId);
+                    this.$scope.load(data.ofertaId);
+                    ofertaId = data.ofertaId;
                 })
                 .catch((err) => {
                     messageApi.errorMessageAjax(err);
