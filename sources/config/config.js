@@ -10,7 +10,7 @@ export const devConfig = {
                 var data = {
                     host: "localhost",
                     port: "3306",
-                    database: "gdes_pipeline_dev",
+                    database: "gdes_pipeline_test",
                     user: "root",
                     password: "aritel"
                 };

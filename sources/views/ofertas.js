@@ -231,7 +231,7 @@ export default class Ofertas extends JetView {
                 { id: "responsableId", header: [translate("Responsable"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUsuarios, width: 200 },
                 { id: "usuarioId", header: [translate("Usuario"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUsuarios, width: 200 },
                 { id: "usuResponsableId", header: [translate("Supervisado"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUsuarios, width: 200 },
-
+                { id: "numeroPedido", header: [translate("Num. Pedido"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
                 // { id: "empresaId", header: [translate("Empresa"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colEmpresas, width: 200 },
                 
                 

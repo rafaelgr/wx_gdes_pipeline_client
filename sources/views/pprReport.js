@@ -79,7 +79,6 @@ export default class PprReport extends JetView {
         let usu = usuarioService.getUsuarioCookie()
         devConfig.getConfigMysql(usu)
         .then(data => {
-            debugger;
             var myconfig = data;
             var connectionString = "Server=" + myconfig.host + ";";
             connectionString += "Port=" + myconfig.port + ";"
