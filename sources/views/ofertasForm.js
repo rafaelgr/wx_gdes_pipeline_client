@@ -353,10 +353,10 @@ export default class OfertasForm extends JetView {
                 {
                     rows: [
                         { view: "textarea", name: "alcance", label: translate("Alcance de los trabajos (Descripción completa)"), labelPosition: "top", height:400 },
-                        { view: "textarea", name: "sinergias", label: translate("Sinergias con otros contratos"), labelPosition: "top" },
-                        { view: "textarea", name: "estrategiaGDES", label: translate("Estrategia tomada en la Oferta"), labelPosition: "top" },
-                        { view: "textarea", name: "diferencialGDES", label: translate("Valor añadido GDES"), labelPosition: "top" },
-                        { view: "textarea", id: "documentosEspeciales", name: "documentosEspeciales", label: translate("Documentos aplicables"), labelPosition: "top" }
+                        { view: "textarea", name: "sinergias", label: translate("Sinergias con otros contratos"), labelPosition: "top" , height:150},
+                        { view: "textarea", name: "estrategiaGDES", label: translate("Estrategia tomada en la Oferta"), labelPosition: "top", height:150 },
+                        { view: "textarea", name: "diferencialGDES", label: translate("Valor añadido GDES"), labelPosition: "top", height:150 },
+                        { view: "textarea", id: "documentosEspeciales", name: "documentosEspeciales", label: translate("Documentos aplicables"), labelPosition: "top", height:150 }
                     ]
                 },
                 {
