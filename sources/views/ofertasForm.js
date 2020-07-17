@@ -35,6 +35,7 @@ var _importeAnual;
 var _importePrimerAno;
 var _importeInversion;
 var _multiplicador;
+var _usuario;
 
 
 export default class OfertasForm extends JetView {
@@ -661,6 +662,7 @@ export default class OfertasForm extends JetView {
     }
     load(ofertaId) {
         let usu = usuarioService.getUsuarioCookie();
+        _usuario = usu;
         if (ofertaId == 0) {
             this.loadUsuarios();
             this.loadUsuariosResponsables();
@@ -826,7 +828,10 @@ export default class OfertasForm extends JetView {
     loadUnidadesNegocio(unidadNegocioId) {
         unidadesNegocioService.getUnidadesNegocio(usuarioService.getUsuarioCookie())
             .then(rows => {
-                var ofertas = generalApi.prepareDataForCombo('unidadNegocioId', 'nombre', rows);
+                var nombre = 'nombre';
+                if (_usuario.codigoIdioma === 'en') nombre = 'nombreEN';
+                if (_usuario.codigoIdioma === 'fr') nombre = 'nombreFR';
+                var ofertas = generalApi.prepareDataForCombo('unidadNegocioId', nombre, rows);
                 var list = $$("cmbUnidadNegocio").getPopup().getList();
                 list.clearAll();
                 list.parse(ofertas);
@@ -871,7 +876,10 @@ export default class OfertasForm extends JetView {
     loadAreas(areaId) {
         areasService.getAreas(usuarioService.getUsuarioCookie())
             .then(rows => {
-                var areas = generalApi.prepareDataForCombo('areaId', 'nombre', rows);
+                var nombre = 'nombre';
+                if (_usuario.codigoIdioma === 'en') nombre = 'nombreEN';
+                if (_usuario.codigoIdioma === 'fr') nombre = 'nombreFR';
+                var areas = generalApi.prepareDataForCombo('areaId', nombre, rows);
                 var list = $$("cmbArea").getPopup().getList();
                 list.clearAll();
                 list.parse(areas);
@@ -946,7 +954,10 @@ export default class OfertasForm extends JetView {
     loadServicios(servicioId) {
         serviciosService.getServicios(usuarioService.getUsuarioCookie())
             .then(rows => {
-                var servicios = generalApi.prepareDataForCombo('servicioId', 'nombre', rows);
+                var nombre = 'nombre';
+                if (_usuario.codigoIdioma === 'en') nombre = 'nombreEN';
+                if (_usuario.codigoIdioma === 'fr') nombre = 'nombreFR';
+                var servicios = generalApi.prepareDataForCombo('servicioId', nombre, rows);
                 var list = $$("cmbServicio").getPopup().getList();
                 list.clearAll();
                 list.parse(servicios);
@@ -961,7 +972,10 @@ export default class OfertasForm extends JetView {
     loadFasesOferta(faseOfertaId) {
         fasesOfertaService.getFasesOferta(usuarioService.getUsuarioCookie())
             .then(rows => {
-                var fasesOferta = generalApi.prepareDataForCombo('faseOfertaId', 'nombre', rows);
+                var nombre = 'nombre';
+                if (_usuario.codigoIdioma === 'en') nombre = 'nombreEN';
+                if (_usuario.codigoIdioma === 'fr') nombre = 'nombreFR';
+                var fasesOferta = generalApi.prepareDataForCombo('faseOfertaId', nombre, rows);
                 var list = $$("cmbFaseOferta").getPopup().getList();
                 list.clearAll();
                 list.parse(fasesOferta);
@@ -976,7 +990,10 @@ export default class OfertasForm extends JetView {
     loadTiposOportunidad(tipoOportunidadId) {
         tiposOportunidadService.getTiposOportunidad(usuarioService.getUsuarioCookie())
             .then(rows => {
-                var tipos = generalApi.prepareDataForCombo('tipoOportunidadId', 'nombre', rows);
+                var nombre = 'nombre';
+                if (_usuario.codigoIdioma === 'en') nombre = 'nombreEN';
+                if (_usuario.codigoIdioma === 'fr') nombre = 'nombreFR';
+                var tipos = generalApi.prepareDataForCombo('tipoOportunidadId', nombre, rows);
                 var list = $$("cmbTipoOportunidad").getPopup().getList();
                 list.clearAll();
                 list.parse(tipos);
@@ -991,7 +1008,10 @@ export default class OfertasForm extends JetView {
     loadTiposContrato(tipoContratoId) {
         tiposContratoService.getTiposContrato(usuarioService.getUsuarioCookie())
             .then(rows => {
-                var tipos = generalApi.prepareDataForCombo('tipoContratoId', 'nombre', rows);
+                var nombre = 'nombre';
+                if (_usuario.codigoIdioma === 'en') nombre = 'nombreEN';
+                if (_usuario.codigoIdioma === 'fr') nombre = 'nombreFR';
+                var tipos = generalApi.prepareDataForCombo('tipoContratoId', nombre, rows);
                 var list = $$("cmbTipoContrato").getPopup().getList();
                 list.clearAll();
                 list.parse(tipos);
@@ -1023,7 +1043,10 @@ export default class OfertasForm extends JetView {
     loadEstados(estadoId) {
         estadosService.getEstados(usuarioService.getUsuarioCookie())
             .then(rows => {
-                var estados = generalApi.prepareDataForCombo('estadoId', 'nombre', rows);
+                var nombre = 'nombre';
+                if (_usuario.codigoIdioma === 'en') nombre = 'nombreEN';
+                if (_usuario.codigoIdioma === 'fr') nombre = 'nombreFR';
+                var estados = generalApi.prepareDataForCombo('estadoId', nombre, rows);
                 var list = $$("cmbEstado").getPopup().getList();
                 list.clearAll();
                 list.parse(estados);
@@ -1038,7 +1061,10 @@ export default class OfertasForm extends JetView {
     loadRazonesPerdida(razonPerdidaId) {
         razonesPerdidaService.getRazonesPerdida(usuarioService.getUsuarioCookie())
             .then(rows => {
-                var razones = generalApi.prepareDataForCombo('razonPerdidaId', 'nombre', rows);
+                var nombre = 'nombre';
+                if (_usuario.codigoIdioma === 'en') nombre = 'nombreEN';
+                if (_usuario.codigoIdioma === 'fr') nombre = 'nombreFR';
+                var razones = generalApi.prepareDataForCombo('razonPerdidaId', nombre, rows);
                 var list = $$("cmbRazonPerdida").getPopup().getList();
                 list.clearAll();
                 list.parse(razones);
