@@ -119,6 +119,16 @@ if (razonPerdidaResult.err) {
     colRazonesPerdida = generalApi.prepareDataForCombo('razonPerdidaId', 'nombre', razonPerdidaResult.data);
 }
 
+var colProbabilidades = [];
+var probabilidades = [
+    { id: 20, value: "20%" },
+    { id: 50, value: "50%" },
+    { id: 80, value: "80%" },
+    { id: 100, value: "100%" }
+];
+colProbabilidades = generalApi.prepareDataForCombo('id', 'value', probabilidades);
+
+
 webix.editors.editdate = webix.extend({
     render: function (value) {
         var icon = "<span class='mdi mdi-calendar' style='position:absolute; cursor:pointer; top:4px; right:4px;'></span>";
@@ -218,7 +228,8 @@ export default class Ofertas extends JetView {
                     editor: "editdate", width: 130, format: webix.i18n.dateFormatStr, sort: "string"
                 },
                 { id: "duracion", header: [translate("Duración"), { content: "textFilter" }], sort: "string", editor: "text", width: 100 },
-                { id: "probabilidad", adjust: true, header: [translate("Probabilidad (%)"), { content: "numberFilter" }], sort: "int", format: webix.i18n.numberFormat, css: { 'text-align': 'right' } },
+                // { id: "probabilidad", adjust: true, header: [translate("Probabilidad (%)"), { content: "numberFilter" }], sort: "int", format: webix.i18n.numberFormat, css: { 'text-align': 'right' } },
+                { id: "probabilidad", header: [translate("Probabilidad (%)"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colProbabilidades, width: 100 },
                 { id: "unidadNegocioId", header: [translate("Unidad de negocio"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUnidadesNegocio, width: 200 },
                 { id: "faseOfertaId", header: [translate("Fase oferta"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colFasesOferta, width: 200 },
                 { id: "tipoOportunidadId", header: [translate("Tipo oportunidad"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colTiposOportunidad, width: 200 },
