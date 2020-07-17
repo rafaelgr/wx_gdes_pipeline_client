@@ -7,12 +7,14 @@ import { empresasService } from "../services/empresas_service";
 import { paisesService } from "../services/paises_service";
 import { areasService } from "../services/areas_service";
 import { unidadesNegocioService } from "../services/unidadesNegocio_service";
+import moment from 'moment';
 
 var editButton = "<span class='onEdit webix_icon wxi-pencil'></span>";
 var deleteButton = "<span class='onDelete webix_icon wxi-trash'></span>";
 var currentIdDatatableView;
 var currentRowDatatableView
 var isNewRow = false;
+var _usuario = usuarioService.getUsuarioCookie();
 
 //-- Begin area of collections
 // We load collections need for combo edit columns in the grid
@@ -45,7 +47,10 @@ var areaResult = areasService.getSyncAreas(usuarioService.getUsuarioCookie());
 if (areaResult.err) {
     messageApi.errorMessageAjax(areaResult.err);
 } else {
-    colAreas = generalApi.prepareDataForCombo('areaId', 'nombre', areaResult.data);
+    var nombre = 'nombre';
+    if (_usuario.codigoIdioma === 'en') nombre = 'nombreEN';
+    if (_usuario.codigoIdioma === 'fr') nombre = 'nombreFR';
+    colAreas = generalApi.prepareDataForCombo('areaId', nombre, areaResult.data);
 }
 
 var colUnidadesNegocio = [];
@@ -53,7 +58,10 @@ var unidadNegocioResult = unidadesNegocioService.getSyncUnidadesNegocio(usuarioS
 if (unidadNegocioResult.err) {
     messageApi.errorMessageAjax(unidadNegocioResult.err);
 } else {
-    colUnidadesNegocio = generalApi.prepareDataForCombo('unidadNegocioId', 'nombre', unidadNegocioResult.data);
+    var nombre = 'nombre';
+    if (_usuario.codigoIdioma === 'en') nombre = 'nombreEN';
+    if (_usuario.codigoIdioma === 'fr') nombre = 'nombreFR';
+    colUnidadesNegocio = generalApi.prepareDataForCombo('unidadNegocioId', nombre, unidadNegocioResult.data);
 }
 
 var colResponsables = [];
@@ -145,10 +153,10 @@ export default class Usuarios extends JetView {
             editable: true,
             editaction: "dblclick",
             rules: {
-                "nombre": webix.rules.isNotEmpty,
-                "codigoIdioma": webix.rules.isNotEmpty,
-                "grupoUsuarioId": webix.rules.isNotEmpty,
-                "emailAzure": webix.rules.isNotEmpty
+                // "nombre": webix.rules.isNotEmpty,
+                // "codigoIdioma": webix.rules.isNotEmpty,
+                // "grupoUsuarioId": webix.rules.isNotEmpty,
+                // "emailAzure": webix.rules.isNotEmpty
             },
             on: {
                 "onAfterEditStart": function (id) {
@@ -170,6 +178,10 @@ export default class Usuarios extends JetView {
                             delete currentRowDatatableView.grupo; // ??
                             delete currentRowDatatableView.responsable; // ??
                             var data = currentRowDatatableView;
+                            delete data.rr2;
+                            delete data.grupo;
+                            delete data.getKeyTime;
+                            delete data.expKeyTime;
                             if (data.usuarioId == 0) {
                                 usuarioService.postUsuario(usuarioService.getUsuarioCookie(), data)
                                     .then((result) => {
@@ -220,7 +232,8 @@ export default class Usuarios extends JetView {
         this.load(id);
     }
     load(id) {
-        usuarioService.getUsuarios(usuarioService.getUsuarioCookie())
+        _usuario = usuarioService.getUsuarioCookie();
+        usuarioService.getUsuarios(_usuario)
             .then((data) => {
                 $$("usuariosGrid").clearAll();
                 $$("usuariosGrid").parse(generalApi.prepareDataForDataTable("usuarioId", data));
