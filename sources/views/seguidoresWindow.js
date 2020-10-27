@@ -137,7 +137,7 @@ export default class OfertasHitosWindow extends JetView {
     calcImporte() {
         var impDiv = $$("importeDivisa").getValue();
         var factor = $$("factor").getValue();
-        var imp = impDiv * factor;
+        var imp = impDiv / factor;
         $$("importe").setValue(imp);
     }
 }
