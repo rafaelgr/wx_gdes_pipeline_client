@@ -86,7 +86,7 @@ export default {
     "UTE (%)": "UTE (%)",
     "Num. Pedido": "Num. Pedido",
     "Competidores": "Competidores",
-    "Fecha adjudicación": "Fecha adjudicación",
+    "Fecha adjudicación": "Fecha Adj.",
     "Fecha inicio contrato": "Fecha inicio contrato",
     "Fecha fin contrato": "Fecha fin contrato",
     "Probabilidad (%)": "Probabilidad (%)",
