@@ -30,6 +30,7 @@ export default {
     "Unidades de negocio": "Unidades de negocio",
     "Unidad de negocio": "Unidad de negocio",
     "Nombre unidad de negocio": "Nombre unidad de negocio",
+    "Codigo Unidad": "Cod. BU",
     "Nombre Francés": "Nombre Francés",
     "Nombre Inglés": "Nombre Inglés",
     "Areas": "Areas",

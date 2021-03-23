@@ -44,6 +44,7 @@ export default {
     "Responsable": "Responsible",
     "Area": "Area",
     "Unidad negocio": "Business unit",
+    "Codigo Unidad": "Cod. BU",
     "Correo Azure": "Azure mail",
     "Ubicación": "Location",
     "Grupo usuarios": "Users group",

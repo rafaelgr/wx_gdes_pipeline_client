@@ -33,6 +33,10 @@ export default class UnidadesNegocioForm extends JetView {
                                 {
                                     view: "text", name: "nombre", required: true, id: "firstField",
                                     label: translate("Nombre unidad de negocio"), labelPosition: "top"
+                                },
+                                {
+                                    view: "text", name: "codigoUnidad", required: true,
+                                    label: translate("Codigo Unidad"), labelPosition: "top"
                                 }
                             ]
                         },

@@ -65,6 +65,7 @@ export default class UnidadesNegocio extends JetView {
                 { id: "nombre", fillspace: true, header: [translate("Nombre unidad de negocio"), { content: "textFilter" }], sort: "string", editor: "text" },
                 { id: "nombreEN", header: [translate("Nombre Inglés"), { content: "textFilter" }], sort: "string", editor: "text", width: 250},
                 { id: "nombreFR", header: [translate("Nombre Francés"), { content: "textFilter" }], sort: "string", editor: "text", width: 250 },
+                { id: "codigoUnidad", header: [translate("Codigo Unidad"), { content: "textFilter" }], sort: "string", editor: "text", width: 100 },
                 { id: "actions", header: [{ text: translate("Acciones"), css: { "text-align": "center" } }], template: editButton + deleteButton, css: { "text-align": "center" } }
             ],
             onClick: {
