@@ -14,6 +14,7 @@ import { divisasService } from "../services/divisas_service";
 import { languageService } from "../locales/language_service";
 import { razonesPerdidaService } from "../services/razonesPerdida_service";
 import { ubicacionesService } from "../services/ubicaciones_service";
+import { tiposContratoService } from '../services/tiposContrato_service';
 import OfertasWindow from "./ofertasWindow";
 
 var editButton = "<span class='onEdit webix_icon wxi-pencil'></span>";
@@ -30,6 +31,15 @@ if (unidadNegocioResult.err) {
 } else {
     colUnidadesNegocio = generalApi.prepareDataForCombo('unidadNegocioId', 'nombre', unidadNegocioResult.data);
 }
+
+var colTiposContrato = [];
+var tipoContratoResult = tiposContratoService.getSyncTiposContrato(usuarioService.getUsuarioCookie());
+if (tipoContratoResult.err) {
+    messageApi.errorMessageAjax(tipoContratoResult.err);
+} else {
+    colTiposContrato = generalApi.prepareDataForCombo('tipoContratoId', 'nombre', tipoContratoResult.data);
+}
+
 
 var colEmpresas = [];
 var empresaResult = empresasService.getSyncEmpresas(usuarioService.getUsuarioCookie());
@@ -231,12 +241,18 @@ export default class Ofertas extends JetView {
                 // { id: "probabilidad", adjust: true, header: [translate("Probabilidad (%)"), { content: "numberFilter" }], sort: "int", format: webix.i18n.numberFormat, css: { 'text-align': 'right' } },
                 { id: "probabilidad", header: [translate("Probabilidad (%)"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colProbabilidades, width: 100 },
                 { id: "unidadNegocioId", header: [translate("Unidad de negocio"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUnidadesNegocio, width: 200 },
+                { id: "paisUbicacion", header: [translate("Pais ubicación"), { content: "textFilter" }], sort: "string", editor: "text", width: 100 },
                 { id: "faseOfertaId", header: [translate("Fase oferta"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colFasesOferta, width: 200 },
                 { id: "tipoOportunidadId", header: [translate("Tipo oportunidad"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colTiposOportunidad, width: 200 },
+                { id: "tipoContratoId", header: [translate("Tipo contrato"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colTiposContrato, width: 200 },
                 { id: "numeroOferta", header: [translate("Nr. Oferta"), { content: "textFilter" }], sort: "string", editor: "text", minWidth: 100 },
                 // { id: "ubicacion", header: [translate("Ubicación"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
                 {
                     id: "fechaAdjudicacion", header: [{ text: translate("Fecha adjudicación"), css: { "text-align": "center" } }, { content: "textFilter" }],
+                    editor: "editdate", width: 130, format: webix.i18n.dateFormatStr, sort: "string"
+                },
+                {
+                    id: "fechaCreacion", header: [{ text: translate("Fecha creación"), css: { "text-align": "center" } }, { content: "textFilter" }],
                     editor: "editdate", width: 130, format: webix.i18n.dateFormatStr, sort: "string"
                 },
                 { id: "responsableId", header: [translate("Responsable"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUsuarios, width: 200 },
@@ -381,7 +397,7 @@ export default class Ofertas extends JetView {
     }
     cargarOfertas(data, id) {
         $$("ofertasGrid").clearAll();
-        $$("ofertasGrid").parse(generalApi.prepareDataForDataTableWidthDates("ofertaId", ['fechaEntrega', 'fechaAdjudicacion', 'fechaInicioContrato', 'fechaFinContrato'], data));
+        $$("ofertasGrid").parse(generalApi.prepareDataForDataTableWidthDates("ofertaId", ['fechaEntrega', 'fechaAdjudicacion', 'fechaInicioContrato', 'fechaFinContrato', 'fechaCreacion'], data));
         $$("ofertasGrid").sort('#ofertaId#', 'desc', 'int');
         if (id) {
             $$("ofertasGrid").select(id);
