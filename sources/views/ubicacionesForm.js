@@ -50,6 +50,19 @@ export default class EmpreasForm extends JetView {
                             ]
                         },
                         {
+                            cols: [
+                                {
+                                    view: "text", name: "paisUbicacion", 
+                                    label: translate("Pais ubicación"), labelPosition: "top"
+                                },                                
+                                {
+                                    view: "text", name: "cpUbicacion", 
+                                    label: translate("CP"), labelPosition: "top"
+                                },                                
+
+                            ]
+                        },
+                        {
                             margin: 5, cols: [
                                 { gravity: 5 },
                                 { view: "button", label: translate("Cancelar"), click: this.cancel, hotkey: "esc" },
