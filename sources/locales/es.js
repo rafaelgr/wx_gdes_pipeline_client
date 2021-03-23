@@ -72,6 +72,7 @@ export default {
     "Fase oferta": "Fase",
     "Tipo oportunidad": "Clasificación",
     "Pais ubicación": "Pais ubicación",
+    "Pais ub.": "Pais UB",
     "Margen (%)": "Margen (%)",
     "Cliente": "Cliente",
     "Nombre": "Nombre",

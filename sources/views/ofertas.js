@@ -241,7 +241,7 @@ export default class Ofertas extends JetView {
                 // { id: "probabilidad", adjust: true, header: [translate("Probabilidad (%)"), { content: "numberFilter" }], sort: "int", format: webix.i18n.numberFormat, css: { 'text-align': 'right' } },
                 { id: "probabilidad", header: [translate("Probabilidad (%)"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colProbabilidades, width: 100 },
                 { id: "unidadNegocioId", header: [translate("Unidad de negocio"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUnidadesNegocio, width: 200 },
-                { id: "paisUbicacion", header: [translate("Pais ubicación"), { content: "textFilter" }], sort: "string", editor: "text", width: 100 },
+                { id: "paisUbicacion", header: [translate("Pais ubicación"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
                 { id: "faseOfertaId", header: [translate("Fase oferta"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colFasesOferta, width: 200 },
                 { id: "tipoOportunidadId", header: [translate("Tipo oportunidad"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colTiposOportunidad, width: 200 },
                 { id: "tipoContratoId", header: [translate("Tipo contrato"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colTiposContrato, width: 200 },
