@@ -67,7 +67,7 @@ export default class OfertasForm extends JetView {
                                 }
                             ]
                         },
-                        { view: "text", gravity: 1, name: "paisUbicacion", label: translate("Pais Ubicación"), labelPosition: "top", required: true },
+                        { view: "text", gravity: 1, id: "paisUbicacion", name: "paisUbicacion", label: translate("Pais Ubicación"), labelPosition: "top", required: true },
                         { view: "text", gravity: 1, name: "cliente", label: translate("Cliente"), required: true, labelPosition: "top" },
                     ]
                 },
@@ -628,7 +628,10 @@ export default class OfertasForm extends JetView {
         }); 
         $$("cmbEmpresa").attachEvent("onChange", (nv, ov) => {
             this.cambioEmpresa(nv);
-        });        
+        });
+        $$("cmbUbicacion").attachEvent("onChange", (nv, ov) => {
+            this.cambioUbicacion(nv);
+        });         
         $$("cmbFaseOferta").attachEvent("onChange", (nv, ov) => {
             if (nv != 3 && ofertaId == 0) {
                 // Si en el alta de una oferta la pasan a algo que no sea oferta
@@ -1409,6 +1412,19 @@ export default class OfertasForm extends JetView {
         areasService.getArea(usu, nv)
         .then(data => {
             $$("cmbUnidadNegocio").setValue(data.unidadNegocioId);
+        })
+        .catch((err) => {
+            messageApi.errorMessageAjax(err);
+        })
+    }
+
+    cambioUbicacion(nv) {
+        let usu = usuarioService.getUsuarioCookie();
+        ubicacionesService.getUbicacion(usu, nv)
+        .then(data => {
+            if (data.paisUbicacion) {
+                $$("paisUbicacion").setValue(data.paisUbicacion);
+            }
         })
         .catch((err) => {
             messageApi.errorMessageAjax(err);
