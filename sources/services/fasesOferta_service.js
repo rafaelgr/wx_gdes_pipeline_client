@@ -21,7 +21,7 @@ export const fasesOfertaService = {
     },
     getSyncFasesOferta: (usu) => {
         var url = devConfig.getApiUrl() + "/api/fases-oferta";
-        if (usu.codigoIdioma && usu,codigoIdioma != "es") {
+        if (usu.codigoIdioma && usu.codigoIdioma != "es") {
             url += "/multi/" + usu.codigoIdioma;
         }        
         var res = webix.ajax()
