@@ -42,6 +42,9 @@ export const areasService = {
     },
     getSyncAreas: (usu) => {
         var url = devConfig.getApiUrl() + "/api/areas";
+        if (usu.codigoIdioma) {
+            url += "/multi/" + usu.codigoIdioma;
+        }
         var res = webix.ajax()
             .headers({
                 "Content-Type": "application/json",

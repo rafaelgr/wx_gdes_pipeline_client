@@ -38,7 +38,10 @@ export const serviciosService = {
         });
     },
     getSyncServicios: (usu) => {
-        var url = devConfig.getApiUrl() + "/api/servicios";
+        var url = devConfig.getApiUrl() + "/api/servicios/multi";
+        if (usu.codigoIdioma) {
+            url += "/" + usu.codigoIdioma;
+        }        
         var res = webix.ajax()
             .headers({
                 "Content-Type": "application/json",

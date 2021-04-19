@@ -21,6 +21,9 @@ export const tiposOportunidadService = {
     },
     getSyncTiposOportunidad: (usu) => {
         var url = devConfig.getApiUrl() + "/api/tipos-oportunidad";
+        if (usu.codigoIdioma) {
+            url += "/multi/" + usu.codigoIdioma;
+        }
         var res = webix.ajax()
             .headers({
                 "Content-Type": "application/json",

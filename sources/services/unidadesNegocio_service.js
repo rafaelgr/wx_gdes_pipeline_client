@@ -21,6 +21,9 @@ export const unidadesNegocioService = {
     },
     getSyncUnidadesNegocio: (usu) => {
         var url = devConfig.getApiUrl() + "/api/unidades-negocio";
+        if (usu.codigoIdioma) {
+            url += "/multi/" + usu.codigoIdioma;
+        }        
         var res = webix.ajax()
             .headers({
                 "Content-Type": "application/json",
