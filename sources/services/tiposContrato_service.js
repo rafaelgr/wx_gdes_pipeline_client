@@ -21,7 +21,7 @@ export const tiposContratoService = {
     },
     getSyncTiposContrato: (usu) => {
         var url = devConfig.getApiUrl() + "/api/tipos-contrato";
-        if (usu.codigoIdioma) {
+        if (usu.codigoIdioma && usu,codigoIdioma != "es") {
             url += "/multi/" + usu.codigoIdioma;
         }
         var res = webix.ajax()

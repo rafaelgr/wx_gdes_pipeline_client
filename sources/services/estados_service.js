@@ -21,7 +21,7 @@ export const estadosService = {
     },
     getSyncEstados: (usu) => {
         var url = devConfig.getApiUrl() + "/api/estados";
-        if (usu.codigoIdioma) {
+        if (usu.codigoIdioma && usu,codigoIdioma != "es") {
             url += "/multi/" + usu.codigoIdioma;
         }
         var res = webix.ajax()

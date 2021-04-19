@@ -20,7 +20,7 @@ export const areasService = {
     },
     getAreasMulti: (usu) => {
         let url =   devConfig.getApiUrl() + "/api/areas";
-        if (usu.codigoIdioma) {
+        if (usu.codigoIdioma && usu,codigoIdioma != "es") {
             url += "/multi/" + usu.codigoIdioma
         }
         return new webix.promise((success, fail) => {
@@ -42,7 +42,7 @@ export const areasService = {
     },
     getSyncAreas: (usu) => {
         var url = devConfig.getApiUrl() + "/api/areas";
-        if (usu.codigoIdioma) {
+        if (usu.codigoIdioma && usu,codigoIdioma != "es") {
             url += "/multi/" + usu.codigoIdioma;
         }
         var res = webix.ajax()

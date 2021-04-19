@@ -749,6 +749,7 @@ export default class OfertasForm extends JetView {
             data.margenContribucion = 0;
         }
         // Control de valores nulos en determinados casos 
+        console.log("IMPUTE", data.importeUTE);
         if (!data.importeUTE) data.importeUTE = 0;
         if (!data.margenContribucion) data.margenContribucion = 0;
         if (!data.importeContribucion) data.importeContribucion = 0;

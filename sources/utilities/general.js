@@ -1,3 +1,4 @@
+import moment from 'moment';
 export const generalApi = {
     prepareDataForDataTable: (idColumn, rows) => {
         var _rows2 = [];
@@ -12,7 +13,10 @@ export const generalApi = {
         rows.forEach(function (e) {
             e.id = e[idColumn];
             datesColumns.forEach(function (dc) {
-                if (e[dc]) e[dc] = new Date(e[dc]);
+                if (e[dc]) {
+                    // e[dc+"F"] = moment(new Date(e[dc])).format('YYYY-MM-DD'),
+                    e[dc] = new Date(e[dc]);
+                }
             });
             _rows2.push(e);
         });
