@@ -18,6 +18,25 @@ export const serviciosService = {
                 });
         });
     },
+    getServiciosMulti: (usu) => {
+        console.log("Usu", usu);
+        return new webix.promise((success, fail) => {
+            var url = devConfig.getApiUrl() + "/api/servicios/multi";
+            webix.ajax()
+                .timeout(10000)
+                .headers({
+                    "Content-Type": "application/json",
+                    "x-apiKey": usu.apiKey
+                })
+                .get(url)
+                .then((result) => {
+                    success(result.json());
+                })
+                .catch((inXhr) => {
+                    fail(inXhr);
+                });
+        });
+    },
     getSyncServicios: (usu) => {
         var url = devConfig.getApiUrl() + "/api/servicios";
         var res = webix.ajax()

@@ -18,6 +18,28 @@ export const areasService = {
                 });
         });
     },
+    getAreasMulti: (usu) => {
+        let url =   devConfig.getApiUrl() + "/api/areas";
+        if (usu.codigoIdioma) {
+            url += "/multi/" + usu.codigoIdioma
+        }
+        return new webix.promise((success, fail) => {
+            var url = devConfig.getApiUrl() + "/api/areas";
+            webix.ajax()
+                .timeout(10000)
+                .headers({
+                    "Content-Type": "application/json",
+                    "x-apiKey": usu.apiKey
+                })
+                .get(url)
+                .then((result) => {
+                    success(result.json());
+                })
+                .catch((inXhr) => {
+                    fail(inXhr);
+                });
+        });
+    },
     getSyncAreas: (usu) => {
         var url = devConfig.getApiUrl() + "/api/areas";
         var res = webix.ajax()

@@ -955,7 +955,7 @@ export default class OfertasForm extends JetView {
     }
 
     loadServicios(servicioId) {
-        serviciosService.getServicios(usuarioService.getUsuarioCookie())
+        serviciosService.getServiciosMulti(usuarioService.getUsuarioCookie())
             .then(rows => {
                 var nombre = 'nombre';
                 if (_usuario.codigoIdioma === 'en') nombre = 'nombreEN';
