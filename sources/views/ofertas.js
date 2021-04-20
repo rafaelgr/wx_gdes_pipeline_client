@@ -171,6 +171,26 @@ webix.editors.editdate = webix.extend({
     }
 }, webix.editors.text);
 
+// webix.editors.editdate = webix.extend({
+//     render:function(){
+//     var icon = "<span class='webix_icon mdi mdi-calendar' style='position:absolute; cursor:pointer; top:8px; right:5px;'></span>";
+//     var node = webix.html.create("div", {
+//           "class":"webix_dt_editor"
+//       }, "<input type='text'>"+icon);
+    
+//     node.childNodes[1].onclick = function(){
+//       var master = webix.UIManager.getFocus();
+//       var editor = master.getEditor();
+      
+//       master.editStop(false);
+//       var config = master.getColumnConfig(editor.column);
+//       config.editor = "date";
+//       master.editCell(editor.row, editor.column);
+//       config.editor = "editdate";
+//     }
+//     return node;
+//   }
+// }, webix.editors.text);
 
 
 export default class Ofertas extends JetView {
@@ -237,18 +257,18 @@ export default class Ofertas extends JetView {
                 { id: "estadoId", header: [translate("Estado"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colEstados, width: 100 },
                 {
                     id: "fechaAdjudicacion", header: [{ text: translate("Fecha adjudicación"), css: { "text-align": "center" } }, { content: "dateFilter" }],
-                    width: 130, format: webix.i18n.dateFormatStr, sort: "date"
+                    width: 130, format: webix.i18n.dateFormatStr, sort: "date", editor: "editdate"
                 },
                 { id: "probabilidad", header: [translate("Probabilidad (%)"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colProbabilidades, width: 100 },
                 { id: "importePresupuesto", adjust: true, header: [translate("Importe"), { content: "numberFilter" }], sort: "int", format: webix.i18n.priceFormat, css: { 'text-align': 'right' }, width: 100},
                 { id: "margenContribucion", header: [translate("Margen (%)"), { content: "numberFilter" }], sort: "int", format: webix.i18n.numberFormat, css: { 'text-align': 'right' }, width: 100 },
                 {
                     id: "fechaInicioContrato", header: [{ text: translate("Fecha inicio contrato"), css: { "text-align": "center" } }, { content: "dateFilter" }],
-                    width: 130, format: webix.i18n.dateFormatStr, sort: "date"
+                    width: 130, format: webix.i18n.dateFormatStr, sort: "date", editor: "editdate"
                 },
                 {
                     id: "fechaFinContrato", header: [{ text: translate("Fecha fin contrato"), css: { "text-align": "center" } }, { content: "dateFilter" }],
-                    width: 130, format: webix.i18n.dateFormatStr, sort: "date"
+                    width: 130, format: webix.i18n.dateFormatStr, sort: "date", editor: "editdate"
                 },
                 { id: "duracion", header: [translate("Duración"), { content: "textFilter" }], sort: "string", editor: "text", width: 100 },
                 { id: "ubicacionId", header: [translate("Ubicacion"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUbicaciones, width: 200 },
@@ -265,7 +285,7 @@ export default class Ofertas extends JetView {
                 { id: "servicioId", header: [translate("Servicio"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colServicios, width: 200 },
                 {
                     id: "fechaCreacion", header: [{ text: translate("Fecha creación"), css: { "text-align": "center" } }, { content: "dateFilter" }],
-                    width: 130, format: webix.i18n.dateFormatStr, sort: "date"
+                    width: 130, format: webix.i18n.dateFormatStr, sort: "date", editor: "editdate"
                 },
                 { id: "usuarioId", header: [translate("Usuario"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUsuarios, width: 200 },
                 { id: "responsableId", header: [translate("Responsable"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUsuarios, width: 200 },
