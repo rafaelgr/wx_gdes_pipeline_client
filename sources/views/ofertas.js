@@ -256,18 +256,18 @@ export default class Ofertas extends JetView {
                 { id: "nombreCorto", header: [translate("Nombre"), { content: "textFilter" }], sort: "string", editor: "text", width: 350 },
                 { id: "estadoId", header: [translate("Estado"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colEstados, width: 100 },
                 {
-                    id: "fechaAdjudicacion", header: [{ text: translate("Fecha adjudicación"), css: { "text-align": "center" } }, { content: "dateFilter" }],
+                    id: "fechaAdjudicacion", header: [{ text: translate("Fecha adjudicación"), css: { "text-align": "center" } }, { content: "textFilter" }],
                     width: 130, format: webix.i18n.dateFormatStr, sort: "date", editor: "editdate"
                 },
                 { id: "probabilidad", header: [translate("Probabilidad (%)"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colProbabilidades, width: 100 },
                 { id: "importePresupuesto", adjust: true, header: [translate("Importe"), { content: "numberFilter" }], sort: "int", format: webix.i18n.priceFormat, css: { 'text-align': 'right' }, width: 100},
                 { id: "margenContribucion", header: [translate("Margen (%)"), { content: "numberFilter" }], sort: "int", format: webix.i18n.numberFormat, css: { 'text-align': 'right' }, width: 100 },
                 {
-                    id: "fechaInicioContrato", header: [{ text: translate("Fecha inicio contrato"), css: { "text-align": "center" } }, { content: "dateFilter" }],
+                    id: "fechaInicioContrato", header: [{ text: translate("Fecha inicio contrato"), css: { "text-align": "center" } }, { content: "textFilter" }],
                     width: 130, format: webix.i18n.dateFormatStr, sort: "date", editor: "editdate"
                 },
                 {
-                    id: "fechaFinContrato", header: [{ text: translate("Fecha fin contrato"), css: { "text-align": "center" } }, { content: "dateFilter" }],
+                    id: "fechaFinContrato", header: [{ text: translate("Fecha fin contrato"), css: { "text-align": "center" } }, { content: "textFilter" }],
                     width: 130, format: webix.i18n.dateFormatStr, sort: "date", editor: "editdate"
                 },
                 { id: "duracion", header: [translate("Duración"), { content: "textFilter" }], sort: "string", editor: "text", width: 100 },
@@ -284,7 +284,7 @@ export default class Ofertas extends JetView {
 
                 { id: "servicioId", header: [translate("Servicio"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colServicios, width: 200 },
                 {
-                    id: "fechaCreacion", header: [{ text: translate("Fecha creación"), css: { "text-align": "center" } }, { content: "dateFilter" }],
+                    id: "fechaCreacion", header: [{ text: translate("Fecha creación"), css: { "text-align": "center" } }, { content: "textFilter" }],
                     width: 130, format: webix.i18n.dateFormatStr, sort: "date", editor: "editdate"
                 },
                 { id: "usuarioId", header: [translate("Usuario"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUsuarios, width: 200 },
