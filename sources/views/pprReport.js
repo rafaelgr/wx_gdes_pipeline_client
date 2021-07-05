@@ -32,7 +32,12 @@ export default class PprReport extends JetView {
                     }
                 ]
             }, modal: true,
-            body: _view1
+            body: {
+                view:"scrollview", scroll:"y", body:{
+                  template: "<div id='report_viewer'></div>",
+                  autoheight:true
+                 }
+               }     
         };
         return _view;
     }
@@ -86,11 +91,9 @@ export default class PprReport extends JetView {
             connectionString += "Database=" + myconfig.database + ";"
             connectionString += "UserId=" + myconfig.user + ";"
             connectionString += "Pwd=" + myconfig.password + ";";
-            console.log('REPORT', report.dictionary.databases.list[0]);
             report.dictionary.databases.list[0].connectionString = connectionString;
     
             // Parámetros
-            console.log('REPORT2', report.dictionary.variables.list[0]);
             report.dictionary.variables.list[0].val = ofertaId;
         
             // Assign report to the viewer, the report will be built automatically after rendering the viewer
