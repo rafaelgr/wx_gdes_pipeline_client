@@ -11,24 +11,26 @@
     <script src="./stireport/js/stimulsoft.viewer.js" type="text/javascript"></script>
     <script>
     const PRODUCTION = false;
+    var viewer = null;
     iniReports = () => {
         // Create the report viewer with default options
         viewer = new Stimulsoft.Viewer.StiViewer(null, "StiViewer", false);
         options = new Stimulsoft.Viewer.StiViewerOptions();
         Stimulsoft.Base.Localization.StiLocalization.setLocalizationFile("../localization/es.xml", true);
-        Stimulsoft.Base.StiLicense.key = "6vJhGtLLLz2GNviWmUTrhSqnOItdDwjBylQzQcAOiHltN9ZO4D78QwpEoh6+UpBm5mrGyhSAIsuWoljPQdUv6R6vgv" +
-            "iStsx8W3jirJvfPH27oRYrC2WIPEmaoAZTNtqb+nDxUpJlSmG62eA46oRJDV8kJ2cJSEx19GMJXYgZvv7yQT9aJHYa" +
-            "SrTVD7wdhpNVS1nQC3OtisVd7MQNQeM40GJxcZpyZDPfvld8mK6VX0RTPJsQZ7UcCEH4Y3LaKzA5DmUS+mwSnjXz/J" +
-            "Fv1uO2JNkfcioieXfYfTaBIgZlKecarCS5vBgMrXly3m5kw+YwpJ2v+cMXuDk3UrZgrdxNnOhg8ZHPg9ijHxqUomZZ" +
-            "BzKpVQU0d06ne60j/liMH5KirAI2JCVfBcBvIcyliJos8LAWr9q/1sPR9y7LmA1eyS1/dXaxmEaqi5ubhLqlf+OS0x" +
-            "FX6tlBBgegqHlIj6Fytwvq5YlGAZ0Cra05JhnKh/ohYlADQz6Jbg5sOKyn5EbejvPS3tWr0LRBH2FO6+mJaSEAwzGm" +
-            "oWT057ScSvGgQmfx8wCqSF+PgK/zTzjy75Oh";
+        Stimulsoft.Base.StiLicense.key = "6vJhGtLLLz2GNviWmUTrhSqnOItdDwjBylQzQcAOiHmdDoZinxw82gXdfpNeKsa0iy3Xro1lEo20e+MLfk+OKYUzWl" + 
+            "NppaVKtAQE9SwlWpW+sdm0zF+U4aC3U5bJqNVT8XNjDqzk6e4Fx4SaTx4pBnD1USxGkYjLCgGc8OEpZqhepOwyHN2t" + 
+            "5lE6ZbkZUidXfrKEaZgGuDh55Nd99E1dMFjXOvmkFPABROQIgwhDSU4ikRxVlQP9P6tPf8ZbRfmmascguce5L9dAee" + 
+            "rR67l3IQInHQKpWt92WE1/si83VWoEzH8Fe3nj2MV6mB+rrHcyXSUwRduMYuLVpw+5Kkv2Y6WXbs6HPSnxScq/N7DJ" + 
+            "ntqnAurKCcTO0Hw+pX1pJMiuHQXPNsfq3TQCD0PLZcArqkMH4B/Vdqw4NscNHdsa7nz2oJOal+535YX35i1eAGrO3b" + 
+            "7jZrvMMzyP87yFJ+vJi0kQ065gpJAmGVSyqYStE2CzS6O2XXHIvCztdg2jnbu+bfb8etIf6RP/KGQsekmdWVouJFq7" + 
+            "RVVXN2zuIcH4YWjvsIIqc/G6i5lGtDc81VqL";
         options.appearance.scrollbarsMode = true;
         options.appearance.fullScreenMode = true;
         options.toolbar.showSendEmailButton = true;
     }
 
     obtainReport = (ofertaId, type) => {
+        Stimulsoft.StiOptions.WebServer.encryptData = false;
         StiOptions.WebServer.url = getApiUrl() + "/streport";
         var file = "reports/proposal_report.mrt";
         if (type == 1) file = "reports/proposal_report_short.mrt";
@@ -39,19 +41,20 @@
         let usu = getUsuarioCookie()
         getConfigMysql(usu)
         .then(data => {
-            debugger;
             var myconfig = data;
             var connectionString = "Server=" + myconfig.host + ";";
             connectionString += "Port=" + myconfig.port + ";"
             connectionString += "Database=" + myconfig.database + ";"
             connectionString += "UserId=" + myconfig.user + ";"
             connectionString += "Pwd=" + myconfig.password + ";";
+            console.log("Report1");
             report.dictionary.databases.list[0].connectionString = connectionString;
     
             // Parámetros
-            report.dictionary.variables.items[0].val = ofertaId;
+            report.dictionary.variables.list[0].val = ofertaId;
         
             // Assign report to the viewer, the report will be built automatically after rendering the viewer
+            console.log("Report2");
             viewer.report = report;
             viewer.renderHtml("report_viewer");
         })

@@ -32,7 +32,12 @@ export default class PprReport extends JetView {
                     }
                 ]
             }, modal: true,
-            body: _view1
+            body: {
+                view:"scrollview", scroll:"y", body:{
+                  template: "<div id='report_viewer'></div>",
+                  autoheight:true
+                 }
+               }     
         };
         return _view;
     }
@@ -56,19 +61,20 @@ export default class PprReport extends JetView {
         viewer = new Stimulsoft.Viewer.StiViewer(null, "StiViewer", false);
         options = new Stimulsoft.Viewer.StiViewerOptions();
         Stimulsoft.Base.Localization.StiLocalization.setLocalizationFile("../localization/es.xml", true);
-        Stimulsoft.Base.StiLicense.key = "6vJhGtLLLz2GNviWmUTrhSqnOItdDwjBylQzQcAOiHltN9ZO4D78QwpEoh6+UpBm5mrGyhSAIsuWoljPQdUv6R6vgv" +
-            "iStsx8W3jirJvfPH27oRYrC2WIPEmaoAZTNtqb+nDxUpJlSmG62eA46oRJDV8kJ2cJSEx19GMJXYgZvv7yQT9aJHYa" +
-            "SrTVD7wdhpNVS1nQC3OtisVd7MQNQeM40GJxcZpyZDPfvld8mK6VX0RTPJsQZ7UcCEH4Y3LaKzA5DmUS+mwSnjXz/J" +
-            "Fv1uO2JNkfcioieXfYfTaBIgZlKecarCS5vBgMrXly3m5kw+YwpJ2v+cMXuDk3UrZgrdxNnOhg8ZHPg9ijHxqUomZZ" +
-            "BzKpVQU0d06ne60j/liMH5KirAI2JCVfBcBvIcyliJos8LAWr9q/1sPR9y7LmA1eyS1/dXaxmEaqi5ubhLqlf+OS0x" +
-            "FX6tlBBgegqHlIj6Fytwvq5YlGAZ0Cra05JhnKh/ohYlADQz6Jbg5sOKyn5EbejvPS3tWr0LRBH2FO6+mJaSEAwzGm" +
-            "oWT057ScSvGgQmfx8wCqSF+PgK/zTzjy75Oh";
+        Stimulsoft.Base.StiLicense.key = "6vJhGtLLLz2GNviWmUTrhSqnOItdDwjBylQzQcAOiHm56d3996S0JifANskQZ7E3Lj9TBEvx4JS1nCvrtJLEhZp3C7" + 
+        "mWTP2kwBeG8PQVOgA65EemvgT+XDvfXz93zHzFtJQXRw7wXHkMMqJzf8SVZeiu9f9cR/iS7knNi4xk7syKA46E2irG" + 
+        "EAKKQCXlfMTKVy/E/+Yxp5n46uquZfk6o1YLLZYm8P4Ov2O+hqHGC7qS5NNsEW/tiKFOGimJD9pf/yrBFItjl5CQuV" + 
+        "PwUYLGGMdSP5CgGuOrVS/bS8w1a/MMMskrapDbUda0FK74HS8wl7kQgkg/L6MpOL2zeygQQl9Meh1GzzSPo02mJNkQ" + 
+        "ULawgWLgv9Ab/0N4zZyXYeNuFXje61t5C4wOL2UbufCp8/PSRxCwwfX1Bnp8S+21w8FO0jlYmuQWFlD4X6QPN7ZOKZ" + 
+        "WwlVCYlg1wk0MitFUU2hQGlYd1AQ5KqABgYRoyNSw8XKgCkjvE4XfuAByTEjzbFQ+S+eQg6ZzZIyPocPzrdxlReACj" + 
+        "Mucj3qiCG2dSANf+EtT4aaBTQJHvgRxKQAFG";
         options.appearance.scrollbarsMode = true;
         options.appearance.fullScreenMode = true;
         options.toolbar.showSendEmailButton = true;
     }
 
     obtainReport(ofertaId, type) {
+        Stimulsoft.StiOptions.WebServer.encryptData = false;
         StiOptions.WebServer.url = devConfig.getApiUrl() + "/streport";
         var file = "reports/proposal_report.mrt";
         if (type == 1) file = "reports/proposal_report_short.mrt";
@@ -88,7 +94,7 @@ export default class PprReport extends JetView {
             report.dictionary.databases.list[0].connectionString = connectionString;
     
             // Parámetros
-            report.dictionary.variables.items[0].val = ofertaId;
+            report.dictionary.variables.list[0].val = ofertaId;
         
             // Assign report to the viewer, the report will be built automatically after rendering the viewer
             viewer.report = report;
