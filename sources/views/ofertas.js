@@ -16,6 +16,7 @@ import { razonesPerdidaService } from "../services/razonesPerdida_service";
 import { ubicacionesService } from "../services/ubicaciones_service";
 import { tiposContratoService } from '../services/tiposContrato_service';
 import { serviciosService } from "../services/servicios_service";
+import { proyectosCentralService } from "../services/proyectos_central_service";
 import OfertasWindow from "./ofertasWindow";
 
 var editButton = "<span class='onEdit webix_icon wxi-pencil'></span>";
@@ -148,6 +149,13 @@ if (serviciosResult.err) {
     colServicios = generalApi.prepareDataForCombo('servicioId', 'nombre', serviciosResult.data);
 }
 
+var colProyectosCentrales = [];
+var proyectoCentralResult = proyectosCentralService.getSyncProyectosCentral(usuarioService.getUsuarioCookie());
+if (proyectoCentralResult.err) {
+    messageApi.errorMessageAjax(proyectoCentralResult.err);
+} else {
+    colProyectosCentrales = generalApi.prepareDataForCombo('codigo', 'nombre', proyectoCentralResult.data);
+}
 
 
 webix.editors.editdate = webix.extend({
@@ -255,6 +263,7 @@ export default class Ofertas extends JetView {
                 { id: "numeroOferta", header: [translate("Nr. Oferta"), { content: "textFilter" }], sort: "string", editor: "text", minWidth: 100 },
                 { id: "nombreCorto", header: [translate("Nombre"), { content: "textFilter" }], sort: "string", editor: "text", width: 350 },
                 { id: "estadoId", header: [translate("Estado"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colEstados, width: 100 },
+                { id: "proyectoCodigo", header: [translate("Proyecto"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colProyectosCentrales, width: 200 },
                 {
                     id: "fechaAdjudicacion", header: [{ text: translate("Fecha adjudicación"), css: { "text-align": "center" } }, { content: "textFilter" }],
                     width: 130, format: webix.i18n.dateFormatStr, sort: "date", editor: "editdate"
@@ -285,6 +294,10 @@ export default class Ofertas extends JetView {
                 { id: "servicioId", header: [translate("Servicio"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colServicios, width: 200 },
                 {
                     id: "fechaCreacion", header: [{ text: translate("Fecha creación"), css: { "text-align": "center" } }, { content: "textFilter" }],
+                    width: 130, format: webix.i18n.dateFormatStr, sort: "date", editor: "editdate"
+                },
+                {
+                    id: "fechaEntrega", header: [{ text: translate("Fecha entrega"), css: { "text-align": "center" } }, { content: "textFilter" }],
                     width: 130, format: webix.i18n.dateFormatStr, sort: "date", editor: "editdate"
                 },
                 { id: "usuarioId", header: [translate("Usuario"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUsuarios, width: 200 },
@@ -352,6 +365,9 @@ export default class Ofertas extends JetView {
                             var data = currentRowDatatableView;
                             data = ofertasService.cleanData(data);
                             data = ofertasService.corregirFechas(data);
+                            if (data.estadoId == 2) {
+                                data.probabilidad = 100;
+                            }
                             if (data.ofertaId == 0) {
                                 ofertasService.postOferta(usuarioService.getUsuarioCookie(), data)
                                     .then((result) => {
