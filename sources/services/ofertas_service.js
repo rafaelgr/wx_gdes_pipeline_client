@@ -5,7 +5,7 @@ export const ofertasService = {
         return new webix.promise((success, fail) => {
             var url = devConfig.getApiUrl() + "/api/ofertas";
             webix.ajax()
-                .timeout(10000)
+                .timeout(50000)
                 .headers({
                     "Content-Type": "application/json",
                     "x-apiKey": usu.apiKey
@@ -26,7 +26,7 @@ export const ofertasService = {
             "/" + usu.grupoUsuarioId4 + "/" + usu.grupoUsuarioId5 + "/" + usu.grupoUsuarioId6 +
             "/" + usu.grupoUsuarioId7;
             webix.ajax()
-                .timeout(10000)
+                .timeout(50000)
                 .headers({
                     "Content-Type": "application/json",
                     "x-apiKey": usu.apiKey
@@ -44,7 +44,7 @@ export const ofertasService = {
         return new webix.promise((success, fail) => {
             var url = devConfig.getApiUrl() + "/api/ofertas/seguidores/" + usu.responsableId + "/" + usu.usuarioId;
             webix.ajax()
-                .timeout(10000)
+                .timeout(50000)
                 .headers({
                     "Content-Type": "application/json",
                     "x-apiKey": usu.apiKey
@@ -79,7 +79,7 @@ export const ofertasService = {
         return new webix.promise((success, fail) => {
             var url = devConfig.getApiUrl() + "/api/ofertas/" + ofertaId;
             webix.ajax()
-                .timeout(10000)
+                .timeout(50000)
                 .headers({
                     "Content-Type": "application/json",
                     "x-apiKey": usu.apiKey
@@ -98,7 +98,7 @@ export const ofertasService = {
         return new webix.promise((success, fail) => {
             var url = devConfig.getApiUrl() + "/api/ofertas";
             webix.ajax()
-                .timeout(10000)
+                .timeout(50000)
                 .headers({
                     "Content-Type": "application/json",
                     "x-apiKey": usu.apiKey
@@ -117,7 +117,7 @@ export const ofertasService = {
         return new webix.promise((success, fail) => {
             var url = devConfig.getApiUrl() + "/api/ofertas";
             webix.ajax()
-                .timeout(10000)
+                .timeout(50000)
                 .headers({
                     "Content-Type": "application/json",
                     "x-apiKey": usu.apiKey
@@ -135,7 +135,7 @@ export const ofertasService = {
         return new webix.promise((success, fail) => {
             var url = devConfig.getApiUrl() + "/api/ofertas/" + ofertaId;
             webix.ajax()
-                .timeout(10000)
+                .timeout(50000)
                 .headers({
                     "Content-Type": "application/json",
                     "x-apiKey": usu.apiKey
