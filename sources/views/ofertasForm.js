@@ -17,6 +17,7 @@ import { generalApi } from "../utilities/general";
 import { parametrosService } from "../services/parametros_service";
 import { versionesService } from '../services/versiones_service';
 import { ubicacionesService } from '../services/ubicaciones_service';
+import { proyectosCentralService } from '../services/proyectos_central_service';
 import UbicacionesWindow from "./ubicacionesWindow";
 // import PprReport from "./pprReport";
 
@@ -149,7 +150,22 @@ export default class OfertasForm extends JetView {
                         }
                     ]
                 },
-                {}
+                {
+                    cols: [
+                        {
+                            gravity:3,
+                            rows: [
+                                { view: "combo", id: "cmbProyectosCentral", name: "proyectoCodigo", options: {}, label: translate("Proyecto"), labelPosition: "top" }
+                            ]
+                        },
+                        {
+                            gravity:2
+
+                        }
+
+                    ]
+
+                },
             ]
         };
         const cellPlanificacion = {
@@ -242,7 +258,7 @@ export default class OfertasForm extends JetView {
                 },
                 {
                     cols: [
-                        { view: "textarea", name: "consideracionesEconomicas", label: translate("Consideraciones incluidas en la oferta económica"), labelPosition: "top" },
+                        { view: "textarea", name: "consideracionesEconomicas", label: translate("Consideraciones incluidas en la oferta económica"), labelPosition: "top", height:130 },
                     ]
                 },
                 {
@@ -683,6 +699,7 @@ export default class OfertasForm extends JetView {
             this.loadEstados();
             this.loadRazonesPerdida();
             this.loadDivisas(1);
+            this.loadProyectosCentral();
             this.getNumeroCodigoOferta();
             this.getDocumentosAplicables(usu.paisId);
             this.setValoresPorDefectoUsuario(usu);
@@ -719,6 +736,7 @@ export default class OfertasForm extends JetView {
                 this.loadEstados(oferta.estadoId);
                 this.loadRazonesPerdida(oferta.razonPerdidaId);
                 this.loadDivisas(oferta.divisaId);
+                this.loadProyectosCentral(oferta.proyectoCodigo)
                 _originalFaseOfertaId = oferta.faseOfertaId;
                 _originalImporte = oferta.importePresupuesto;
                 ofertaId = oferta.ofertaId;
@@ -968,6 +986,23 @@ export default class OfertasForm extends JetView {
                 if (servicioId) {
                     $$("cmbServicio").setValue(servicioId);
                     $$("cmbServicio").refresh();
+                }
+                return;
+            });
+    }
+
+    loadProyectosCentral(codigo) {
+        console.log("proyectosCentralService.getSyncProyectosCentral");
+        proyectosCentralService.getProyectosCentral(usuarioService.getUsuarioCookie())
+            .then(rows => {
+                var nombre = 'nombre';
+                var servicios = generalApi.prepareDataForCombo('codigo', nombre, rows);
+                var list = $$("cmbProyectosCentral").getPopup().getList();
+                list.clearAll();
+                list.parse(servicios);
+                if (codigo) {
+                    $$("cmbProyectosCentral").setValue(codigo);
+                    $$("cmbProyectosCentral").refresh();
                 }
                 return;
             });
