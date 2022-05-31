@@ -699,7 +699,7 @@ export default class OfertasForm extends JetView {
             this.loadEstados();
             this.loadRazonesPerdida();
             this.loadDivisas(1);
-            this.loadProyectosCentral();
+            this.loadProyectosCentral('0');
             this.getNumeroCodigoOferta();
             this.getDocumentosAplicables(usu.paisId);
             this.setValoresPorDefectoUsuario(usu);
