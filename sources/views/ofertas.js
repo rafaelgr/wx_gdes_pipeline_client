@@ -276,16 +276,14 @@ export default class Ofertas extends JetView {
                         }).then(() => {
                             // Código a ejecutar cuando la exportación termine
                             // Restauramos los datos en el grid después de la exportación
+                             // Primero, comprobar si la columna está oculta
                             this.cargarOfertas(datosOriginales, null);
                             var stateDt = webix.storage.session.get("stateGridOfertas");
                             if(stateDt) this.$$('ofertasGrid').setState(stateDt);
                             webix.storage.session.put("stateGridOfertas", null);
-
-                            // Primero, comprobar si la columna está oculta
-                            if (this.isColumnHidden($$("ofertasGrid"), "notasEstado")) {
-                                $$("ofertasGrid").hideColumn("notasEstado");// volvemos a ocultar la columna después de la exportación
-                            }
                         });
+
+                        
                     }
                 },
                 {
@@ -351,7 +349,7 @@ export default class Ofertas extends JetView {
                 { id: "responsableId", header: [translate("Responsable"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUsuarios, width: 200 },
                 { id: "usuResponsableId", header: [translate("Supervisado"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUsuarios, width: 200 },
                 { id: "numeroPedido", header: [translate("Num. Pedido"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
-                { id: "notasEstado", header: [translate("Notas Estado"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
+                { id: "notasEstado", header: [translate("Notas Estado"), { content: "textFilter" }], sort: "string", editor: "text", width: 200, hidden: true },
 
                 //-- Viejo orden
 
@@ -437,8 +435,17 @@ export default class Ofertas extends JetView {
                     }
                 },
                 "onAfterLoad":  () => {
-                    $$("ofertasGrid").hideColumn("notasEstado");// ocultamos
-                    
+                    try {
+                        var bool = this.isColumnHidden($$("ofertasGrid"), "notasEstado");
+                        if (!bool) {
+                            $$("ofertasGrid").hideColumn("notasEstado");// volvemos a ocultar la columna después de la exportación
+                        }
+                        
+
+                    } catch(e) {
+
+                    }
+                   
                     // Obtener los datos actuales del grid (sin modificaciones)
                     datosGrid = $$("ofertasGrid").serialize();
                 
@@ -587,8 +594,9 @@ export default class Ofertas extends JetView {
     
     
     isColumnHidden(grid, columnId) {
-        const column = grid.config.columns.find(col => col.id === columnId);
-        return column ? column.hidden === true : false;  // Comprobamos si la columna tiene la propiedad 'hidden' en true
+        const column = grid.getColumnConfig(columnId);
+        var bool = column ? column.hidden === true : false;  // Comprobamos si la columna tiene la propiedad 'hidden' en true
+        return bool
     }
 }
 
