@@ -257,9 +257,9 @@ export default class Ofertas extends JetView {
                         const datosTransformados = this.transformarDatosParaExcel(datosGrid);
 
 
-                        if (!this.isColumnHidden($$("ofertasGrid"), "notasEstado")) {
-                            $$("ofertasGrid").showColumn("notasEstado");// mostramos la columna para incluirla en la exportación
-                        }
+                        // if (!this.isColumnHidden($$("ofertasGrid"), "notasEstado")) {
+                        //     $$("ofertasGrid").showColumn("notasEstado");// mostramos la columna para incluirla en la exportación
+                        // }
                        
 
                         
@@ -349,7 +349,9 @@ export default class Ofertas extends JetView {
                 { id: "responsableId", header: [translate("Responsable"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUsuarios, width: 200 },
                 { id: "usuResponsableId", header: [translate("Supervisado"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUsuarios, width: 200 },
                 { id: "numeroPedido", header: [translate("Num. Pedido"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
-                { id: "notasEstado", header: [translate("Notas Estado"), { content: "textFilter" }], sort: "string", editor: "text", width: 200, hidden: true },
+                { id: "notasEstado", header: [translate("Notas sobre versiones de la Oferta"), { content: "textFilter" }], sort: "string", editor: "text", width: 300 },
+                { id: "situacionProyecto", header: [translate("Notas sobre cierre de la Oferta"), { content: "textFilter" }], sort: "string", editor: "text", width: 300 },
+                { id: "observaciones", header: [translate(" Notas sobre el avance de la Oferta"), { content: "textFilter" }], sort: "string", editor: "text", width: 300 },
 
                 //-- Viejo orden
 
@@ -435,7 +437,7 @@ export default class Ofertas extends JetView {
                     }
                 },
                 "onAfterLoad":  () => {
-                    try {
+                    /* try {
                         var bool = this.isColumnHidden($$("ofertasGrid"), "notasEstado");
                         if (!bool) {
                             $$("ofertasGrid").hideColumn("notasEstado");// volvemos a ocultar la columna después de la exportación
@@ -444,7 +446,7 @@ export default class Ofertas extends JetView {
 
                     } catch(e) {
 
-                    }
+                    } */
                    
                     // Obtener los datos actuales del grid (sin modificaciones)
                     datosGrid = $$("ofertasGrid").serialize();

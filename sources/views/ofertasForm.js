@@ -447,22 +447,22 @@ export default class OfertasForm extends JetView {
                 id: "financieros", view: "ckeditor", name: "financieros", heigth: 900
             }
         };
-        const cellOportunidades = {
+        /* const cellOportunidades = {
             padding: 5, css: "fondocelda",
             rows: [
                 { template: translate("OPORTUNIDADES"), type: "section" },
                 { view: "textarea", name: "actividadesRealizadas", label: translate("Actividades realizadas"), labelPosition: "top" },
                 { view: "textarea", name: "actividadesPlanificadas", label: translate("Actividades planificadas"), labelPosition: "top" },
             ]
-        };
+        }; */
         const cellProyectos = {
             padding: 5, css: "fondocelda",
             rows: [
                 { template: translate("PROYECTOS"), type: "section" },
-                { view: "textarea", name: "situacionProyecto", label: translate("Situación de proyecto"), labelPosition: "top" },
+                { view: "textarea", name: "situacionProyecto", label: translate("Situación de proyecto"), labelPosition: "top", minHeight: 200 },
             ]
         };
-        const cellReclamaciones = {
+       /*  const cellReclamaciones = {
             padding: 5, css: "fondocelda",
             rows: [
                 { template: translate("RECLAMACIONES"), type: "section" },
@@ -527,12 +527,12 @@ export default class OfertasForm extends JetView {
                     ]
                 }
             ]
-        };
+        }; */
         const cellNotas = {
             padding: 5, css: "fondocelda",
             rows: [
                 { template: translate("NOTAS"), type: "section" },
-                { view: "textarea", name: "observaciones", label: translate("Observaciones"), labelPosition: "top" }
+                { view: "textarea", name: "observaciones", label: translate("Observaciones"), labelPosition: "top", minHeight: 200 }
             ]
         };
         const tabAnotaciones = {
@@ -541,13 +541,13 @@ export default class OfertasForm extends JetView {
                 rows: [
                     {
                         cols: [
-                            cellOportunidades,
+                            //cellOportunidades,
                             cellProyectos
                         ]
                     },
                     {
                         cols: [
-                            cellReclamaciones,
+                            //cellReclamaciones,
                             cellNotas
                         ]
                     }

@@ -269,5 +269,8 @@ export default {
     "<strong>PPR Short:</strong> Informe corto de tres página. Haga clic en el icono para visualizarlo": "<strong>PPR Short:</strong> Rapport court de trois pages. Cliquez sur l'icône pour afficher " ,
     "<strong>PPR Complete:</strong> Informe completo de cuatro páginas. Haga clic en el icono para visualizarlo":"</strong> Rapport complet de quatre pages. Cliquez sur l'icône pour visualiser",
     "<strong>PPR Annex:</strong> Informe solo con los annexos. Haga clic en el icono para visualizarlo":"<strong>PPR Annex:</strong> Rapport avec annexes uniquement. Cliquez sur l'icône pour l'afficher",
-    "PPR": "PPR"
+    "PPR": "PPR",
+     "Notas sobre cierre de la Oferta": "Notes sur la clôture de l'offre",
+     " Notas sobre el avance de la Oferta": "Notes sur l'avancement de l'offre",
+      "Notas sobre versiones de la Oferta": "Notes sur les versions de l'offre"
 }
