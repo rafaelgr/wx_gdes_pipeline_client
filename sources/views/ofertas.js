@@ -19,6 +19,9 @@ import { serviciosService } from "../services/servicios_service";
 import { proyectosCentralService } from "../services/proyectos_central_service";
 import OfertasWindow from "./ofertasWindow";
 
+var datosGrid;
+var datosOriginales;
+
 var editButton = "<span class='onEdit webix_icon wxi-pencil'></span>";
 var deleteButton = "<span class='onDelete webix_icon wxi-trash'></span>";
 
@@ -233,12 +236,54 @@ export default class Ofertas extends JetView {
                 {
                     view: "button", type: "icon", icon: "wxi-download", width: 37, align: "right",
                     click: () => {
+                        // Definimos las columnas mapeadas en este contexto
+                        const columnasMapeadas = {
+                            estadoId: colEstados,
+                            proyectoCodigo: colProyectosCentrales,
+                            ubicacionId: colUbicaciones,
+                            areaId: colAreas,
+                            unidadNegocioId: colUnidadesNegocio,
+                            paisId: colPaises,
+                            faseOfertaId: colFasesOferta,
+                            tipoOportunidadId: colTiposOportunidad,
+                            tipoContratoId: colTiposContrato,
+                            servicioId: colServicios,
+                            usuarioId: colUsuarios,
+                            responsableId: colUsuarios,
+                            usuResponsableId: colUsuarios,
+                        };
+                
+                        // Transformamos los datos para exportar con los valores en vez de los IDs
+                        const datosTransformados = this.transformarDatosParaExcel(datosGrid);
+
+
+                        // if (!this.isColumnHidden($$("ofertasGrid"), "notasEstado")) {
+                        //     $$("ofertasGrid").showColumn("notasEstado");// mostramos la columna para incluirla en la exportación
+                        // }
+                       
+
+                        
+                
+                
+                        // Exportamos a Excel los datos transformados (con los valores)
                         webix.toExcel($$("ofertasGrid"), {
-                            filename: "ofertas",
-                            name: "Ofertas",
-                            rawValues: true,
-                            ignore: { "actions": true }
+                            data: datosTransformados,  // Datos transformados con valores visuales
+                            filename: "ofertas",  // Nombre del archivo Excel
+                            name: "Ofertas",  // Nombre de la hoja en Excel
+                            rawValues: true,  // Usamos valores puros (sin formato)
+                            ignore: { "actions": true },  // Ignorar columnas de acciones si es necesario
+                            
+                        }).then(() => {
+                            // Código a ejecutar cuando la exportación termine
+                            // Restauramos los datos en el grid después de la exportación
+                             // Primero, comprobar si la columna está oculta
+                            this.cargarOfertas(datosOriginales, null);
+                            var stateDt = webix.storage.session.get("stateGridOfertas");
+                            if(stateDt) this.$$('ofertasGrid').setState(stateDt);
+                            webix.storage.session.put("stateGridOfertas", null);
                         });
+
+                        
                     }
                 },
                 {
@@ -304,6 +349,9 @@ export default class Ofertas extends JetView {
                 { id: "responsableId", header: [translate("Responsable"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUsuarios, width: 200 },
                 { id: "usuResponsableId", header: [translate("Supervisado"), { content: "selectFilter" }], sort: "string", editor: "combo", collection: colUsuarios, width: 200 },
                 { id: "numeroPedido", header: [translate("Num. Pedido"), { content: "textFilter" }], sort: "string", editor: "text", width: 200 },
+                { id: "notasEstado", header: [translate("Notas sobre versiones de la Oferta"), { content: "textFilter" }], sort: "string", editor: "text", width: 300 },
+                { id: "situacionProyecto", header: [translate("Notas sobre cierre de la Oferta"), { content: "textFilter" }], sort: "string", editor: "text", width: 300 },
+                { id: "observaciones", header: [translate(" Notas sobre el avance de la Oferta"), { content: "textFilter" }], sort: "string", editor: "text", width: 300 },
 
                 //-- Viejo orden
 
@@ -388,10 +436,30 @@ export default class Ofertas extends JetView {
                         }
                     }
                 },
+                "onAfterLoad":  () => {
+                    /* try {
+                        var bool = this.isColumnHidden($$("ofertasGrid"), "notasEstado");
+                        if (!bool) {
+                            $$("ofertasGrid").hideColumn("notasEstado");// volvemos a ocultar la columna después de la exportación
+                        }
+                        
+
+                    } catch(e) {
+
+                    } */
+                   
+                    // Obtener los datos actuales del grid (sin modificaciones)
+                    datosGrid = $$("ofertasGrid").serialize();
+                
+                    // Hacemos una copia profunda de los datos originales para restaurarlos después
+                    datosOriginales = JSON.parse(JSON.stringify(datosGrid));  // Copia profunda usando JSON
+                },
                 "onAfterFilter": function () {
                     var numReg = $$("ofertasGrid").count();
                     $$("OfertasNReg").config.label = "NREG: " + numReg;
                     $$("OfertasNReg").refresh();
+                    //guardar filtros
+                    webix.storage.session.put("stateGridOfertas", this.getState());
                 }
             }
         }
@@ -422,6 +490,7 @@ export default class Ofertas extends JetView {
         languageService.setLanguage(this.app, usu.codigoIdioma);
     }
     load(id) {
+        webix.storage.session.put("stateGridOfertas", null);//eliminamos qualquier filtro guardado
         $$("ofertasGrid").showProgress({ type: "icon" });
         var usu = usuarioService.getUsuarioCookie();
         if (usu.esAdministrador) {
@@ -490,4 +559,50 @@ export default class Ofertas extends JetView {
         });
         this.load();
     }
+
+    transformarDatosParaExcel(datos) {
+        // Mapeo de las columnas con sus colecciones correspondientes
+        const columnasMapeadas = {
+            estadoId: colEstados,
+            proyectoCodigo: colProyectosCentrales,
+            ubicacionId: colUbicaciones,
+            areaId: colAreas,
+            unidadNegocioId: colUnidadesNegocio,
+            paisId: colPaises,
+            faseOfertaId: colFasesOferta,
+            tipoOportunidadId: colTiposOportunidad,
+            tipoContratoId: colTiposContrato,
+            servicioId: colServicios,
+            usuarioId: colUsuarios,
+            responsableId: colUsuarios,
+            usuResponsableId: colUsuarios,
+        };
+    
+        // Recorremos cada fila de datos y procesamos los IDs
+        return datos.map(row => {
+            // Recorremos cada columna mapeada
+            for (const [columnId, collection] of Object.entries(columnasMapeadas)) {
+                if (row[columnId]) {
+                    const item = collection.find(item => item.id === row[columnId]);
+                    row[columnId] = item ? item.value : row[columnId]; // Reemplazamos el ID con el valor
+                }
+            }
+            
+    
+            // Devuelven los datos transformados
+            return row;
+        });
+    }
+    
+    
+    isColumnHidden(grid, columnId) {
+        const column = grid.getColumnConfig(columnId);
+        var bool = column ? column.hidden === true : false;  // Comprobamos si la columna tiene la propiedad 'hidden' en true
+        return bool
+    }
 }
+
+
+
+
+
